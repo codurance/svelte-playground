@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/c3/0.1.29/c3.css" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.11.1/tachyons.min.css" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/c3/0.7.2/c3.min.js"></script>
+    <title>C3 playground</title>
+  </head>
+
+  <body>
+    <div class="w-100 h-100 flex flex-column items-center justify-center">
+      <header>
+        <nav class="pa3 pa4-ns">
+          <h1 class="black b f1 f-headline-ns tc db">C3/D3 playground</h1>
+          <div class="tc pb3">
+            <a class="link dim gray f6 f5-ns dib mr3" href="#linechart" title="linechart">linechart</a>
+            <a class="link dim gray f6 f5-ns dib mr3" href="#spline" title="splinechart">spline</a>
+            <a class="link dim gray f6 f5-ns dib mr3" href="#areachart" title="areachart">areachart</a>
+            <a class="link dim gray f6 f5-ns dib" href="#horizontal-barchart" title="horizontal-barchart">horizontal-barchart</a>
+            <a class="link dim gray f6 f5-ns dib" href="#vertical-barchart" title="vertical-barchart">vertical-barchart</a>
+            <a class="link dim gray f6 f5-ns dib" href="#dynamic-barchart" title="dynamic-barchart">dynamic-barchart</a>
+          </div>
+        </nav>
+      </header>
+
+      <main class="w-100">
+        <section class="w-80 center" style="height: 500px;">
+          <h3>Linechart</h3>
+          <div id="linechart"></div>
+        </section>
+
+        <section class="w-80 center" style="height: 500px;">
+          <h3>Splinechart</h3>
+          <div id="spline"></div>
+        </section>
+
+        <section class="w-80 center" style="height: 500px;">
+          <h3>Areachart</h3>
+          <div id="areachart"></div>
+        </section>
+
+        <section class="w-80 center" style="height: 500px;">
+          <h3>Horizontal barchart</h3>
+          <div id="horizontal-barchart"></div>
+        </section>
+
+        <section class="w-80 center" style="height: 500px;">
+          <h3>Vertical barchart</h3>
+          <div id="vertical-barchart"></div>
+        </section>
+
+        <section class="w-80 center" style="height: 500px;">
+          <h3>Dynamic barchart</h3>
+          <button onclick="update(data1)">Variable 1</button>
+          <button onclick="update(data2)">Variable 2</button>
+          <div id="dynamic-barchart"></div>
+        </section>
+
+      </main>
+    </div>
+
+    <script type="text/javascript" src="js/linechart.js"></script>
+    <script type="text/javascript" src="js/spline.js"></script>
+    <script type="text/javascript" src="js/areachart.js"></script>
+    <script type="text/javascript" src="js/horizontal-barchart.js"></script>
+    <script type="text/javascript" src="js/vertical-barchart.js"></script>
+    <script type="text/javascript" src="js/dynamic-barchart.js"></script>
+  </body>
+</html>
