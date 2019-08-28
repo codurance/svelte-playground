@@ -1,3 +1,15 @@
+Getting started
+-----
+# Debug
+1.  run: `npm install`
+2.  run: `npm run dev`
+3.  click: [http://localhost:8080](http://localhost:8080)
+
+# Release
+1.  run: `npm install`
+2.  run: `npm run release`
+3.  open dist folder
+
 # :bar_chart: c3d3-playground
 >A simple playground for C3.js and D3.js
 
