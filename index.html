@@ -1,72 +1,102 @@
-<!DOCTYPE HTML>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <link href="//cdnjs.cloudflare.com/ajax/libs/c3/0.1.29/c3.css" rel="stylesheet" type="text/css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.11.1/tachyons.min.css" rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/c3/0.7.2/c3.min.js"></script>
-    <title>C3/D3 playground</title>
-  </head>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <body>
-    <div class="w-100 h-100 flex flex-column items-center justify-center">
-      <header>
-        <nav class="pa3 pa4-ns">
-          <h1 class="black b f1 f-headline-ns tc db">C3/D3 playground</h1>
-          <div class="tc pb3">
-            <a class="link dim gray f6 f5-ns dib mr3" href="#linechart" title="linechart">linechart</a>
-            <a class="link dim gray f6 f5-ns dib mr3" href="#spline" title="splinechart">spline</a>
-            <a class="link dim gray f6 f5-ns dib mr3" href="#areachart" title="areachart">areachart</a>
-            <a class="link dim gray f6 f5-ns dib" href="#horizontal-barchart" title="horizontal-barchart">horizontal-barchart</a>
-            <a class="link dim gray f6 f5-ns dib" href="#vertical-barchart" title="vertical-barchart">vertical-barchart</a>
-            <a class="link dim gray f6 f5-ns dib" href="#dynamic-barchart" title="dynamic-barchart">dynamic-barchart</a>
+    <title>SiSalut - Demo</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/sidebar.css" rel="stylesheet">
+    <link href="css/override.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+    <link href="css/mobile.css" rel="stylesheet">
+
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <img src="resources/logo.jpg">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="header">
+              <p>InfoABS2, composició de les llars</p>
+            <img src="resources/header.jpg">
           </div>
         </nav>
-      </header>
+        <div class="wrapper">
+            <nav class="sidebar">
+                <ul class="list-unstyled components">
+                    <li class="active">
+                        <a href="#maps" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Mapes i gràfics per ABS</a>
+                        <ul class="collapse list-unstyled" id="mapes">
+                            <li>
+                                <a href="#">Percentatge de persones grans que viuen soles per ABS i sexe. Barcelona, any 2017.</a>
+                            </li>
+                            <li>
+                                <a href="#">Percentatge de persones entre 65 i 74 anys que viuen soles, per ABS i sexe. Barcelona, any 2017.</a>
+                            </li>
+                            <li>
+                                <a href="#">Percentatge de persones entre 75 i 84 anys que viuen soles, per ABS i sexe. Barcelona, any 2017.</a>
+                            </li>
+                            <li>
+                                <a href="#">Percentatge de persones de 85 anys i més que viuen soles, per ABS i sexe. Barcelona, any 2017.</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#abs1a" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">ABS 1A - BCNeta</a>
+                        <ul class="collapse list-unstyled" id="abs1a">
+                            <li>
+                                <a href="#">Composició de les llars per ABS, districte, AIS i Barcelona. ABS 1A, any 2017.</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#abs1b" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">ABS 1B - Casc Antic</a>
+                        <ul class="collapse list-unstyled" id="abs1b">
+                            <li>
+                                <a href="#">Composició de les llars per ABS, districte, AIS i Barcelona. ABS 1B, any 2017.</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#abs1c" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">ABS 1C - Gòtic</a>
+                        <ul class="collapse list-unstyled" id="abs1c">
+                            <li>
+                                <a href="#">Composició de les llars per ABS, districte, AIS i Barcelona. ABS 1C, any 2017.</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
 
-      <main class="w-100">
-        <section class="w-80 center" style="height: 500px;">
-          <h3>Linechart</h3>
-          <div id="linechart"></div>
-        </section>
+            <div class="container-fluid">
+                <div class="row">
 
-        <section class="w-80 center" style="height: 500px;">
-          <h3>Splinechart</h3>
-          <div id="spline"></div>
-        </section>
+                    <main role="main" class="col-md-12 ml-sm-auto col-lg-12 pt-3 px-4">
+                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                            <h1 class="h2">Title</h1>
+                            <div class="btn-toolbar mb-2 mb-md-0">
+                                <div class="btn-group mr-2">
+                                    <button class="btn btn-sm btn-outline-secondary">Export</button>
+                                </div>
+                                <div class="btn-group mr-2">
+                                    <button class="btn btn-sm btn-outline-secondary">Flip</button>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </div>
 
-        <section class="w-80 center" style="height: 500px;">
-          <h3>Areachart</h3>
-          <div id="areachart"></div>
-        </section>
+        </div>
 
-        <section class="w-80 center" style="height: 500px;">
-          <h3>Horizontal barchart</h3>
-          <div id="horizontal-barchart"></div>
-        </section>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/custom.js">
+        </script>
 
-        <section class="w-80 center" style="height: 500px;">
-          <h3>Vertical barchart</h3>
-          <div id="vertical-barchart"></div>
-        </section>
+    </body>
 
-        <section class="w-80 center" style="height: 500px;">
-          <h3>Dynamic barchart</h3>
-          <button onclick="update(data1)">Variable 1</button>
-          <button onclick="update(data2)">Variable 2</button>
-          <div id="dynamic-barchart"></div>
-        </section>
-
-      </main>
-    </div>
-
-    <script type="text/javascript" src="js/linechart.js"></script>
-    <script type="text/javascript" src="js/spline.js"></script>
-    <script type="text/javascript" src="js/areachart.js"></script>
-    <script type="text/javascript" src="js/horizontal-barchart.js"></script>
-    <script type="text/javascript" src="js/vertical-barchart.js"></script>
-    <script type="text/javascript" src="js/dynamic-barchart.js"></script>
-  </body>
 </html>

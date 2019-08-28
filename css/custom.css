@@ -1,0 +1,9 @@
+.header {
+  margin-left: 8em;
+  display: flex;
+  align-items: center;
+}
+
+.header img {
+  padding-left: 1em;
+}

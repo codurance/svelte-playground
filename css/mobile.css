@@ -1,0 +1,15 @@
+@media (max-width: 768px) {
+    .sidebar {
+      margin-left: -250px;
+    }
+    .sidebar.active {
+      margin-left: 0;
+    }
+    .sidebarCollapse span {
+      display: none;
+    }
+    .header {
+      display: none;
+    }
+  }
+  
