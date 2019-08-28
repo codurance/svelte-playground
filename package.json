@@ -1,0 +1,40 @@
+{
+  "name": "SiSalut",
+  "title": "SiSalut - Demo",
+  "version": "1.0.0",
+  "homepage": "https://codurance.com",
+  "author": "Codurance",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codurance/c3d3-playground.git"
+  },
+  "scripts": {
+    "clean": "gulp clean",
+    "release": "gulp release",
+    "dev": "gulp dev"
+  },
+  "devDependencies": {
+    "babel-core": "6.26.0",
+    "babel-preset-env": "1.6.1",
+    "del": "3.0.0",
+    "gulp": "3.9.1",
+    "gulp-better-rollup": "3.1.0",
+    "gulp-clean-css": "3.9.3",
+    "gulp-cli": "github:gulpjs/gulp-cli",
+    "gulp-copy": "1.1.0",
+    "gulp-htmlmin": "4.0.0",
+    "gulp-imagemin": "4.1.0",
+    "gulp-nunjucks-render": "2.2.2",
+    "gulp-sequence": "1.0.0",
+    "gulp-uglify": "3.0.0",
+    "imagemin-gifsicle": "5.2.0",
+    "imagemin-jpegtran": "5.0.2",
+    "imagemin-optipng": "5.2.1",
+    "gulp-size": "3.0.0",
+    "imagemin-svgo": "6.0.0",
+    "koa": "2.5.0",
+    "koa-logger": "3.2.0",
+    "koa-static": "4.0.2",
+    "rollup-plugin-babel": "3.0.3"
+  }
+}
