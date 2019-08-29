@@ -1,15 +1,90 @@
 @media (max-width: 768px) {
-    .sidebar {
-      margin-left: -250px;
-    }
-    .sidebar.active {
-      margin-left: 0;
-    }
-    .sidebarCollapse span {
-      display: none;
-    }
-    .header {
-      display: none;
-    }
+  .navbar {
+    padding: 0px 5px !important;
   }
-  
+  .sidebar {
+    margin-left: -250px;
+  }
+  .sidebar.active {
+    margin-left: 0;
+  }
+  .sidebarCollapse span {
+    display: none;
+  }
+  .header {
+    display: none;
+  }
+  .svg {
+    top: -17vh;
+    position: relative;
+    width: 98% !important;
+  }
+  .map {
+    margin-left: 0 !important;
+    max-height: 25em;
+    margin-bottom: 5em;
+  }
+  .map-information {
+    display: contents;
+  }
+  .box {
+    border: 0px;
+    margin-bottom: 1em;
+  }
+  div .container-fluid {
+    padding: 0 !important;
+  }
+}
+
+@media (max-width: 411px) {
+  .svg {
+    top: -6vh;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 359px) {
+  .svg {
+    top: -17vh;
+  }
+  .map {
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 360px) and (max-width: 374px) {
+  .svg {
+    top: -12vh;
+  }
+  .map {
+    margin-bottom: 1em;
+  }
+}
+
+@media (min-width: 375px) and (max-width: 410px) {
+  .svg {
+    top: -8vh;
+  }
+  .map {
+    margin-bottom: 2em;
+  }
+}
+
+@media (min-width: 414px) and (max-width: 420px) {
+  .svg {
+    top: -6vh;
+  }
+  .map {
+    margin-bottom: 5em;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 790px) {
+  .svg {
+    top: 1vh;
+    width: 100% !important;
+    height: 50em !important;
+  }
+  .map {
+    margin-bottom: 25em;
+  }
+}
