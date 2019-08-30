@@ -2,6 +2,10 @@ $(document).ready(function () {
     $('.navbar-toggler').on('click', function () {
         $('.sidebar').toggleClass('active');
     });
+
+    $('.social .fa').each(function () {
+        this.href+= document.location.href;
+    });
 });
 
 $(function(){
