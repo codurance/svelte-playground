@@ -81,9 +81,9 @@ gulp.task("clean", function() {
 gulp.task("build", gulpSequence("clean", "html", "styles", "javascript", "images"));
 
 gulp.task("release", ["clean"], function() {
-  isRelease = true;
+  // isRelease = true;
 
-  return gulp.start(gulpSequence("build"));
+  return gulp.start("build");
 });
 
 gulp.task("dev", ["build"], function() {
