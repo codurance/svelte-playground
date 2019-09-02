@@ -34,11 +34,18 @@
   div .container-fluid {
     padding: 0 !important;
   }
+  .social-links {
+    margin-left: 10% !important;
+    width: 15em;
+  }
 }
 
 @media (max-width: 411px) {
   .svg {
     top: -6vh;
+  }
+  .social-links {
+    margin-left: -15% !important;
   }
 }
 
@@ -49,6 +56,9 @@
   .map {
     margin-bottom: 0;
   }
+  .social-links {
+    margin-left: -35% !important;
+  }
 }
 
 @media (min-width: 360px) and (max-width: 374px) {
@@ -57,6 +67,9 @@
   }
   .map {
     margin-bottom: 1em;
+  }
+  .social-links {
+    margin-left: -24% !important;
   }
 }
 
@@ -67,6 +80,9 @@
   .map {
     margin-bottom: 2em;
   }
+  .social-links {
+    margin-left: -24% !important;
+  }
 }
 
 @media (min-width: 414px) and (max-width: 420px) {
@@ -75,6 +91,9 @@
   }
   .map {
     margin-bottom: 5em;
+  }
+  .social-links {
+    margin-left: -16% !important;
   }
 }
 
@@ -86,5 +105,14 @@
   }
   .map {
     margin-bottom: 25em;
+  }
+  .social-links {
+    margin-left: -12% !important;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1024px) {
+  .social-links {
+    margin-left: -18% !important;
   }
 }

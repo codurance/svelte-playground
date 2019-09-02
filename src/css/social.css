@@ -7,6 +7,7 @@
   border-radius: 100%;
   margin-right: 7px;
 }
+
 .social-links a i {
   font-size: 20px;
   line-height: 38px;
@@ -15,7 +16,7 @@
 .social-links ul li {
   list-style-type: none;
   display: inline;
-  color: #fff
+  color: #fff;
 }
 
 .social-links a .fa:hover {
