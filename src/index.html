@@ -3,19 +3,24 @@
 <head>
         {% include "src/partials/head.html" %} 
 
-    <body>
-        {% include "src/partials/navbar.html" %} 
+    <body id="body">
+        <div class="front">
+            {% include "src/partials/navbar.html" %} 
 
-        <div class="wrapper">
+            <div class="wrapper">
 
-            {% include "src/partials/sidebar.html" %} 
+                {% include "src/partials/sidebar.html" %} 
 
-            {% include "src/partials/main.html" %} 
+                {% include "src/partials/main.html" %} 
+
+            </div>
+
+            {% include "src/partials/footer.html" %} 
 
         </div>
-
-        {% include "src/partials/footer.html" %} 
-
+        <div class="back">
+            <img id="modificado" src="images/original.png" width="100%" height="100%"/>
+        </div> 
     </body>
 
 </html>
