@@ -1,72 +1,250 @@
-<!DOCTYPE HTML>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <link href="//cdnjs.cloudflare.com/ajax/libs/c3/0.1.29/c3.css" rel="stylesheet" type="text/css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.11.1/tachyons.min.css" rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/c3/0.7.2/c3.min.js"></script>
-    <title>C3/D3 playground</title>
-  </head>
+<head>
+        <meta charset="utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no"
+/>
+<link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+<link rel="manifest" href="images/favicon/site.webmanifest">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
 
-  <body>
-    <div class="w-100 h-100 flex flex-column items-center justify-center">
-      <header>
-        <nav class="pa3 pa4-ns">
-          <h1 class="black b f1 f-headline-ns tc db">C3/D3 playground</h1>
-          <div class="tc pb3">
-            <a class="link dim gray f6 f5-ns dib mr3" href="#linechart" title="linechart">linechart</a>
-            <a class="link dim gray f6 f5-ns dib mr3" href="#spline" title="splinechart">spline</a>
-            <a class="link dim gray f6 f5-ns dib mr3" href="#areachart" title="areachart">areachart</a>
-            <a class="link dim gray f6 f5-ns dib" href="#horizontal-barchart" title="horizontal-barchart">horizontal-barchart</a>
-            <a class="link dim gray f6 f5-ns dib" href="#vertical-barchart" title="vertical-barchart">vertical-barchart</a>
-            <a class="link dim gray f6 f5-ns dib" href="#dynamic-barchart" title="dynamic-barchart">dynamic-barchart</a>
+<title>SiSalut - Demo</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="css/bootstrap.min.css" rel="stylesheet" />
+<link href="css/sidebar.css" rel="stylesheet" />
+<link href="css/override.css" rel="stylesheet" />
+<link href="css/custom.css" rel="stylesheet" />
+<link href="css/mobile.css" rel="stylesheet" />
+<link href="css/maps.css" rel="stylesheet" />
+<link href="css/social.css" rel="stylesheet" />
+ 
+
+    <body id="body">
+        <div class="front">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <img src="images/logo.jpg" />
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="header">
+    <p>InfoABS2, composició de les llars</p>
+    <img src="images/header.jpg" />
+  </div>
+</nav>
+ 
+
+            <div class="wrapper">
+
+                <nav class="sidebar">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
+        </div>
+        <input type="text" class="form-control" placeholder="Gràfics" aria-label="Gràfics" aria-describedby="basic-addon1">
+      </div>
+  <ul class="list-unstyled components">
+    <li class="active">
+      <a
+        href="#maps"
+        data-toggle="collapse"
+        aria-expanded="false"
+        class="dropdown-toggle"
+        >Mapes i gràfics per ABS</a
+      >
+      <ul class="collapse list-unstyled" id="maps">
+        <li>
+          <a href="#"
+            >Percentatge de persones grans que viuen soles per ABS i sexe.
+            Barcelona, any 2017.</a
+          >
+        </li>
+        <li>
+          <a href="#"
+            >Percentatge de persones entre 65 i 74 anys que viuen soles, per ABS
+            i sexe. Barcelona, any 2017.</a
+          >
+        </li>
+        <li>
+          <a href="#"
+            >Percentatge de persones entre 75 i 84 anys que viuen soles, per ABS
+            i sexe. Barcelona, any 2017.</a
+          >
+        </li>
+        <li>
+          <a href="#"
+            >Percentatge de persones de 85 anys i més que viuen soles, per ABS i
+            sexe. Barcelona, any 2017.</a
+          >
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a
+        href="#abs1a"
+        data-toggle="collapse"
+        aria-expanded="false"
+        class="dropdown-toggle"
+        >ABS 1A - BCNeta</a
+      >
+      <ul class="collapse list-unstyled" id="abs1a">
+        <li>
+          <a href="#"
+            >Composició de les llars per ABS, districte, AIS i Barcelona. ABS
+            1A, any 2017.</a
+          >
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a
+        href="#abs1b"
+        data-toggle="collapse"
+        aria-expanded="false"
+        class="dropdown-toggle"
+        >ABS 1B - Casc Antic</a
+      >
+      <ul class="collapse list-unstyled" id="abs1b">
+        <li>
+          <a href="#"
+            >Composició de les llars per ABS, districte, AIS i Barcelona. ABS
+            1B, any 2017.</a
+          >
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a
+        href="#abs1c"
+        data-toggle="collapse"
+        aria-expanded="false"
+        class="dropdown-toggle"
+        >ABS 1C - Gòtic</a
+      >
+      <ul class="collapse list-unstyled" id="abs1c">
+        <li>
+          <a href="#"
+            >Composició de les llars per ABS, districte, AIS i Barcelona. ABS
+            1C, any 2017.</a
+          >
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+ 
+
+                <div class="container-fluid">
+  <div>
+    <main role="main" class="col-md-12 ml-sm-auto col-lg-12 pt-3 px-4">
+      <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom"
+      >
+        <h4>Percentatge de persones grans que viuen soles per ABS i sexe. Barcelona, any 2017</h4>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group mr-2">
+            <button class="btn btn-sm btn-outline-secondary" id="exportMap">Exportació</button>
           </div>
-        </nav>
-      </header>
-
-      <main class="w-100">
-        <section class="w-80 center" style="height: 500px;">
-          <h3>Linechart</h3>
-          <div id="linechart"></div>
-        </section>
-
-        <section class="w-80 center" style="height: 500px;">
-          <h3>Splinechart</h3>
-          <div id="spline"></div>
-        </section>
-
-        <section class="w-80 center" style="height: 500px;">
-          <h3>Areachart</h3>
-          <div id="areachart"></div>
-        </section>
-
-        <section class="w-80 center" style="height: 500px;">
-          <h3>Horizontal barchart</h3>
-          <div id="horizontal-barchart"></div>
-        </section>
-
-        <section class="w-80 center" style="height: 500px;">
-          <h3>Vertical barchart</h3>
-          <div id="vertical-barchart"></div>
-        </section>
-
-        <section class="w-80 center" style="height: 500px;">
-          <h3>Dynamic barchart</h3>
-          <button onclick="update(data1)">Variable 1</button>
-          <button onclick="update(data2)">Variable 2</button>
-          <div id="dynamic-barchart"></div>
-        </section>
-
-      </main>
+          <div class="btn-group mr-2">
+            <button class="btn btn-sm btn-outline-secondary" id="original">Original</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <div class="row container-fixed">
+      <div class="container" id="abs-bcn-map" data-fileName="ABS Barcelona">
+  <div class="row map">
+    <img class="svg" src="../../images/abs-bcn.svg" />
+  </div>
+  <div class="row map-information">
+    <div class="col-lg-3 box">
+      <h5 class="border-bottom">Filtres</h5>
     </div>
+    <div class="col-lg-6"></div>
+    <div class="col-lg-3 box">
+      <h5 class="border-bottom">Informació</h5>
+    </div>
+  </div>
+  <hr class="mt-5 mb-5" />
+  <div class="row border-top">
+    <div class="col-3 col-sm-1 col-md-4"></div>
+    <div class="col-6 col-sm-10 col-md-4">
+      <div class="social-links">
+  <ul>
+    <li>
+      <a
+        class="fb"
+        href="https://www.facebook.com/sharer.php?u="
+        target="_blank"
+      >
+        <i class="fa fa-facebook"></i
+      ></a>
+    </li>
+    <li>
+      <a class="wp" href="whatsapp://send?text=">
+        <i class="fa fa-whatsapp"></i
+      ></a>
+    </li>
+    <li>
+      <a
+        class="tw"
+        href="https://twitter.com/intent/tweet?url=&text=&via="
+        target="_blank"
+      >
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a
+        class="ln"
+        href="https://www.linkedin.com/shareArticle?url=&title="
+        target="_blank"
+      >
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+  </ul>
+</div>
 
-    <script type="text/javascript" src="js/linechart.js"></script>
-    <script type="text/javascript" src="js/spline.js"></script>
-    <script type="text/javascript" src="js/areachart.js"></script>
-    <script type="text/javascript" src="js/horizontal-barchart.js"></script>
-    <script type="text/javascript" src="js/vertical-barchart.js"></script>
-    <script type="text/javascript" src="js/dynamic-barchart.js"></script>
-  </body>
+    </div>
+    <div class="col-3 col-sm-1 col-md-4"></div>
+  </div>
+</div>
+  
+  </div>
+</div> 
+
+            </div>
+
+            
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
+<script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/custom.js"></script>
+<script src="js/export.js"></script> 
+
+        </div>
+        <div class="back">
+            <img id="modificado" src="images/original.png" width="100%" height="100%"/>
+        </div> 
+    </body>
+
 </html>
