@@ -9,10 +9,12 @@ $(document).ready(function() {
 
   $("#original").click(function() {
     $("#body").flip('toggle');
+    $(".front").css('display','block');
   });
 
-  $("#modificado").click(function() {
+  $("#modified").click(function() {
     $("#body").flip('toggle');
+    $(".front").css('display','none');
   });
 
   $("#body").flip({
