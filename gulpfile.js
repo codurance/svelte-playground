@@ -1,11 +1,10 @@
 const gulp = require("gulp"),
   cssClean = require("gulp-clean-css"),
   gulpSequence = require("gulp-sequence"),
-  uglify = require("gulp-uglify"),
+  uglify = require("gulp-uglify-es").default,
   del = require("del"),
   babel = require("rollup-plugin-babel"),
   rollup = require("gulp-better-rollup"),
-  imagemin = require("gulp-imagemin"),
   htmlmin = require("gulp-htmlmin"),
   size = require("gulp-size"),
   nunjucksRender = require("gulp-nunjucks-render");
@@ -21,21 +20,16 @@ let tasks = {
   },
   images: {
     src: "src/images/**/*",
-    dest: "dist/images",
-    min: imagemin
+    dest: "dist/images"
   },
   styles: {
-    src: [
-      "src/css/*.css",
-    ],
+    src: "src/css/*.css",
     dest: "dist/css",
-    banner: true,
     min: () => cssClean({ compatibility: "ie8" })
   },
   javascript: {
     src: "src/js/*",
     dest: "dist/js",
-    banner: true,
     fun: () =>
       rollup({ plugins: [babel()] }, "cjs").on("error", e =>
         console.log(e.message)
@@ -78,10 +72,13 @@ gulp.task("clean", function() {
   return del("dist/**/*");
 });
 
-gulp.task("build", gulpSequence("clean", "html", "styles", "javascript", "images"));
+gulp.task(
+  "build",
+  gulpSequence("clean", "html", "styles", "javascript", "images")
+);
 
 gulp.task("release", ["clean"], function() {
-  // isRelease = true;
+  isRelease = true;
 
   return gulp.start("build");
 });
