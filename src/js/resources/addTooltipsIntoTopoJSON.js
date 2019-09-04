@@ -2096,20 +2096,11 @@
 
             res.on('end', function(){
                 json = JSON.parse(response);
-
-                var output = {};
-
                 function createJson(item) {
                     var id = item[0].id ;
+                    const tooltip = [parseFloat(item[0].textoHTML), parseFloat(item[1].textoHTML), parseFloat(item[2].textoHTML)];
 
-                    item.forEach(function(element, index) {
-                        var value = index + 1;
-                        output[value] = parseFloat(element.textoHTML);
-
-                        if(index == 2) {
-                            addTooltipsIntoProperties(json, id, output);
-                        }
-                    });
+                    addTooltipsIntoProperties(json, id, tooltip);
                 }
 
                 grouped.map(createJson);
