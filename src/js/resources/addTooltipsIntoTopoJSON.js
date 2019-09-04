@@ -2068,14 +2068,14 @@ var https = require('https');
         return result;
     }
 
-    function addTooltipsIntoProperties(json, id, tooltip) {
+    function addTooltipsIntoProperties(json, id, values) {
         var geometriesCount = json.objects.ABS_2018.geometries.length;
 
         for (let index = 0; index < geometriesCount; index++) {
             const geometry = json.objects.ABS_2018.geometries[index];
 
             if(geometry.properties.NOMABS.includes(id)) {
-                geometry.properties["TOOLTIPS"] = tooltip;
+                geometry.properties["VALORES"] = values;
             }
         }
     }
@@ -2098,9 +2098,9 @@ var https = require('https');
                 json = JSON.parse(response);
                 function createJson(item) {
                     var id = item[0].id ;
-                    const tooltip = [parseFloat(item[0].textoHTML), parseFloat(item[1].textoHTML), parseFloat(item[2].textoHTML)];
+                    const values = [parseFloat(item[0].textoHTML), parseFloat(item[1].textoHTML), parseFloat(item[2].textoHTML)];
 
-                    addTooltipsIntoProperties(json, id, tooltip);
+                    addTooltipsIntoProperties(json, id, values);
                 }
 
                 grouped.map(createJson);
