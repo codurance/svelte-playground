@@ -20,6 +20,4 @@ $(document).ready(function() {
   $('#body').flip({
     trigger: 'manual',
   });
-
-  $('#bar-chart-bcn').css('display', 'none');
 });
