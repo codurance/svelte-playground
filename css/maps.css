@@ -1,14 +1,1 @@
-svg path {
-  fill: none;
-  stroke: #333;
-  stroke-width: 0.7px;
-}
-
-.svg {
-  width: 50%;
-  height: 35em;
-}
-
-.map {
-  margin-left: 25%;
-}
+.map svg path{fill:none;stroke:#333;stroke-width:.7px}.svg{width:50%;height:35em}.map{margin-left:25%}
