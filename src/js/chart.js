@@ -25,6 +25,9 @@ var options = {
   ],
   xaxis: {
     categories: [],
+    labels: {
+      trim: false,
+    },
   },
 };
 
