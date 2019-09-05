@@ -1,12 +1,69 @@
-# :bar_chart: c3d3-playground
->A simple playground for C3.js and D3.js
+*Psst — looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
 
-# :link: Live demo:
+---
 
-[c3d3-playground](https://codurance.github.io/c3d3-playground/)
+# svelte app
 
-## :information_source: About the charts:
+This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
 
-The first three charts are made using `C3` library, the others with `D3`.
+To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
 
-The project is a simple `index.html` with relative `JavaScript` files.
+```bash
+npx degit sveltejs/template svelte-app
+cd svelte-app
+```
+
+*Note that you will need to have [Node.js](https://nodejs.org) installed.*
+
+
+## Get started
+
+Install the dependencies...
+
+```bash
+cd svelte-app
+npm install
+```
+
+...then start [Rollup](https://rollupjs.org):
+
+```bash
+npm run dev
+```
+
+Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
+
+
+## Deploying to the web
+
+### With [now](https://zeit.co/now)
+
+Install `now` if you haven't already:
+
+```bash
+npm install -g now
+```
+
+Then, from within your project folder:
+
+```bash
+cd public
+now
+```
+
+As an alternative, use the [Now desktop client](https://zeit.co/download) and simply drag the unzipped project folder to the taskbar icon.
+
+### With [surge](https://surge.sh/)
+
+Install `surge` if you haven't already:
+
+```bash
+npm install -g surge
+```
+
+Then, from within your project folder:
+
+```bash
+npm run build
+surge public
+```
