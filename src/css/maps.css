@@ -1,7 +1,5 @@
-.map svg path {
-  fill: none;
-  stroke: #333;
-  stroke-width: 0.7px;
+#map svg {
+  user-select: none;
 }
 
 .svg {
