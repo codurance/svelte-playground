@@ -14,12 +14,13 @@
   .header {
     display: none;
   }
-  .svg {
+  #map svg {
     top: -17vh;
     position: relative;
     width: 98% !important;
+    margin-left: 0 !important;
   }
-  .map {
+  #map {
     margin-left: 0 !important;
     max-height: 25em;
     margin-bottom: 5em;
@@ -41,8 +42,8 @@
 }
 
 @media (max-width: 411px) {
-  .svg {
-    top: -6vh;
+  #map svg {
+    top: 3vh;
   }
   .social-links {
     margin-left: -15% !important;
@@ -50,10 +51,10 @@
 }
 
 @media (min-width: 320px) and (max-width: 359px) {
-  .svg {
-    top: -17vh;
+  #map svg {
+    top: 0vh;
   }
-  .map {
+  #map {
     margin-bottom: 0;
   }
   .social-links {
@@ -62,10 +63,10 @@
 }
 
 @media (min-width: 360px) and (max-width: 374px) {
-  .svg {
-    top: -12vh;
+  #map svg {
+    top: 2vh;
   }
-  .map {
+  #map {
     margin-bottom: 1em;
   }
   .social-links {
@@ -74,10 +75,10 @@
 }
 
 @media (min-width: 375px) and (max-width: 410px) {
-  .svg {
-    top: -8vh;
+  #map svg {
+    top: 0vh;
   }
-  .map {
+  #map {
     margin-bottom: 2em;
   }
   .social-links {
@@ -86,10 +87,10 @@
 }
 
 @media (min-width: 414px) and (max-width: 420px) {
-  .svg {
-    top: -6vh;
+  #map svg {
+    top: 0vh;
   }
-  .map {
+  #map {
     margin-bottom: 5em;
   }
   .social-links {
@@ -98,12 +99,12 @@
 }
 
 @media (min-width: 768px) and (max-width: 790px) {
-  .svg {
+  #map svg {
     top: 1vh;
     width: 100% !important;
-    height: 50em !important;
+    height: 60em !important;
   }
-  .map {
+  #map {
     margin-bottom: 25em;
   }
   .social-links {

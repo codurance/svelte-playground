@@ -3,8 +3,11 @@ const FINAL =
 
 const map = d3.select('#map');
 const filters = document.getElementById('filters');
-const width = map.node().getBoundingClientRect().width;
-const height = width / 0.5;
+var width = map.node().getBoundingClientRect().width;
+
+if (width <= 400) width += 510;
+
+const height = width / 0.6;
 const COLORS = [
   '#ffffff',
   '#ffd333',
