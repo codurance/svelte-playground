@@ -39,6 +39,12 @@
     margin-left: 10% !important;
     width: 15em;
   }
+  main h4 {
+    font-size: 0.7em;
+  }
+  #map-action {
+    display: none;
+  }
 }
 
 @media (max-width: 411px) {
