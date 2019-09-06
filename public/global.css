@@ -82,3 +82,9 @@ button:focus {
   background: rgba(255, 255, 255, 0.96);
   box-shadow: 2px 2px 6px -4px #999;
 }
+
+.searchBox {
+  margin: 0 !important;
+  border-radius: 5px;
+  width: 25em;
+}
