@@ -66,7 +66,7 @@
 
 <div style="position: fixed; bottom: 2rem; right: 6rem; z-index: 1;">
   <MenuSurface bind:this={menu} anchorCorner="BOTTOM_RIGHT">
-    <input type="text" placeholder="Cercar" class="searchBox" autofocus />
+    <input type="text" placeholder="Cercar" class="searchBox" />
   </MenuSurface>
 </div>
 
