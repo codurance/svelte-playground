@@ -59,3 +59,7 @@ div .container-fluid {
   height: 10em;
   text-align: center;
 }
+
+.chart-information {
+  margin-top: -80em;
+}
