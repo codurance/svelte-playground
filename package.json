@@ -1,36 +1,27 @@
 {
-  "name": "SiSalut",
-  "title": "SiSalut - Demo",
+  "name": "svelte-app",
   "version": "1.0.0",
-  "homepage": "https://codurance.com",
-  "author": "Codurance",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/codurance/c3d3-playground.git"
+  "devDependencies": {
+    "node-sass": "^4.12.0",
+    "npm-run-all": "^4.1.5",
+    "rollup": "^1.12.0",
+    "rollup-plugin-commonjs": "^10.0.0",
+    "rollup-plugin-livereload": "^1.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-postcss": "^2.0.3",
+    "rollup-plugin-svelte": "^5.0.3",
+    "rollup-plugin-terser": "^4.0.4",
+    "svelte": "^3.0.0",
+    "svelte-material-ui": "^1.0.0-beta.10"
+  },
+  "dependencies": {
+    "sirv-cli": "^0.4.4"
   },
   "scripts": {
-    "clean": "gulp clean",
-    "release": "gulp release",
-    "dev": "gulp dev"
-  },
-  "devDependencies": {
-    "babel-core": "6.26.0",
-    "babel-preset-env": "1.6.1",
-    "del": "3.0.0",
-    "gulp": "3.9.1",
-    "gulp-better-rollup": "3.1.0",
-    "gulp-clean-css": "3.9.3",
-    "gulp-cli": "github:gulpjs/gulp-cli",
-    "gulp-copy": "1.1.0",
-    "gulp-htmlmin": "4.0.0",
-    "gulp-nunjucks-render": "^2.2.3",
-    "gulp-sequence": "1.0.0",
-    "gulp-size": "3.0.0",
-    "gulp-uglify-es": "^1.0.4",
-    "koa": "2.5.0",
-    "koa-logger": "3.2.0",
-    "koa-static": "4.0.2",
-    "prettier": "1.18.2",
-    "rollup-plugin-babel": "3.0.3"
+    "build": "rollup -c",
+    "autobuild": "rollup -c -w",
+    "dev": "run-p start:dev autobuild",
+    "start": "sirv public --single",
+    "start:dev": "sirv public --single --dev"
   }
 }
