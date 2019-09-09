@@ -8,19 +8,18 @@
     <link rel="shortcut icon" type="image/png" href="./favicon.png" />
   </head>
   <style>
-    img {
+    a img {
       border: 1px solid #ddd;
       border-radius: 4px;
-      width: 30%;
       display: inline-flex;
-      margin-left: 2em;
+      margin-left: 3em;
       margin-right: auto;
-      margin-top: 10%;
+      margin-top: 5%;
       box-shadow: 5px 5px #028cd6;
     }
 
     img:hover {
-      box-shadow: 5px 5px #2b88ba;
+      box-shadow: 5px 5px #6eb8e0;
     }
 
     h1 {
@@ -29,6 +28,7 @@
       margin-right: auto;
       width: 100%;
       text-align: center;
+      font-size: 5em;
     }
     body {
       font-family: "Alegreya Sans";
@@ -38,20 +38,22 @@
     a {
       text-decoration: none;
     }
+
+    .navbar {
+      background-color: #028cd6;
+      overflow: hidden;
+    }
   </style>
   <body>
-    <h1>SiSalut - Demo</h1>
+    <div class="navbar">
+      <h1>SiSalut - Demo</h1>
+    </div>
 
-    <a href="./bootstrap/">
+    <a href="./bootstrap.html">
       <img src="./bootstrap/thumbnail.png" />
     </a>
     <a href="./material/">
       <img src="./material/thumbnail.png" />
-    </a>
-    <a href="./original">
-      <img
-        src="https://www.aspb.cat/docs/sisalutinfoabs/SISalutEscutsLlibres/aspb.jpg"
-      />
     </a>
   </body>
 </html>
