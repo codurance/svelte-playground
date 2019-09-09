@@ -19,6 +19,7 @@
     position: relative;
     width: 98% !important;
     margin-left: 0 !important;
+    transform: scale(1.1);
   }
   #map {
     margin-left: 0 !important;
@@ -31,6 +32,7 @@
   .box {
     border: 0px;
     margin-bottom: 1em;
+    left: 1em;
   }
   div .container-fluid {
     padding: 0 !important;
@@ -45,11 +47,15 @@
   #map-action {
     display: none;
   }
+  #chart {
+    margin-left: 1.7em !important;
+  }
 }
 
 @media (max-width: 411px) {
   #map svg {
-    top: 3vh;
+    top: 7vh;
+    left: 5vh;
   }
   .social-links {
     margin-left: -15% !important;
@@ -58,7 +64,9 @@
 
 @media (min-width: 320px) and (max-width: 359px) {
   #map svg {
-    top: 0vh;
+    top: 10vh;
+    left: 3vh;
+    width: 94% !important;
   }
   #map {
     margin-bottom: 0;
@@ -70,7 +78,8 @@
 
 @media (min-width: 360px) and (max-width: 374px) {
   #map svg {
-    top: 2vh;
+    top: 6vh;
+    left: 3vh;
   }
   #map {
     margin-bottom: 1em;
@@ -82,7 +91,8 @@
 
 @media (min-width: 375px) and (max-width: 410px) {
   #map svg {
-    top: 0vh;
+    top: 7vh;
+    left: 3vh;
   }
   #map {
     margin-bottom: 2em;
@@ -94,7 +104,8 @@
 
 @media (min-width: 414px) and (max-width: 420px) {
   #map svg {
-    top: 0vh;
+    top: 5vh;
+    left: 4vh;
   }
   #map {
     margin-bottom: 5em;
@@ -106,9 +117,10 @@
 
 @media (min-width: 768px) and (max-width: 790px) {
   #map svg {
-    top: 1vh;
+    top: 7vh;
+    left: 4vh;
     width: 100% !important;
-    height: 60em !important;
+    height: 55em !important;
   }
   #map {
     margin-bottom: 25em;
