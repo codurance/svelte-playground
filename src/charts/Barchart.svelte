@@ -45,10 +45,10 @@
       parseFloat(series.value)
     );
 
-    var chart = new ApexCharts(document.querySelector("#chart"), options);
+    var chart = new ApexCharts(document.querySelector("#barchart"), options);
 
     chart.render();
   });
 </script>
 
-<div id="chart" />
+<div id="barchart" />

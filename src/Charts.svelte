@@ -4,10 +4,10 @@
   import Barchart from "./charts/Barchart.svelte";
 </script>
 
-<Card>
+<Card svgElementId="map">
   <ABSMap />
 </Card>
 <br />
-<Card>
+<Card svgElementId="barchart">
   <Barchart />
 </Card>
