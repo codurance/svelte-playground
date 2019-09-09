@@ -12,8 +12,8 @@
   let barcelona;
   let colorScaleExtent = [0, 0];
 
-  $: width = widthParent;
-  $: height = widthParent;
+  $: width = widthParent / 1.5;
+  $: height = widthParent / 1.5;
   $: filter = 0;
   $: quantize = d3
     .scaleQuantize()

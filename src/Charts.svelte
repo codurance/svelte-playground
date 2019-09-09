@@ -4,7 +4,7 @@
   import Barchart from "./charts/Barchart.svelte";
 </script>
 
-<Card svgElementId="map">
+<Card svgElementId="map" fileName="ABS Barcelona Map">
   <ABSMap />
 </Card>
 <br />

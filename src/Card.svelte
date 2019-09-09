@@ -16,6 +16,7 @@
   import Select, { Option } from "@smui/select";
 
   export let svgElementId;
+  export let fileName;
 
   let selected = $ABSMapFilter;
   const filters = [
@@ -24,13 +25,15 @@
     { value: 2, label: "Homes de 85 anys i més que viuen sols" }
   ];
 
-  function exportSvg(elementId) {
+  function exportSvg(elementId, filename) {
     const SVG = document.querySelector(`#${elementId}`);
 
-    html2canvas(SVG).then(canvas => {
-      let pdf = new jsPDF("p", "mm", "a4");
-      pdf.addImage(canvas.toDataURL(), "PNG", 0, 0, 211, 298);
-      pdf.save(SVG.dataset.filename);
+    html2canvas(SVG, { width: 1500, height: 2800, scale: 1 }).then(canvas => {
+      let pdf = jsPDF('p', 'pt', 'a4', true);
+
+      pdf.addImage(canvas.toDataURL(), 'PNG', 0, -180, 700, 1000);
+
+      pdf.save(filename);
     });
   }
 </script>
@@ -61,7 +64,7 @@
       <IconButton
         class="material-icons"
         title="File download"
-        on:click={() => exportSvg(svgElementId)}>
+        on:click={() => exportSvg(svgElementId, fileName)}>
         file_download
       </IconButton>
     </ActionIcons>
