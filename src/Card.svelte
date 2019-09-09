@@ -1,4 +1,5 @@
 <script>
+  import { ABSMapFilter } from "./store.js";
   import Card, {
     Content,
     PrimaryAction,
@@ -10,6 +11,15 @@
   } from "@smui/card";
   import Button, { Label } from "@smui/button";
   import IconButton, { Icon } from "@smui/icon-button";
+  import Select, { Option } from "@smui/select";
+
+  let selected = $ABSMapFilter;
+  const filters = [
+    { value: 0, label: "Homes 65-74 anys que viuen sols" },
+    { value: 1, label: "Homes 75-84 anys que viuen sols" },
+    { value: 2, label: "Homes de 85 anys i més que viuen sols" }
+  ];
+  let valueShapedFilledInvalid = "";
 </script>
 
 <Card
@@ -18,11 +28,18 @@
     <slot />
   </Content>
   <Actions>
-    <ActionButtons>
-      <Button>
-        <Label>Filter</Label>
-      </Button>
-    </ActionButtons>
+
+    <Select
+      class="shaped"
+      variant="filled"
+      label="Filtres"
+      bind:value={selected}
+      on:change={() => ABSMapFilter.set(selected)}>
+      {#each filters as { value, label }}
+        <Option {value} selected={selected === value}>{label}</Option>
+      {/each}
+    </Select>
+
     <ActionIcons>
       <IconButton toggle aria-label="Add to favorites" title="Add to favorites">
         <Icon class="material-icons" on>favorite</Icon>
