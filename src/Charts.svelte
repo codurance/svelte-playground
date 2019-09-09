@@ -1,13 +1,13 @@
 <script>
   import Card from "./Card.svelte";
-  import BarcelonaMapChart from "./charts/BarcelonaMapChart.svelte";
-  import BarcelonaBarChart from "./charts/BarcelonaBarChart.svelte";
+  import ABSMap from "./charts/ABSMap.svelte";
+  import Barchart from "./charts/Barchart.svelte";
 </script>
 
 <Card>
-  <BarcelonaMapChart />
+  <ABSMap />
 </Card>
 <br />
 <Card>
-  <BarcelonaBarChart />
+  <Barchart />
 </Card>
