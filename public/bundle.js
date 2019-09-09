@@ -22549,11 +22549,19 @@ var app = (function () {
 
     function get_each_context$1(ctx, list, i) {
     	const child_ctx = Object.create(ctx);
+    	child_ctx.color = list[i].color;
+    	child_ctx.text = list[i].text;
+    	child_ctx.i = i;
+    	return child_ctx;
+    }
+
+    function get_each_context_1(ctx, list, i) {
+    	const child_ctx = Object.create(ctx);
     	child_ctx.feature = list[i];
     	return child_ctx;
     }
 
-    // (93:6) {:else}
+    // (101:6) {:else}
     function create_else_block$6(ctx) {
     	var t;
 
@@ -22576,16 +22584,16 @@ var app = (function () {
     	};
     }
 
-    // (77:6) {#if features}
+    // (85:6) {#if features}
     function create_if_block_1$2(ctx) {
     	var each_1_anchor;
 
-    	var each_value = ctx.features;
+    	var each_value_1 = ctx.features;
 
     	var each_blocks = [];
 
-    	for (var i = 0; i < each_value.length; i += 1) {
-    		each_blocks[i] = create_each_block$1(get_each_context$1(ctx, each_value, i));
+    	for (var i = 0; i < each_value_1.length; i += 1) {
+    		each_blocks[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
     	}
 
     	return {
@@ -22607,15 +22615,15 @@ var app = (function () {
 
     		p: function update(changed, ctx) {
     			if (changed.path || changed.features || changed.quantize || changed.Number || changed.$ABSMapFilter) {
-    				each_value = ctx.features;
+    				each_value_1 = ctx.features;
 
-    				for (var i = 0; i < each_value.length; i += 1) {
-    					const child_ctx = get_each_context$1(ctx, each_value, i);
+    				for (var i = 0; i < each_value_1.length; i += 1) {
+    					const child_ctx = get_each_context_1(ctx, each_value_1, i);
 
     					if (each_blocks[i]) {
     						each_blocks[i].p(changed, child_ctx);
     					} else {
-    						each_blocks[i] = create_each_block$1(child_ctx);
+    						each_blocks[i] = create_each_block_1(child_ctx);
     						each_blocks[i].c();
     						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
     					}
@@ -22624,7 +22632,7 @@ var app = (function () {
     				for (; i < each_blocks.length; i += 1) {
     					each_blocks[i].d(1);
     				}
-    				each_blocks.length = each_value.length;
+    				each_blocks.length = each_value_1.length;
     			}
     		},
 
@@ -22638,8 +22646,8 @@ var app = (function () {
     	};
     }
 
-    // (78:8) {#each features as feature}
-    function create_each_block$1(ctx) {
+    // (86:8) {#each features as feature}
+    function create_each_block_1(ctx) {
     	var path_1, path_1_d_value, path_1_fill_value, text_1, t_value = ctx.feature.properties.NOMABS.replace('Barcelona - ', '') + "", t, text_1_transform_value, dispose;
 
     	function mousemove_handler(...args) {
@@ -22654,10 +22662,10 @@ var app = (function () {
     			attr(path_1, "d", path_1_d_value = ctx.path(ctx.feature));
     			attr(path_1, "fill", path_1_fill_value = ctx.quantize(ctx.Number(ctx.feature.properties.VALORES ? ctx.feature.properties.VALORES[ctx.$ABSMapFilter] : 0)));
     			attr(path_1, "stroke", "black");
-    			add_location(path_1, file$i, 78, 10, 2043);
+    			add_location(path_1, file$i, 86, 10, 2265);
     			set_style(text_1, "font-size", "10px");
     			attr(text_1, "transform", text_1_transform_value = `translate(${ctx.path.centroid(ctx.feature)})`);
-    			add_location(text_1, file$i, 86, 10, 2393);
+    			add_location(text_1, file$i, 94, 10, 2615);
 
     			dispose = [
     				listen(path_1, "mouseover", ctx.handleMouseOver),
@@ -22702,7 +22710,47 @@ var app = (function () {
     	};
     }
 
-    // (97:0) {#if showTooltip}
+    // (104:6) {#each labels as { color, text }
+    function create_each_block$1(ctx) {
+    	var rect, rect_fill_value, text_1, t_value = ctx.text + "", t;
+
+    	return {
+    		c: function create() {
+    			rect = svg_element("rect");
+    			text_1 = svg_element("text");
+    			t = text(t_value);
+    			attr(rect, "x", "10");
+    			attr(rect, "y", 10 + 15 * ctx.i);
+    			attr(rect, "width", "10");
+    			attr(rect, "height", "10");
+    			attr(rect, "stroke", "black");
+    			attr(rect, "stroke-width", "1");
+    			attr(rect, "fill", rect_fill_value = ctx.color);
+    			add_location(rect, file$i, 104, 8, 2917);
+    			attr(text_1, "x", "25");
+    			attr(text_1, "y", 19 + 15 * ctx.i);
+    			attr(text_1, "font-size", "12");
+    			add_location(text_1, file$i, 112, 8, 3095);
+    		},
+
+    		m: function mount(target, anchor) {
+    			insert(target, rect, anchor);
+    			insert(target, text_1, anchor);
+    			append(text_1, t);
+    		},
+
+    		p: noop,
+
+    		d: function destroy(detaching) {
+    			if (detaching) {
+    				detach(rect);
+    				detach(text_1);
+    			}
+    		}
+    	};
+    }
+
+    // (118:0) {#if showTooltip}
     function create_if_block$7(ctx) {
     	var div, p0, t0_value = ctx.tooltipValues.NOMABS + "", t0, t1, p1, t2_value = ctx.tooltipValues.NOMAGA + "", t2, t3, p2, t4_value = ctx.tooltipValues.NOMSS + "", t4, t5, p3, t6_value = ctx.tooltipValues.VALORES ? ctx.tooltipValues.VALORES[ctx.$ABSMapFilter] : 'No Data' + "", t6, div_style_value;
 
@@ -22720,13 +22768,13 @@ var app = (function () {
     			t5 = space();
     			p3 = element("p");
     			t6 = text(t6_value);
-    			add_location(p0, file$i, 100, 4, 2817);
-    			add_location(p1, file$i, 101, 4, 2851);
-    			add_location(p2, file$i, 102, 4, 2885);
-    			add_location(p3, file$i, 103, 4, 2918);
+    			add_location(p0, file$i, 121, 4, 3357);
+    			add_location(p1, file$i, 122, 4, 3391);
+    			add_location(p2, file$i, 123, 4, 3425);
+    			add_location(p3, file$i, 124, 4, 3458);
     			attr(div, "class", "tooltip");
     			attr(div, "style", div_style_value = ctx.showTooltip ? `opacity: .9; top: ${ctx.tooltipValues.top}px; left: ${ctx.tooltipValues.left}px` : 'opacity: 0');
-    			add_location(div, file$i, 97, 2, 2672);
+    			add_location(div, file$i, 118, 2, 3212);
     		},
 
     		m: function mount(target, anchor) {
@@ -22775,7 +22823,7 @@ var app = (function () {
     }
 
     function create_fragment$l(ctx) {
-    	var div, svg, g, g_transform_value, svg_viewBox_value, t, if_block1_anchor;
+    	var div, svg, g0, g1, svg_viewBox_value, t, if_block1_anchor;
 
     	function select_block_type(changed, ctx) {
     		if (ctx.features) return create_if_block_1$2;
@@ -22785,23 +22833,37 @@ var app = (function () {
     	var current_block_type = select_block_type(null, ctx);
     	var if_block0 = current_block_type(ctx);
 
+    	var each_value = ctx.labels;
+
+    	var each_blocks = [];
+
+    	for (var i = 0; i < each_value.length; i += 1) {
+    		each_blocks[i] = create_each_block$1(get_each_context$1(ctx, each_value, i));
+    	}
+
     	var if_block1 = (ctx.showTooltip) && create_if_block$7(ctx);
 
     	return {
     		c: function create() {
     			div = element("div");
     			svg = svg_element("svg");
-    			g = svg_element("g");
+    			g0 = svg_element("g");
     			if_block0.c();
+    			g1 = svg_element("g");
+
+    			for (var i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
     			t = space();
     			if (if_block1) if_block1.c();
     			if_block1_anchor = empty();
-    			attr(g, "transform", g_transform_value = `translate(${ctx.width / 2}px, ${ctx.height / 2}px)`);
-    			add_location(g, file$i, 75, 4, 1915);
+    			add_location(g0, file$i, 83, 4, 2194);
+    			add_location(g1, file$i, 102, 4, 2862);
     			attr(svg, "viewBox", svg_viewBox_value = `0 0 ${ctx.width || 0} ${ctx.height || 0}`);
-    			add_location(svg, file$i, 74, 2, 1860);
+    			add_location(svg, file$i, 81, 2, 2138);
     			attr(div, "id", "map");
-    			add_location(div, file$i, 73, 0, 1843);
+    			add_location(div, file$i, 80, 0, 2121);
     		},
 
     		l: function claim(nodes) {
@@ -22811,8 +22873,14 @@ var app = (function () {
     		m: function mount(target, anchor) {
     			insert(target, div, anchor);
     			append(div, svg);
-    			append(svg, g);
-    			if_block0.m(g, null);
+    			append(svg, g0);
+    			if_block0.m(g0, null);
+    			append(svg, g1);
+
+    			for (var i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].m(g1, null);
+    			}
+
     			insert(target, t, anchor);
     			if (if_block1) if_block1.m(target, anchor);
     			insert(target, if_block1_anchor, anchor);
@@ -22826,12 +22894,29 @@ var app = (function () {
     				if_block0 = current_block_type(ctx);
     				if (if_block0) {
     					if_block0.c();
-    					if_block0.m(g, null);
+    					if_block0.m(g0, null);
     				}
     			}
 
-    			if ((changed.width || changed.height) && g_transform_value !== (g_transform_value = `translate(${ctx.width / 2}px, ${ctx.height / 2}px)`)) {
-    				attr(g, "transform", g_transform_value);
+    			if (changed.labels) {
+    				each_value = ctx.labels;
+
+    				for (var i = 0; i < each_value.length; i += 1) {
+    					const child_ctx = get_each_context$1(ctx, each_value, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(changed, child_ctx);
+    					} else {
+    						each_blocks[i] = create_each_block$1(child_ctx);
+    						each_blocks[i].c();
+    						each_blocks[i].m(g1, null);
+    					}
+    				}
+
+    				for (; i < each_blocks.length; i += 1) {
+    					each_blocks[i].d(1);
+    				}
+    				each_blocks.length = each_value.length;
     			}
 
     			if ((changed.width || changed.height) && svg_viewBox_value !== (svg_viewBox_value = `0 0 ${ctx.width || 0} ${ctx.height || 0}`)) {
@@ -22861,6 +22946,8 @@ var app = (function () {
     			}
 
     			if_block0.d();
+
+    			destroy_each(each_blocks, detaching);
 
     			if (detaching) {
     				detach(t);
@@ -22939,6 +23026,13 @@ var app = (function () {
         );
         selectElement.attr("fill", quantizedColor);
       };
+      const labels = [
+        { color: "#fff", text: "De 8.5 a 11.10" },
+        { color: "#ffd333", text: "De 11.11 a 12.30" },
+        { color: "#ffde66", text: "De 12.31 a 13.60" },
+        { color: "#fff4cc", text: "De 13.61 a 16.10" },
+        { color: "#ffe999", text: "De 16.11 a 29.40" }
+      ];
 
     	function mousemove_handler({ feature }, event) {
     		return handleMouseMove(feature, event);
@@ -22964,6 +23058,7 @@ var app = (function () {
     		handleMouseOver,
     		handleMouseMove,
     		handleMouseOut,
+    		labels,
     		width,
     		height,
     		quantize,

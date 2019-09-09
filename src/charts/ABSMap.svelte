@@ -69,11 +69,19 @@
     );
     selectElement.attr("fill", quantizedColor);
   };
+  const labels = [
+    { color: "#fff", text: "De 8.5 a 11.10" },
+    { color: "#ffd333", text: "De 11.11 a 12.30" },
+    { color: "#ffde66", text: "De 12.31 a 13.60" },
+    { color: "#fff4cc", text: "De 13.61 a 16.10" },
+    { color: "#ffe999", text: "De 16.11 a 29.40" }
+  ];
 </script>
 
 <div id="map">
   <svg viewBox={`0 0 ${width || 0} ${height || 0}`}>
-    <g transform={`translate(${width / 2}px, ${height / 2}px)`}>
+
+    <g>
       {#if features}
         {#each features as feature}
           <path
@@ -91,6 +99,19 @@
           </text>
         {/each}
       {:else}loading{/if}
+    </g>
+    <g>
+      {#each labels as { color, text }, i}
+        <rect
+          x="10"
+          y={10 + 15 * i}
+          width="10"
+          height="10"
+          stroke="black"
+          stroke-width="1"
+          fill={color} />
+        <text x="25" y={19 + 15 * i} font-size="12">{text}</text>
+      {/each}
     </g>
   </svg>
 </div>
