@@ -42,15 +42,30 @@
 <TopAppBar variant="static" color="primary">
   <Row>
     <Section>
-      <IconButton
-        class="material-icons"
-        style="margin-top: 0.5em;"
-        on:click={() => (drawerOpen = !drawerOpen)}>
-        menu
-      </IconButton>
+      <img src="/images/logo.jpg" alt="SiSalut" />
       <Title>SiSalut - Demo</Title>
     </Section>
+    <Section align="end" toolbar>
+      <img src="/images/header.jpg" alt="SiSalut" />
+    </Section>
   </Row>
+</TopAppBar>
+<TopAppBar variant="static" color="secondary">
+  <Row>
+    <Section>
+        <IconButton class="material-icons" aria-label="Search">search</IconButton>
+        <IconButton class="material-icons" aria-label="Grid">grid_on</IconButton>
+        <IconButton class="material-icons" aria-label="List"
+                    on:click={() => (drawerOpen = !drawerOpen)}>
+                    list</IconButton>
+        <IconButton class="material-icons" aria-label="Map">map</IconButton>
+        <IconButton class="material-icons" aria-label="Chart">insert_chart</IconButton>
+    </Section>
+    <Section align="end" toolbar>
+        <IconButton class="material-icons" aria-label="Search">brightness_5</IconButton>
+        <IconButton class="material-icons" aria-label="Search">brightness_2</IconButton>
+    </Section>
+   </Row>
 </TopAppBar>
 <TopAppBar variant="static" color="secondary">
   <Title>
