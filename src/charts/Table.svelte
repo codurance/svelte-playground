@@ -48,15 +48,24 @@
             <Cell>9.4</Cell>
             <Cell>1.4</Cell>
           </Row>
+          <Row>
+            <Cell>
+              PERSONES GRANS QUE VIUEN SOLES	
+            </Cell>
+            <Cell></Cell>
+            <Cell></Cell>
+            <Cell></Cell>
+            <Cell></Cell>
+          </Row>
            <Row>
-            <Cell>LLARS AMB >4 PERSONES</Cell>
+            <Cell>Homes 65-74 anys</Cell>
             <Cell>2.4</Cell>
             <Cell>5.4</Cell>
             <Cell>3.4</Cell>
             <Cell>7.4</Cell>
           </Row>
            <Row>
-            <Cell>LLARS AMB >4 PERSONES</Cell>
+            <Cell>Dones 65-74 anys</Cell>
             <Cell>2.4</Cell>
             <Cell>3.4</Cell>
             <Cell>6.4</Cell>
