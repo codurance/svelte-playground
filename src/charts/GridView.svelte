@@ -11,6 +11,7 @@
     ActionIcons
   } from "@smui/card";
   import Button, { Label } from "@smui/button";
+  import { fade, draw, fly } from 'svelte/transition';
   import Table from "./Table.svelte";
 
   const FINAL =
@@ -102,8 +103,8 @@
             on:mouseover={handleMouseOver}
             on:mouseout={handleMouseOut}
             opacity="0.6">
-            <g>
-              <path
+            <g out:fly="{{y: -20, duration: 100}}">
+              <path in:draw="{{duration: 2000}}"
                 id={`path-${getAbsCode(feature)}`}
                 class={`paths`}
                 d={PATH(feature)}

@@ -3,7 +3,7 @@
   import { onMount } from "svelte";
   import Table from "./Table.svelte";
   import { quintOut } from 'svelte/easing';
-    import { fade, draw, fly } from 'svelte/transition';
+  import { fade, draw, fly } from 'svelte/transition';
 
   const HOMESCOLOR = ["#ffffff", "#6fd1f2", "#12c4ff", "#089dcf", "#00769e"];
   const MIXCOLOR = ["#ffffff", "#ffd333", "#ffde66", "#fff4cc", "#ffe999"];

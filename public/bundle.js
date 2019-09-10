@@ -29345,11 +29345,11 @@ var app = (function () {
     			attr(path_1, "d", path_1_d_value = ctx.path(ctx.feature));
     			attr(path_1, "fill", path_1_fill_value = ctx.quantize(ctx.Number(ctx.feature.properties.VALORES ? ctx.feature.properties.VALORES[ctx.$ABSMapFilter] : 0)));
     			attr(path_1, "stroke", "black");
-    			add_location(path_1, file$q, 103, 10, 2842);
+    			add_location(path_1, file$q, 103, 10, 2840);
     			set_style(text_1, "font-size", "10px");
     			attr(text_1, "transform", text_1_transform_value = `translate(${ctx.path.centroid(ctx.feature)})`);
-    			add_location(text_1, file$q, 113, 10, 3320);
-    			add_location(g, file$q, 112, 8, 3270);
+    			add_location(text_1, file$q, 113, 10, 3318);
+    			add_location(g, file$q, 112, 8, 3268);
 
     			dispose = [
     				listen(path_1, "mouseover", ctx.handleMouseOver),
@@ -29441,11 +29441,11 @@ var app = (function () {
     			attr(rect, "stroke", "black");
     			attr(rect, "stroke-width", "1");
     			attr(rect, "fill", rect_fill_value = ctx.color);
-    			add_location(rect, file$q, 124, 8, 3685);
+    			add_location(rect, file$q, 124, 8, 3683);
     			attr(text_1, "x", "25");
     			attr(text_1, "y", 19 + 15 * ctx.i);
     			attr(text_1, "font-size", "12");
-    			add_location(text_1, file$q, 132, 8, 3863);
+    			add_location(text_1, file$q, 132, 8, 3861);
     		},
 
     		m: function mount(target, anchor) {
@@ -29497,18 +29497,18 @@ var app = (function () {
     			t7 = text(t7_value);
     			t8 = space();
     			if (if_block) if_block.c();
-    			add_location(p0, file$q, 141, 4, 4125);
-    			add_location(p1, file$q, 142, 4, 4159);
-    			add_location(p2, file$q, 143, 4, 4193);
+    			add_location(p0, file$q, 141, 4, 4123);
+    			add_location(p1, file$q, 142, 4, 4157);
+    			add_location(p2, file$q, 143, 4, 4191);
     			attr(img, "src", "./icons/oldman.svg");
     			attr(img, "alt", "Old Man");
     			attr(img, "width", "15%");
     			attr(img, "height", "15%");
-    			add_location(img, file$q, 145, 4, 4234);
-    			add_location(p3, file$q, 144, 4, 4226);
+    			add_location(img, file$q, 145, 4, 4232);
+    			add_location(p3, file$q, 144, 4, 4224);
     			attr(div, "class", "tooltip");
     			attr(div, "style", div_style_value = ctx.showTooltip ? `opacity: .9; top: ${ctx.tooltipValues.top}px; left: ${ctx.tooltipValues.left}px` : 'opacity: 0');
-    			add_location(div, file$q, 138, 2, 3980);
+    			add_location(div, file$q, 138, 2, 3978);
     		},
 
     		m: function mount(target, anchor) {
@@ -29588,7 +29588,7 @@ var app = (function () {
     			attr(img, "alt", "Old Man");
     			attr(img, "width", "15%");
     			attr(img, "height", "15%");
-    			add_location(img, file$q, 148, 6, 4412);
+    			add_location(img, file$q, 148, 6, 4410);
     		},
 
     		m: function mount(target, anchor) {
@@ -29682,12 +29682,12 @@ var app = (function () {
     			t1 = space();
     			if (if_block1) if_block1.c();
     			if_block1_anchor = empty();
-    			add_location(g0, file$q, 100, 4, 2739);
-    			add_location(g1, file$q, 122, 4, 3630);
+    			add_location(g0, file$q, 100, 4, 2737);
+    			add_location(g1, file$q, 122, 4, 3628);
     			attr(svg, "viewBox", svg_viewBox_value = `0 0 ${ctx.width || 0} ${ctx.height || 0}`);
-    			add_location(svg, file$q, 98, 2, 2683);
+    			add_location(svg, file$q, 98, 2, 2681);
     			attr(div, "id", "map");
-    			add_location(div, file$q, 97, 0, 2666);
+    			add_location(div, file$q, 97, 0, 2664);
     		},
 
     		l: function claim(nodes) {
@@ -30202,7 +30202,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (124:2) {:else}
+    // (125:2) {:else}
     function create_else_block$8(ctx) {
     	var t;
 
@@ -30227,7 +30227,7 @@ var app = (function () {
     	};
     }
 
-    // (89:2) {#if features}
+    // (90:2) {#if features}
     function create_if_block$9(ctx) {
     	var each_1_anchor, current;
 
@@ -30309,7 +30309,7 @@ var app = (function () {
     	};
     }
 
-    // (114:10) <Content style="color: #888;">
+    // (115:10) <Content style="color: #888;">
     function create_default_slot_3$3(ctx) {
     	var span, t0_value = ctx.feature.properties.NOMSS + "", t0, t1, t2, b, t3_value = getAbsCode$1(ctx.feature) + "", t3;
 
@@ -30322,8 +30322,8 @@ var app = (function () {
     			b = element("b");
     			t3 = text(t3_value);
     			set_style(span, "color", "black");
-    			add_location(span, file$s, 114, 12, 3126);
-    			add_location(b, file$s, 115, 12, 3202);
+    			add_location(span, file$s, 115, 12, 3246);
+    			add_location(b, file$s, 116, 12, 3322);
     		},
 
     		m: function mount(target, anchor) {
@@ -30355,7 +30355,7 @@ var app = (function () {
     	};
     }
 
-    // (118:10) <Content style="color: #888; font-size: 10px; padding-top: 0;">
+    // (119:10) <Content style="color: #888; font-size: 10px; padding-top: 0;">
     function create_default_slot_2$3(ctx) {
     	var t;
 
@@ -30376,9 +30376,9 @@ var app = (function () {
     	};
     }
 
-    // (92:8) <PrimaryAction on:click={() => handleOnClick(feature)}>
+    // (93:8) <PrimaryAction on:click={() => handleOnClick(feature)}>
     function create_default_slot_1$3(ctx) {
-    	var svg, g, path, path_id_value, path_d_value, path_fill_value, svg_viewBox_value, t0, t1, current, dispose;
+    	var svg, g, path, path_id_value, path_d_value, path_fill_value, path_intro, g_outro, svg_viewBox_value, t0, t1, current, dispose;
 
     	var content0 = new Content({
     		props: {
@@ -30412,8 +30412,8 @@ var app = (function () {
     			attr(path, "d", path_d_value = ctx.PATH(ctx.feature));
     			attr(path, "fill", path_fill_value = ctx.quantize(Number(ctx.feature.properties.VALORES ? ctx.feature.properties.VALORES[ctx.$ABSMapFilter] : 0)));
     			attr(path, "stroke", "black");
-    			add_location(path, file$s, 105, 14, 2766);
-    			add_location(g, file$s, 104, 12, 2748);
+    			add_location(path, file$s, 106, 14, 2857);
+    			add_location(g, file$s, 105, 12, 2803);
     			attr(svg, "width", "350px");
     			attr(svg, "height", "200px");
     			attr(svg, "viewBox", svg_viewBox_value = `
@@ -30422,7 +30422,7 @@ var app = (function () {
         350
         200`);
     			attr(svg, "opacity", "0.6");
-    			add_location(svg, file$s, 93, 10, 2416);
+    			add_location(svg, file$s, 94, 10, 2471);
 
     			dispose = [
     				listen(svg, "mouseover", ctx.handleMouseOver),
@@ -30473,6 +30473,15 @@ var app = (function () {
 
     		i: function intro(local) {
     			if (current) return;
+    			if (!path_intro) {
+    				add_render_callback(() => {
+    					path_intro = create_in_transition(path, draw, {duration: 2000});
+    					path_intro.start();
+    				});
+    			}
+
+    			if (g_outro) g_outro.end(1);
+
     			transition_in(content0.$$.fragment, local);
 
     			transition_in(content1.$$.fragment, local);
@@ -30481,6 +30490,8 @@ var app = (function () {
     		},
 
     		o: function outro(local) {
+    			g_outro = create_out_transition(g, fly, {y: -20, duration: 100});
+
     			transition_out(content0.$$.fragment, local);
     			transition_out(content1.$$.fragment, local);
     			current = false;
@@ -30489,6 +30500,7 @@ var app = (function () {
     		d: function destroy(detaching) {
     			if (detaching) {
     				detach(svg);
+    				if (g_outro) g_outro.end();
     				detach(t0);
     			}
 
@@ -30505,7 +30517,7 @@ var app = (function () {
     	};
     }
 
-    // (91:6) <Card style="cursor: pointer; box-shadow:2px 2px rgba(0,0,0,0.2)">
+    // (92:6) <Card style="cursor: pointer; box-shadow:2px 2px rgba(0,0,0,0.2)">
     function create_default_slot$6(ctx) {
     	var t, current;
 
@@ -30563,7 +30575,7 @@ var app = (function () {
     	};
     }
 
-    // (90:4) {#each features as feature, i}
+    // (91:4) {#each features as feature, i}
     function create_each_block$2(ctx) {
     	var current;
 
@@ -30659,7 +30671,7 @@ var app = (function () {
     			div = element("div");
     			if_block.c();
     			attr(div, "style", ctx.cardWrapper);
-    			add_location(div, file$s, 86, 0, 2189);
+    			add_location(div, file$s, 87, 0, 2244);
     		},
 
     		l: function claim(nodes) {
