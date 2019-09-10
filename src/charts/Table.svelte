@@ -2,6 +2,7 @@
   import DataTable, {Head, Body, Row, Cell} from '@smui/data-table';
   import Dialog, {Title, Content, Actions} from '@smui/dialog';
   import Button, {Label} from '@smui/button';
+  import IconButton, { Icon } from "@smui/icon-button";
 
   export let dialog;
   export let ABSSelected = { };
@@ -13,9 +14,16 @@
   aria-describedby="dialog-content"
   on:MDCDialog:closed={()=> dialog.close()}
 >
-  <Title id="dialog-title">{ABSSelected.NOMABS}</Title>
+  <Title id="dialog-title">{ABSSelected.NOMABS}
+    <IconButton
+        id="close-dialog"
+        class="material-icons"
+        title="Close"
+        on:click={()=> dialog.close()}>
+        close
+    </IconButton>
+  </Title>
   <Content id="dialog-content">
-
       <DataTable table$aria-label="Products">
         <Head>
           <Row>
@@ -64,8 +72,36 @@
             <Cell>3.4</Cell>
             <Cell>7.4</Cell>
           </Row>
-           <Row>
+          <Row>
             <Cell>Dones 65-74 anys</Cell>
+            <Cell>2.4</Cell>
+            <Cell>3.4</Cell>
+            <Cell>6.4</Cell>
+            <Cell>8.4</Cell>
+          </Row>
+          <Row>
+            <Cell>Homes 75-84 anys</Cell>
+            <Cell>2.4</Cell>
+            <Cell>3.4</Cell>
+            <Cell>6.4</Cell>
+            <Cell>8.4</Cell>
+          </Row>
+          <Row>
+            <Cell>Dones 75-84 anys</Cell>
+            <Cell>2.4</Cell>
+            <Cell>3.4</Cell>
+            <Cell>6.4</Cell>
+            <Cell>8.4</Cell>
+          </Row>
+          <Row>
+            <Cell>Homes >=85 anys</Cell>
+            <Cell>2.4</Cell>
+            <Cell>3.4</Cell>
+            <Cell>6.4</Cell>
+            <Cell>8.4</Cell>
+          </Row>
+          <Row>
+            <Cell>Dones >=85 anys	</Cell>
             <Cell>2.4</Cell>
             <Cell>3.4</Cell>
             <Cell>6.4</Cell>
@@ -76,8 +112,10 @@
 
   </Content>
   <Actions>
-    <Button color="secondary">
-      <Label>Tancar</Label>
-    </Button>
+   <IconButton
+        class="material-icons"
+        title="File download">
+        file_download
+   </IconButton>
   </Actions>
 </Dialog>

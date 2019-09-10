@@ -92,3 +92,8 @@ button:focus {
 svg {
   user-select: none;
 }
+
+#close-dialog {
+  float: right;
+  margin-top: 9px;
+}
