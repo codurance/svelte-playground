@@ -2,6 +2,8 @@
   import { ABSMapFilter } from "../store.js";
   import { onMount } from "svelte";
   import Table from "./Table.svelte";
+  import { quintOut } from 'svelte/easing';
+    import { fade, draw, fly } from 'svelte/transition';
 
   const HOMESCOLOR = ["#ffffff", "#6fd1f2", "#12c4ff", "#089dcf", "#00769e"];
   const MIXCOLOR = ["#ffffff", "#ffd333", "#ffde66", "#fff4cc", "#ffe999"];
@@ -56,7 +58,7 @@
   function handleMouseOver() {
     showTooltip = true;
     selectElement = d3.select(this);
-    selectElement.attr("fill", mixSelected ? "orange" : "blue");
+    selectElement.attr("fill", mixSelected ? "lightblue": "orange");
   }
 
   function handleMouseMove(d, event) {
@@ -97,10 +99,10 @@
 <div id="map">
   <svg viewBox={`0 0 ${width || 0} ${height || 0}`}>
 
-    <g>
+    <g out:fade="{{duration: 200}}">
       {#if features}
-        {#each features as feature}
-          <path
+        {#each features as feature, i}
+          <path in:draw="{{duration: 3000}}"
             d={path(feature)}
             fill={quantize(Number(feature.properties.VALORES ? feature.properties.VALORES[$ABSMapFilter] : 0))}
             stroke="black"
@@ -109,11 +111,13 @@
             on:mouseout={handleMouseOut(feature)}
             on:click={()=> handleOnClick(feature)} />
 
-          <text
+        <g out:fly="{{y: -20, duration: 200}}">
+          <text in:fade="{{delay: 1000 + i * 15, duration: 200}}"
             style="font-size: 10px"
             transform={`translate(${path.centroid(feature)})`}>
             {feature.properties.NOMABS.replace('Barcelona - ', '')}
           </text>
+        </g>
         {/each}
       {:else}loading{/if}
     </g>

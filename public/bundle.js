@@ -390,6 +390,124 @@ var app = (function () {
         }
     }
     const null_transition = { duration: 0 };
+    function create_in_transition(node, fn, params) {
+        let config = fn(node, params);
+        let running = false;
+        let animation_name;
+        let task;
+        let uid = 0;
+        function cleanup() {
+            if (animation_name)
+                delete_rule(node, animation_name);
+        }
+        function go() {
+            const { delay = 0, duration = 300, easing = identity, tick = noop, css } = config || null_transition;
+            if (css)
+                animation_name = create_rule(node, 0, 1, duration, delay, easing, css, uid++);
+            tick(0, 1);
+            const start_time = now() + delay;
+            const end_time = start_time + duration;
+            if (task)
+                task.abort();
+            running = true;
+            add_render_callback(() => dispatch(node, true, 'start'));
+            task = loop(now => {
+                if (running) {
+                    if (now >= end_time) {
+                        tick(1, 0);
+                        dispatch(node, true, 'end');
+                        cleanup();
+                        return running = false;
+                    }
+                    if (now >= start_time) {
+                        const t = easing((now - start_time) / duration);
+                        tick(t, 1 - t);
+                    }
+                }
+                return running;
+            });
+        }
+        let started = false;
+        return {
+            start() {
+                if (started)
+                    return;
+                delete_rule(node);
+                if (is_function(config)) {
+                    config = config();
+                    wait().then(go);
+                }
+                else {
+                    go();
+                }
+            },
+            invalidate() {
+                started = false;
+            },
+            end() {
+                if (running) {
+                    cleanup();
+                    running = false;
+                }
+            }
+        };
+    }
+    function create_out_transition(node, fn, params) {
+        let config = fn(node, params);
+        let running = true;
+        let animation_name;
+        const group = outros;
+        group.r += 1;
+        function go() {
+            const { delay = 0, duration = 300, easing = identity, tick = noop, css } = config || null_transition;
+            if (css)
+                animation_name = create_rule(node, 1, 0, duration, delay, easing, css);
+            const start_time = now() + delay;
+            const end_time = start_time + duration;
+            add_render_callback(() => dispatch(node, false, 'start'));
+            loop(now => {
+                if (running) {
+                    if (now >= end_time) {
+                        tick(0, 1);
+                        dispatch(node, false, 'end');
+                        if (!--group.r) {
+                            // this will result in `end()` being called,
+                            // so we don't need to clean up here
+                            run_all(group.c);
+                        }
+                        return false;
+                    }
+                    if (now >= start_time) {
+                        const t = easing((now - start_time) / duration);
+                        tick(1 - t, t);
+                    }
+                }
+                return running;
+            });
+        }
+        if (is_function(config)) {
+            wait().then(() => {
+                // @ts-ignore
+                config = config();
+                go();
+            });
+        }
+        else {
+            go();
+        }
+        return {
+            end(reset) {
+                if (reset && config.tick) {
+                    config.tick(1, 0);
+                }
+                if (running) {
+                    if (animation_name)
+                        delete_rule(node, animation_name);
+                    running = false;
+                }
+            }
+        };
+    }
     function create_bidirectional_transition(node, fn, params, intro) {
         let config = fn(node, params);
         let t = intro ? 0 : 1;
@@ -7305,12 +7423,54 @@ var app = (function () {
     	}
     }
 
+    function cubicInOut(t) {
+        return t < 0.5 ? 4.0 * t * t * t : 0.5 * Math.pow(2.0 * t - 2.0, 3.0) + 1.0;
+    }
+    function cubicOut(t) {
+        const f = t - 1.0;
+        return f * f * f + 1.0;
+    }
+
     function fade(node, { delay = 0, duration = 400 }) {
         const o = +getComputedStyle(node).opacity;
         return {
             delay,
             duration,
             css: t => `opacity: ${t * o}`
+        };
+    }
+    function fly(node, { delay = 0, duration = 400, easing = cubicOut, x = 0, y = 0, opacity = 0 }) {
+        const style = getComputedStyle(node);
+        const target_opacity = +style.opacity;
+        const transform = style.transform === 'none' ? '' : style.transform;
+        const od = target_opacity * (1 - opacity);
+        return {
+            delay,
+            duration,
+            easing,
+            css: (t, u) => `
+			transform: ${transform} translate(${(1 - t) * x}px, ${(1 - t) * y}px);
+			opacity: ${target_opacity - (od * u)}`
+        };
+    }
+    function draw(node, { delay = 0, speed, duration, easing = cubicInOut }) {
+        const len = node.getTotalLength();
+        if (duration === undefined) {
+            if (speed === undefined) {
+                duration = 800;
+            }
+            else {
+                duration = len / speed;
+            }
+        }
+        else if (typeof duration === 'function') {
+            duration = duration(len);
+        }
+        return {
+            delay,
+            duration,
+            easing,
+            css: (t, u) => `stroke-dasharray: ${t * len} ${u * len}`
         };
     }
 
@@ -28848,10 +29008,11 @@ var app = (function () {
     function get_each_context_1(ctx, list, i) {
     	const child_ctx = Object.create(ctx);
     	child_ctx.feature = list[i];
+    	child_ctx.i = i;
     	return child_ctx;
     }
 
-    // (118:6) {:else}
+    // (122:6) {:else}
     function create_else_block$7(ctx) {
     	var t;
 
@@ -28865,6 +29026,8 @@ var app = (function () {
     		},
 
     		p: noop,
+    		i: noop,
+    		o: noop,
 
     		d: function destroy(detaching) {
     			if (detaching) {
@@ -28874,9 +29037,9 @@ var app = (function () {
     	};
     }
 
-    // (101:6) {#if features}
+    // (103:6) {#if features}
     function create_if_block_2$1(ctx) {
-    	var each_1_anchor;
+    	var each_1_anchor, current;
 
     	var each_value_1 = ctx.features;
 
@@ -28885,6 +29048,10 @@ var app = (function () {
     	for (var i = 0; i < each_value_1.length; i += 1) {
     		each_blocks[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
     	}
+
+    	const out = i => transition_out(each_blocks[i], 1, 1, () => {
+    		each_blocks[i] = null;
+    	});
 
     	return {
     		c: function create() {
@@ -28901,6 +29068,7 @@ var app = (function () {
     			}
 
     			insert(target, each_1_anchor, anchor);
+    			current = true;
     		},
 
     		p: function update(changed, ctx) {
@@ -28912,18 +29080,33 @@ var app = (function () {
 
     					if (each_blocks[i]) {
     						each_blocks[i].p(changed, child_ctx);
+    						transition_in(each_blocks[i], 1);
     					} else {
     						each_blocks[i] = create_each_block_1(child_ctx);
     						each_blocks[i].c();
+    						transition_in(each_blocks[i], 1);
     						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
     					}
     				}
 
-    				for (; i < each_blocks.length; i += 1) {
-    					each_blocks[i].d(1);
-    				}
-    				each_blocks.length = each_value_1.length;
+    				group_outros();
+    				for (i = each_value_1.length; i < each_blocks.length; i += 1) out(i);
+    				check_outros();
     			}
+    		},
+
+    		i: function intro(local) {
+    			if (current) return;
+    			for (var i = 0; i < each_value_1.length; i += 1) transition_in(each_blocks[i]);
+
+    			current = true;
+    		},
+
+    		o: function outro(local) {
+    			each_blocks = each_blocks.filter(Boolean);
+    			for (let i = 0; i < each_blocks.length; i += 1) transition_out(each_blocks[i]);
+
+    			current = false;
     		},
 
     		d: function destroy(detaching) {
@@ -28936,9 +29119,9 @@ var app = (function () {
     	};
     }
 
-    // (102:8) {#each features as feature}
+    // (104:8) {#each features as feature, i}
     function create_each_block_1(ctx) {
-    	var path_1, path_1_d_value, path_1_fill_value, text_1, t_value = ctx.feature.properties.NOMABS.replace('Barcelona - ', '') + "", t, text_1_transform_value, dispose;
+    	var path_1, path_1_d_value, path_1_fill_value, path_1_intro, g, text_1, t_value = ctx.feature.properties.NOMABS.replace('Barcelona - ', '') + "", t, text_1_transform_value, text_1_intro, g_outro, current, dispose;
 
     	function mousemove_handler(...args) {
     		return ctx.mousemove_handler(ctx, ...args);
@@ -28951,15 +29134,17 @@ var app = (function () {
     	return {
     		c: function create() {
     			path_1 = svg_element("path");
+    			g = svg_element("g");
     			text_1 = svg_element("text");
     			t = text(t_value);
     			attr(path_1, "d", path_1_d_value = ctx.path(ctx.feature));
     			attr(path_1, "fill", path_1_fill_value = ctx.quantize(ctx.Number(ctx.feature.properties.VALORES ? ctx.feature.properties.VALORES[ctx.$ABSMapFilter] : 0)));
     			attr(path_1, "stroke", "black");
-    			add_location(path_1, file$p, 102, 10, 2706);
+    			add_location(path_1, file$p, 104, 10, 2843);
     			set_style(text_1, "font-size", "10px");
     			attr(text_1, "transform", text_1_transform_value = `translate(${ctx.path.centroid(ctx.feature)})`);
-    			add_location(text_1, file$p, 111, 10, 3107);
+    			add_location(text_1, file$p, 114, 10, 3321);
+    			add_location(g, file$p, 113, 8, 3271);
 
     			dispose = [
     				listen(path_1, "mouseover", ctx.handleMouseOver),
@@ -28971,33 +29156,63 @@ var app = (function () {
 
     		m: function mount(target, anchor) {
     			insert(target, path_1, anchor);
-    			insert(target, text_1, anchor);
+    			insert(target, g, anchor);
+    			append(g, text_1);
     			append(text_1, t);
+    			current = true;
     		},
 
     		p: function update(changed, new_ctx) {
     			ctx = new_ctx;
-    			if ((changed.features) && path_1_d_value !== (path_1_d_value = ctx.path(ctx.feature))) {
+    			if ((!current || changed.features) && path_1_d_value !== (path_1_d_value = ctx.path(ctx.feature))) {
     				attr(path_1, "d", path_1_d_value);
     			}
 
-    			if ((changed.quantize || changed.features || changed.$ABSMapFilter) && path_1_fill_value !== (path_1_fill_value = ctx.quantize(ctx.Number(ctx.feature.properties.VALORES ? ctx.feature.properties.VALORES[ctx.$ABSMapFilter] : 0)))) {
+    			if ((!current || changed.quantize || changed.features || changed.$ABSMapFilter) && path_1_fill_value !== (path_1_fill_value = ctx.quantize(ctx.Number(ctx.feature.properties.VALORES ? ctx.feature.properties.VALORES[ctx.$ABSMapFilter] : 0)))) {
     				attr(path_1, "fill", path_1_fill_value);
     			}
 
-    			if ((changed.features) && t_value !== (t_value = ctx.feature.properties.NOMABS.replace('Barcelona - ', '') + "")) {
+    			if ((!current || changed.features) && t_value !== (t_value = ctx.feature.properties.NOMABS.replace('Barcelona - ', '') + "")) {
     				set_data(t, t_value);
     			}
 
-    			if ((changed.features) && text_1_transform_value !== (text_1_transform_value = `translate(${ctx.path.centroid(ctx.feature)})`)) {
+    			if ((!current || changed.features) && text_1_transform_value !== (text_1_transform_value = `translate(${ctx.path.centroid(ctx.feature)})`)) {
     				attr(text_1, "transform", text_1_transform_value);
     			}
+    		},
+
+    		i: function intro(local) {
+    			if (current) return;
+    			if (!path_1_intro) {
+    				add_render_callback(() => {
+    					path_1_intro = create_in_transition(path_1, draw, {duration: 3000});
+    					path_1_intro.start();
+    				});
+    			}
+
+    			if (!text_1_intro) {
+    				add_render_callback(() => {
+    					text_1_intro = create_in_transition(text_1, fade, {delay: 1000 + ctx.i * 15, duration: 200});
+    					text_1_intro.start();
+    				});
+    			}
+
+    			if (g_outro) g_outro.end(1);
+
+    			current = true;
+    		},
+
+    		o: function outro(local) {
+    			g_outro = create_out_transition(g, fly, {y: -20, duration: 200});
+
+    			current = false;
     		},
 
     		d: function destroy(detaching) {
     			if (detaching) {
     				detach(path_1);
-    				detach(text_1);
+    				detach(g);
+    				if (g_outro) g_outro.end();
     			}
 
     			run_all(dispose);
@@ -29005,7 +29220,7 @@ var app = (function () {
     	};
     }
 
-    // (121:6) {#each labels as { color, text }
+    // (125:6) {#each labels as { color, text }
     function create_each_block$1(ctx) {
     	var rect, rect_fill_value, text_1, t_value = ctx.text + "", t;
 
@@ -29021,11 +29236,11 @@ var app = (function () {
     			attr(rect, "stroke", "black");
     			attr(rect, "stroke-width", "1");
     			attr(rect, "fill", rect_fill_value = ctx.color);
-    			add_location(rect, file$p, 121, 8, 3409);
+    			add_location(rect, file$p, 125, 8, 3686);
     			attr(text_1, "x", "25");
     			attr(text_1, "y", 19 + 15 * ctx.i);
     			attr(text_1, "font-size", "12");
-    			add_location(text_1, file$p, 129, 8, 3587);
+    			add_location(text_1, file$p, 133, 8, 3864);
     		},
 
     		m: function mount(target, anchor) {
@@ -29045,7 +29260,7 @@ var app = (function () {
     	};
     }
 
-    // (135:0) {#if showTooltip}
+    // (139:0) {#if showTooltip}
     function create_if_block$8(ctx) {
     	var div, p0, t0_value = ctx.tooltipValues.NOMABS + "", t0, t1, p1, t2_value = ctx.tooltipValues.NOMAGA + "", t2, t3, p2, t4_value = ctx.tooltipValues.NOMSS + "", t4, t5, p3, img, t6, t7_value = ctx.tooltipValues.VALORES ? ctx.tooltipValues.VALORES[ctx.$ABSMapFilter] : 'No Data' + "", t7, t8, div_style_value;
 
@@ -29069,18 +29284,18 @@ var app = (function () {
     			t7 = text(t7_value);
     			t8 = space();
     			if (if_block) if_block.c();
-    			add_location(p0, file$p, 138, 4, 3849);
-    			add_location(p1, file$p, 139, 4, 3883);
-    			add_location(p2, file$p, 140, 4, 3917);
+    			add_location(p0, file$p, 142, 4, 4126);
+    			add_location(p1, file$p, 143, 4, 4160);
+    			add_location(p2, file$p, 144, 4, 4194);
     			attr(img, "src", "./icons/oldman.svg");
     			attr(img, "alt", "Old Man");
     			attr(img, "width", "15%");
     			attr(img, "height", "15%");
-    			add_location(img, file$p, 142, 4, 3958);
-    			add_location(p3, file$p, 141, 4, 3950);
+    			add_location(img, file$p, 146, 4, 4235);
+    			add_location(p3, file$p, 145, 4, 4227);
     			attr(div, "class", "tooltip");
     			attr(div, "style", div_style_value = ctx.showTooltip ? `opacity: .9; top: ${ctx.tooltipValues.top}px; left: ${ctx.tooltipValues.left}px` : 'opacity: 0');
-    			add_location(div, file$p, 135, 2, 3704);
+    			add_location(div, file$p, 139, 2, 3981);
     		},
 
     		m: function mount(target, anchor) {
@@ -29147,7 +29362,7 @@ var app = (function () {
     	};
     }
 
-    // (145:4) {#if mixSelected}
+    // (149:4) {#if mixSelected}
     function create_if_block_1$2(ctx) {
     	var img, t0, t1_value = ctx.tooltipValues.VALORES ? ctx.tooltipValues.VALORES[ctx.$ABSMapFilter] * 2 : 'No Data' + "", t1;
 
@@ -29160,7 +29375,7 @@ var app = (function () {
     			attr(img, "alt", "Old Man");
     			attr(img, "width", "15%");
     			attr(img, "height", "15%");
-    			add_location(img, file$p, 145, 6, 4136);
+    			add_location(img, file$p, 149, 6, 4413);
     		},
 
     		m: function mount(target, anchor) {
@@ -29186,7 +29401,7 @@ var app = (function () {
     }
 
     function create_fragment$t(ctx) {
-    	var updating_ABSSelected, updating_dialog, t0, div, svg, g0, g1, svg_viewBox_value, t1, if_block1_anchor, current;
+    	var updating_ABSSelected, updating_dialog, t0, div, svg, g0, current_block_type_index, if_block0, g0_outro, g1, svg_viewBox_value, t1, if_block1_anchor, current;
 
     	function table_ABSSelected_binding(value) {
     		ctx.table_ABSSelected_binding.call(null, value);
@@ -29212,13 +29427,20 @@ var app = (function () {
     	binding_callbacks.push(() => bind(table, 'ABSSelected', table_ABSSelected_binding));
     	binding_callbacks.push(() => bind(table, 'dialog', table_dialog_binding));
 
+    	var if_block_creators = [
+    		create_if_block_2$1,
+    		create_else_block$7
+    	];
+
+    	var if_blocks = [];
+
     	function select_block_type(changed, ctx) {
-    		if (ctx.features) return create_if_block_2$1;
-    		return create_else_block$7;
+    		if (ctx.features) return 0;
+    		return 1;
     	}
 
-    	var current_block_type = select_block_type(null, ctx);
-    	var if_block0 = current_block_type(ctx);
+    	current_block_type_index = select_block_type(null, ctx);
+    	if_block0 = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
 
     	var each_value = ctx.labels;
 
@@ -29247,12 +29469,12 @@ var app = (function () {
     			t1 = space();
     			if (if_block1) if_block1.c();
     			if_block1_anchor = empty();
-    			add_location(g0, file$p, 99, 4, 2635);
-    			add_location(g1, file$p, 119, 4, 3354);
+    			add_location(g0, file$p, 101, 4, 2740);
+    			add_location(g1, file$p, 123, 4, 3631);
     			attr(svg, "viewBox", svg_viewBox_value = `0 0 ${ctx.width || 0} ${ctx.height || 0}`);
-    			add_location(svg, file$p, 97, 2, 2579);
+    			add_location(svg, file$p, 99, 2, 2684);
     			attr(div, "id", "map");
-    			add_location(div, file$p, 96, 0, 2562);
+    			add_location(div, file$p, 98, 0, 2667);
     		},
 
     		l: function claim(nodes) {
@@ -29265,7 +29487,7 @@ var app = (function () {
     			insert(target, div, anchor);
     			append(div, svg);
     			append(svg, g0);
-    			if_block0.m(g0, null);
+    			if_blocks[current_block_type_index].m(g0, null);
     			append(svg, g1);
 
     			for (var i = 0; i < each_blocks.length; i += 1) {
@@ -29288,15 +29510,24 @@ var app = (function () {
     			}
     			table.$set(table_changes);
 
-    			if (current_block_type === (current_block_type = select_block_type(changed, ctx)) && if_block0) {
-    				if_block0.p(changed, ctx);
+    			var previous_block_index = current_block_type_index;
+    			current_block_type_index = select_block_type(changed, ctx);
+    			if (current_block_type_index === previous_block_index) {
+    				if_blocks[current_block_type_index].p(changed, ctx);
     			} else {
-    				if_block0.d(1);
-    				if_block0 = current_block_type(ctx);
-    				if (if_block0) {
+    				group_outros();
+    				transition_out(if_blocks[previous_block_index], 1, 1, () => {
+    					if_blocks[previous_block_index] = null;
+    				});
+    				check_outros();
+
+    				if_block0 = if_blocks[current_block_type_index];
+    				if (!if_block0) {
+    					if_block0 = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
     					if_block0.c();
-    					if_block0.m(g0, null);
     				}
+    				transition_in(if_block0, 1);
+    				if_block0.m(g0, null);
     			}
 
     			if (changed.labels) {
@@ -29342,11 +29573,19 @@ var app = (function () {
     			if (current) return;
     			transition_in(table.$$.fragment, local);
 
+    			transition_in(if_block0);
+
+    			if (g0_outro) g0_outro.end(1);
+
     			current = true;
     		},
 
     		o: function outro(local) {
     			transition_out(table.$$.fragment, local);
+    			transition_out(if_block0);
+
+    			g0_outro = create_out_transition(g0, fade, {duration: 200});
+
     			current = false;
     		},
 
@@ -29358,7 +29597,11 @@ var app = (function () {
     				detach(div);
     			}
 
-    			if_block0.d();
+    			if_blocks[current_block_type_index].d();
+
+    			if (detaching) {
+    				if (g0_outro) g0_outro.end();
+    			}
 
     			destroy_each(each_blocks, detaching);
 
@@ -29425,7 +29668,7 @@ var app = (function () {
       function handleMouseOver() {
         $$invalidate('showTooltip', showTooltip = true);
         selectElement = d3.select(this);
-        selectElement.attr("fill", mixSelected ? "orange" : "blue");
+        selectElement.attr("fill", mixSelected ? "lightblue": "orange");
       }
 
       function handleMouseMove(d, event) {
