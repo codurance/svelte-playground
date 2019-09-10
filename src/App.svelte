@@ -1,5 +1,5 @@
 <script>
-  import Drawer, {
+  import {
     AppContent,
     Content,
     Header,
@@ -19,14 +19,11 @@
   import Charts from "./Charts.svelte";
 
   let current = "main";
-  let drawer;
-  let drawerOpen = false;
   let menu;
 
-  function go(key) {
-    current = key;
-    drawerOpen = false;
-  }
+  function changeLens(newLens) {
+    
+  };
 </script>
 
 <link
@@ -54,12 +51,16 @@
   <Row>
     <Section>
         <IconButton class="material-icons" aria-label="Search">search</IconButton>
-        <IconButton class="material-icons" aria-label="Grid">grid_on</IconButton>
+        <IconButton class="material-icons" aria-label="Grid"
+                    on:click={() => changeLens("grid")}>grid_on</IconButton>
         <IconButton class="material-icons" aria-label="List"
-                    on:click={() => (drawerOpen = !drawerOpen)}>
+                    on:click={() => changeLens("list")}>
                     list</IconButton>
-        <IconButton class="material-icons" aria-label="Map">map</IconButton>
-        <IconButton class="material-icons" aria-label="Chart">insert_chart</IconButton>
+        <IconButton class="material-icons" aria-label="Map"
+                    on:click={() => changeLens("map")}>map</IconButton>
+        <IconButton class="material-icons" aria-label="Chart"
+                    on:click={() => changeLens("chart")}>
+                    insert_chart</IconButton>
     </Section>
     <Section align="end" toolbar>
         <IconButton class="material-icons" aria-label="Search">brightness_5</IconButton>
@@ -84,37 +85,6 @@
     <input type="text" placeholder="Cercar" class="searchBox" />
   </MenuSurface>
 </div>
-
-<Drawer variant="modal" bind:this={drawer} bind:open={drawerOpen}>
-  <Content>
-    <List>
-      <Item
-        href="javascript:void(0)"
-        on:click={() => go('main')}
-        activated={current === 'main'}>
-        <Text>Mapes i gràfics per ABS</Text>
-      </Item>
-      <Item
-        href="javascript:void(0)"
-        on:click={() => go('other')}
-        activated={current === 'other'}>
-        <Text>ABS 1A - BCNeta</Text>
-      </Item>
-      <Item
-        href="javascript:void(0)"
-        on:click={() => go('other')}
-        activated={current === 'other'}>
-        <Text>ABS 1B - Casc Antic</Text>
-      </Item>
-      <Item
-        href="javascript:void(0)"
-        on:click={() => go('other')}
-        activated={current === 'other'}>
-        <Text>ABS 1C - Gòtic</Text>
-      </Item>
-    </List>
-  </Content>
-</Drawer>
 
 <Scrim />
 
