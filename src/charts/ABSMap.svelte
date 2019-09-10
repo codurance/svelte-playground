@@ -25,6 +25,13 @@
   $: height = widthParent / 1.5;
   $: filter = 0;
   $: colors = mixSelected ? MIXCOLOR : HOMESCOLOR;
+  $: labels = [
+    { color: colors[0], text: "De 8.5 a 11.10" },
+    { color: colors[1], text: "De 11.11 a 12.30" },
+    { color: colors[2], text: "De 12.31 a 13.60" },
+    { color: colors[3], text: "De 13.61 a 16.10" },
+    { color: colors[4], text: "De 16.11 a 29.40" }
+  ];
   $: quantize = d3
     .scaleQuantize()
     .domain(colorScaleExtent)
@@ -84,14 +91,6 @@
     );
     selectElement.attr("fill", quantizedColor);
   };
-
-  const labels = [
-    { color: "#fff", text: "De 8.5 a 11.10" },
-    { color: "#ffd333", text: "De 11.11 a 12.30" },
-    { color: "#ffde66", text: "De 12.31 a 13.60" },
-    { color: "#fff4cc", text: "De 13.61 a 16.10" },
-    { color: "#ffe999", text: "De 16.11 a 29.40" }
-  ];
 
 </script>
 
