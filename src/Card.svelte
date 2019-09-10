@@ -55,6 +55,8 @@
       {/each}
     </Select>
 
+    <slot name="aditionalFilter"/>
+
     <ActionIcons>
       <IconButton toggle aria-label="Add to favorites" title="Add to favorites">
         <Icon class="material-icons" on>favorite</Icon>

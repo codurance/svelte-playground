@@ -8,6 +8,10 @@
 
   const path = d3.geoPath();
 
+  export let mixSelected;
+  let dialog;
+  let ABSSelected = { };
+
   let widthParent;
   let features;
   let barcelona;
@@ -85,12 +89,9 @@
     { color: "#ffe999", text: "De 16.11 a 29.40" }
   ];
 
-  let dialog;
-  let ABSSelected = { };
 </script>
 
 <Table bind:ABSSelected={ABSSelected} bind:dialog={dialog} />
-
 <div id="map">
   <svg viewBox={`0 0 ${width || 0} ${height || 0}`}>
 
@@ -137,7 +138,12 @@
     <p>{tooltipValues.NOMAGA}</p>
     <p>{tooltipValues.NOMSS}</p>
     <p>
-      {tooltipValues.VALORES ? tooltipValues.VALORES[$ABSMapFilter] : 'No Data'}
+    <img src="./icons/oldman.svg" alt="Old Man" width="15%" height="15%"/>
+    {tooltipValues.VALORES ? tooltipValues.VALORES[$ABSMapFilter] : 'No Data'}
+    {#if mixSelected}
+      <img src="./icons/oldwoman.svg" alt="Old Man" width="15%" height="15%"/>
+      {tooltipValues.VALORES ? tooltipValues.VALORES[$ABSMapFilter] * 2 : 'No Data'}
+    {/if}
     </p>
   </div>
 {/if}

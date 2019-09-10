@@ -6857,6 +6857,186 @@ var app = (function () {
     	}
     }
 
+    /**
+     * @license
+     * Copyright 2017 Google Inc.
+     *
+     * Permission is hereby granted, free of charge, to any person obtaining a copy
+     * of this software and associated documentation files (the "Software"), to deal
+     * in the Software without restriction, including without limitation the rights
+     * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+     * copies of the Software, and to permit persons to whom the Software is
+     * furnished to do so, subject to the following conditions:
+     *
+     * The above copyright notice and this permission notice shall be included in
+     * all copies or substantial portions of the Software.
+     *
+     * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+     * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+     * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+     * THE SOFTWARE.
+     */
+    var cssClasses$4 = {
+        ROOT: 'mdc-form-field',
+    };
+    var strings$5 = {
+        LABEL_SELECTOR: '.mdc-form-field > label',
+    };
+    //# sourceMappingURL=constants.js.map
+
+    /**
+     * @license
+     * Copyright 2017 Google Inc.
+     *
+     * Permission is hereby granted, free of charge, to any person obtaining a copy
+     * of this software and associated documentation files (the "Software"), to deal
+     * in the Software without restriction, including without limitation the rights
+     * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+     * copies of the Software, and to permit persons to whom the Software is
+     * furnished to do so, subject to the following conditions:
+     *
+     * The above copyright notice and this permission notice shall be included in
+     * all copies or substantial portions of the Software.
+     *
+     * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+     * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+     * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+     * THE SOFTWARE.
+     */
+    var MDCFormFieldFoundation = /** @class */ (function (_super) {
+        __extends(MDCFormFieldFoundation, _super);
+        function MDCFormFieldFoundation(adapter) {
+            var _this = _super.call(this, __assign({}, MDCFormFieldFoundation.defaultAdapter, adapter)) || this;
+            _this.clickHandler_ = function () { return _this.handleClick_(); };
+            return _this;
+        }
+        Object.defineProperty(MDCFormFieldFoundation, "cssClasses", {
+            get: function () {
+                return cssClasses$4;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(MDCFormFieldFoundation, "strings", {
+            get: function () {
+                return strings$5;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(MDCFormFieldFoundation, "defaultAdapter", {
+            get: function () {
+                return {
+                    activateInputRipple: function () { return undefined; },
+                    deactivateInputRipple: function () { return undefined; },
+                    deregisterInteractionHandler: function () { return undefined; },
+                    registerInteractionHandler: function () { return undefined; },
+                };
+            },
+            enumerable: true,
+            configurable: true
+        });
+        MDCFormFieldFoundation.prototype.init = function () {
+            this.adapter_.registerInteractionHandler('click', this.clickHandler_);
+        };
+        MDCFormFieldFoundation.prototype.destroy = function () {
+            this.adapter_.deregisterInteractionHandler('click', this.clickHandler_);
+        };
+        MDCFormFieldFoundation.prototype.handleClick_ = function () {
+            var _this = this;
+            this.adapter_.activateInputRipple();
+            requestAnimationFrame(function () { return _this.adapter_.deactivateInputRipple(); });
+        };
+        return MDCFormFieldFoundation;
+    }(MDCFoundation));
+    //# sourceMappingURL=foundation.js.map
+
+    /**
+     * @license
+     * Copyright 2017 Google Inc.
+     *
+     * Permission is hereby granted, free of charge, to any person obtaining a copy
+     * of this software and associated documentation files (the "Software"), to deal
+     * in the Software without restriction, including without limitation the rights
+     * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+     * copies of the Software, and to permit persons to whom the Software is
+     * furnished to do so, subject to the following conditions:
+     *
+     * The above copyright notice and this permission notice shall be included in
+     * all copies or substantial portions of the Software.
+     *
+     * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+     * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+     * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+     * THE SOFTWARE.
+     */
+    var MDCFormField = /** @class */ (function (_super) {
+        __extends(MDCFormField, _super);
+        function MDCFormField() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        MDCFormField.attachTo = function (root) {
+            return new MDCFormField(root);
+        };
+        Object.defineProperty(MDCFormField.prototype, "input", {
+            get: function () {
+                return this.input_;
+            },
+            set: function (input) {
+                this.input_ = input;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(MDCFormField.prototype, "label_", {
+            get: function () {
+                var LABEL_SELECTOR = MDCFormFieldFoundation.strings.LABEL_SELECTOR;
+                return this.root_.querySelector(LABEL_SELECTOR);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        MDCFormField.prototype.getDefaultFoundation = function () {
+            var _this = this;
+            // DO NOT INLINE this variable. For backward compatibility, foundations take a Partial<MDCFooAdapter>.
+            // To ensure we don't accidentally omit any methods, we need a separate, strongly typed adapter variable.
+            var adapter = {
+                activateInputRipple: function () {
+                    if (_this.input_ && _this.input_.ripple) {
+                        _this.input_.ripple.activate();
+                    }
+                },
+                deactivateInputRipple: function () {
+                    if (_this.input_ && _this.input_.ripple) {
+                        _this.input_.ripple.deactivate();
+                    }
+                },
+                deregisterInteractionHandler: function (evtType, handler) {
+                    if (_this.label_) {
+                        _this.label_.removeEventListener(evtType, handler);
+                    }
+                },
+                registerInteractionHandler: function (evtType, handler) {
+                    if (_this.label_) {
+                        _this.label_.addEventListener(evtType, handler);
+                    }
+                },
+            };
+            return new MDCFormFieldFoundation(adapter);
+        };
+        return MDCFormField;
+    }(MDCComponent));
+    //# sourceMappingURL=component.js.map
+
     function prefixFilter(obj, prefix) {
       let names = Object.getOwnPropertyNames(obj);
       const newObj = {};
@@ -6869,6 +7049,260 @@ var app = (function () {
       }
 
       return newObj;
+    }
+
+    /* node_modules/@smui/form-field/FormField.svelte generated by Svelte v3.9.2 */
+
+    const file$9 = "node_modules/@smui/form-field/FormField.svelte";
+
+    const get_label_slot_changes = () => ({});
+    const get_label_slot_context = () => ({});
+
+    function create_fragment$a(ctx) {
+    	var div, t, label, useActions_action, useActions_action_1, forwardEvents_action, current;
+
+    	const default_slot_template = ctx.$$slots.default;
+    	const default_slot = create_slot(default_slot_template, ctx, null);
+
+    	const label_slot_template = ctx.$$slots.label;
+    	const label_slot = create_slot(label_slot_template, ctx, get_label_slot_context);
+
+    	var label_levels = [
+    		{ for: ctx.inputId },
+    		exclude(prefixFilter(ctx.$$props, 'label$'), ['use'])
+    	];
+
+    	var label_data = {};
+    	for (var i = 0; i < label_levels.length; i += 1) {
+    		label_data = assign(label_data, label_levels[i]);
+    	}
+
+    	var div_levels = [
+    		{ class: "mdc-form-field " + ctx.className },
+    		exclude(ctx.$$props, ['use', 'class', 'alignEnd', 'inputId', 'label$'])
+    	];
+
+    	var div_data = {};
+    	for (var i = 0; i < div_levels.length; i += 1) {
+    		div_data = assign(div_data, div_levels[i]);
+    	}
+
+    	return {
+    		c: function create() {
+    			div = element("div");
+
+    			if (default_slot) default_slot.c();
+    			t = space();
+    			label = element("label");
+
+    			if (label_slot) label_slot.c();
+
+    			set_attributes(label, label_data);
+    			add_location(label, file$9, 9, 2, 254);
+    			set_attributes(div, div_data);
+    			toggle_class(div, "mdc-form-field--align-end", ctx.align === 'end');
+    			add_location(div, file$9, 0, 0, 0);
+    		},
+
+    		l: function claim(nodes) {
+    			if (default_slot) default_slot.l(div_nodes);
+
+    			if (label_slot) label_slot.l(label_nodes);
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+
+    		m: function mount(target, anchor) {
+    			insert(target, div, anchor);
+
+    			if (default_slot) {
+    				default_slot.m(div, null);
+    			}
+
+    			append(div, t);
+    			append(div, label);
+
+    			if (label_slot) {
+    				label_slot.m(label, null);
+    			}
+
+    			useActions_action = useActions.call(null, label, ctx.label$use) || {};
+    			ctx.div_binding(div);
+    			useActions_action_1 = useActions.call(null, div, ctx.use) || {};
+    			forwardEvents_action = ctx.forwardEvents.call(null, div) || {};
+    			current = true;
+    		},
+
+    		p: function update(changed, ctx) {
+    			if (default_slot && default_slot.p && changed.$$scope) {
+    				default_slot.p(
+    					get_slot_changes(default_slot_template, ctx, changed, null),
+    					get_slot_context(default_slot_template, ctx, null)
+    				);
+    			}
+
+    			if (label_slot && label_slot.p && changed.$$scope) {
+    				label_slot.p(
+    					get_slot_changes(label_slot_template, ctx, changed, get_label_slot_changes),
+    					get_slot_context(label_slot_template, ctx, get_label_slot_context)
+    				);
+    			}
+
+    			set_attributes(label, get_spread_update(label_levels, [
+    				(changed.inputId) && { for: ctx.inputId },
+    				(changed.exclude || changed.prefixFilter || changed.$$props) && exclude(prefixFilter(ctx.$$props, 'label$'), ['use'])
+    			]));
+
+    			if (typeof useActions_action.update === 'function' && changed.label$use) {
+    				useActions_action.update.call(null, ctx.label$use);
+    			}
+
+    			set_attributes(div, get_spread_update(div_levels, [
+    				(changed.className) && { class: "mdc-form-field " + ctx.className },
+    				(changed.exclude || changed.$$props) && exclude(ctx.$$props, ['use', 'class', 'alignEnd', 'inputId', 'label$'])
+    			]));
+
+    			if (typeof useActions_action_1.update === 'function' && changed.use) {
+    				useActions_action_1.update.call(null, ctx.use);
+    			}
+
+    			if ((changed.className || changed.align)) {
+    				toggle_class(div, "mdc-form-field--align-end", ctx.align === 'end');
+    			}
+    		},
+
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(default_slot, local);
+    			transition_in(label_slot, local);
+    			current = true;
+    		},
+
+    		o: function outro(local) {
+    			transition_out(default_slot, local);
+    			transition_out(label_slot, local);
+    			current = false;
+    		},
+
+    		d: function destroy(detaching) {
+    			if (detaching) {
+    				detach(div);
+    			}
+
+    			if (default_slot) default_slot.d(detaching);
+
+    			if (label_slot) label_slot.d(detaching);
+    			if (useActions_action && typeof useActions_action.destroy === 'function') useActions_action.destroy();
+    			ctx.div_binding(null);
+    			if (useActions_action_1 && typeof useActions_action_1.destroy === 'function') useActions_action_1.destroy();
+    			if (forwardEvents_action && typeof forwardEvents_action.destroy === 'function') forwardEvents_action.destroy();
+    		}
+    	};
+    }
+
+    let counter$1 = 0;
+
+    function instance$a($$self, $$props, $$invalidate) {
+    	
+
+      const forwardEvents = forwardEventsBuilder(current_component);
+
+      let { use = [], class: className = '', align = 'start', inputId = 'SMUI-form-field-'+(counter$1++), label$use = [] } = $$props;
+
+      let element;
+      let formField;
+
+      setContext('SMUI:form-field', () => formField);
+      setContext('SMUI:generic:input:props', {id: inputId});
+
+      onMount(() => {
+        formField = new MDCFormField(element);
+      });
+
+      onDestroy(() => {
+        if (formField) {
+          formField.destroy();
+        }
+      });
+
+    	let { $$slots = {}, $$scope } = $$props;
+
+    	function div_binding($$value) {
+    		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
+    			$$invalidate('element', element = $$value);
+    		});
+    	}
+
+    	$$self.$set = $$new_props => {
+    		$$invalidate('$$props', $$props = assign(assign({}, $$props), $$new_props));
+    		if ('use' in $$new_props) $$invalidate('use', use = $$new_props.use);
+    		if ('class' in $$new_props) $$invalidate('className', className = $$new_props.class);
+    		if ('align' in $$new_props) $$invalidate('align', align = $$new_props.align);
+    		if ('inputId' in $$new_props) $$invalidate('inputId', inputId = $$new_props.inputId);
+    		if ('label$use' in $$new_props) $$invalidate('label$use', label$use = $$new_props.label$use);
+    		if ('$$scope' in $$new_props) $$invalidate('$$scope', $$scope = $$new_props.$$scope);
+    	};
+
+    	return {
+    		forwardEvents,
+    		use,
+    		className,
+    		align,
+    		inputId,
+    		label$use,
+    		element,
+    		$$props,
+    		div_binding,
+    		$$props: $$props = exclude_internal_props($$props),
+    		$$slots,
+    		$$scope
+    	};
+    }
+
+    class FormField extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$a, create_fragment$a, safe_not_equal, ["use", "class", "align", "inputId", "label$use"]);
+    	}
+
+    	get use() {
+    		throw new Error("<FormField>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set use(value) {
+    		throw new Error("<FormField>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get class() {
+    		throw new Error("<FormField>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set class(value) {
+    		throw new Error("<FormField>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get align() {
+    		throw new Error("<FormField>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set align(value) {
+    		throw new Error("<FormField>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get inputId() {
+    		throw new Error("<FormField>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set inputId(value) {
+    		throw new Error("<FormField>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get label$use() {
+    		throw new Error("<FormField>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set label$use(value) {
+    		throw new Error("<FormField>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
     }
 
     function fade(node, { delay = 0, duration = 400 }) {
@@ -14222,9 +14656,9 @@ var app = (function () {
 
     /* node_modules/@smui/card/Card.svelte generated by Svelte v3.9.2 */
 
-    const file$9 = "node_modules/@smui/card/Card.svelte";
+    const file$a = "node_modules/@smui/card/Card.svelte";
 
-    function create_fragment$a(ctx) {
+    function create_fragment$b(ctx) {
     	var div, useActions_action, forwardEvents_action, current;
 
     	const default_slot_template = ctx.$$slots.default;
@@ -14249,7 +14683,7 @@ var app = (function () {
     			set_attributes(div, div_data);
     			toggle_class(div, "mdc-card--outlined", ctx.variant === 'outlined');
     			toggle_class(div, "smui-card--padded", ctx.padded);
-    			add_location(div, file$9, 0, 0, 0);
+    			add_location(div, file$a, 0, 0, 0);
     		},
 
     		l: function claim(nodes) {
@@ -14318,7 +14752,7 @@ var app = (function () {
     	};
     }
 
-    function instance$a($$self, $$props, $$invalidate) {
+    function instance$b($$self, $$props, $$invalidate) {
     	
 
       const forwardEvents = forwardEventsBuilder(current_component);
@@ -14352,7 +14786,7 @@ var app = (function () {
     class Card extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$a, create_fragment$a, safe_not_equal, ["use", "class", "variant", "padded"]);
+    		init(this, options, instance$b, create_fragment$b, safe_not_equal, ["use", "class", "variant", "padded"]);
     	}
 
     	get use() {
@@ -14399,9 +14833,9 @@ var app = (function () {
 
     /* node_modules/@smui/card/Actions.svelte generated by Svelte v3.9.2 */
 
-    const file$a = "node_modules/@smui/card/Actions.svelte";
+    const file$b = "node_modules/@smui/card/Actions.svelte";
 
-    function create_fragment$b(ctx) {
+    function create_fragment$c(ctx) {
     	var div, useActions_action, forwardEvents_action, current;
 
     	const default_slot_template = ctx.$$slots.default;
@@ -14425,7 +14859,7 @@ var app = (function () {
 
     			set_attributes(div, div_data);
     			toggle_class(div, "mdc-card__actions--full-bleed", ctx.fullBleed);
-    			add_location(div, file$a, 0, 0, 0);
+    			add_location(div, file$b, 0, 0, 0);
     		},
 
     		l: function claim(nodes) {
@@ -14490,7 +14924,7 @@ var app = (function () {
     	};
     }
 
-    function instance$b($$self, $$props, $$invalidate) {
+    function instance$c($$self, $$props, $$invalidate) {
     	
 
       const forwardEvents = forwardEventsBuilder(current_component);
@@ -14525,7 +14959,7 @@ var app = (function () {
     class Actions extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$b, create_fragment$b, safe_not_equal, ["use", "class", "fullBleed"]);
+    		init(this, options, instance$c, create_fragment$c, safe_not_equal, ["use", "class", "fullBleed"]);
     	}
 
     	get use() {
@@ -14584,7 +15018,7 @@ var app = (function () {
      * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
      * THE SOFTWARE.
      */
-    var cssClasses$4 = {
+    var cssClasses$5 = {
         LABEL_FLOAT_ABOVE: 'mdc-floating-label--float-above',
         LABEL_SHAKE: 'mdc-floating-label--shake',
         ROOT: 'mdc-floating-label',
@@ -14622,7 +15056,7 @@ var app = (function () {
         }
         Object.defineProperty(MDCFloatingLabelFoundation, "cssClasses", {
             get: function () {
-                return cssClasses$4;
+                return cssClasses$5;
             },
             enumerable: true,
             configurable: true
@@ -14780,7 +15214,7 @@ var app = (function () {
      * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
      * THE SOFTWARE.
      */
-    var cssClasses$5 = {
+    var cssClasses$6 = {
         LINE_RIPPLE_ACTIVE: 'mdc-line-ripple--active',
         LINE_RIPPLE_DEACTIVATING: 'mdc-line-ripple--deactivating',
     };
@@ -14817,7 +15251,7 @@ var app = (function () {
         }
         Object.defineProperty(MDCLineRippleFoundation, "cssClasses", {
             get: function () {
-                return cssClasses$5;
+                return cssClasses$6;
             },
             enumerable: true,
             configurable: true
@@ -14848,23 +15282,23 @@ var app = (function () {
             this.adapter_.deregisterEventHandler('transitionend', this.transitionEndHandler_);
         };
         MDCLineRippleFoundation.prototype.activate = function () {
-            this.adapter_.removeClass(cssClasses$5.LINE_RIPPLE_DEACTIVATING);
-            this.adapter_.addClass(cssClasses$5.LINE_RIPPLE_ACTIVE);
+            this.adapter_.removeClass(cssClasses$6.LINE_RIPPLE_DEACTIVATING);
+            this.adapter_.addClass(cssClasses$6.LINE_RIPPLE_ACTIVE);
         };
         MDCLineRippleFoundation.prototype.setRippleCenter = function (xCoordinate) {
             this.adapter_.setStyle('transform-origin', xCoordinate + "px center");
         };
         MDCLineRippleFoundation.prototype.deactivate = function () {
-            this.adapter_.addClass(cssClasses$5.LINE_RIPPLE_DEACTIVATING);
+            this.adapter_.addClass(cssClasses$6.LINE_RIPPLE_DEACTIVATING);
         };
         MDCLineRippleFoundation.prototype.handleTransitionEnd = function (evt) {
             // Wait for the line ripple to be either transparent or opaque
             // before emitting the animation end event
-            var isDeactivating = this.adapter_.hasClass(cssClasses$5.LINE_RIPPLE_DEACTIVATING);
+            var isDeactivating = this.adapter_.hasClass(cssClasses$6.LINE_RIPPLE_DEACTIVATING);
             if (evt.propertyName === 'opacity') {
                 if (isDeactivating) {
-                    this.adapter_.removeClass(cssClasses$5.LINE_RIPPLE_ACTIVE);
-                    this.adapter_.removeClass(cssClasses$5.LINE_RIPPLE_DEACTIVATING);
+                    this.adapter_.removeClass(cssClasses$6.LINE_RIPPLE_ACTIVE);
+                    this.adapter_.removeClass(cssClasses$6.LINE_RIPPLE_DEACTIVATING);
                 }
             }
         };
@@ -14963,7 +15397,7 @@ var app = (function () {
      * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
      * THE SOFTWARE.
      */
-    var cssClasses$6 = {
+    var cssClasses$7 = {
         ANCHOR: 'mdc-menu-surface--anchor',
         ANIMATING_CLOSED: 'mdc-menu-surface--animating-closed',
         ANIMATING_OPEN: 'mdc-menu-surface--animating-open',
@@ -14972,7 +15406,7 @@ var app = (function () {
         ROOT: 'mdc-menu-surface',
     };
     // tslint:disable:object-literal-sort-keys
-    var strings$5 = {
+    var strings$6 = {
         CLOSED_EVENT: 'MDCMenuSurface:closed',
         OPENED_EVENT: 'MDCMenuSurface:opened',
         FOCUSABLE_ELEMENTS: [
@@ -15061,14 +15495,14 @@ var app = (function () {
         }
         Object.defineProperty(MDCMenuSurfaceFoundation, "cssClasses", {
             get: function () {
-                return cssClasses$6;
+                return cssClasses$7;
             },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(MDCMenuSurfaceFoundation, "strings", {
             get: function () {
-                return strings$5;
+                return strings$6;
             },
             enumerable: true,
             configurable: true
@@ -15534,8 +15968,8 @@ var app = (function () {
         MDCMenuSurface.prototype.initialSyncWithDOM = function () {
             var _this = this;
             var parentEl = this.root_.parentElement;
-            this.anchorElement = parentEl && parentEl.classList.contains(cssClasses$6.ANCHOR) ? parentEl : null;
-            if (this.root_.classList.contains(cssClasses$6.FIXED)) {
+            this.anchorElement = parentEl && parentEl.classList.contains(cssClasses$7.ANCHOR) ? parentEl : null;
+            if (this.root_.classList.contains(cssClasses$7.FIXED)) {
                 this.setFixedPosition(true);
             }
             this.handleKeydown_ = function (evt) { return _this.foundation_.handleKeydown(evt); };
@@ -15543,13 +15977,13 @@ var app = (function () {
             this.registerBodyClickListener_ = function () { return document.body.addEventListener('click', _this.handleBodyClick_); };
             this.deregisterBodyClickListener_ = function () { return document.body.removeEventListener('click', _this.handleBodyClick_); };
             this.listen('keydown', this.handleKeydown_);
-            this.listen(strings$5.OPENED_EVENT, this.registerBodyClickListener_);
-            this.listen(strings$5.CLOSED_EVENT, this.deregisterBodyClickListener_);
+            this.listen(strings$6.OPENED_EVENT, this.registerBodyClickListener_);
+            this.listen(strings$6.CLOSED_EVENT, this.deregisterBodyClickListener_);
         };
         MDCMenuSurface.prototype.destroy = function () {
             this.unlisten('keydown', this.handleKeydown_);
-            this.unlisten(strings$5.OPENED_EVENT, this.registerBodyClickListener_);
-            this.unlisten(strings$5.CLOSED_EVENT, this.deregisterBodyClickListener_);
+            this.unlisten(strings$6.OPENED_EVENT, this.registerBodyClickListener_);
+            this.unlisten(strings$6.CLOSED_EVENT, this.deregisterBodyClickListener_);
             _super.prototype.destroy.call(this);
         };
         MDCMenuSurface.prototype.isOpen = function () {
@@ -15588,10 +16022,10 @@ var app = (function () {
         /** Sets the menu-surface to position: fixed. */
         MDCMenuSurface.prototype.setFixedPosition = function (isFixed) {
             if (isFixed) {
-                this.root_.classList.add(cssClasses$6.FIXED);
+                this.root_.classList.add(cssClasses$7.FIXED);
             }
             else {
-                this.root_.classList.remove(cssClasses$6.FIXED);
+                this.root_.classList.remove(cssClasses$7.FIXED);
             }
             this.foundation_.setFixedPosition(isFixed);
         };
@@ -15690,12 +16124,12 @@ var app = (function () {
      * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
      * THE SOFTWARE.
      */
-    var cssClasses$7 = {
+    var cssClasses$8 = {
         MENU_SELECTED_LIST_ITEM: 'mdc-menu-item--selected',
         MENU_SELECTION_GROUP: 'mdc-menu__selection-group',
         ROOT: 'mdc-menu',
     };
-    var strings$6 = {
+    var strings$7 = {
         ARIA_CHECKED_ATTR: 'aria-checked',
         CHECKBOX_SELECTOR: 'input[type="checkbox"]',
         LIST_SELECTOR: '.mdc-list',
@@ -15745,14 +16179,14 @@ var app = (function () {
         }
         Object.defineProperty(MDCMenuFoundation, "cssClasses", {
             get: function () {
-                return cssClasses$7;
+                return cssClasses$8;
             },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(MDCMenuFoundation, "strings", {
             get: function () {
-                return strings$6;
+                return strings$7;
             },
             enumerable: true,
             configurable: true
@@ -15853,11 +16287,11 @@ var app = (function () {
             }
             var prevSelectedIndex = this.adapter_.getSelectedSiblingOfItemAtIndex(index);
             if (prevSelectedIndex >= 0) {
-                this.adapter_.removeAttributeFromElementAtIndex(prevSelectedIndex, strings$6.ARIA_CHECKED_ATTR);
-                this.adapter_.removeClassFromElementAtIndex(prevSelectedIndex, cssClasses$7.MENU_SELECTED_LIST_ITEM);
+                this.adapter_.removeAttributeFromElementAtIndex(prevSelectedIndex, strings$7.ARIA_CHECKED_ATTR);
+                this.adapter_.removeClassFromElementAtIndex(prevSelectedIndex, cssClasses$8.MENU_SELECTED_LIST_ITEM);
             }
-            this.adapter_.addClassToElementAtIndex(index, cssClasses$7.MENU_SELECTED_LIST_ITEM);
-            this.adapter_.addAttributeToElementAtIndex(index, strings$6.ARIA_CHECKED_ATTR, 'true');
+            this.adapter_.addClassToElementAtIndex(index, cssClasses$8.MENU_SELECTED_LIST_ITEM);
+            this.adapter_.addAttributeToElementAtIndex(index, strings$7.ARIA_CHECKED_ATTR, 'true');
         };
         MDCMenuFoundation.prototype.validatedIndex_ = function (index) {
             var menuSize = this.adapter_.getMenuItemCount();
@@ -15909,7 +16343,7 @@ var app = (function () {
         MDCMenu.prototype.initialSyncWithDOM = function () {
             var _this = this;
             this.menuSurface_ = this.menuSurfaceFactory_(this.root_);
-            var list = this.root_.querySelector(strings$6.LIST_SELECTOR);
+            var list = this.root_.querySelector(strings$7.LIST_SELECTOR);
             if (list) {
                 this.list_ = this.listFactory_(list);
                 this.list_.wrapFocus = true;
@@ -16060,17 +16494,17 @@ var app = (function () {
                 elementContainsClass: function (element, className) { return element.classList.contains(className); },
                 closeSurface: function (skipRestoreFocus) { return _this.menuSurface_.close(skipRestoreFocus); },
                 getElementIndex: function (element) { return _this.items.indexOf(element); },
-                notifySelected: function (evtData) { return _this.emit(strings$6.SELECTED_EVENT, {
+                notifySelected: function (evtData) { return _this.emit(strings$7.SELECTED_EVENT, {
                     index: evtData.index,
                     item: _this.items[evtData.index],
                 }); },
                 getMenuItemCount: function () { return _this.items.length; },
                 focusItemAtIndex: function (index) { return _this.items[index].focus(); },
-                focusListRoot: function () { return _this.root_.querySelector(strings$6.LIST_SELECTOR).focus(); },
-                isSelectableItemAtIndex: function (index) { return !!closest(_this.items[index], "." + cssClasses$7.MENU_SELECTION_GROUP); },
+                focusListRoot: function () { return _this.root_.querySelector(strings$7.LIST_SELECTOR).focus(); },
+                isSelectableItemAtIndex: function (index) { return !!closest(_this.items[index], "." + cssClasses$8.MENU_SELECTION_GROUP); },
                 getSelectedSiblingOfItemAtIndex: function (index) {
-                    var selectionGroupEl = closest(_this.items[index], "." + cssClasses$7.MENU_SELECTION_GROUP);
-                    var selectedItemEl = selectionGroupEl.querySelector("." + cssClasses$7.MENU_SELECTED_LIST_ITEM);
+                    var selectionGroupEl = closest(_this.items[index], "." + cssClasses$8.MENU_SELECTION_GROUP);
+                    var selectedItemEl = selectionGroupEl.querySelector("." + cssClasses$8.MENU_SELECTED_LIST_ITEM);
                     return selectedItemEl ? _this.items.indexOf(selectedItemEl) : -1;
                 },
             };
@@ -16103,14 +16537,14 @@ var app = (function () {
      * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
      * THE SOFTWARE.
      */
-    var strings$7 = {
+    var strings$8 = {
         NOTCH_ELEMENT_SELECTOR: '.mdc-notched-outline__notch',
     };
     var numbers$5 = {
         // This should stay in sync with $mdc-notched-outline-padding * 2.
         NOTCH_ELEMENT_PADDING: 8,
     };
-    var cssClasses$8 = {
+    var cssClasses$9 = {
         NO_LABEL: 'mdc-notched-outline--no-label',
         OUTLINE_NOTCHED: 'mdc-notched-outline--notched',
         OUTLINE_UPGRADED: 'mdc-notched-outline--upgraded',
@@ -16146,14 +16580,14 @@ var app = (function () {
         }
         Object.defineProperty(MDCNotchedOutlineFoundation, "strings", {
             get: function () {
-                return strings$7;
+                return strings$8;
             },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(MDCNotchedOutlineFoundation, "cssClasses", {
             get: function () {
-                return cssClasses$8;
+                return cssClasses$9;
             },
             enumerable: true,
             configurable: true
@@ -16236,17 +16670,17 @@ var app = (function () {
             return new MDCNotchedOutline(root);
         };
         MDCNotchedOutline.prototype.initialSyncWithDOM = function () {
-            this.notchElement_ = this.root_.querySelector(strings$7.NOTCH_ELEMENT_SELECTOR);
+            this.notchElement_ = this.root_.querySelector(strings$8.NOTCH_ELEMENT_SELECTOR);
             var label = this.root_.querySelector('.' + MDCFloatingLabelFoundation.cssClasses.ROOT);
             if (label) {
                 label.style.transitionDuration = '0s';
-                this.root_.classList.add(cssClasses$8.OUTLINE_UPGRADED);
+                this.root_.classList.add(cssClasses$9.OUTLINE_UPGRADED);
                 requestAnimationFrame(function () {
                     label.style.transitionDuration = '';
                 });
             }
             else {
-                this.root_.classList.add(cssClasses$8.NO_LABEL);
+                this.root_.classList.add(cssClasses$9.NO_LABEL);
             }
         };
         /**
@@ -16302,7 +16736,7 @@ var app = (function () {
      * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
      * THE SOFTWARE.
      */
-    var cssClasses$9 = {
+    var cssClasses$a = {
         ACTIVATED: 'mdc-select--activated',
         DISABLED: 'mdc-select--disabled',
         FOCUSED: 'mdc-select--focused',
@@ -16313,7 +16747,7 @@ var app = (function () {
         SELECTED_ITEM_CLASS: 'mdc-list-item--selected',
         WITH_LEADING_ICON: 'mdc-select--with-leading-icon',
     };
-    var strings$8 = {
+    var strings$9 = {
         ARIA_CONTROLS: 'aria-controls',
         ARIA_SELECTED_ATTR: 'aria-selected',
         CHANGE_EVENT: 'MDCSelect:change',
@@ -16325,7 +16759,7 @@ var app = (function () {
         MENU_SELECTOR: '.mdc-select__menu',
         NATIVE_CONTROL_SELECTOR: '.mdc-select__native-control',
         OUTLINE_SELECTOR: '.mdc-notched-outline',
-        SELECTED_ITEM_SELECTOR: "." + cssClasses$9.SELECTED_ITEM_CLASS,
+        SELECTED_ITEM_SELECTOR: "." + cssClasses$a.SELECTED_ITEM_CLASS,
         SELECTED_TEXT_SELECTOR: '.mdc-select__selected-text',
     };
     var numbers$6 = {
@@ -16371,7 +16805,7 @@ var app = (function () {
         }
         Object.defineProperty(MDCSelectFoundation, "cssClasses", {
             get: function () {
-                return cssClasses$9;
+                return cssClasses$a;
             },
             enumerable: true,
             configurable: true
@@ -16385,7 +16819,7 @@ var app = (function () {
         });
         Object.defineProperty(MDCSelectFoundation, "strings", {
             get: function () {
-                return strings$8;
+                return strings$9;
             },
             enumerable: true,
             configurable: true
@@ -16440,10 +16874,10 @@ var app = (function () {
         };
         MDCSelectFoundation.prototype.setDisabled = function (isDisabled) {
             if (isDisabled) {
-                this.adapter_.addClass(cssClasses$9.DISABLED);
+                this.adapter_.addClass(cssClasses$a.DISABLED);
             }
             else {
-                this.adapter_.removeClass(cssClasses$9.DISABLED);
+                this.adapter_.removeClass(cssClasses$a.DISABLED);
             }
             this.adapter_.setDisabled(isDisabled);
             this.adapter_.closeMenu();
@@ -16464,10 +16898,10 @@ var app = (function () {
             this.notchOutline(openNotch);
         };
         MDCSelectFoundation.prototype.handleMenuOpened = function () {
-            this.adapter_.addClass(cssClasses$9.ACTIVATED);
+            this.adapter_.addClass(cssClasses$a.ACTIVATED);
         };
         MDCSelectFoundation.prototype.handleMenuClosed = function () {
-            this.adapter_.removeClass(cssClasses$9.ACTIVATED);
+            this.adapter_.removeClass(cssClasses$a.ACTIVATED);
         };
         /**
          * Handles value changes, via change event or programmatic updates.
@@ -16476,9 +16910,9 @@ var app = (function () {
             if (didChange === void 0) { didChange = true; }
             var value = this.getValue();
             var optionHasValue = value.length > 0;
-            var isRequired = this.adapter_.hasClass(cssClasses$9.REQUIRED);
+            var isRequired = this.adapter_.hasClass(cssClasses$a.REQUIRED);
             this.notchOutline(optionHasValue);
-            if (!this.adapter_.hasClass(cssClasses$9.FOCUSED)) {
+            if (!this.adapter_.hasClass(cssClasses$a.FOCUSED)) {
                 this.adapter_.floatLabel(optionHasValue);
             }
             if (didChange) {
@@ -16495,7 +16929,7 @@ var app = (function () {
          * Handles focus events from select element.
          */
         MDCSelectFoundation.prototype.handleFocus = function () {
-            this.adapter_.addClass(cssClasses$9.FOCUSED);
+            this.adapter_.addClass(cssClasses$a.FOCUSED);
             this.adapter_.floatLabel(true);
             this.notchOutline(true);
             this.adapter_.activateBottomLine();
@@ -16510,10 +16944,10 @@ var app = (function () {
             if (this.adapter_.isMenuOpen()) {
                 return;
             }
-            this.adapter_.removeClass(cssClasses$9.FOCUSED);
+            this.adapter_.removeClass(cssClasses$a.FOCUSED);
             this.handleChange(false);
             this.adapter_.deactivateBottomLine();
-            var isRequired = this.adapter_.hasClass(cssClasses$9.REQUIRED);
+            var isRequired = this.adapter_.hasClass(cssClasses$a.REQUIRED);
             if (isRequired) {
                 this.setValid(this.isValid());
                 if (this.helperText_) {
@@ -16536,7 +16970,7 @@ var app = (function () {
             var isSpace = event.key === 'Space' || event.keyCode === 32;
             var arrowUp = event.key === 'ArrowUp' || event.keyCode === 38;
             var arrowDown = event.key === 'ArrowDown' || event.keyCode === 40;
-            if (this.adapter_.hasClass(cssClasses$9.FOCUSED) && (isEnter || isSpace || arrowUp || arrowDown)) {
+            if (this.adapter_.hasClass(cssClasses$a.FOCUSED) && (isEnter || isSpace || arrowUp || arrowDown)) {
                 this.adapter_.openMenu();
                 event.preventDefault();
             }
@@ -16548,7 +16982,7 @@ var app = (function () {
             if (!this.adapter_.hasOutline()) {
                 return;
             }
-            var isFocused = this.adapter_.hasClass(cssClasses$9.FOCUSED);
+            var isFocused = this.adapter_.hasClass(cssClasses$a.FOCUSED);
             if (openNotch) {
                 var labelScale = numbers$6.LABEL_SCALE;
                 var labelWidth = this.adapter_.getLabelWidth() * labelScale;
@@ -16606,11 +17040,11 @@ var app = (function () {
      * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
      * THE SOFTWARE.
      */
-    var strings$9 = {
+    var strings$a = {
         ARIA_HIDDEN: 'aria-hidden',
         ROLE: 'role',
     };
-    var cssClasses$a = {
+    var cssClasses$b = {
         HELPER_TEXT_PERSISTENT: 'mdc-select-helper-text--persistent',
         HELPER_TEXT_VALIDATION_MSG: 'mdc-select-helper-text--validation-msg',
     };
@@ -16645,14 +17079,14 @@ var app = (function () {
         }
         Object.defineProperty(MDCSelectHelperTextFoundation, "cssClasses", {
             get: function () {
-                return cssClasses$a;
+                return cssClasses$b;
             },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(MDCSelectHelperTextFoundation, "strings", {
             get: function () {
-                return strings$9;
+                return strings$a;
             },
             enumerable: true,
             configurable: true
@@ -16687,10 +17121,10 @@ var app = (function () {
          */
         MDCSelectHelperTextFoundation.prototype.setPersistent = function (isPersistent) {
             if (isPersistent) {
-                this.adapter_.addClass(cssClasses$a.HELPER_TEXT_PERSISTENT);
+                this.adapter_.addClass(cssClasses$b.HELPER_TEXT_PERSISTENT);
             }
             else {
-                this.adapter_.removeClass(cssClasses$a.HELPER_TEXT_PERSISTENT);
+                this.adapter_.removeClass(cssClasses$b.HELPER_TEXT_PERSISTENT);
             }
         };
         /**
@@ -16698,30 +17132,30 @@ var app = (function () {
          */
         MDCSelectHelperTextFoundation.prototype.setValidation = function (isValidation) {
             if (isValidation) {
-                this.adapter_.addClass(cssClasses$a.HELPER_TEXT_VALIDATION_MSG);
+                this.adapter_.addClass(cssClasses$b.HELPER_TEXT_VALIDATION_MSG);
             }
             else {
-                this.adapter_.removeClass(cssClasses$a.HELPER_TEXT_VALIDATION_MSG);
+                this.adapter_.removeClass(cssClasses$b.HELPER_TEXT_VALIDATION_MSG);
             }
         };
         /**
          * Makes the helper text visible to screen readers.
          */
         MDCSelectHelperTextFoundation.prototype.showToScreenReader = function () {
-            this.adapter_.removeAttr(strings$9.ARIA_HIDDEN);
+            this.adapter_.removeAttr(strings$a.ARIA_HIDDEN);
         };
         /**
          * Sets the validity of the helper text based on the select validity.
          */
         MDCSelectHelperTextFoundation.prototype.setValidity = function (selectIsValid) {
-            var helperTextIsPersistent = this.adapter_.hasClass(cssClasses$a.HELPER_TEXT_PERSISTENT);
-            var helperTextIsValidationMsg = this.adapter_.hasClass(cssClasses$a.HELPER_TEXT_VALIDATION_MSG);
+            var helperTextIsPersistent = this.adapter_.hasClass(cssClasses$b.HELPER_TEXT_PERSISTENT);
+            var helperTextIsValidationMsg = this.adapter_.hasClass(cssClasses$b.HELPER_TEXT_VALIDATION_MSG);
             var validationMsgNeedsDisplay = helperTextIsValidationMsg && !selectIsValid;
             if (validationMsgNeedsDisplay) {
-                this.adapter_.setAttr(strings$9.ROLE, 'alert');
+                this.adapter_.setAttr(strings$a.ROLE, 'alert');
             }
             else {
-                this.adapter_.removeAttr(strings$9.ROLE);
+                this.adapter_.removeAttr(strings$a.ROLE);
             }
             if (!helperTextIsPersistent && !validationMsgNeedsDisplay) {
                 this.hide_();
@@ -16731,7 +17165,7 @@ var app = (function () {
          * Hides the help text from screen readers.
          */
         MDCSelectHelperTextFoundation.prototype.hide_ = function () {
-            this.adapter_.setAttr(strings$9.ARIA_HIDDEN, 'true');
+            this.adapter_.setAttr(strings$a.ARIA_HIDDEN, 'true');
         };
         return MDCSelectHelperTextFoundation;
     }(MDCFoundation));
@@ -16818,7 +17252,7 @@ var app = (function () {
      * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
      * THE SOFTWARE.
      */
-    var strings$a = {
+    var strings$b = {
         ICON_EVENT: 'MDCSelect:icon',
         ICON_ROLE: 'button',
     };
@@ -16857,7 +17291,7 @@ var app = (function () {
         }
         Object.defineProperty(MDCSelectIconFoundation, "strings", {
             get: function () {
-                return strings$a;
+                return strings$b;
             },
             enumerable: true,
             configurable: true
@@ -16905,7 +17339,7 @@ var app = (function () {
             }
             else {
                 this.adapter_.setAttr('tabindex', this.savedTabIndex_);
-                this.adapter_.setAttr('role', strings$a.ICON_ROLE);
+                this.adapter_.setAttr('role', strings$b.ICON_ROLE);
             }
         };
         MDCSelectIconFoundation.prototype.setAriaLabel = function (label) {
@@ -17023,16 +17457,16 @@ var app = (function () {
             if (iconFactory === void 0) { iconFactory = function (el) { return new MDCSelectIcon(el); }; }
             if (helperTextFactory === void 0) { helperTextFactory = function (el) { return new MDCSelectHelperText(el); }; }
             this.isMenuOpen_ = false;
-            this.nativeControl_ = this.root_.querySelector(strings$8.NATIVE_CONTROL_SELECTOR);
-            this.selectedText_ = this.root_.querySelector(strings$8.SELECTED_TEXT_SELECTOR);
+            this.nativeControl_ = this.root_.querySelector(strings$9.NATIVE_CONTROL_SELECTOR);
+            this.selectedText_ = this.root_.querySelector(strings$9.SELECTED_TEXT_SELECTOR);
             var targetElement = this.nativeControl_ || this.selectedText_;
             if (!targetElement) {
                 throw new Error('MDCSelect: Missing required element: Exactly one of the following selectors must be present: ' +
-                    ("'" + strings$8.NATIVE_CONTROL_SELECTOR + "' or '" + strings$8.SELECTED_TEXT_SELECTOR + "'"));
+                    ("'" + strings$9.NATIVE_CONTROL_SELECTOR + "' or '" + strings$9.SELECTED_TEXT_SELECTOR + "'"));
             }
             this.targetElement_ = targetElement;
-            if (this.targetElement_.hasAttribute(strings$8.ARIA_CONTROLS)) {
-                var helperTextElement = document.getElementById(this.targetElement_.getAttribute(strings$8.ARIA_CONTROLS));
+            if (this.targetElement_.hasAttribute(strings$9.ARIA_CONTROLS)) {
+                var helperTextElement = document.getElementById(this.targetElement_.getAttribute(strings$9.ARIA_CONTROLS));
                 if (helperTextElement) {
                     this.helperText_ = helperTextFactory(helperTextElement);
                 }
@@ -17040,21 +17474,21 @@ var app = (function () {
             if (this.selectedText_) {
                 this.enhancedSelectSetup_(menuFactory);
             }
-            var labelElement = this.root_.querySelector(strings$8.LABEL_SELECTOR);
+            var labelElement = this.root_.querySelector(strings$9.LABEL_SELECTOR);
             this.label_ = labelElement ? labelFactory(labelElement) : null;
-            var lineRippleElement = this.root_.querySelector(strings$8.LINE_RIPPLE_SELECTOR);
+            var lineRippleElement = this.root_.querySelector(strings$9.LINE_RIPPLE_SELECTOR);
             this.lineRipple_ = lineRippleElement ? lineRippleFactory(lineRippleElement) : null;
-            var outlineElement = this.root_.querySelector(strings$8.OUTLINE_SELECTOR);
+            var outlineElement = this.root_.querySelector(strings$9.OUTLINE_SELECTOR);
             this.outline_ = outlineElement ? outlineFactory(outlineElement) : null;
-            var leadingIcon = this.root_.querySelector(strings$8.LEADING_ICON_SELECTOR);
+            var leadingIcon = this.root_.querySelector(strings$9.LEADING_ICON_SELECTOR);
             if (leadingIcon) {
-                this.root_.classList.add(cssClasses$9.WITH_LEADING_ICON);
+                this.root_.classList.add(cssClasses$a.WITH_LEADING_ICON);
                 this.leadingIcon_ = iconFactory(leadingIcon);
                 if (this.menuElement_) {
-                    this.menuElement_.classList.add(cssClasses$9.WITH_LEADING_ICON);
+                    this.menuElement_.classList.add(cssClasses$a.WITH_LEADING_ICON);
                 }
             }
-            if (!this.root_.classList.contains(cssClasses$9.OUTLINED)) {
+            if (!this.root_.classList.contains(cssClasses$a.OUTLINED)) {
                 this.ripple = this.createRipple_();
             }
             // The required state needs to be sync'd before the mutation observer is added.
@@ -17105,16 +17539,16 @@ var app = (function () {
             this.targetElement_.addEventListener('click', this.handleClick_);
             if (this.menuElement_) {
                 this.selectedText_.addEventListener('keydown', this.handleKeydown_);
-                this.menu_.listen(strings$5.CLOSED_EVENT, this.handleMenuClosed_);
-                this.menu_.listen(strings$5.OPENED_EVENT, this.handleMenuOpened_);
-                this.menu_.listen(strings$6.SELECTED_EVENT, this.handleMenuSelected_);
+                this.menu_.listen(strings$6.CLOSED_EVENT, this.handleMenuClosed_);
+                this.menu_.listen(strings$6.OPENED_EVENT, this.handleMenuOpened_);
+                this.menu_.listen(strings$7.SELECTED_EVENT, this.handleMenuSelected_);
                 if (this.hiddenInput_ && this.hiddenInput_.value) {
                     // If the hidden input already has a value, use it to restore the select's value.
                     // This can happen e.g. if the user goes back or (in some browsers) refreshes the page.
                     var enhancedAdapterMethods = this.getEnhancedSelectAdapterMethods_();
                     enhancedAdapterMethods.setValue(this.hiddenInput_.value);
                 }
-                else if (this.menuElement_.querySelector(strings$8.SELECTED_ITEM_SELECTOR)) {
+                else if (this.menuElement_.querySelector(strings$9.SELECTED_ITEM_SELECTOR)) {
                     // If an element is selected, the select should set the initial selected text.
                     var enhancedAdapterMethods = this.getEnhancedSelectAdapterMethods_();
                     enhancedAdapterMethods.setValue(enhancedAdapterMethods.getValue());
@@ -17122,7 +17556,7 @@ var app = (function () {
             }
             // Initially sync floating label
             this.foundation_.handleChange(/* didChange */ false);
-            if (this.root_.classList.contains(cssClasses$9.DISABLED)
+            if (this.root_.classList.contains(cssClasses$a.DISABLED)
                 || (this.nativeControl_ && this.nativeControl_.disabled)) {
                 this.disabled = true;
             }
@@ -17134,9 +17568,9 @@ var app = (function () {
             this.targetElement_.removeEventListener('keydown', this.handleKeydown_);
             this.targetElement_.removeEventListener('click', this.handleClick_);
             if (this.menu_) {
-                this.menu_.unlisten(strings$5.CLOSED_EVENT, this.handleMenuClosed_);
-                this.menu_.unlisten(strings$5.OPENED_EVENT, this.handleMenuOpened_);
-                this.menu_.unlisten(strings$6.SELECTED_EVENT, this.handleMenuSelected_);
+                this.menu_.unlisten(strings$6.CLOSED_EVENT, this.handleMenuClosed_);
+                this.menu_.unlisten(strings$6.OPENED_EVENT, this.handleMenuOpened_);
+                this.menu_.unlisten(strings$7.SELECTED_EVENT, this.handleMenuSelected_);
                 this.menu_.destroy();
             }
             if (this.ripple) {
@@ -17170,7 +17604,7 @@ var app = (function () {
             get: function () {
                 var selectedIndex = -1;
                 if (this.menuElement_ && this.menu_) {
-                    var selectedEl = this.menuElement_.querySelector(strings$8.SELECTED_ITEM_SELECTOR);
+                    var selectedEl = this.menuElement_.querySelector(strings$9.SELECTED_ITEM_SELECTOR);
                     selectedIndex = this.menu_.items.indexOf(selectedEl);
                 }
                 else if (this.nativeControl_) {
@@ -17186,7 +17620,7 @@ var app = (function () {
         });
         Object.defineProperty(MDCSelect.prototype, "disabled", {
             get: function () {
-                return this.root_.classList.contains(cssClasses$9.DISABLED) ||
+                return this.root_.classList.contains(cssClasses$a.DISABLED) ||
                     (this.nativeControl_ ? this.nativeControl_.disabled : false);
             },
             set: function (disabled) {
@@ -17285,10 +17719,10 @@ var app = (function () {
          * Handles setup for the enhanced menu.
          */
         MDCSelect.prototype.enhancedSelectSetup_ = function (menuFactory) {
-            var isDisabled = this.root_.classList.contains(cssClasses$9.DISABLED);
+            var isDisabled = this.root_.classList.contains(cssClasses$a.DISABLED);
             this.selectedText_.setAttribute('tabindex', isDisabled ? '-1' : '0');
-            this.hiddenInput_ = this.root_.querySelector(strings$8.HIDDEN_INPUT_SELECTOR);
-            this.menuElement_ = this.root_.querySelector(strings$8.MENU_SELECTOR);
+            this.hiddenInput_ = this.root_.querySelector(strings$9.HIDDEN_INPUT_SELECTOR);
+            this.menuElement_ = this.root_.querySelector(strings$9.MENU_SELECTOR);
             this.menu_ = menuFactory(this.menuElement_);
             this.menu_.hoistMenuToBody();
             this.menu_.setAnchorElement(this.root_);
@@ -17323,10 +17757,10 @@ var app = (function () {
                 },
                 setValid: function (isValid) {
                     if (isValid) {
-                        _this.root_.classList.remove(cssClasses$9.INVALID);
+                        _this.root_.classList.remove(cssClasses$a.INVALID);
                     }
                     else {
-                        _this.root_.classList.add(cssClasses$9.INVALID);
+                        _this.root_.classList.add(cssClasses$a.INVALID);
                     }
                 },
                 checkValidity: function () { return _this.nativeControl_.checkValidity(); },
@@ -17338,14 +17772,14 @@ var app = (function () {
             // tslint:disable:object-literal-sort-keys Methods should be in the same order as the adapter interface.
             return {
                 getValue: function () {
-                    var listItem = _this.menuElement_.querySelector(strings$8.SELECTED_ITEM_SELECTOR);
-                    if (listItem && listItem.hasAttribute(strings$8.ENHANCED_VALUE_ATTR)) {
-                        return listItem.getAttribute(strings$8.ENHANCED_VALUE_ATTR) || '';
+                    var listItem = _this.menuElement_.querySelector(strings$9.SELECTED_ITEM_SELECTOR);
+                    if (listItem && listItem.hasAttribute(strings$9.ENHANCED_VALUE_ATTR)) {
+                        return listItem.getAttribute(strings$9.ENHANCED_VALUE_ATTR) || '';
                     }
                     return '';
                 },
                 setValue: function (value) {
-                    var element = _this.menuElement_.querySelector("[" + strings$8.ENHANCED_VALUE_ATTR + "=\"" + value + "\"]");
+                    var element = _this.menuElement_.querySelector("[" + strings$9.ENHANCED_VALUE_ATTR + "=\"" + value + "\"]");
                     _this.setEnhancedSelectedIndex_(element ? _this.menu_.items.indexOf(element) : -1);
                 },
                 openMenu: function () {
@@ -17371,7 +17805,7 @@ var app = (function () {
                 },
                 checkValidity: function () {
                     var classList = _this.root_.classList;
-                    if (classList.contains(cssClasses$9.REQUIRED) && !classList.contains(cssClasses$9.DISABLED)) {
+                    if (classList.contains(cssClasses$a.REQUIRED) && !classList.contains(cssClasses$a.DISABLED)) {
                         // See notes for required attribute under https://www.w3.org/TR/html52/sec-forms.html#the-select-element
                         // TL;DR: Invalid if no index is selected, or if the first index is selected and has an empty value.
                         return _this.selectedIndex !== -1 && (_this.selectedIndex !== 0 || Boolean(_this.value));
@@ -17383,10 +17817,10 @@ var app = (function () {
                 setValid: function (isValid) {
                     _this.selectedText_.setAttribute('aria-invalid', (!isValid).toString());
                     if (isValid) {
-                        _this.root_.classList.remove(cssClasses$9.INVALID);
+                        _this.root_.classList.remove(cssClasses$a.INVALID);
                     }
                     else {
-                        _this.root_.classList.add(cssClasses$9.INVALID);
+                        _this.root_.classList.add(cssClasses$a.INVALID);
                     }
                 },
             };
@@ -17404,7 +17838,7 @@ var app = (function () {
                 deactivateBottomLine: function () { return _this.lineRipple_ && _this.lineRipple_.deactivate(); },
                 notifyChange: function (value) {
                     var index = _this.selectedIndex;
-                    _this.emit(strings$8.CHANGE_EVENT, { value: value, index: index }, true /* shouldBubble  */);
+                    _this.emit(strings$9.CHANGE_EVENT, { value: value, index: index }, true /* shouldBubble  */);
                 },
             };
             // tslint:enable:object-literal-sort-keys
@@ -17449,26 +17883,26 @@ var app = (function () {
         MDCSelect.prototype.setEnhancedSelectedIndex_ = function (index) {
             var selectedItem = this.menu_.items[index];
             this.selectedText_.textContent = selectedItem ? selectedItem.textContent.trim() : '';
-            var previouslySelected = this.menuElement_.querySelector(strings$8.SELECTED_ITEM_SELECTOR);
+            var previouslySelected = this.menuElement_.querySelector(strings$9.SELECTED_ITEM_SELECTOR);
             if (previouslySelected) {
-                previouslySelected.classList.remove(cssClasses$9.SELECTED_ITEM_CLASS);
-                previouslySelected.removeAttribute(strings$8.ARIA_SELECTED_ATTR);
+                previouslySelected.classList.remove(cssClasses$a.SELECTED_ITEM_CLASS);
+                previouslySelected.removeAttribute(strings$9.ARIA_SELECTED_ATTR);
             }
             if (selectedItem) {
-                selectedItem.classList.add(cssClasses$9.SELECTED_ITEM_CLASS);
-                selectedItem.setAttribute(strings$8.ARIA_SELECTED_ATTR, 'true');
+                selectedItem.classList.add(cssClasses$a.SELECTED_ITEM_CLASS);
+                selectedItem.setAttribute(strings$9.ARIA_SELECTED_ATTR, 'true');
             }
             // Synchronize hidden input's value with data-value attribute of selected item.
             // This code path is also followed when setting value directly, so this covers all cases.
             if (this.hiddenInput_) {
-                this.hiddenInput_.value = selectedItem ? selectedItem.getAttribute(strings$8.ENHANCED_VALUE_ATTR) || '' : '';
+                this.hiddenInput_.value = selectedItem ? selectedItem.getAttribute(strings$9.ENHANCED_VALUE_ATTR) || '' : '';
             }
             this.layout();
         };
         MDCSelect.prototype.initialSyncRequiredState_ = function () {
             var isRequired = this.targetElement_.required
                 || this.targetElement_.getAttribute('aria-required') === 'true'
-                || this.root_.classList.contains(cssClasses$9.REQUIRED);
+                || this.root_.classList.contains(cssClasses$a.REQUIRED);
             if (isRequired) {
                 if (this.nativeControl_) {
                     this.nativeControl_.required = true;
@@ -17476,7 +17910,7 @@ var app = (function () {
                 else {
                     this.selectedText_.setAttribute('aria-required', 'true');
                 }
-                this.root_.classList.add(cssClasses$9.REQUIRED);
+                this.root_.classList.add(cssClasses$a.REQUIRED);
             }
         };
         MDCSelect.prototype.addMutationObserverForRequired_ = function () {
@@ -17488,18 +17922,18 @@ var app = (function () {
                     }
                     if (_this.selectedText_) {
                         if (_this.selectedText_.getAttribute('aria-required') === 'true') {
-                            _this.root_.classList.add(cssClasses$9.REQUIRED);
+                            _this.root_.classList.add(cssClasses$a.REQUIRED);
                         }
                         else {
-                            _this.root_.classList.remove(cssClasses$9.REQUIRED);
+                            _this.root_.classList.remove(cssClasses$a.REQUIRED);
                         }
                     }
                     else {
                         if (_this.nativeControl_.required) {
-                            _this.root_.classList.add(cssClasses$9.REQUIRED);
+                            _this.root_.classList.add(cssClasses$a.REQUIRED);
                         }
                         else {
-                            _this.root_.classList.remove(cssClasses$9.REQUIRED);
+                            _this.root_.classList.remove(cssClasses$a.REQUIRED);
                         }
                     }
                     return true;
@@ -17520,9 +17954,9 @@ var app = (function () {
 
     /* node_modules/@smui/menu-surface/MenuSurface.svelte generated by Svelte v3.9.2 */
 
-    const file$b = "node_modules/@smui/menu-surface/MenuSurface.svelte";
+    const file$c = "node_modules/@smui/menu-surface/MenuSurface.svelte";
 
-    function create_fragment$c(ctx) {
+    function create_fragment$d(ctx) {
     	var div, useActions_action, forwardEvents_action, current, dispose;
 
     	const default_slot_template = ctx.$$slots.default;
@@ -17548,7 +17982,7 @@ var app = (function () {
     			toggle_class(div, "mdc-menu-surface--fixed", ctx.fixed);
     			toggle_class(div, "mdc-menu-surface--open", ctx.isStatic);
     			toggle_class(div, "smui-menu-surface--static", ctx.isStatic);
-    			add_location(div, file$b, 0, 0, 0);
+    			add_location(div, file$c, 0, 0, 0);
 
     			dispose = [
     				listen(div, "MDCMenuSurface:closed", ctx.updateOpen),
@@ -17628,7 +18062,7 @@ var app = (function () {
 
 
 
-    function instance$c($$self, $$props, $$invalidate) {
+    function instance$d($$self, $$props, $$invalidate) {
     	
 
       const forwardEvents = forwardEventsBuilder(current_component, ['MDCMenuSurface:closed', 'MDCMenuSurface:opened']);
@@ -17796,7 +18230,7 @@ var app = (function () {
     class MenuSurface extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$c, create_fragment$c, safe_not_equal, ["use", "class", "static", "anchor", "fixed", "open", "quickOpen", "anchorElement", "anchorCorner", "element", "setOpen", "setAnchorCorner", "setAnchorMargin", "setFixedPosition", "setAbsolutePosition", "setMenuSurfaceAnchorElement", "hoistMenuToBody", "setIsHoisted", "getDefaultFoundation"]);
+    		init(this, options, instance$d, create_fragment$d, safe_not_equal, ["use", "class", "static", "anchor", "fixed", "open", "quickOpen", "anchorElement", "anchorCorner", "element", "setOpen", "setAnchorCorner", "setAnchorMargin", "setFixedPosition", "setAbsolutePosition", "setMenuSurfaceAnchorElement", "hoistMenuToBody", "setIsHoisted", "getDefaultFoundation"]);
 
     		const { ctx } = this.$$;
     		const props = options.props || {};
@@ -18037,7 +18471,7 @@ var app = (function () {
     	};
     }
 
-    function create_fragment$d(ctx) {
+    function create_fragment$e(ctx) {
     	var updating_element, current;
 
     	var menusurface_spread_levels = [
@@ -18114,7 +18548,7 @@ var app = (function () {
     	};
     }
 
-    function instance$d($$self, $$props, $$invalidate) {
+    function instance$e($$self, $$props, $$invalidate) {
     	
 
       const forwardEvents = forwardEventsBuilder(current_component, ['MDCMenu:selected', 'MDCMenuSurface:closed', 'MDCMenuSurface:opened']);
@@ -18293,7 +18727,7 @@ var app = (function () {
     class Menu extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$d, create_fragment$d, safe_not_equal, ["use", "class", "static", "open", "quickOpen", "anchorCorner", "wrapFocus", "setOpen", "getItems", "setDefaultFocusState", "setAnchorCorner", "setAnchorMargin", "setSelectedIndex", "getOptionByIndex", "setFixedPosition", "hoistMenuToBody", "setIsHoisted", "setAbsolutePosition", "setAnchorElement", "getDefaultFoundation"]);
+    		init(this, options, instance$e, create_fragment$e, safe_not_equal, ["use", "class", "static", "open", "quickOpen", "anchorCorner", "wrapFocus", "setOpen", "getItems", "setDefaultFocusState", "setAnchorCorner", "setAnchorMargin", "setSelectedIndex", "getOptionByIndex", "setFixedPosition", "hoistMenuToBody", "setIsHoisted", "setAbsolutePosition", "setAnchorElement", "getDefaultFoundation"]);
 
     		const { ctx } = this.$$;
     		const props = options.props || {};
@@ -18501,7 +18935,7 @@ var app = (function () {
 
     /* node_modules/@smui/floating-label/FloatingLabel.svelte generated by Svelte v3.9.2 */
 
-    const file$c = "node_modules/@smui/floating-label/FloatingLabel.svelte";
+    const file$d = "node_modules/@smui/floating-label/FloatingLabel.svelte";
 
     // (9:0) {:else}
     function create_else_block$3(ctx) {
@@ -18528,7 +18962,7 @@ var app = (function () {
     			if (default_slot) default_slot.c();
 
     			set_attributes(label, label_data);
-    			add_location(label, file$c, 9, 2, 232);
+    			add_location(label, file$d, 9, 2, 232);
     		},
 
     		l: function claim(nodes) {
@@ -18615,7 +19049,7 @@ var app = (function () {
     			if (default_slot) default_slot.c();
 
     			set_attributes(span, span_data);
-    			add_location(span, file$c, 1, 2, 16);
+    			add_location(span, file$d, 1, 2, 16);
     		},
 
     		l: function claim(nodes) {
@@ -18677,7 +19111,7 @@ var app = (function () {
     	};
     }
 
-    function create_fragment$e(ctx) {
+    function create_fragment$f(ctx) {
     	var current_block_type_index, if_block, if_block_anchor, current;
 
     	var if_block_creators = [
@@ -18754,7 +19188,7 @@ var app = (function () {
     	};
     }
 
-    function instance$e($$self, $$props, $$invalidate) {
+    function instance$f($$self, $$props, $$invalidate) {
     	
 
       const forwardEvents = forwardEventsBuilder(current_component);
@@ -18837,7 +19271,7 @@ var app = (function () {
     class FloatingLabel extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$e, create_fragment$e, safe_not_equal, ["use", "class", "for", "wrapped", "shake", "float", "getWidth"]);
+    		init(this, options, instance$f, create_fragment$f, safe_not_equal, ["use", "class", "for", "wrapped", "shake", "float", "getWidth"]);
 
     		const { ctx } = this.$$;
     		const props = options.props || {};
@@ -18911,9 +19345,9 @@ var app = (function () {
 
     /* node_modules/@smui/line-ripple/LineRipple.svelte generated by Svelte v3.9.2 */
 
-    const file$d = "node_modules/@smui/line-ripple/LineRipple.svelte";
+    const file$e = "node_modules/@smui/line-ripple/LineRipple.svelte";
 
-    function create_fragment$f(ctx) {
+    function create_fragment$g(ctx) {
     	var div, useActions_action, forwardEvents_action;
 
     	var div_levels = [
@@ -18931,7 +19365,7 @@ var app = (function () {
     			div = element("div");
     			set_attributes(div, div_data);
     			toggle_class(div, "mdc-line-ripple--active", ctx.active);
-    			add_location(div, file$d, 0, 0, 0);
+    			add_location(div, file$e, 0, 0, 0);
     		},
 
     		l: function claim(nodes) {
@@ -18975,7 +19409,7 @@ var app = (function () {
     	};
     }
 
-    function instance$f($$self, $$props, $$invalidate) {
+    function instance$g($$self, $$props, $$invalidate) {
     	
 
       const forwardEvents = forwardEventsBuilder(current_component);
@@ -19036,7 +19470,7 @@ var app = (function () {
     class LineRipple extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$f, create_fragment$f, safe_not_equal, ["use", "class", "active", "activate", "deactivate", "setRippleCenter"]);
+    		init(this, options, instance$g, create_fragment$g, safe_not_equal, ["use", "class", "active", "activate", "deactivate", "setRippleCenter"]);
 
     		const { ctx } = this.$$;
     		const props = options.props || {};
@@ -19102,7 +19536,7 @@ var app = (function () {
 
     /* node_modules/@smui/notched-outline/NotchedOutline.svelte generated by Svelte v3.9.2 */
 
-    const file$e = "node_modules/@smui/notched-outline/NotchedOutline.svelte";
+    const file$f = "node_modules/@smui/notched-outline/NotchedOutline.svelte";
 
     // (11:2) {#if !noLabel}
     function create_if_block$4(ctx) {
@@ -19118,7 +19552,7 @@ var app = (function () {
     			if (default_slot) default_slot.c();
 
     			attr(div, "class", "mdc-notched-outline__notch");
-    			add_location(div, file$e, 11, 4, 345);
+    			add_location(div, file$f, 11, 4, 345);
     		},
 
     		l: function claim(nodes) {
@@ -19165,7 +19599,7 @@ var app = (function () {
     	};
     }
 
-    function create_fragment$g(ctx) {
+    function create_fragment$h(ctx) {
     	var div2, div0, t0, t1, div1, useActions_action, forwardEvents_action, current;
 
     	var if_block = (!ctx.noLabel) && create_if_block$4(ctx);
@@ -19189,13 +19623,13 @@ var app = (function () {
     			t1 = space();
     			div1 = element("div");
     			attr(div0, "class", "mdc-notched-outline__leading");
-    			add_location(div0, file$e, 9, 2, 275);
+    			add_location(div0, file$f, 9, 2, 275);
     			attr(div1, "class", "mdc-notched-outline__trailing");
-    			add_location(div1, file$e, 13, 2, 415);
+    			add_location(div1, file$f, 13, 2, 415);
     			set_attributes(div2, div2_data);
     			toggle_class(div2, "mdc-notched-outline--notched", ctx.notched);
     			toggle_class(div2, "mdc-notched-outline--no-label", ctx.noLabel);
-    			add_location(div2, file$e, 0, 0, 0);
+    			add_location(div2, file$f, 0, 0, 0);
     		},
 
     		l: function claim(nodes) {
@@ -19276,7 +19710,7 @@ var app = (function () {
     	};
     }
 
-    function instance$g($$self, $$props, $$invalidate) {
+    function instance$h($$self, $$props, $$invalidate) {
     	
 
       const forwardEvents = forwardEventsBuilder(current_component);
@@ -19339,7 +19773,7 @@ var app = (function () {
     class NotchedOutline extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$g, create_fragment$g, safe_not_equal, ["use", "class", "notched", "noLabel", "notch", "closeNotch"]);
+    		init(this, options, instance$h, create_fragment$h, safe_not_equal, ["use", "class", "notched", "noLabel", "notch", "closeNotch"]);
 
     		const { ctx } = this.$$;
     		const props = options.props || {};
@@ -19402,13 +19836,13 @@ var app = (function () {
 
     /* node_modules/@smui/select/Select.svelte generated by Svelte v3.9.2 */
 
-    const file$f = "node_modules/@smui/select/Select.svelte";
+    const file$g = "node_modules/@smui/select/Select.svelte";
 
     const get_label_slot_changes_1 = () => ({});
     const get_label_slot_context_1 = () => ({});
 
-    const get_label_slot_changes = () => ({});
-    const get_label_slot_context = () => ({});
+    const get_label_slot_changes$1 = () => ({});
+    const get_label_slot_context$1 = () => ({});
 
     const get_icon_slot_changes = () => ({});
     const get_icon_slot_context = () => ({});
@@ -19440,7 +19874,7 @@ var app = (function () {
     			if (default_slot) default_slot.c();
 
     			set_attributes(select_1, select_1_data);
-    			add_location(select_1, file$f, 45, 4, 1592);
+    			add_location(select_1, file$g, 45, 4, 1592);
 
     			dispose = [
     				listen(select_1, "change", ctx.change_handler_1),
@@ -19562,14 +19996,14 @@ var app = (function () {
     			t2 = space();
     			menu.$$.fragment.c();
     			set_attributes(input, input_data);
-    			add_location(input, file$f, 16, 4, 757);
+    			add_location(input, file$g, 16, 4, 757);
     			attr(div, "id", div_id_value = ctx.inputId+'-smui-selected-text');
     			attr(div, "class", "mdc-select__selected-text");
     			attr(div, "role", "button");
     			attr(div, "aria-haspopup", "listbox");
     			attr(div, "aria-labelledby", div_aria_labelledby_value = "" + (ctx.inputId+'-smui-label') + " " + (ctx.inputId+'-smui-selected-text'));
     			attr(div, "aria-required", div_aria_required_value = ctx.required ? 'true' : 'false');
-    			add_location(div, file$f, 27, 4, 1004);
+    			add_location(div, file$g, 27, 4, 1004);
 
     			dispose = [
     				listen(input, "change", ctx.change_handler),
@@ -19925,7 +20359,7 @@ var app = (function () {
     	var t, current;
 
     	const label_slot_template = ctx.$$slots.label;
-    	const label_slot = create_slot(label_slot_template, ctx, get_label_slot_context);
+    	const label_slot = create_slot(label_slot_template, ctx, get_label_slot_context$1);
 
     	return {
     		c: function create() {
@@ -19955,8 +20389,8 @@ var app = (function () {
 
     			if (label_slot && label_slot.p && changed.$$scope) {
     				label_slot.p(
-    					get_slot_changes(label_slot_template, ctx, changed, get_label_slot_changes),
-    					get_slot_context(label_slot_template, ctx, get_label_slot_context)
+    					get_slot_changes(label_slot_template, ctx, changed, get_label_slot_changes$1),
+    					get_slot_context(label_slot_template, ctx, get_label_slot_context$1)
     				);
     			}
     		},
@@ -20270,7 +20704,7 @@ var app = (function () {
     	};
     }
 
-    function create_fragment$h(ctx) {
+    function create_fragment$i(ctx) {
     	var div, t0, i, t1, current_block_type_index, if_block0, t2, t3, useActions_action, forwardEvents_action, current, dispose;
 
     	const icon_slot_template = ctx.$$slots.icon;
@@ -20320,14 +20754,14 @@ var app = (function () {
     			if (if_block2) if_block2.c();
 
     			attr(i, "class", "mdc-select__dropdown-icon");
-    			add_location(i, file$f, 14, 2, 694);
+    			add_location(i, file$g, 14, 2, 694);
     			set_attributes(div, div_data);
     			toggle_class(div, "mdc-select--disabled", ctx.disabled);
     			toggle_class(div, "mdc-select--outlined", ctx.variant === 'outlined');
     			toggle_class(div, "smui-select--standard", ctx.variant === 'standard');
     			toggle_class(div, "mdc-select--with-leading-icon", ctx.withLeadingIcon);
     			toggle_class(div, "mdc-select--invalid", ctx.invalid);
-    			add_location(div, file$f, 0, 0, 0);
+    			add_location(div, file$g, 0, 0, 0);
     			dispose = listen(div, "MDCSelect:change", ctx.changeHandler);
     		},
 
@@ -20482,15 +20916,15 @@ var app = (function () {
     	};
     }
 
-    let counter$1 = 0;
+    let counter$2 = 0;
 
-    function instance$h($$self, $$props, $$invalidate) {
+    function instance$i($$self, $$props, $$invalidate) {
     	
 
       const forwardEvents = forwardEventsBuilder(current_component, 'MDCSelect:change');
       const uninitializedValue = () => {};
 
-      let { use = [], class: className = '', ripple = true, disabled = false, enhanced = false, variant = 'standard', withLeadingIcon = false, noLabel = false, label = null, value = '', selectedIndex = null, selectedText = '', dirty = false, invalid = uninitializedValue, updateInvalid = invalid === uninitializedValue, required = false, inputId = 'SMUI-select-'+(counter$1++), input$use = [], input$class = '', label$class = '', menu$class = '' } = $$props;
+      let { use = [], class: className = '', ripple = true, disabled = false, enhanced = false, variant = 'standard', withLeadingIcon = false, noLabel = false, label = null, value = '', selectedIndex = null, selectedText = '', dirty = false, invalid = uninitializedValue, updateInvalid = invalid === uninitializedValue, required = false, inputId = 'SMUI-select-'+(counter$2++), input$use = [], input$class = '', label$class = '', menu$class = '' } = $$props;
 
       let element;
       let select;
@@ -20677,7 +21111,7 @@ var app = (function () {
     class Select extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$h, create_fragment$h, safe_not_equal, ["use", "class", "ripple", "disabled", "enhanced", "variant", "withLeadingIcon", "noLabel", "label", "value", "selectedIndex", "selectedText", "dirty", "invalid", "updateInvalid", "required", "inputId", "input$use", "input$class", "label$class", "menu$class", "focus", "layout"]);
+    		init(this, options, instance$i, create_fragment$i, safe_not_equal, ["use", "class", "ripple", "disabled", "enhanced", "variant", "withLeadingIcon", "noLabel", "label", "value", "selectedIndex", "selectedText", "dirty", "invalid", "updateInvalid", "required", "inputId", "input$use", "input$class", "label$class", "menu$class", "focus", "layout"]);
 
     		const { ctx } = this.$$;
     		const props = options.props || {};
@@ -20876,7 +21310,7 @@ var app = (function () {
 
     /* node_modules/@smui/select/Option.svelte generated by Svelte v3.9.2 */
 
-    const file$g = "node_modules/@smui/select/Option.svelte";
+    const file$h = "node_modules/@smui/select/Option.svelte";
 
     // (8:0) {:else}
     function create_else_block$5(ctx) {
@@ -20903,7 +21337,7 @@ var app = (function () {
     			if (default_slot) default_slot.c();
 
     			set_attributes(option, option_data);
-    			add_location(option, file$g, 8, 2, 185);
+    			add_location(option, file$h, 8, 2, 185);
     		},
 
     		l: function claim(nodes) {
@@ -21073,7 +21507,7 @@ var app = (function () {
     	};
     }
 
-    function create_fragment$i(ctx) {
+    function create_fragment$j(ctx) {
     	var current_block_type_index, if_block, if_block_anchor, current;
 
     	var if_block_creators = [
@@ -21150,7 +21584,7 @@ var app = (function () {
     	};
     }
 
-    function instance$i($$self, $$props, $$invalidate) {
+    function instance$j($$self, $$props, $$invalidate) {
     	
 
       const forwardEvents = forwardEventsBuilder(current_component);
@@ -21188,7 +21622,7 @@ var app = (function () {
     class Option extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$i, create_fragment$i, safe_not_equal, ["use", "class", "value", "selected"]);
+    		init(this, options, instance$j, create_fragment$j, safe_not_equal, ["use", "class", "value", "selected"]);
     	}
 
     	get use() {
@@ -21225,6 +21659,9 @@ var app = (function () {
     }
 
     /* src/Card.svelte generated by Svelte v3.9.2 */
+
+    const get_aditionalFilter_slot_changes = () => ({});
+    const get_aditionalFilter_slot_context = () => ({});
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = Object.create(ctx);
@@ -21438,7 +21875,7 @@ var app = (function () {
     	};
     }
 
-    // (60:8) <Icon class="material-icons" on>
+    // (62:8) <Icon class="material-icons" on>
     function create_default_slot_7(ctx) {
     	var t;
 
@@ -21459,7 +21896,7 @@ var app = (function () {
     	};
     }
 
-    // (61:8) <Icon class="material-icons">
+    // (63:8) <Icon class="material-icons">
     function create_default_slot_6(ctx) {
     	var t;
 
@@ -21480,7 +21917,7 @@ var app = (function () {
     	};
     }
 
-    // (59:6) <IconButton toggle aria-label="Add to favorites" title="Add to favorites">
+    // (61:6) <IconButton toggle aria-label="Add to favorites" title="Add to favorites">
     function create_default_slot_5(ctx) {
     	var t, current;
 
@@ -21554,7 +21991,7 @@ var app = (function () {
     	};
     }
 
-    // (63:6) <IconButton class="material-icons" title="Share">
+    // (65:6) <IconButton class="material-icons" title="Share">
     function create_default_slot_4$1(ctx) {
     	var t;
 
@@ -21575,7 +22012,7 @@ var app = (function () {
     	};
     }
 
-    // (64:6) <IconButton         class="material-icons"         title="File download"         on:click={() => exportSvg(svgElementId, fileName)}>
+    // (66:6) <IconButton         class="material-icons"         title="File download"         on:click={() => exportSvg(svgElementId, fileName)}>
     function create_default_slot_3$1(ctx) {
     	var t;
 
@@ -21596,7 +22033,7 @@ var app = (function () {
     	};
     }
 
-    // (58:4) <ActionIcons>
+    // (60:4) <ActionIcons>
     function create_default_slot_2$1(ctx) {
     	var t0, t1, current;
 
@@ -21702,7 +22139,7 @@ var app = (function () {
 
     // (46:2) <Actions>
     function create_default_slot_1$1(ctx) {
-    	var updating_value, t, current;
+    	var updating_value, t0, t1, current;
 
     	function select_value_binding(value) {
     		ctx.select_value_binding.call(null, value);
@@ -21725,6 +22162,9 @@ var app = (function () {
     	binding_callbacks.push(() => bind(select, 'value', select_value_binding));
     	select.$on("change", ctx.change_handler);
 
+    	const aditionalFilter_slot_template = ctx.$$slots.aditionalFilter;
+    	const aditionalFilter_slot = create_slot(aditionalFilter_slot_template, ctx, get_aditionalFilter_slot_context);
+
     	var actionicons = new ActionIcons({
     		props: {
     		$$slots: { default: [create_default_slot_2$1] },
@@ -21736,13 +22176,26 @@ var app = (function () {
     	return {
     		c: function create() {
     			select.$$.fragment.c();
-    			t = space();
+    			t0 = space();
+
+    			if (aditionalFilter_slot) aditionalFilter_slot.c();
+    			t1 = space();
     			actionicons.$$.fragment.c();
+    		},
+
+    		l: function claim(nodes) {
+    			if (aditionalFilter_slot) aditionalFilter_slot.l(nodes);
     		},
 
     		m: function mount(target, anchor) {
     			mount_component(select, target, anchor);
-    			insert(target, t, anchor);
+    			insert(target, t0, anchor);
+
+    			if (aditionalFilter_slot) {
+    				aditionalFilter_slot.m(target, anchor);
+    			}
+
+    			insert(target, t1, anchor);
     			mount_component(actionicons, target, anchor);
     			current = true;
     		},
@@ -21755,6 +22208,13 @@ var app = (function () {
     			}
     			select.$set(select_changes);
 
+    			if (aditionalFilter_slot && aditionalFilter_slot.p && changed.$$scope) {
+    				aditionalFilter_slot.p(
+    					get_slot_changes(aditionalFilter_slot_template, ctx, changed, get_aditionalFilter_slot_changes),
+    					get_slot_context(aditionalFilter_slot_template, ctx, get_aditionalFilter_slot_context)
+    				);
+    			}
+
     			var actionicons_changes = {};
     			if (changed.$$scope) actionicons_changes.$$scope = { changed, ctx };
     			actionicons.$set(actionicons_changes);
@@ -21764,6 +22224,8 @@ var app = (function () {
     			if (current) return;
     			transition_in(select.$$.fragment, local);
 
+    			transition_in(aditionalFilter_slot, local);
+
     			transition_in(actionicons.$$.fragment, local);
 
     			current = true;
@@ -21771,6 +22233,7 @@ var app = (function () {
 
     		o: function outro(local) {
     			transition_out(select.$$.fragment, local);
+    			transition_out(aditionalFilter_slot, local);
     			transition_out(actionicons.$$.fragment, local);
     			current = false;
     		},
@@ -21779,7 +22242,13 @@ var app = (function () {
     			destroy_component(select, detaching);
 
     			if (detaching) {
-    				detach(t);
+    				detach(t0);
+    			}
+
+    			if (aditionalFilter_slot) aditionalFilter_slot.d(detaching);
+
+    			if (detaching) {
+    				detach(t1);
     			}
 
     			destroy_component(actionicons, detaching);
@@ -21859,7 +22328,7 @@ var app = (function () {
     	};
     }
 
-    function create_fragment$j(ctx) {
+    function create_fragment$k(ctx) {
     	var current;
 
     	var card = new Card({
@@ -21922,7 +22391,7 @@ var app = (function () {
       });
     }
 
-    function instance$j($$self, $$props, $$invalidate) {
+    function instance$k($$self, $$props, $$invalidate) {
     	let $ABSMapFilter;
 
     	validate_store(ABSMapFilter, 'ABSMapFilter');
@@ -21981,7 +22450,7 @@ var app = (function () {
     class Card_1 extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$j, create_fragment$j, safe_not_equal, ["svgElementId", "fileName"]);
+    		init(this, options, instance$k, create_fragment$k, safe_not_equal, ["svgElementId", "fileName"]);
 
     		const { ctx } = this.$$;
     		const props = options.props || {};
@@ -22090,7 +22559,7 @@ var app = (function () {
      * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
      * THE SOFTWARE.
      */
-    var cssClasses$b = {
+    var cssClasses$c = {
         ANIM_CHECKED_INDETERMINATE: 'mdc-checkbox--anim-checked-indeterminate',
         ANIM_CHECKED_UNCHECKED: 'mdc-checkbox--anim-checked-unchecked',
         ANIM_INDETERMINATE_CHECKED: 'mdc-checkbox--anim-indeterminate-checked',
@@ -22109,7 +22578,7 @@ var app = (function () {
         SELECTED: 'mdc-checkbox--selected',
         UPGRADED: 'mdc-checkbox--upgraded',
     };
-    var strings$b = {
+    var strings$c = {
         ARIA_CHECKED_ATTR: 'aria-checked',
         ARIA_CHECKED_INDETERMINATE_VALUE: 'mixed',
         NATIVE_CONTROL_SELECTOR: '.mdc-checkbox__native-control',
@@ -22149,7 +22618,7 @@ var app = (function () {
         __extends(MDCCheckboxFoundation, _super);
         function MDCCheckboxFoundation(adapter) {
             var _this = _super.call(this, __assign({}, MDCCheckboxFoundation.defaultAdapter, adapter)) || this;
-            _this.currentCheckState_ = strings$b.TRANSITION_STATE_INIT;
+            _this.currentCheckState_ = strings$c.TRANSITION_STATE_INIT;
             _this.currentAnimationClass_ = '';
             _this.animEndLatchTimer_ = 0;
             _this.enableAnimationEndHandler_ = false;
@@ -22157,14 +22626,14 @@ var app = (function () {
         }
         Object.defineProperty(MDCCheckboxFoundation, "cssClasses", {
             get: function () {
-                return cssClasses$b;
+                return cssClasses$c;
             },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(MDCCheckboxFoundation, "strings", {
             get: function () {
-                return strings$b;
+                return strings$c;
             },
             enumerable: true,
             configurable: true
@@ -22197,7 +22666,7 @@ var app = (function () {
         MDCCheckboxFoundation.prototype.init = function () {
             this.currentCheckState_ = this.determineCheckState_();
             this.updateAriaChecked_();
-            this.adapter_.addClass(cssClasses$b.UPGRADED);
+            this.adapter_.addClass(cssClasses$c.UPGRADED);
         };
         MDCCheckboxFoundation.prototype.destroy = function () {
             clearTimeout(this.animEndLatchTimer_);
@@ -22205,10 +22674,10 @@ var app = (function () {
         MDCCheckboxFoundation.prototype.setDisabled = function (disabled) {
             this.adapter_.setNativeControlDisabled(disabled);
             if (disabled) {
-                this.adapter_.addClass(cssClasses$b.DISABLED);
+                this.adapter_.addClass(cssClasses$c.DISABLED);
             }
             else {
-                this.adapter_.removeClass(cssClasses$b.DISABLED);
+                this.adapter_.removeClass(cssClasses$c.DISABLED);
             }
         };
         /**
@@ -22241,8 +22710,8 @@ var app = (function () {
                 return;
             }
             this.updateAriaChecked_();
-            var TRANSITION_STATE_UNCHECKED = strings$b.TRANSITION_STATE_UNCHECKED;
-            var SELECTED = cssClasses$b.SELECTED;
+            var TRANSITION_STATE_UNCHECKED = strings$c.TRANSITION_STATE_UNCHECKED;
+            var SELECTED = cssClasses$c.SELECTED;
             if (newState === TRANSITION_STATE_UNCHECKED) {
                 this.adapter_.removeClass(SELECTED);
             }
@@ -22266,14 +22735,14 @@ var app = (function () {
             }
         };
         MDCCheckboxFoundation.prototype.determineCheckState_ = function () {
-            var TRANSITION_STATE_INDETERMINATE = strings$b.TRANSITION_STATE_INDETERMINATE, TRANSITION_STATE_CHECKED = strings$b.TRANSITION_STATE_CHECKED, TRANSITION_STATE_UNCHECKED = strings$b.TRANSITION_STATE_UNCHECKED;
+            var TRANSITION_STATE_INDETERMINATE = strings$c.TRANSITION_STATE_INDETERMINATE, TRANSITION_STATE_CHECKED = strings$c.TRANSITION_STATE_CHECKED, TRANSITION_STATE_UNCHECKED = strings$c.TRANSITION_STATE_UNCHECKED;
             if (this.adapter_.isIndeterminate()) {
                 return TRANSITION_STATE_INDETERMINATE;
             }
             return this.adapter_.isChecked() ? TRANSITION_STATE_CHECKED : TRANSITION_STATE_UNCHECKED;
         };
         MDCCheckboxFoundation.prototype.getTransitionAnimationClass_ = function (oldState, newState) {
-            var TRANSITION_STATE_INIT = strings$b.TRANSITION_STATE_INIT, TRANSITION_STATE_CHECKED = strings$b.TRANSITION_STATE_CHECKED, TRANSITION_STATE_UNCHECKED = strings$b.TRANSITION_STATE_UNCHECKED;
+            var TRANSITION_STATE_INIT = strings$c.TRANSITION_STATE_INIT, TRANSITION_STATE_CHECKED = strings$c.TRANSITION_STATE_CHECKED, TRANSITION_STATE_UNCHECKED = strings$c.TRANSITION_STATE_UNCHECKED;
             var _a = MDCCheckboxFoundation.cssClasses, ANIM_UNCHECKED_CHECKED = _a.ANIM_UNCHECKED_CHECKED, ANIM_UNCHECKED_INDETERMINATE = _a.ANIM_UNCHECKED_INDETERMINATE, ANIM_CHECKED_UNCHECKED = _a.ANIM_CHECKED_UNCHECKED, ANIM_CHECKED_INDETERMINATE = _a.ANIM_CHECKED_INDETERMINATE, ANIM_INDETERMINATE_CHECKED = _a.ANIM_INDETERMINATE_CHECKED, ANIM_INDETERMINATE_UNCHECKED = _a.ANIM_INDETERMINATE_UNCHECKED;
             switch (oldState) {
                 case TRANSITION_STATE_INIT:
@@ -22292,12 +22761,12 @@ var app = (function () {
         MDCCheckboxFoundation.prototype.updateAriaChecked_ = function () {
             // Ensure aria-checked is set to mixed if checkbox is in indeterminate state.
             if (this.adapter_.isIndeterminate()) {
-                this.adapter_.setNativeControlAttr(strings$b.ARIA_CHECKED_ATTR, strings$b.ARIA_CHECKED_INDETERMINATE_VALUE);
+                this.adapter_.setNativeControlAttr(strings$c.ARIA_CHECKED_ATTR, strings$c.ARIA_CHECKED_INDETERMINATE_VALUE);
             }
             else {
                 // The on/off state does not need to keep track of aria-checked, since
                 // the screenreader uses the checked property on the checkbox element.
-                this.adapter_.removeNativeControlAttr(strings$b.ARIA_CHECKED_ATTR);
+                this.adapter_.removeNativeControlAttr(strings$c.ARIA_CHECKED_ATTR);
             }
         };
         return MDCCheckboxFoundation;
@@ -22501,7 +22970,7 @@ var app = (function () {
      * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
      * THE SOFTWARE.
      */
-    var cssClasses$c = {
+    var cssClasses$d = {
         CELL: 'mdc-data-table__cell',
         CELL_NUMERIC: 'mdc-data-table__cell--numeric',
         CONTENT: 'mdc-data-table__content',
@@ -22512,13 +22981,13 @@ var app = (function () {
         ROW_CHECKBOX: 'mdc-data-table__row-checkbox',
         ROW_SELECTED: 'mdc-data-table__row--selected',
     };
-    var strings$c = {
+    var strings$d = {
         ARIA_SELECTED: 'aria-selected',
         DATA_ROW_ID_ATTR: 'data-row-id',
-        HEADER_ROW_CHECKBOX_SELECTOR: "." + cssClasses$c.HEADER_ROW_CHECKBOX,
-        ROW_CHECKBOX_SELECTOR: "." + cssClasses$c.ROW_CHECKBOX,
-        ROW_SELECTED_SELECTOR: "." + cssClasses$c.ROW_SELECTED,
-        ROW_SELECTOR: "." + cssClasses$c.ROW,
+        HEADER_ROW_CHECKBOX_SELECTOR: "." + cssClasses$d.HEADER_ROW_CHECKBOX,
+        ROW_CHECKBOX_SELECTOR: "." + cssClasses$d.ROW_CHECKBOX,
+        ROW_SELECTED_SELECTOR: "." + cssClasses$d.ROW_SELECTED,
+        ROW_SELECTOR: "." + cssClasses$d.ROW,
     };
     var events = {
         ROW_SELECTION_CHANGED: 'MDCDataTable:rowSelectionChanged',
@@ -22701,12 +23170,12 @@ var app = (function () {
          */
         MDCDataTableFoundation.prototype.selectRowAtIndex_ = function (rowIndex, selected) {
             if (selected) {
-                this.adapter_.addClassAtRowIndex(rowIndex, cssClasses$c.ROW_SELECTED);
-                this.adapter_.setAttributeAtRowIndex(rowIndex, strings$c.ARIA_SELECTED, 'true');
+                this.adapter_.addClassAtRowIndex(rowIndex, cssClasses$d.ROW_SELECTED);
+                this.adapter_.setAttributeAtRowIndex(rowIndex, strings$d.ARIA_SELECTED, 'true');
             }
             else {
-                this.adapter_.removeClassAtRowIndex(rowIndex, cssClasses$c.ROW_SELECTED);
-                this.adapter_.setAttributeAtRowIndex(rowIndex, strings$c.ARIA_SELECTED, 'false');
+                this.adapter_.removeClassAtRowIndex(rowIndex, cssClasses$d.ROW_SELECTED);
+                this.adapter_.setAttributeAtRowIndex(rowIndex, strings$d.ARIA_SELECTED, 'false');
             }
         };
         return MDCDataTableFoundation;
@@ -22749,10 +23218,10 @@ var app = (function () {
         };
         MDCDataTable.prototype.initialSyncWithDOM = function () {
             var _this = this;
-            this.headerRow_ = this.root_.querySelector("." + cssClasses$c.HEADER_ROW);
+            this.headerRow_ = this.root_.querySelector("." + cssClasses$d.HEADER_ROW);
             this.handleHeaderRowCheckboxChange_ = function () { return _this.foundation_.handleHeaderRowCheckboxChange(); };
             this.headerRow_.addEventListener('change', this.handleHeaderRowCheckboxChange_);
-            this.content_ = this.root_.querySelector("." + cssClasses$c.CONTENT);
+            this.content_ = this.root_.querySelector("." + cssClasses$d.CONTENT);
             this.handleRowCheckboxChange_ = function (event) { return _this.foundation_.handleRowCheckboxChange(event); };
             this.content_.addEventListener('change', this.handleRowCheckboxChange_);
             this.layout();
@@ -22796,15 +23265,15 @@ var app = (function () {
             var adapter = {
                 addClassAtRowIndex: function (rowIndex, className) { return _this.getRows()[rowIndex].classList.add(className); },
                 getRowCount: function () { return _this.getRows().length; },
-                getRowElements: function () { return [].slice.call(_this.root_.querySelectorAll(strings$c.ROW_SELECTOR)); },
-                getRowIdAtIndex: function (rowIndex) { return _this.getRows()[rowIndex].getAttribute(strings$c.DATA_ROW_ID_ATTR); },
+                getRowElements: function () { return [].slice.call(_this.root_.querySelectorAll(strings$d.ROW_SELECTOR)); },
+                getRowIdAtIndex: function (rowIndex) { return _this.getRows()[rowIndex].getAttribute(strings$d.DATA_ROW_ID_ATTR); },
                 getRowIndexByChildElement: function (el) {
-                    return _this.getRows().indexOf(closest(el, strings$c.ROW_SELECTOR));
+                    return _this.getRows().indexOf(closest(el, strings$d.ROW_SELECTOR));
                 },
-                getSelectedRowCount: function () { return _this.root_.querySelectorAll(strings$c.ROW_SELECTED_SELECTOR).length; },
+                getSelectedRowCount: function () { return _this.root_.querySelectorAll(strings$d.ROW_SELECTED_SELECTOR).length; },
                 isCheckboxAtRowIndexChecked: function (rowIndex) { return _this.rowCheckboxList_[rowIndex].checked; },
                 isHeaderRowCheckboxChecked: function () { return _this.headerRowCheckbox_.checked; },
-                isRowsSelectable: function () { return !!_this.root_.querySelector(strings$c.ROW_CHECKBOX_SELECTOR); },
+                isRowsSelectable: function () { return !!_this.root_.querySelector(strings$d.ROW_CHECKBOX_SELECTOR); },
                 notifyRowSelectionChanged: function (data) {
                     _this.emit(events.ROW_SELECTION_CHANGED, {
                         row: _this.getRowByIndex_(data.rowIndex),
@@ -22820,7 +23289,7 @@ var app = (function () {
                     if (_this.headerRowCheckbox_) {
                         _this.headerRowCheckbox_.destroy();
                     }
-                    var checkboxEl = _this.root_.querySelector(strings$c.HEADER_ROW_CHECKBOX_SELECTOR);
+                    var checkboxEl = _this.root_.querySelector(strings$d.HEADER_ROW_CHECKBOX_SELECTOR);
                     _this.headerRowCheckbox_ = _this.checkboxFactory_(checkboxEl);
                 },
                 registerRowCheckboxes: function () {
@@ -22829,7 +23298,7 @@ var app = (function () {
                     }
                     _this.rowCheckboxList_ = [];
                     _this.getRows().forEach(function (rowEl) {
-                        var checkbox = _this.checkboxFactory_(rowEl.querySelector(strings$c.ROW_CHECKBOX_SELECTOR));
+                        var checkbox = _this.checkboxFactory_(rowEl.querySelector(strings$d.ROW_CHECKBOX_SELECTOR));
                         _this.rowCheckboxList_.push(checkbox);
                     });
                 },
@@ -22855,7 +23324,7 @@ var app = (function () {
             return this.getRows()[index];
         };
         MDCDataTable.prototype.getRowIdByIndex_ = function (index) {
-            return this.getRowByIndex_(index).getAttribute(strings$c.DATA_ROW_ID_ATTR);
+            return this.getRowByIndex_(index).getAttribute(strings$d.DATA_ROW_ID_ATTR);
         };
         return MDCDataTable;
     }(MDCComponent));
@@ -22864,9 +23333,9 @@ var app = (function () {
     /* node_modules/@smui/data-table/DataTable.svelte generated by Svelte v3.9.2 */
     const { Error: Error_1 } = globals;
 
-    const file$h = "node_modules/@smui/data-table/DataTable.svelte";
+    const file$i = "node_modules/@smui/data-table/DataTable.svelte";
 
-    function create_fragment$k(ctx) {
+    function create_fragment$l(ctx) {
     	var div, table, useActions_action, useActions_action_1, forwardEvents_action, current, dispose;
 
     	const default_slot_template = ctx.$$slots.default;
@@ -22900,9 +23369,9 @@ var app = (function () {
     			if (default_slot) default_slot.c();
 
     			set_attributes(table, table_data);
-    			add_location(table, file$h, 10, 2, 308);
+    			add_location(table, file$i, 10, 2, 308);
     			set_attributes(div, div_data);
-    			add_location(div, file$h, 0, 0, 0);
+    			add_location(div, file$i, 0, 0, 0);
 
     			dispose = [
     				listen(div, "MDCDataTable:rowSelectionChanged", ctx.handleChange),
@@ -22984,7 +23453,7 @@ var app = (function () {
     	};
     }
 
-    function instance$k($$self, $$props, $$invalidate) {
+    function instance$l($$self, $$props, $$invalidate) {
 
       const forwardEvents = forwardEventsBuilder(current_component, ['MDCDataTable:rowSelectionChanged', 'MDCDataTable:selectedAll', 'MDCDataTable:unselectedAll']);
 
@@ -23090,7 +23559,7 @@ var app = (function () {
     class DataTable extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$k, create_fragment$k, safe_not_equal, ["use", "class", "table$use", "table$class", "layout", "getRows", "getSelectedRowIds", "setSelectedRowIds"]);
+    		init(this, options, instance$l, create_fragment$l, safe_not_equal, ["use", "class", "table$use", "table$class", "layout", "getRows", "getSelectedRowIds", "setSelectedRowIds"]);
 
     		const { ctx } = this.$$;
     		const props = options.props || {};
@@ -23175,9 +23644,9 @@ var app = (function () {
 
     /* node_modules/@smui/data-table/Head.svelte generated by Svelte v3.9.2 */
 
-    const file$i = "node_modules/@smui/data-table/Head.svelte";
+    const file$j = "node_modules/@smui/data-table/Head.svelte";
 
-    function create_fragment$l(ctx) {
+    function create_fragment$m(ctx) {
     	var thead, useActions_action, forwardEvents_action, current;
 
     	const default_slot_template = ctx.$$slots.default;
@@ -23199,7 +23668,7 @@ var app = (function () {
     			if (default_slot) default_slot.c();
 
     			set_attributes(thead, thead_data);
-    			add_location(thead, file$i, 0, 0, 0);
+    			add_location(thead, file$j, 0, 0, 0);
     		},
 
     		l: function claim(nodes) {
@@ -23259,7 +23728,7 @@ var app = (function () {
     	};
     }
 
-    function instance$l($$self, $$props, $$invalidate) {
+    function instance$m($$self, $$props, $$invalidate) {
     	
 
       const forwardEvents = forwardEventsBuilder(current_component);
@@ -23289,7 +23758,7 @@ var app = (function () {
     class Head extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$l, create_fragment$l, safe_not_equal, ["use"]);
+    		init(this, options, instance$m, create_fragment$m, safe_not_equal, ["use"]);
     	}
 
     	get use() {
@@ -23303,9 +23772,9 @@ var app = (function () {
 
     /* node_modules/@smui/data-table/Body.svelte generated by Svelte v3.9.2 */
 
-    const file$j = "node_modules/@smui/data-table/Body.svelte";
+    const file$k = "node_modules/@smui/data-table/Body.svelte";
 
-    function create_fragment$m(ctx) {
+    function create_fragment$n(ctx) {
     	var tbody, useActions_action, forwardEvents_action, current;
 
     	const default_slot_template = ctx.$$slots.default;
@@ -23328,7 +23797,7 @@ var app = (function () {
     			if (default_slot) default_slot.c();
 
     			set_attributes(tbody, tbody_data);
-    			add_location(tbody, file$j, 0, 0, 0);
+    			add_location(tbody, file$k, 0, 0, 0);
     		},
 
     		l: function claim(nodes) {
@@ -23389,7 +23858,7 @@ var app = (function () {
     	};
     }
 
-    function instance$m($$self, $$props, $$invalidate) {
+    function instance$n($$self, $$props, $$invalidate) {
     	
 
       const forwardEvents = forwardEventsBuilder(current_component);
@@ -23421,7 +23890,7 @@ var app = (function () {
     class Body extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$m, create_fragment$m, safe_not_equal, ["use", "class"]);
+    		init(this, options, instance$n, create_fragment$n, safe_not_equal, ["use", "class"]);
     	}
 
     	get use() {
@@ -23443,9 +23912,9 @@ var app = (function () {
 
     /* node_modules/@smui/data-table/Row.svelte generated by Svelte v3.9.2 */
 
-    const file$k = "node_modules/@smui/data-table/Row.svelte";
+    const file$l = "node_modules/@smui/data-table/Row.svelte";
 
-    function create_fragment$n(ctx) {
+    function create_fragment$o(ctx) {
     	var tr, useActions_action, forwardEvents_action, current;
 
     	const default_slot_template = ctx.$$slots.default;
@@ -23471,7 +23940,7 @@ var app = (function () {
     			toggle_class(tr, "mdc-data-table__header-row", ctx.header);
     			toggle_class(tr, "mdc-data-table__row", !ctx.header);
     			toggle_class(tr, "mdc-data-table__row--selected", !ctx.header && ctx.selected);
-    			add_location(tr, file$k, 0, 0, 0);
+    			add_location(tr, file$l, 0, 0, 0);
     		},
 
     		l: function claim(nodes) {
@@ -23543,7 +24012,7 @@ var app = (function () {
     	};
     }
 
-    function instance$n($$self, $$props, $$invalidate) {
+    function instance$o($$self, $$props, $$invalidate) {
     	
 
       const forwardEvents = forwardEventsBuilder(current_component);
@@ -23616,7 +24085,7 @@ var app = (function () {
     class Row$1 extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$n, create_fragment$n, safe_not_equal, ["use"]);
+    		init(this, options, instance$o, create_fragment$o, safe_not_equal, ["use"]);
     	}
 
     	get use() {
@@ -23630,7 +24099,7 @@ var app = (function () {
 
     /* node_modules/@smui/data-table/Cell.svelte generated by Svelte v3.9.2 */
 
-    const file$l = "node_modules/@smui/data-table/Cell.svelte";
+    const file$m = "node_modules/@smui/data-table/Cell.svelte";
 
     // (11:0) {:else}
     function create_else_block$6(ctx) {
@@ -23660,7 +24129,7 @@ var app = (function () {
     			set_attributes(td, td_data);
     			toggle_class(td, "mdc-data-table__cell--numeric", ctx.numeric);
     			toggle_class(td, "mdc-data-table__cell--checkbox", ctx.checkbox);
-    			add_location(td, file$l, 11, 2, 313);
+    			add_location(td, file$m, 11, 2, 313);
     		},
 
     		l: function claim(nodes) {
@@ -23757,7 +24226,7 @@ var app = (function () {
 
     			set_attributes(th, th_data);
     			toggle_class(th, "mdc-data-table__header-cell--checkbox", ctx.checkbox);
-    			add_location(th, file$l, 1, 2, 15);
+    			add_location(th, file$m, 1, 2, 15);
     		},
 
     		l: function claim(nodes) {
@@ -23823,7 +24292,7 @@ var app = (function () {
     	};
     }
 
-    function create_fragment$o(ctx) {
+    function create_fragment$p(ctx) {
     	var current_block_type_index, if_block, if_block_anchor, current;
 
     	var if_block_creators = [
@@ -23900,7 +24369,7 @@ var app = (function () {
     	};
     }
 
-    function instance$o($$self, $$props, $$invalidate) {
+    function instance$p($$self, $$props, $$invalidate) {
     	
 
       const forwardEvents = forwardEventsBuilder(current_component);
@@ -23950,7 +24419,7 @@ var app = (function () {
     class Cell extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$o, create_fragment$o, safe_not_equal, ["use", "class", "role", "scope", "numeric", "checkbox"]);
+    		init(this, options, instance$p, create_fragment$p, safe_not_equal, ["use", "class", "role", "scope", "numeric", "checkbox"]);
     	}
 
     	get use() {
@@ -24064,7 +24533,7 @@ var app = (function () {
      * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
      * THE SOFTWARE.
      */
-    var cssClasses$d = {
+    var cssClasses$e = {
         CLOSING: 'mdc-dialog--closing',
         OPEN: 'mdc-dialog--open',
         OPENING: 'mdc-dialog--opening',
@@ -24072,7 +24541,7 @@ var app = (function () {
         SCROLL_LOCK: 'mdc-dialog-scroll-lock',
         STACKED: 'mdc-dialog--stacked',
     };
-    var strings$d = {
+    var strings$e = {
         ACTION_ATTRIBUTE: 'data-mdc-dialog-action',
         BUTTON_DEFAULT_ATTRIBUTE: 'data-mdc-dialog-button-default',
         BUTTON_SELECTOR: '.mdc-dialog__button',
@@ -24128,22 +24597,22 @@ var app = (function () {
             _this.animationFrame_ = 0;
             _this.animationTimer_ = 0;
             _this.layoutFrame_ = 0;
-            _this.escapeKeyAction_ = strings$d.CLOSE_ACTION;
-            _this.scrimClickAction_ = strings$d.CLOSE_ACTION;
+            _this.escapeKeyAction_ = strings$e.CLOSE_ACTION;
+            _this.scrimClickAction_ = strings$e.CLOSE_ACTION;
             _this.autoStackButtons_ = true;
             _this.areButtonsStacked_ = false;
             return _this;
         }
         Object.defineProperty(MDCDialogFoundation, "cssClasses", {
             get: function () {
-                return cssClasses$d;
+                return cssClasses$e;
             },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(MDCDialogFoundation, "strings", {
             get: function () {
-                return strings$d;
+                return strings$e;
             },
             enumerable: true,
             configurable: true
@@ -24182,13 +24651,13 @@ var app = (function () {
             configurable: true
         });
         MDCDialogFoundation.prototype.init = function () {
-            if (this.adapter_.hasClass(cssClasses$d.STACKED)) {
+            if (this.adapter_.hasClass(cssClasses$e.STACKED)) {
                 this.setAutoStackButtons(false);
             }
         };
         MDCDialogFoundation.prototype.destroy = function () {
             if (this.isOpen_) {
-                this.close(strings$d.DESTROY_ACTION);
+                this.close(strings$e.DESTROY_ACTION);
             }
             if (this.animationTimer_) {
                 clearTimeout(this.animationTimer_);
@@ -24203,11 +24672,11 @@ var app = (function () {
             var _this = this;
             this.isOpen_ = true;
             this.adapter_.notifyOpening();
-            this.adapter_.addClass(cssClasses$d.OPENING);
+            this.adapter_.addClass(cssClasses$e.OPENING);
             // Wait a frame once display is no longer "none", to establish basis for animation
             this.runNextAnimationFrame_(function () {
-                _this.adapter_.addClass(cssClasses$d.OPEN);
-                _this.adapter_.addBodyClass(cssClasses$d.SCROLL_LOCK);
+                _this.adapter_.addClass(cssClasses$e.OPEN);
+                _this.adapter_.addBodyClass(cssClasses$e.SCROLL_LOCK);
                 _this.layout();
                 _this.animationTimer_ = setTimeout(function () {
                     _this.handleAnimationTimerEnd_();
@@ -24225,9 +24694,9 @@ var app = (function () {
             }
             this.isOpen_ = false;
             this.adapter_.notifyClosing(action);
-            this.adapter_.addClass(cssClasses$d.CLOSING);
-            this.adapter_.removeClass(cssClasses$d.OPEN);
-            this.adapter_.removeBodyClass(cssClasses$d.SCROLL_LOCK);
+            this.adapter_.addClass(cssClasses$e.CLOSING);
+            this.adapter_.removeClass(cssClasses$e.OPEN);
+            this.adapter_.removeBodyClass(cssClasses$e.SCROLL_LOCK);
             cancelAnimationFrame(this.animationFrame_);
             this.animationFrame_ = 0;
             clearTimeout(this.animationTimer_);
@@ -24270,7 +24739,7 @@ var app = (function () {
         };
         /** Handles click on the dialog root element. */
         MDCDialogFoundation.prototype.handleClick = function (evt) {
-            var isScrim = this.adapter_.eventTargetMatches(evt.target, strings$d.SCRIM_SELECTOR);
+            var isScrim = this.adapter_.eventTargetMatches(evt.target, strings$e.SCRIM_SELECTOR);
             // Check for scrim click first since it doesn't require querying ancestors.
             if (isScrim && this.scrimClickAction_ !== '') {
                 this.close(this.scrimClickAction_);
@@ -24294,7 +24763,7 @@ var app = (function () {
                 // since space/enter keydowns on buttons trigger click events.
                 return;
             }
-            var isDefault = !this.adapter_.eventTargetMatches(evt.target, strings$d.SUPPRESS_DEFAULT_PRESS_SELECTOR);
+            var isDefault = !this.adapter_.eventTargetMatches(evt.target, strings$e.SUPPRESS_DEFAULT_PRESS_SELECTOR);
             if (isEnter && isDefault) {
                 this.adapter_.clickDefaultButton();
             }
@@ -24314,8 +24783,8 @@ var app = (function () {
         };
         MDCDialogFoundation.prototype.handleAnimationTimerEnd_ = function () {
             this.animationTimer_ = 0;
-            this.adapter_.removeClass(cssClasses$d.OPENING);
-            this.adapter_.removeClass(cssClasses$d.CLOSING);
+            this.adapter_.removeClass(cssClasses$e.OPENING);
+            this.adapter_.removeClass(cssClasses$e.CLOSING);
         };
         /**
          * Runs the given logic on the next animation frame, using setTimeout to factor in Firefox reflow behavior.
@@ -24331,10 +24800,10 @@ var app = (function () {
         };
         MDCDialogFoundation.prototype.detectStackedButtons_ = function () {
             // Remove the class first to let us measure the buttons' natural positions.
-            this.adapter_.removeClass(cssClasses$d.STACKED);
+            this.adapter_.removeClass(cssClasses$e.STACKED);
             var areButtonsStacked = this.adapter_.areButtonsStacked();
             if (areButtonsStacked) {
-                this.adapter_.addClass(cssClasses$d.STACKED);
+                this.adapter_.addClass(cssClasses$e.STACKED);
             }
             if (areButtonsStacked !== this.areButtonsStacked_) {
                 this.adapter_.reverseButtons();
@@ -24343,9 +24812,9 @@ var app = (function () {
         };
         MDCDialogFoundation.prototype.detectScrollableContent_ = function () {
             // Remove the class first to let us measure the natural height of the content.
-            this.adapter_.removeClass(cssClasses$d.SCROLLABLE);
+            this.adapter_.removeClass(cssClasses$e.SCROLLABLE);
             if (this.adapter_.isContentScrollable()) {
-                this.adapter_.addClass(cssClasses$d.SCROLLABLE);
+                this.adapter_.addClass(cssClasses$e.SCROLLABLE);
             }
         };
         return MDCDialogFoundation;
@@ -24374,7 +24843,7 @@ var app = (function () {
      * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
      * THE SOFTWARE.
      */
-    var strings$e = MDCDialogFoundation.strings;
+    var strings$f = MDCDialogFoundation.strings;
     var MDCDialog = /** @class */ (function (_super) {
         __extends(MDCDialog, _super);
         function MDCDialog() {
@@ -24422,14 +24891,14 @@ var app = (function () {
         };
         MDCDialog.prototype.initialize = function (focusTrapFactory) {
             var e_1, _a;
-            var container = this.root_.querySelector(strings$e.CONTAINER_SELECTOR);
+            var container = this.root_.querySelector(strings$f.CONTAINER_SELECTOR);
             if (!container) {
-                throw new Error("Dialog component requires a " + strings$e.CONTAINER_SELECTOR + " container element");
+                throw new Error("Dialog component requires a " + strings$f.CONTAINER_SELECTOR + " container element");
             }
             this.container_ = container;
-            this.content_ = this.root_.querySelector(strings$e.CONTENT_SELECTOR);
-            this.buttons_ = [].slice.call(this.root_.querySelectorAll(strings$e.BUTTON_SELECTOR));
-            this.defaultButton_ = this.root_.querySelector("[" + strings$e.BUTTON_DEFAULT_ATTRIBUTE + "]");
+            this.content_ = this.root_.querySelector(strings$f.CONTENT_SELECTOR);
+            this.buttons_ = [].slice.call(this.root_.querySelectorAll(strings$f.BUTTON_SELECTOR));
+            this.defaultButton_ = this.root_.querySelector("[" + strings$f.BUTTON_DEFAULT_ATTRIBUTE + "]");
             this.focusTrapFactory_ = focusTrapFactory;
             this.buttonRipples_ = [];
             try {
@@ -24464,14 +24933,14 @@ var app = (function () {
             };
             this.listen('click', this.handleClick_);
             this.listen('keydown', this.handleKeydown_);
-            this.listen(strings$e.OPENING_EVENT, this.handleOpening_);
-            this.listen(strings$e.CLOSING_EVENT, this.handleClosing_);
+            this.listen(strings$f.OPENING_EVENT, this.handleOpening_);
+            this.listen(strings$f.CLOSING_EVENT, this.handleClosing_);
         };
         MDCDialog.prototype.destroy = function () {
             this.unlisten('click', this.handleClick_);
             this.unlisten('keydown', this.handleKeydown_);
-            this.unlisten(strings$e.OPENING_EVENT, this.handleOpening_);
-            this.unlisten(strings$e.CLOSING_EVENT, this.handleClosing_);
+            this.unlisten(strings$f.OPENING_EVENT, this.handleOpening_);
+            this.unlisten(strings$f.CLOSING_EVENT, this.handleClosing_);
             this.handleClosing_();
             this.buttonRipples_.forEach(function (ripple) { return ripple.destroy(); });
             _super.prototype.destroy.call(this);
@@ -24500,16 +24969,16 @@ var app = (function () {
                     if (!evt.target) {
                         return '';
                     }
-                    var element = closest(evt.target, "[" + strings$e.ACTION_ATTRIBUTE + "]");
-                    return element && element.getAttribute(strings$e.ACTION_ATTRIBUTE);
+                    var element = closest(evt.target, "[" + strings$f.ACTION_ATTRIBUTE + "]");
+                    return element && element.getAttribute(strings$f.ACTION_ATTRIBUTE);
                 },
                 getInitialFocusEl: function () { return _this.getInitialFocusEl_(); },
                 hasClass: function (className) { return _this.root_.classList.contains(className); },
                 isContentScrollable: function () { return isScrollable(_this.content_); },
-                notifyClosed: function (action) { return _this.emit(strings$e.CLOSED_EVENT, action ? { action: action } : {}); },
-                notifyClosing: function (action) { return _this.emit(strings$e.CLOSING_EVENT, action ? { action: action } : {}); },
-                notifyOpened: function () { return _this.emit(strings$e.OPENED_EVENT, {}); },
-                notifyOpening: function () { return _this.emit(strings$e.OPENING_EVENT, {}); },
+                notifyClosed: function (action) { return _this.emit(strings$f.CLOSED_EVENT, action ? { action: action } : {}); },
+                notifyClosing: function (action) { return _this.emit(strings$f.CLOSING_EVENT, action ? { action: action } : {}); },
+                notifyOpened: function () { return _this.emit(strings$f.OPENED_EVENT, {}); },
+                notifyOpening: function () { return _this.emit(strings$f.OPENING_EVENT, {}); },
                 releaseFocus: function () { return _this.focusTrap_.deactivate(); },
                 removeBodyClass: function (className) { return document.body.classList.remove(className); },
                 removeClass: function (className) { return _this.root_.classList.remove(className); },
@@ -24524,7 +24993,7 @@ var app = (function () {
             return new MDCDialogFoundation(adapter);
         };
         MDCDialog.prototype.getInitialFocusEl_ = function () {
-            return document.querySelector("[" + strings$e.INITIAL_FOCUS_ATTRIBUTE + "]");
+            return document.querySelector("[" + strings$f.INITIAL_FOCUS_ATTRIBUTE + "]");
         };
         return MDCDialog;
     }(MDCComponent));
@@ -24532,9 +25001,9 @@ var app = (function () {
 
     /* node_modules/@smui/dialog/Dialog.svelte generated by Svelte v3.9.2 */
 
-    const file$m = "node_modules/@smui/dialog/Dialog.svelte";
+    const file$n = "node_modules/@smui/dialog/Dialog.svelte";
 
-    function create_fragment$p(ctx) {
+    function create_fragment$q(ctx) {
     	var div3, div1, div0, t, div2, useActions_action, forwardEvents_action, current;
 
     	const default_slot_template = ctx.$$slots.default;
@@ -24563,13 +25032,13 @@ var app = (function () {
     			div2 = element("div");
 
     			attr(div0, "class", "mdc-dialog__surface");
-    			add_location(div0, file$m, 10, 4, 230);
+    			add_location(div0, file$n, 10, 4, 230);
     			attr(div1, "class", "mdc-dialog__container");
-    			add_location(div1, file$m, 9, 2, 190);
+    			add_location(div1, file$n, 9, 2, 190);
     			attr(div2, "class", "mdc-dialog__scrim");
-    			add_location(div2, file$m, 14, 2, 306);
+    			add_location(div2, file$n, 14, 2, 306);
     			set_attributes(div3, div3_data);
-    			add_location(div3, file$m, 0, 0, 0);
+    			add_location(div3, file$n, 0, 0, 0);
     		},
 
     		l: function claim(nodes) {
@@ -24638,7 +25107,7 @@ var app = (function () {
     	};
     }
 
-    function instance$p($$self, $$props, $$invalidate) {
+    function instance$q($$self, $$props, $$invalidate) {
     	
 
       const forwardEvents = forwardEventsBuilder(current_component, ['MDCDialog:opening', 'MDCDialog:opened', 'MDCDialog:closing', 'MDCDialog:closed']);
@@ -24719,7 +25188,7 @@ var app = (function () {
     class Dialog extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$p, create_fragment$p, safe_not_equal, ["use", "class", "escapeKeyAction", "scrimClickAction", "autoStackButtons", "open", "close", "isOpen", "layout"]);
+    		init(this, options, instance$q, create_fragment$q, safe_not_equal, ["use", "class", "escapeKeyAction", "scrimClickAction", "autoStackButtons", "open", "close", "isOpen", "layout"]);
 
     		const { ctx } = this.$$;
     		const props = options.props || {};
@@ -24830,9 +25299,9 @@ var app = (function () {
 
     /* node_modules/@smui/common/Footer.svelte generated by Svelte v3.9.2 */
 
-    const file$n = "node_modules/@smui/common/Footer.svelte";
+    const file$o = "node_modules/@smui/common/Footer.svelte";
 
-    function create_fragment$q(ctx) {
+    function create_fragment$r(ctx) {
     	var footer, useActions_action, forwardEvents_action, current;
 
     	const default_slot_template = ctx.$$slots.default;
@@ -24854,7 +25323,7 @@ var app = (function () {
     			if (default_slot) default_slot.c();
 
     			set_attributes(footer, footer_data);
-    			add_location(footer, file$n, 0, 0, 0);
+    			add_location(footer, file$o, 0, 0, 0);
     		},
 
     		l: function claim(nodes) {
@@ -24914,7 +25383,7 @@ var app = (function () {
     	};
     }
 
-    function instance$q($$self, $$props, $$invalidate) {
+    function instance$r($$self, $$props, $$invalidate) {
     	
 
       const forwardEvents = forwardEventsBuilder(current_component);
@@ -24942,7 +25411,7 @@ var app = (function () {
     class Footer extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$q, create_fragment$q, safe_not_equal, ["use"]);
+    		init(this, options, instance$r, create_fragment$r, safe_not_equal, ["use"]);
     	}
 
     	get use() {
@@ -28243,7 +28712,7 @@ var app = (function () {
     	};
     }
 
-    function create_fragment$r(ctx) {
+    function create_fragment$s(ctx) {
     	var current;
 
     	let dialog_1_props = {
@@ -28297,7 +28766,7 @@ var app = (function () {
     	};
     }
 
-    function instance$r($$self, $$props, $$invalidate) {
+    function instance$s($$self, $$props, $$invalidate) {
     	
 
       let { dialog, ABSSelected = { } } = $$props;
@@ -28338,7 +28807,7 @@ var app = (function () {
     class Table extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$r, create_fragment$r, safe_not_equal, ["dialog", "ABSSelected"]);
+    		init(this, options, instance$s, create_fragment$s, safe_not_equal, ["dialog", "ABSSelected"]);
 
     		const { ctx } = this.$$;
     		const props = options.props || {};
@@ -28366,7 +28835,7 @@ var app = (function () {
 
     /* src/charts/ABSMap.svelte generated by Svelte v3.9.2 */
 
-    const file$o = "src/charts/ABSMap.svelte";
+    const file$p = "src/charts/ABSMap.svelte";
 
     function get_each_context$1(ctx, list, i) {
     	const child_ctx = Object.create(ctx);
@@ -28382,7 +28851,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (115:6) {:else}
+    // (116:6) {:else}
     function create_else_block$7(ctx) {
     	var t;
 
@@ -28405,8 +28874,8 @@ var app = (function () {
     	};
     }
 
-    // (98:6) {#if features}
-    function create_if_block_1$2(ctx) {
+    // (99:6) {#if features}
+    function create_if_block_2$1(ctx) {
     	var each_1_anchor;
 
     	var each_value_1 = ctx.features;
@@ -28467,7 +28936,7 @@ var app = (function () {
     	};
     }
 
-    // (99:8) {#each features as feature}
+    // (100:8) {#each features as feature}
     function create_each_block_1(ctx) {
     	var path_1, path_1_d_value, path_1_fill_value, text_1, t_value = ctx.feature.properties.NOMABS.replace('Barcelona - ', '') + "", t, text_1_transform_value, dispose;
 
@@ -28487,10 +28956,10 @@ var app = (function () {
     			attr(path_1, "d", path_1_d_value = ctx.path(ctx.feature));
     			attr(path_1, "fill", path_1_fill_value = ctx.quantize(ctx.Number(ctx.feature.properties.VALORES ? ctx.feature.properties.VALORES[ctx.$ABSMapFilter] : 0)));
     			attr(path_1, "stroke", "black");
-    			add_location(path_1, file$o, 99, 10, 2526);
+    			add_location(path_1, file$p, 100, 10, 2552);
     			set_style(text_1, "font-size", "10px");
     			attr(text_1, "transform", text_1_transform_value = `translate(${ctx.path.centroid(ctx.feature)})`);
-    			add_location(text_1, file$o, 108, 10, 2927);
+    			add_location(text_1, file$p, 109, 10, 2953);
 
     			dispose = [
     				listen(path_1, "mouseover", ctx.handleMouseOver),
@@ -28536,7 +29005,7 @@ var app = (function () {
     	};
     }
 
-    // (118:6) {#each labels as { color, text }
+    // (119:6) {#each labels as { color, text }
     function create_each_block$1(ctx) {
     	var rect, rect_fill_value, text_1, t_value = ctx.text + "", t;
 
@@ -28552,11 +29021,11 @@ var app = (function () {
     			attr(rect, "stroke", "black");
     			attr(rect, "stroke-width", "1");
     			attr(rect, "fill", rect_fill_value = ctx.color);
-    			add_location(rect, file$o, 118, 8, 3229);
+    			add_location(rect, file$p, 119, 8, 3255);
     			attr(text_1, "x", "25");
     			attr(text_1, "y", 19 + 15 * ctx.i);
     			attr(text_1, "font-size", "12");
-    			add_location(text_1, file$o, 126, 8, 3407);
+    			add_location(text_1, file$p, 127, 8, 3433);
     		},
 
     		m: function mount(target, anchor) {
@@ -28576,9 +29045,11 @@ var app = (function () {
     	};
     }
 
-    // (132:0) {#if showTooltip}
+    // (133:0) {#if showTooltip}
     function create_if_block$8(ctx) {
-    	var div, p0, t0_value = ctx.tooltipValues.NOMABS + "", t0, t1, p1, t2_value = ctx.tooltipValues.NOMAGA + "", t2, t3, p2, t4_value = ctx.tooltipValues.NOMSS + "", t4, t5, p3, t6_value = ctx.tooltipValues.VALORES ? ctx.tooltipValues.VALORES[ctx.$ABSMapFilter] : 'No Data' + "", t6, div_style_value;
+    	var div, p0, t0_value = ctx.tooltipValues.NOMABS + "", t0, t1, p1, t2_value = ctx.tooltipValues.NOMAGA + "", t2, t3, p2, t4_value = ctx.tooltipValues.NOMSS + "", t4, t5, p3, img, t6, t7_value = ctx.tooltipValues.VALORES ? ctx.tooltipValues.VALORES[ctx.$ABSMapFilter] : 'No Data' + "", t7, t8, div_style_value;
+
+    	var if_block = (ctx.mixSelected) && create_if_block_1$2(ctx);
 
     	return {
     		c: function create() {
@@ -28593,14 +29064,23 @@ var app = (function () {
     			t4 = text(t4_value);
     			t5 = space();
     			p3 = element("p");
-    			t6 = text(t6_value);
-    			add_location(p0, file$o, 135, 4, 3669);
-    			add_location(p1, file$o, 136, 4, 3703);
-    			add_location(p2, file$o, 137, 4, 3737);
-    			add_location(p3, file$o, 138, 4, 3770);
+    			img = element("img");
+    			t6 = space();
+    			t7 = text(t7_value);
+    			t8 = space();
+    			if (if_block) if_block.c();
+    			add_location(p0, file$p, 136, 4, 3695);
+    			add_location(p1, file$p, 137, 4, 3729);
+    			add_location(p2, file$p, 138, 4, 3763);
+    			attr(img, "src", "./icons/oldman.svg");
+    			attr(img, "alt", "Old Man");
+    			attr(img, "width", "15%");
+    			attr(img, "height", "15%");
+    			add_location(img, file$p, 140, 4, 3804);
+    			add_location(p3, file$p, 139, 4, 3796);
     			attr(div, "class", "tooltip");
     			attr(div, "style", div_style_value = ctx.showTooltip ? `opacity: .9; top: ${ctx.tooltipValues.top}px; left: ${ctx.tooltipValues.left}px` : 'opacity: 0');
-    			add_location(div, file$o, 132, 2, 3524);
+    			add_location(div, file$p, 133, 2, 3550);
     		},
 
     		m: function mount(target, anchor) {
@@ -28615,7 +29095,11 @@ var app = (function () {
     			append(p2, t4);
     			append(div, t5);
     			append(div, p3);
+    			append(p3, img);
     			append(p3, t6);
+    			append(p3, t7);
+    			append(p3, t8);
+    			if (if_block) if_block.m(p3, null);
     		},
 
     		p: function update(changed, ctx) {
@@ -28631,8 +29115,21 @@ var app = (function () {
     				set_data(t4, t4_value);
     			}
 
-    			if ((changed.tooltipValues || changed.$ABSMapFilter) && t6_value !== (t6_value = ctx.tooltipValues.VALORES ? ctx.tooltipValues.VALORES[ctx.$ABSMapFilter] : 'No Data' + "")) {
-    				set_data(t6, t6_value);
+    			if ((changed.tooltipValues || changed.$ABSMapFilter) && t7_value !== (t7_value = ctx.tooltipValues.VALORES ? ctx.tooltipValues.VALORES[ctx.$ABSMapFilter] : 'No Data' + "")) {
+    				set_data(t7, t7_value);
+    			}
+
+    			if (ctx.mixSelected) {
+    				if (if_block) {
+    					if_block.p(changed, ctx);
+    				} else {
+    					if_block = create_if_block_1$2(ctx);
+    					if_block.c();
+    					if_block.m(p3, null);
+    				}
+    			} else if (if_block) {
+    				if_block.d(1);
+    				if_block = null;
     			}
 
     			if ((changed.showTooltip || changed.tooltipValues) && div_style_value !== (div_style_value = ctx.showTooltip ? `opacity: .9; top: ${ctx.tooltipValues.top}px; left: ${ctx.tooltipValues.left}px` : 'opacity: 0')) {
@@ -28644,11 +29141,51 @@ var app = (function () {
     			if (detaching) {
     				detach(div);
     			}
+
+    			if (if_block) if_block.d();
     		}
     	};
     }
 
-    function create_fragment$s(ctx) {
+    // (143:4) {#if mixSelected}
+    function create_if_block_1$2(ctx) {
+    	var img, t0, t1_value = ctx.tooltipValues.VALORES ? ctx.tooltipValues.VALORES[ctx.$ABSMapFilter] * 2 : 'No Data' + "", t1;
+
+    	return {
+    		c: function create() {
+    			img = element("img");
+    			t0 = space();
+    			t1 = text(t1_value);
+    			attr(img, "src", "./icons/oldwoman.svg");
+    			attr(img, "alt", "Old Man");
+    			attr(img, "width", "15%");
+    			attr(img, "height", "15%");
+    			add_location(img, file$p, 143, 6, 3982);
+    		},
+
+    		m: function mount(target, anchor) {
+    			insert(target, img, anchor);
+    			insert(target, t0, anchor);
+    			insert(target, t1, anchor);
+    		},
+
+    		p: function update(changed, ctx) {
+    			if ((changed.tooltipValues || changed.$ABSMapFilter) && t1_value !== (t1_value = ctx.tooltipValues.VALORES ? ctx.tooltipValues.VALORES[ctx.$ABSMapFilter] * 2 : 'No Data' + "")) {
+    				set_data(t1, t1_value);
+    			}
+    		},
+
+    		d: function destroy(detaching) {
+    			if (detaching) {
+    				detach(img);
+    				detach(t0);
+    				detach(t1);
+    			}
+    		}
+    	};
+    }
+
+    function create_fragment$t(ctx) {
     	var updating_ABSSelected, updating_dialog, t0, div, svg, g0, g1, svg_viewBox_value, t1, if_block1_anchor, current;
 
     	function table_ABSSelected_binding(value) {
@@ -28676,7 +29213,7 @@ var app = (function () {
     	binding_callbacks.push(() => bind(table, 'dialog', table_dialog_binding));
 
     	function select_block_type(changed, ctx) {
-    		if (ctx.features) return create_if_block_1$2;
+    		if (ctx.features) return create_if_block_2$1;
     		return create_else_block$7;
     	}
 
@@ -28710,12 +29247,12 @@ var app = (function () {
     			t1 = space();
     			if (if_block1) if_block1.c();
     			if_block1_anchor = empty();
-    			add_location(g0, file$o, 96, 4, 2455);
-    			add_location(g1, file$o, 116, 4, 3174);
+    			add_location(g0, file$p, 97, 4, 2481);
+    			add_location(g1, file$p, 117, 4, 3200);
     			attr(svg, "viewBox", svg_viewBox_value = `0 0 ${ctx.width || 0} ${ctx.height || 0}`);
-    			add_location(svg, file$o, 94, 2, 2399);
+    			add_location(svg, file$p, 95, 2, 2425);
     			attr(div, "id", "map");
-    			add_location(div, file$o, 93, 0, 2382);
+    			add_location(div, file$p, 94, 0, 2408);
     		},
 
     		l: function claim(nodes) {
@@ -28841,7 +29378,7 @@ var app = (function () {
     const FINAL =
         "https://gist.githubusercontent.com/damianpumar/862fe8d75f92a0b114ad4ae2bf128e13/raw/21dc4b07207455034b1e48022ae53f3a84fe5ece/finaltopojson";
 
-    function instance$s($$self, $$props, $$invalidate) {
+    function instance$t($$self, $$props, $$invalidate) {
     	let $ABSMapFilter;
 
     	validate_store(ABSMapFilter, 'ABSMapFilter');
@@ -28850,6 +29387,10 @@ var app = (function () {
     	
 
       const path = d3.geoPath();
+
+      let { mixSelected } = $$props;
+      let dialog;
+      let ABSSelected = { };
 
       let widthParent;
       let features;
@@ -28917,8 +29458,10 @@ var app = (function () {
         { color: "#ffe999", text: "De 16.11 a 29.40" }
       ];
 
-      let dialog;
-      let ABSSelected = { };
+    	const writable_props = ['mixSelected'];
+    	Object.keys($$props).forEach(key => {
+    		if (!writable_props.includes(key) && !key.startsWith('$$')) console.warn(`<ABSMap> was created with unknown prop '${key}'`);
+    	});
 
     	function table_ABSSelected_binding(value) {
     		ABSSelected = value;
@@ -28938,6 +29481,10 @@ var app = (function () {
     		return handleOnClick(feature);
     	}
 
+    	$$self.$set = $$props => {
+    		if ('mixSelected' in $$props) $$invalidate('mixSelected', mixSelected = $$props.mixSelected);
+    	};
+
     	let width, height, quantize, selectElement, showTooltip, tooltipValues;
 
     	$$self.$$.update = ($$dirty = { widthParent: 1, colorScaleExtent: 1 }) => {
@@ -28954,14 +29501,15 @@ var app = (function () {
 
     	return {
     		path,
+    		mixSelected,
+    		dialog,
+    		ABSSelected,
     		features,
     		handleOnClick,
     		handleMouseOver,
     		handleMouseMove,
     		handleMouseOut,
     		labels,
-    		dialog,
-    		ABSSelected,
     		width,
     		height,
     		quantize,
@@ -28979,15 +29527,29 @@ var app = (function () {
     class ABSMap extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$s, create_fragment$s, safe_not_equal, []);
+    		init(this, options, instance$t, create_fragment$t, safe_not_equal, ["mixSelected"]);
+
+    		const { ctx } = this.$$;
+    		const props = options.props || {};
+    		if (ctx.mixSelected === undefined && !('mixSelected' in props)) {
+    			console.warn("<ABSMap> was created without expected prop 'mixSelected'");
+    		}
+    	}
+
+    	get mixSelected() {
+    		throw new Error("<ABSMap>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set mixSelected(value) {
+    		throw new Error("<ABSMap>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
 
     /* src/charts/Barchart.svelte generated by Svelte v3.9.2 */
 
-    const file$p = "src/charts/Barchart.svelte";
+    const file$q = "src/charts/Barchart.svelte";
 
-    function create_fragment$t(ctx) {
+    function create_fragment$u(ctx) {
     	var updating_ABSSelected, updating_dialog, t, div, current;
 
     	function table_ABSSelected_binding(value) {
@@ -29020,7 +29582,7 @@ var app = (function () {
     			t = space();
     			div = element("div");
     			attr(div, "id", "barchart");
-    			add_location(div, file$p, 83, 0, 1782);
+    			add_location(div, file$q, 83, 0, 1782);
     		},
 
     		l: function claim(nodes) {
@@ -29068,10 +29630,10 @@ var app = (function () {
     	};
     }
 
-    function instance$t($$self, $$props, $$invalidate) {
+    function instance$u($$self, $$props, $$invalidate) {
     	
 
-      var options = {
+      let options = {
         chart: {
           height: 1200,
           width: "90%",
@@ -29126,6 +29688,12 @@ var app = (function () {
         }
       };
 
+      let dialog;
+      let ABSSelected = {
+        NOMABS: "",
+        NOMAGA: ""
+       };
+
       onMount(async () => {
         const fetched = await fetch(
           "https://gist.githubusercontent.com/damianpumar/f5110a8cf1c2a99408a4cc40235e6790/raw/c7cfcac7a10a2cf25359454756fcd6c82763d7c8/barchart"
@@ -29139,12 +29707,6 @@ var app = (function () {
 
         chart.render();
       });
-
-      let dialog;
-      let ABSSelected = {
-        NOMABS: "",
-        NOMAGA: ""
-       };
 
     	function table_ABSSelected_binding(value) {
     		ABSSelected = value;
@@ -29167,28 +29729,592 @@ var app = (function () {
     class Barchart extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$t, create_fragment$t, safe_not_equal, []);
+    		init(this, options, instance$u, create_fragment$u, safe_not_equal, []);
+    	}
+    }
+
+    /* node_modules/@smui/checkbox/Checkbox.svelte generated by Svelte v3.9.2 */
+
+    const file$r = "node_modules/@smui/checkbox/Checkbox.svelte";
+
+    function create_fragment$v(ctx) {
+    	var div2, input, useActions_action, t0, div1, svg, path, t1, div0, useActions_action_1, forwardEvents_action, dispose;
+
+    	var input_levels = [
+    		{ class: "mdc-checkbox__native-control " + ctx.input$class },
+    		{ type: "checkbox" },
+    		ctx.inputProps,
+    		{ disabled: ctx.disabled },
+    		{ value: ctx.valueKey === ctx.uninitializedValue ? ctx.value : ctx.valueKey },
+    		exclude(prefixFilter(ctx.$$props, 'input$'), ['use', 'class'])
+    	];
+
+    	var input_data = {};
+    	for (var i = 0; i < input_levels.length; i += 1) {
+    		input_data = assign(input_data, input_levels[i]);
+    	}
+
+    	var div2_levels = [
+    		{ class: "mdc-checkbox " + ctx.className },
+    		exclude(ctx.$$props, ['use', 'class', 'disabled', 'indeterminate', 'group', 'checked', 'value', 'valueKey', 'input$'])
+    	];
+
+    	var div2_data = {};
+    	for (var i = 0; i < div2_levels.length; i += 1) {
+    		div2_data = assign(div2_data, div2_levels[i]);
+    	}
+
+    	return {
+    		c: function create() {
+    			div2 = element("div");
+    			input = element("input");
+    			t0 = space();
+    			div1 = element("div");
+    			svg = svg_element("svg");
+    			path = svg_element("path");
+    			t1 = space();
+    			div0 = element("div");
+    			set_attributes(input, input_data);
+    			add_location(input, file$r, 10, 2, 447);
+    			attr(path, "class", "mdc-checkbox__checkmark-path");
+    			attr(path, "fill", "none");
+    			attr(path, "d", "M1.73,12.91 8.1,19.28 22.79,4.59");
+    			add_location(path, file$r, 25, 6, 953);
+    			attr(svg, "class", "mdc-checkbox__checkmark");
+    			attr(svg, "viewBox", "0 0 24 24");
+    			add_location(svg, file$r, 24, 4, 889);
+    			attr(div0, "class", "mdc-checkbox__mixedmark");
+    			add_location(div0, file$r, 27, 4, 1063);
+    			attr(div1, "class", "mdc-checkbox__background");
+    			add_location(div1, file$r, 23, 2, 846);
+    			set_attributes(div2, div2_data);
+    			toggle_class(div2, "mdc-checkbox--disabled", ctx.disabled);
+    			toggle_class(div2, "mdc-data-table__header-row-checkbox", ctx.context === 'data-table' && ctx.dataTableHeader);
+    			toggle_class(div2, "mdc-data-table__row-checkbox", ctx.context === 'data-table' && !ctx.dataTableHeader);
+    			add_location(div2, file$r, 0, 0, 0);
+
+    			dispose = [
+    				listen(input, "change", ctx.input_change_handler),
+    				listen(input, "change", ctx.handleChange),
+    				listen(input, "input", ctx.handleChange),
+    				listen(input, "change", ctx.change_handler),
+    				listen(input, "input", ctx.input_handler)
+    			];
+    		},
+
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+
+    		m: function mount(target, anchor) {
+    			insert(target, div2, anchor);
+    			append(div2, input);
+
+    			input.checked = ctx.nativeChecked;
+
+    			useActions_action = useActions.call(null, input, ctx.input$use) || {};
+    			append(div2, t0);
+    			append(div2, div1);
+    			append(div1, svg);
+    			append(svg, path);
+    			append(div1, t1);
+    			append(div1, div0);
+    			ctx.div2_binding(div2);
+    			useActions_action_1 = useActions.call(null, div2, ctx.use) || {};
+    			forwardEvents_action = ctx.forwardEvents.call(null, div2) || {};
+    		},
+
+    		p: function update(changed, ctx) {
+    			if (changed.nativeChecked) input.checked = ctx.nativeChecked;
+
+    			set_attributes(input, get_spread_update(input_levels, [
+    				(changed.input$class) && { class: "mdc-checkbox__native-control " + ctx.input$class },
+    				{ type: "checkbox" },
+    				(changed.inputProps) && ctx.inputProps,
+    				(changed.disabled) && { disabled: ctx.disabled },
+    				(changed.valueKey || changed.uninitializedValue || changed.value) && { value: ctx.valueKey === ctx.uninitializedValue ? ctx.value : ctx.valueKey },
+    				(changed.exclude || changed.prefixFilter || changed.$$props) && exclude(prefixFilter(ctx.$$props, 'input$'), ['use', 'class'])
+    			]));
+
+    			if (typeof useActions_action.update === 'function' && changed.input$use) {
+    				useActions_action.update.call(null, ctx.input$use);
+    			}
+
+    			set_attributes(div2, get_spread_update(div2_levels, [
+    				(changed.className) && { class: "mdc-checkbox " + ctx.className },
+    				(changed.exclude || changed.$$props) && exclude(ctx.$$props, ['use', 'class', 'disabled', 'indeterminate', 'group', 'checked', 'value', 'valueKey', 'input$'])
+    			]));
+
+    			if (typeof useActions_action_1.update === 'function' && changed.use) {
+    				useActions_action_1.update.call(null, ctx.use);
+    			}
+
+    			if ((changed.className || changed.disabled)) {
+    				toggle_class(div2, "mdc-checkbox--disabled", ctx.disabled);
+    			}
+
+    			if ((changed.className || changed.context || changed.dataTableHeader)) {
+    				toggle_class(div2, "mdc-data-table__header-row-checkbox", ctx.context === 'data-table' && ctx.dataTableHeader);
+    				toggle_class(div2, "mdc-data-table__row-checkbox", ctx.context === 'data-table' && !ctx.dataTableHeader);
+    			}
+    		},
+
+    		i: noop,
+    		o: noop,
+
+    		d: function destroy(detaching) {
+    			if (detaching) {
+    				detach(div2);
+    			}
+
+    			if (useActions_action && typeof useActions_action.destroy === 'function') useActions_action.destroy();
+    			ctx.div2_binding(null);
+    			if (useActions_action_1 && typeof useActions_action_1.destroy === 'function') useActions_action_1.destroy();
+    			if (forwardEvents_action && typeof forwardEvents_action.destroy === 'function') forwardEvents_action.destroy();
+    			run_all(dispose);
+    		}
+    	};
+    }
+
+    function instance$v($$self, $$props, $$invalidate) {
+    	
+
+      const forwardEvents = forwardEventsBuilder(current_component);
+      let uninitializedValue = () => {};
+
+      let { use = [], class: className = '', disabled = false, indeterminate = uninitializedValue, group = uninitializedValue, checked = uninitializedValue, value = null, valueKey = uninitializedValue, input$use = [], input$class = '' } = $$props;
+
+      let element;
+      let checkbox;
+      let formField = getContext('SMUI:form-field');
+      let inputProps = getContext('SMUI:generic:input:props') || {};
+      let setChecked = getContext('SMUI:generic:input:setChecked');
+      let addChangeHandler = getContext('SMUI:generic:input:addChangeHandler');
+      let nativeChecked = group === uninitializedValue ? (checked === uninitializedValue ? false : checked) : group.indexOf(value) !== -1;
+      let context = getContext('SMUI:checkbox:context');
+      let dataTableHeader = getContext('SMUI:data-table:row:header');
+      let getDataTableRowIndex = getContext('SMUI:data-table:row:getIndex');
+      let instantiate = getContext('SMUI:checkbox:instantiate');
+      let getInstance = getContext('SMUI:checkbox:getInstance');
+
+      let previousChecked = checked;
+
+      if (addChangeHandler) {
+        addChangeHandler(handleChange);
+      }
+
+      onMount(async () => {
+        if (instantiate !== false) {
+          $$invalidate('checkbox', checkbox = new MDCCheckbox(element));
+        } else {
+          if (context === 'data-table') {
+            if (dataTableHeader) {
+              $$invalidate('checkbox', checkbox = await getInstance(true));
+            } else {
+              $$invalidate('checkbox', checkbox = (await getInstance(false))[getDataTableRowIndex()]);
+            }
+          } else {
+            $$invalidate('checkbox', checkbox = await getInstance());
+          }
+        }
+
+        if (formField && formField()) {
+          formField().input = checkbox;
+        }
+      });
+
+      onDestroy(() => {
+        if (instantiate !== false) {
+          checkbox.destroy();
+        }
+      });
+
+      function handleChange() {
+        if (group !== uninitializedValue) {
+          const idx = group.indexOf(value);
+          if (checkbox.checked && idx === -1) {
+            group.push(value);
+            $$invalidate('group', group);
+          } else if (!checkbox.checked && idx !== -1) {
+            group.splice(idx, 1);
+            $$invalidate('group', group);
+          }
+        }
+      }
+
+      function getId() {
+        return inputProps && inputProps.id;
+      }
+
+    	function change_handler(event) {
+    		bubble($$self, event);
+    	}
+
+    	function input_handler(event) {
+    		bubble($$self, event);
+    	}
+
+    	function input_change_handler() {
+    		nativeChecked = this.checked;
+    		$$invalidate('nativeChecked', nativeChecked), $$invalidate('checked', checked), $$invalidate('uninitializedValue', uninitializedValue), $$invalidate('previousChecked', previousChecked);
+    	}
+
+    	function div2_binding($$value) {
+    		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
+    			$$invalidate('element', element = $$value);
+    		});
+    	}
+
+    	$$self.$set = $$new_props => {
+    		$$invalidate('$$props', $$props = assign(assign({}, $$props), $$new_props));
+    		if ('use' in $$new_props) $$invalidate('use', use = $$new_props.use);
+    		if ('class' in $$new_props) $$invalidate('className', className = $$new_props.class);
+    		if ('disabled' in $$new_props) $$invalidate('disabled', disabled = $$new_props.disabled);
+    		if ('indeterminate' in $$new_props) $$invalidate('indeterminate', indeterminate = $$new_props.indeterminate);
+    		if ('group' in $$new_props) $$invalidate('group', group = $$new_props.group);
+    		if ('checked' in $$new_props) $$invalidate('checked', checked = $$new_props.checked);
+    		if ('value' in $$new_props) $$invalidate('value', value = $$new_props.value);
+    		if ('valueKey' in $$new_props) $$invalidate('valueKey', valueKey = $$new_props.valueKey);
+    		if ('input$use' in $$new_props) $$invalidate('input$use', input$use = $$new_props.input$use);
+    		if ('input$class' in $$new_props) $$invalidate('input$class', input$class = $$new_props.input$class);
+    	};
+
+    	$$self.$$.update = ($$dirty = { checked: 1, uninitializedValue: 1, previousChecked: 1, nativeChecked: 1, setChecked: 1, checkbox: 1, indeterminate: 1, group: 1, value: 1, disabled: 1, valueKey: 1 }) => {
+    		if ($$dirty.checked || $$dirty.uninitializedValue || $$dirty.previousChecked || $$dirty.nativeChecked) { if (checked !== uninitializedValue) {
+            if (checked === previousChecked) {
+              $$invalidate('checked', checked = nativeChecked);
+            } else if (nativeChecked !== checked) {
+              $$invalidate('nativeChecked', nativeChecked = checked);
+            }
+            $$invalidate('previousChecked', previousChecked = checked);
+          } }
+    		if ($$dirty.setChecked || $$dirty.nativeChecked) { if (setChecked) {
+            setChecked(nativeChecked);
+          } }
+    		if ($$dirty.checkbox || $$dirty.indeterminate || $$dirty.uninitializedValue) { if (checkbox && indeterminate !== uninitializedValue && checkbox.indeterminate !== indeterminate) {
+            checkbox.indeterminate = indeterminate; $$invalidate('checkbox', checkbox), $$invalidate('indeterminate', indeterminate), $$invalidate('uninitializedValue', uninitializedValue), $$invalidate('group', group), $$invalidate('value', value), $$invalidate('checked', checked), $$invalidate('disabled', disabled), $$invalidate('valueKey', valueKey), $$invalidate('previousChecked', previousChecked), $$invalidate('nativeChecked', nativeChecked);
+          } }
+    		if ($$dirty.checkbox || $$dirty.group || $$dirty.uninitializedValue || $$dirty.value || $$dirty.checked) { if (checkbox) {
+            if (group !== uninitializedValue) {
+              const isChecked = group.indexOf(value) !== -1;
+              if (checkbox.checked !== isChecked) {
+                checkbox.checked = isChecked; $$invalidate('checkbox', checkbox), $$invalidate('indeterminate', indeterminate), $$invalidate('uninitializedValue', uninitializedValue), $$invalidate('group', group), $$invalidate('value', value), $$invalidate('checked', checked), $$invalidate('disabled', disabled), $$invalidate('valueKey', valueKey), $$invalidate('previousChecked', previousChecked), $$invalidate('nativeChecked', nativeChecked);
+              }
+            } else if (checked !== uninitializedValue && checkbox.checked !== checked) {
+              checkbox.checked = checked; $$invalidate('checkbox', checkbox), $$invalidate('indeterminate', indeterminate), $$invalidate('uninitializedValue', uninitializedValue), $$invalidate('group', group), $$invalidate('value', value), $$invalidate('checked', checked), $$invalidate('disabled', disabled), $$invalidate('valueKey', valueKey), $$invalidate('previousChecked', previousChecked), $$invalidate('nativeChecked', nativeChecked);
+            }
+          } }
+    		if ($$dirty.checkbox || $$dirty.disabled) { if (checkbox && checkbox.disabled !== disabled) {
+            checkbox.disabled = disabled; $$invalidate('checkbox', checkbox), $$invalidate('indeterminate', indeterminate), $$invalidate('uninitializedValue', uninitializedValue), $$invalidate('group', group), $$invalidate('value', value), $$invalidate('checked', checked), $$invalidate('disabled', disabled), $$invalidate('valueKey', valueKey), $$invalidate('previousChecked', previousChecked), $$invalidate('nativeChecked', nativeChecked);
+          } }
+    		if ($$dirty.checkbox || $$dirty.valueKey || $$dirty.uninitializedValue || $$dirty.value) { if (checkbox && valueKey === uninitializedValue && checkbox.value !== value) {
+            checkbox.value = value; $$invalidate('checkbox', checkbox), $$invalidate('indeterminate', indeterminate), $$invalidate('uninitializedValue', uninitializedValue), $$invalidate('group', group), $$invalidate('value', value), $$invalidate('checked', checked), $$invalidate('disabled', disabled), $$invalidate('valueKey', valueKey), $$invalidate('previousChecked', previousChecked), $$invalidate('nativeChecked', nativeChecked);
+          } }
+    		if ($$dirty.checkbox || $$dirty.valueKey || $$dirty.uninitializedValue) { if (checkbox && valueKey !== uninitializedValue && checkbox.value !== valueKey) {
+            checkbox.value = valueKey; $$invalidate('checkbox', checkbox), $$invalidate('indeterminate', indeterminate), $$invalidate('uninitializedValue', uninitializedValue), $$invalidate('group', group), $$invalidate('value', value), $$invalidate('checked', checked), $$invalidate('disabled', disabled), $$invalidate('valueKey', valueKey), $$invalidate('previousChecked', previousChecked), $$invalidate('nativeChecked', nativeChecked);
+          } }
+    	};
+
+    	return {
+    		forwardEvents,
+    		uninitializedValue,
+    		use,
+    		className,
+    		disabled,
+    		indeterminate,
+    		group,
+    		checked,
+    		value,
+    		valueKey,
+    		input$use,
+    		input$class,
+    		element,
+    		inputProps,
+    		nativeChecked,
+    		context,
+    		dataTableHeader,
+    		handleChange,
+    		getId,
+    		$$props,
+    		change_handler,
+    		input_handler,
+    		input_change_handler,
+    		div2_binding,
+    		$$props: $$props = exclude_internal_props($$props)
+    	};
+    }
+
+    class Checkbox extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$v, create_fragment$v, safe_not_equal, ["use", "class", "disabled", "indeterminate", "group", "checked", "value", "valueKey", "input$use", "input$class", "getId"]);
+
+    		const { ctx } = this.$$;
+    		const props = options.props || {};
+    		if (ctx.getId === undefined && !('getId' in props)) {
+    			console.warn("<Checkbox> was created without expected prop 'getId'");
+    		}
+    	}
+
+    	get use() {
+    		throw new Error("<Checkbox>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set use(value) {
+    		throw new Error("<Checkbox>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get class() {
+    		throw new Error("<Checkbox>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set class(value) {
+    		throw new Error("<Checkbox>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get disabled() {
+    		throw new Error("<Checkbox>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set disabled(value) {
+    		throw new Error("<Checkbox>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get indeterminate() {
+    		throw new Error("<Checkbox>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set indeterminate(value) {
+    		throw new Error("<Checkbox>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get group() {
+    		throw new Error("<Checkbox>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set group(value) {
+    		throw new Error("<Checkbox>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get checked() {
+    		throw new Error("<Checkbox>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set checked(value) {
+    		throw new Error("<Checkbox>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get value() {
+    		throw new Error("<Checkbox>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set value(value) {
+    		throw new Error("<Checkbox>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get valueKey() {
+    		throw new Error("<Checkbox>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set valueKey(value) {
+    		throw new Error("<Checkbox>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get input$use() {
+    		throw new Error("<Checkbox>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set input$use(value) {
+    		throw new Error("<Checkbox>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get input$class() {
+    		throw new Error("<Checkbox>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set input$class(value) {
+    		throw new Error("<Checkbox>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get getId() {
+    		return this.$$.ctx.getId;
+    	}
+
+    	set getId(value) {
+    		throw new Error("<Checkbox>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
 
     /* src/Charts.svelte generated by Svelte v3.9.2 */
 
-    const file$q = "src/Charts.svelte";
+    const file$s = "src/Charts.svelte";
 
-    // (7:0) <Card svgElementId="map" fileName="ABS Barcelona Map">
+    // (15:6) <span slot="label">
+    function create_label_slot(ctx) {
+    	var span;
+
+    	return {
+    		c: function create() {
+    			span = element("span");
+    			span.textContent = "Homes - Dones";
+    			attr(span, "slot", "label");
+    			add_location(span, file$s, 14, 6, 467);
+    		},
+
+    		m: function mount(target, anchor) {
+    			insert(target, span, anchor);
+    		},
+
+    		d: function destroy(detaching) {
+    			if (detaching) {
+    				detach(span);
+    			}
+    		}
+    	};
+    }
+
+    // (13:4) <FormField>
+    function create_default_slot_2$3(ctx) {
+    	var updating_checked, t, current;
+
+    	function checkbox_checked_binding(value) {
+    		ctx.checkbox_checked_binding.call(null, value);
+    		updating_checked = true;
+    		add_flush_callback(() => updating_checked = false);
+    	}
+
+    	let checkbox_props = {};
+    	if (ctx.mixSelected !== void 0) {
+    		checkbox_props.checked = ctx.mixSelected;
+    	}
+    	var checkbox = new Checkbox({ props: checkbox_props, $$inline: true });
+
+    	binding_callbacks.push(() => bind(checkbox, 'checked', checkbox_checked_binding));
+
+    	return {
+    		c: function create() {
+    			checkbox.$$.fragment.c();
+    			t = space();
+    		},
+
+    		m: function mount(target, anchor) {
+    			mount_component(checkbox, target, anchor);
+    			insert(target, t, anchor);
+    			current = true;
+    		},
+
+    		p: function update(changed, ctx) {
+    			var checkbox_changes = {};
+    			if (!updating_checked && changed.mixSelected) {
+    				checkbox_changes.checked = ctx.mixSelected;
+    			}
+    			checkbox.$set(checkbox_changes);
+    		},
+
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(checkbox.$$.fragment, local);
+
+    			current = true;
+    		},
+
+    		o: function outro(local) {
+    			transition_out(checkbox.$$.fragment, local);
+    			current = false;
+    		},
+
+    		d: function destroy(detaching) {
+    			destroy_component(checkbox, detaching);
+
+    			if (detaching) {
+    				detach(t);
+    			}
+    		}
+    	};
+    }
+
+    // (12:2) <span slot="aditionalFilter">
+    function create_aditionalFilter_slot(ctx) {
+    	var span, current;
+
+    	var formfield = new FormField({
+    		props: {
+    		$$slots: {
+    		default: [create_default_slot_2$3],
+    		label: [create_label_slot]
+    	},
+    		$$scope: { ctx }
+    	},
+    		$$inline: true
+    	});
+
+    	return {
+    		c: function create() {
+    			span = element("span");
+    			formfield.$$.fragment.c();
+    			attr(span, "slot", "aditionalFilter");
+    			add_location(span, file$s, 11, 2, 369);
+    		},
+
+    		m: function mount(target, anchor) {
+    			insert(target, span, anchor);
+    			mount_component(formfield, span, null);
+    			current = true;
+    		},
+
+    		p: function update(changed, ctx) {
+    			var formfield_changes = {};
+    			if (changed.$$scope || changed.mixSelected) formfield_changes.$$scope = { changed, ctx };
+    			formfield.$set(formfield_changes);
+    		},
+
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(formfield.$$.fragment, local);
+
+    			current = true;
+    		},
+
+    		o: function outro(local) {
+    			transition_out(formfield.$$.fragment, local);
+    			current = false;
+    		},
+
+    		d: function destroy(detaching) {
+    			if (detaching) {
+    				detach(span);
+    			}
+
+    			destroy_component(formfield);
+    		}
+    	};
+    }
+
+    // (10:0) <Card svgElementId="map" fileName="ABS Barcelona Map">
     function create_default_slot_1$3(ctx) {
-    	var current;
+    	var t, current;
 
-    	var absmap = new ABSMap({ $$inline: true });
+    	var absmap = new ABSMap({
+    		props: { mixSelected: ctx.mixSelected },
+    		$$inline: true
+    	});
 
     	return {
     		c: function create() {
     			absmap.$$.fragment.c();
+    			t = space();
     		},
 
     		m: function mount(target, anchor) {
     			mount_component(absmap, target, anchor);
+    			insert(target, t, anchor);
     			current = true;
+    		},
+
+    		p: function update(changed, ctx) {
+    			var absmap_changes = {};
+    			if (changed.mixSelected) absmap_changes.mixSelected = ctx.mixSelected;
+    			absmap.$set(absmap_changes);
     		},
 
     		i: function intro(local) {
@@ -29205,11 +30331,15 @@ var app = (function () {
 
     		d: function destroy(detaching) {
     			destroy_component(absmap, detaching);
+
+    			if (detaching) {
+    				detach(t);
+    			}
     		}
     	};
     }
 
-    // (11:0) <Card svgElementId="barchart">
+    // (20:0) <Card svgElementId="barchart">
     function create_default_slot$6(ctx) {
     	var current;
 
@@ -29243,14 +30373,17 @@ var app = (function () {
     	};
     }
 
-    function create_fragment$u(ctx) {
+    function create_fragment$w(ctx) {
     	var t0, br, t1, current;
 
     	var card0 = new Card_1({
     		props: {
     		svgElementId: "map",
     		fileName: "ABS Barcelona Map",
-    		$$slots: { default: [create_default_slot_1$3] },
+    		$$slots: {
+    		default: [create_default_slot_1$3],
+    		aditionalFilter: [create_aditionalFilter_slot]
+    	},
     		$$scope: { ctx }
     	},
     		$$inline: true
@@ -29272,7 +30405,7 @@ var app = (function () {
     			br = element("br");
     			t1 = space();
     			card1.$$.fragment.c();
-    			add_location(br, file$q, 9, 0, 230);
+    			add_location(br, file$s, 18, 0, 542);
     		},
 
     		l: function claim(nodes) {
@@ -29290,7 +30423,7 @@ var app = (function () {
 
     		p: function update(changed, ctx) {
     			var card0_changes = {};
-    			if (changed.$$scope) card0_changes.$$scope = { changed, ctx };
+    			if (changed.$$scope || changed.mixSelected) card0_changes.$$scope = { changed, ctx };
     			card0.$set(card0_changes);
 
     			var card1_changes = {};
@@ -29327,16 +30460,45 @@ var app = (function () {
     	};
     }
 
+    function instance$w($$self, $$props, $$invalidate) {
+    	
+      let { mixSelected = false } = $$props;
+
+    	const writable_props = ['mixSelected'];
+    	Object.keys($$props).forEach(key => {
+    		if (!writable_props.includes(key) && !key.startsWith('$$')) console.warn(`<Charts> was created with unknown prop '${key}'`);
+    	});
+
+    	function checkbox_checked_binding(value) {
+    		mixSelected = value;
+    		$$invalidate('mixSelected', mixSelected);
+    	}
+
+    	$$self.$set = $$props => {
+    		if ('mixSelected' in $$props) $$invalidate('mixSelected', mixSelected = $$props.mixSelected);
+    	};
+
+    	return { mixSelected, checkbox_checked_binding };
+    }
+
     class Charts extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, null, create_fragment$u, safe_not_equal, []);
+    		init(this, options, instance$w, create_fragment$w, safe_not_equal, ["mixSelected"]);
+    	}
+
+    	get mixSelected() {
+    		throw new Error("<Charts>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set mixSelected(value) {
+    		throw new Error("<Charts>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
 
     /* src/App.svelte generated by Svelte v3.9.2 */
 
-    const file$r = "src/App.svelte";
+    const file$t = "src/App.svelte";
 
     // (46:6) <Title>
     function create_default_slot_18$1(ctx) {
@@ -29378,7 +30540,7 @@ var app = (function () {
     			title.$$.fragment.c();
     			attr(img, "src", "/images/logo.jpg");
     			attr(img, "alt", "SiSalut");
-    			add_location(img, file$r, 44, 6, 1049);
+    			add_location(img, file$t, 44, 6, 1049);
     		},
 
     		m: function mount(target, anchor) {
@@ -29426,7 +30588,7 @@ var app = (function () {
     			img = element("img");
     			attr(img, "src", "/images/header.jpg");
     			attr(img, "alt", "SiSalut");
-    			add_location(img, file$r, 48, 6, 1185);
+    			add_location(img, file$t, 48, 6, 1185);
     		},
 
     		m: function mount(target, anchor) {
@@ -29591,7 +30753,7 @@ var app = (function () {
     			attr(input, "type", "text");
     			attr(input, "class", "searchBox");
     			attr(input, "placeholder", "Cercar");
-    			add_location(input, file$r, 59, 20, 1554);
+    			add_location(input, file$t, 59, 20, 1554);
     			dispose = listen(input, "input", ctx.input_input_handler);
     		},
 
@@ -30150,7 +31312,7 @@ var app = (function () {
     }
 
     // (80:2) <Title>
-    function create_default_slot_2$3(ctx) {
+    function create_default_slot_2$4(ctx) {
     	var t;
 
     	return {
@@ -30176,7 +31338,7 @@ var app = (function () {
 
     	var title = new Title({
     		props: {
-    		$$slots: { default: [create_default_slot_2$3] },
+    		$$slots: { default: [create_default_slot_2$4] },
     		$$scope: { ctx }
     	},
     		$$inline: true
@@ -30250,7 +31412,7 @@ var app = (function () {
     	};
     }
 
-    function create_fragment$v(ctx) {
+    function create_fragment$x(ctx) {
     	var link0, t0, link1, t1, link2, t2, t3, t4, t5, t6, current_1;
 
     	var topappbar0 = new TopAppBar({
@@ -30312,13 +31474,13 @@ var app = (function () {
     			appcontent.$$.fragment.c();
     			attr(link0, "rel", "stylesheet");
     			attr(link0, "href", "https://fonts.googleapis.com/icon?family=Material+Icons");
-    			add_location(link0, file$r, 31, 0, 689);
+    			add_location(link0, file$t, 31, 0, 689);
     			attr(link1, "rel", "stylesheet");
     			attr(link1, "href", "https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700");
-    			add_location(link1, file$r, 34, 0, 782);
+    			add_location(link1, file$t, 34, 0, 782);
     			attr(link2, "rel", "stylesheet");
     			attr(link2, "href", "https://fonts.googleapis.com/css?family=Roboto+Mono");
-    			add_location(link2, file$r, 37, 0, 886);
+    			add_location(link2, file$t, 37, 0, 886);
     		},
 
     		l: function claim(nodes) {
@@ -30429,7 +31591,7 @@ var app = (function () {
       
     }
 
-    function instance$u($$self, $$props, $$invalidate) {
+    function instance$x($$self, $$props, $$invalidate) {
     	
       let search = "";
       let isVisibleSearchInput = false;
@@ -30479,7 +31641,7 @@ var app = (function () {
     class App extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$u, create_fragment$v, safe_not_equal, []);
+    		init(this, options, instance$x, create_fragment$x, safe_not_equal, []);
     	}
     }
 

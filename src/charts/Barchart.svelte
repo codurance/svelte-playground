@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import Table from "./Table.svelte";
 
-  var options = {
+  let options = {
     chart: {
       height: 1200,
       width: "90%",
@@ -57,6 +57,12 @@
     }
   };
 
+  let dialog;
+  let ABSSelected = {
+    NOMABS: "",
+    NOMAGA: ""
+   };
+
   onMount(async () => {
     const fetched = await fetch(
       "https://gist.githubusercontent.com/damianpumar/f5110a8cf1c2a99408a4cc40235e6790/raw/c7cfcac7a10a2cf25359454756fcd6c82763d7c8/barchart"
@@ -72,12 +78,6 @@
 
     chart.render();
   });
-
-  let dialog;
-  let ABSSelected = {
-    NOMABS: "",
-    NOMAGA: ""
-   };
 </script>
 
 <Table bind:ABSSelected={ABSSelected} bind:dialog={dialog} />
