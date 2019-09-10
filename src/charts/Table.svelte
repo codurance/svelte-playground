@@ -6,6 +6,16 @@
 
   export let dialog;
   export let ABSSelected = { };
+
+  function getAbsCode(feature) {
+    return feature.NOMABS ? feature.NOMABS.replace("Barcelona - ", "") : "";
+  }
+
+  function createTitle(feature) {
+    return feature.NOMSS ? 
+           feature.NOMSS + " - " + getAbsCode(feature) :
+           feature.NOMABS;
+  }
 </script>
 
 <Dialog
@@ -14,7 +24,7 @@
   aria-describedby="dialog-content"
   on:MDCDialog:closed={()=> dialog.close()}
 >
-  <Title id="dialog-title">{ABSSelected.NOMABS}
+  <Title id="dialog-title">{createTitle(ABSSelected)}
     <IconButton
         id="close-dialog"
         class="material-icons"
@@ -28,7 +38,7 @@
         <Head>
           <Row>
             <Cell></Cell>
-            <Cell>ABS {ABSSelected.NOMABS}</Cell>
+            <Cell>ABS {getAbsCode(ABSSelected)}</Cell>
             <Cell>{ABSSelected.NOMAGA}</Cell>
             <Cell>AIS BCN Esquerra</Cell>
             <Cell>Barcelona</Cell>

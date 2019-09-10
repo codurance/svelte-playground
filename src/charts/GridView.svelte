@@ -11,6 +11,7 @@
     ActionIcons
   } from "@smui/card";
   import Button, { Label } from "@smui/button";
+  import Table from "./Table.svelte";
 
   const FINAL =
     "https://gist.githubusercontent.com/damianpumar/862fe8d75f92a0b114ad4ae2bf128e13/raw/21dc4b07207455034b1e48022ae53f3a84fe5ece/finaltopojson";
@@ -71,14 +72,24 @@
     absElement = d3.select(this);
     absElement.attr("opacity", "0.3");
   }
+  let ABSSelected;
+  let dialog;
+
+   function handleOnClick(absSelected) {
+    ABSSelected = absSelected.properties;
+
+    dialog.open();
+  }
 </script>
+
+<Table bind:ABSSelected={ABSSelected} bind:dialog={dialog} />
 
 <div style={cardWrapper}>
 
   {#if features}
     {#each features as feature, i}
       <Card style="cursor: pointer; box-shadow:2px 2px rgba(0,0,0,0.2)">
-        <PrimaryAction on:click={() => window.alert('aaa')}>
+        <PrimaryAction on:click={() => handleOnClick(feature)}>
 
           <svg
             width="350px"
