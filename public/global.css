@@ -84,7 +84,7 @@ button:focus {
 }
 
 .searchBox {
-  margin: 0 !important;
+  margin-left: 10px !important;
   border-radius: 5px;
   width: 25em;
 }

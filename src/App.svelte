@@ -10,20 +10,22 @@
   import List, { Item, Text, Separator, Subheader } from "@smui/list";
   import TopAppBar, { Row, Section, Title } from "@smui/top-app-bar";
   import IconButton from "@smui/icon-button";
-  import Checkbox from "@smui/checkbox";
   import FormField from "@smui/form-field";
-  import Fab, { Icon } from "@smui/fab";
-
-  import MenuSurface, { Anchor } from "@smui/menu-surface";
 
   import Charts from "./Charts.svelte";
 
   let current = "main";
-  let menu;
+  let search = "";
+  let isVisibleSearchInput = false;
 
   function changeLens(newLens) {
     
   };
+
+  function showSearch() {
+      search = "";
+      isVisibleSearchInput = !isVisibleSearchInput;
+  }
 </script>
 
 <link
@@ -50,7 +52,12 @@
 <TopAppBar variant="static" color="secondary">
   <Row>
     <Section>
-        <IconButton class="material-icons" aria-label="Search">search</IconButton>
+       <IconButton class="material-icons" aria-label="Search"
+                   on:click={()=> showSearch()}>
+                   search</IconButton>
+                   {#if isVisibleSearchInput}
+                    <input type="text" class="searchBox" placeholder="Cercar" bind:value={search}/>
+                  {/if}
         <IconButton class="material-icons" aria-label="Grid"
                     on:click={() => changeLens("grid")}>grid_on</IconButton>
         <IconButton class="material-icons" aria-label="List"
@@ -74,17 +81,6 @@
     2017
   </Title>
 </TopAppBar>
-<Fab
-  on:click={() => menu.setOpen(true)}
-  style="position: fixed; bottom: 1rem; right: 2rem; z-index: 1;">
-  <Icon class="material-icons">search</Icon>
-</Fab>
-
-<div style="position: fixed; bottom: 2rem; right: 6rem; z-index: 1;">
-  <MenuSurface bind:this={menu} anchorCorner="BOTTOM_RIGHT">
-    <input type="text" placeholder="Cercar" class="searchBox" />
-  </MenuSurface>
-</div>
 
 <Scrim />
 
