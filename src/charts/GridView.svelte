@@ -19,6 +19,7 @@
   const PATH = d3.geoPath();
   const COLORS = ["#ffffff", "#ffd333", "#ffde66", "#fff4cc", "#ffe999"];
 
+  export let listVisualization = false;
   let features;
   let barcelona;
   let colorScaleExtent = [0, 0];
@@ -50,8 +51,20 @@
     return feature.properties.NOMABS.replace("Barcelona - ", "");
   }
 
-  const cardWrapper = `
-  display: grid;
+  function modifyCardWrapperStyle(){
+    return listVisualization ? "" : "display:grid;";
+  }
+
+  function modifyCardStyle(){
+    return listVisualization ? "margin-bottom: 25px;" : "box-shadow:2px 2px rgba(0,0,0,0.2)";
+  }
+
+  $: cardStyle = "cursor: pointer; "+ modifyCardStyle();
+
+  $: cardWrapper = 
+  modifyCardWrapperStyle()
+  + 
+  `
   width: 80%;
   margin: 20px auto;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -89,7 +102,7 @@
 
   {#if features}
     {#each features as feature, i}
-      <Card style="cursor: pointer; box-shadow:2px 2px rgba(0,0,0,0.2)">
+      <Card style={cardStyle}>
         <PrimaryAction on:click={() => handleOnClick(feature)}>
 
           <svg

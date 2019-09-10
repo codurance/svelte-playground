@@ -3,6 +3,7 @@
   import ABSMap from "./charts/ABSMap.svelte";
   import Barchart from "./charts/Barchart.svelte";
   import GridView from "./charts/GridView.svelte";
+  import List from "./charts/List.svelte";
   import Checkbox from '@smui/checkbox';
   import FormField from '@smui/form-field';
   import { LensSelected } from "./store.js";
@@ -25,7 +26,7 @@
     <Barchart />
   </Card>
 {:else if $LensSelected == "grid"}
-
   <GridView />
-
+{:else if $LensSelected == "list"}
+  <List />
 {/if}
