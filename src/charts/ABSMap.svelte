@@ -1,6 +1,7 @@
 <script>
   import { ABSMapFilter } from "../store.js";
   import { onMount } from "svelte";
+  import Table from "./Table.svelte";
 
   const FINAL =
     "https://gist.githubusercontent.com/damianpumar/862fe8d75f92a0b114ad4ae2bf128e13/raw/21dc4b07207455034b1e48022ae53f3a84fe5ece/finaltopojson";
@@ -40,6 +41,12 @@
   });
   const COLORS = ["#ffffff", "#ffd333", "#ffde66", "#fff4cc", "#ffe999"];
 
+  function handleOnClick(absSelected) {
+    ABSSelected = absSelected.properties;
+
+    dialog.open();
+  }
+
   function handleMouseOver() {
     showTooltip = true;
     selectElement = d3.select(this);
@@ -69,6 +76,7 @@
     );
     selectElement.attr("fill", quantizedColor);
   };
+
   const labels = [
     { color: "#fff", text: "De 8.5 a 11.10" },
     { color: "#ffd333", text: "De 11.11 a 12.30" },
@@ -76,7 +84,12 @@
     { color: "#fff4cc", text: "De 13.61 a 16.10" },
     { color: "#ffe999", text: "De 16.11 a 29.40" }
   ];
+
+  let dialog;
+  let ABSSelected = { };
 </script>
+
+<Table bind:ABSSelected={ABSSelected} bind:dialog={dialog} />
 
 <div id="map">
   <svg viewBox={`0 0 ${width || 0} ${height || 0}`}>
@@ -90,7 +103,8 @@
             stroke="black"
             on:mouseover={handleMouseOver}
             on:mousemove={event => handleMouseMove(feature, event)}
-            on:mouseout={handleMouseOut(feature)} />
+            on:mouseout={handleMouseOut(feature)}
+            on:click={()=> handleOnClick(feature)} />
 
           <text
             style="font-size: 10px"

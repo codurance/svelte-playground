@@ -1,0 +1,74 @@
+<script>
+  import DataTable, {Head, Body, Row, Cell} from '@smui/data-table';
+  import Dialog, {Title, Content, Actions} from '@smui/dialog';
+  import Button, {Label} from '@smui/button';
+
+  export let dialog;
+  export let ABSSelected = { };
+</script>
+
+<Dialog
+  bind:this={dialog}
+  aria-labelledby="dialog-title"
+  aria-describedby="dialog-content"
+  on:MDCDialog:closed={()=> dialog.close()}
+>
+  <Title id="dialog-title">{ABSSelected.NOMABS}</Title>
+  <Content id="dialog-content">
+
+      <DataTable table$aria-label="Products">
+        <Head>
+          <Row>
+            <Cell></Cell>
+            <Cell>ABS {ABSSelected.NOMABS}</Cell>
+            <Cell>{ABSSelected.NOMAGA}</Cell>
+            <Cell>AIS BCN Esquerra</Cell>
+            <Cell>Barcelona</Cell>
+          </Row>
+          <Row>
+          <Cell></Cell>
+            <Cell>N%</Cell>
+            <Cell>N%</Cell>
+            <Cell>N%</Cell>
+            <Cell>N%</Cell>
+          </Row>
+        </Head>
+        <Body>
+          <Row>
+            <Cell>PERSONES PER LLAR (mitjana)</Cell>
+            <Cell>2.3</Cell>
+            <Cell>2.3</Cell>
+            <Cell>2.3</Cell>
+            <Cell>2.3</Cell>
+          </Row>
+          <Row>
+            <Cell>LLARS AMB >4 PERSONES</Cell>
+            <Cell>2.4</Cell>
+            <Cell>0.4</Cell>
+            <Cell>9.4</Cell>
+            <Cell>1.4</Cell>
+          </Row>
+           <Row>
+            <Cell>LLARS AMB >4 PERSONES</Cell>
+            <Cell>2.4</Cell>
+            <Cell>5.4</Cell>
+            <Cell>3.4</Cell>
+            <Cell>7.4</Cell>
+          </Row>
+           <Row>
+            <Cell>LLARS AMB >4 PERSONES</Cell>
+            <Cell>2.4</Cell>
+            <Cell>3.4</Cell>
+            <Cell>6.4</Cell>
+            <Cell>8.4</Cell>
+          </Row>
+        </Body>
+      </DataTable>
+
+  </Content>
+  <Actions>
+    <Button color="secondary">
+      <Label>Tancar</Label>
+    </Button>
+  </Actions>
+</Dialog>

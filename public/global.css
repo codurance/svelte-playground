@@ -88,3 +88,7 @@ button:focus {
   border-radius: 5px;
   width: 25em;
 }
+
+svg {
+  user-select: none;
+}
