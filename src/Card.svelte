@@ -29,9 +29,9 @@
     const SVG = document.querySelector(`#${elementId}`);
 
     html2canvas(SVG, { width: 1500, height: 2800, scale: 1 }).then(canvas => {
-      let pdf = jsPDF('p', 'pt', 'a4', true);
+      let pdf = jsPDF("p", "pt", "a4", true);
 
-      pdf.addImage(canvas.toDataURL(), 'PNG', 0, -180, 700, 1000);
+      pdf.addImage(canvas.toDataURL(), "PNG", 0, -180, 700, 1000);
 
       pdf.save(filename);
     });
