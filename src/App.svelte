@@ -12,6 +12,7 @@
   import IconButton from "@smui/icon-button";
   import FormField from "@smui/form-field";
   import { fade } from 'svelte/transition';
+  import { LensSelected } from "./store.js";
 
   import Charts from "./Charts.svelte";
 
@@ -20,7 +21,7 @@
   let isVisibleSearchInput = false;
 
   function changeLens(newLens) {
-    
+    LensSelected.set(newLens);
   };
 
   function showSearch() {
@@ -59,16 +60,16 @@
                    {#if isVisibleSearchInput}
                     <input transition:fade type="text" class="searchBox" placeholder="Cercar" bind:value={search}/>
                    {/if}
+        <IconButton class="material-icons" aria-label="Map"
+                    on:click={() => changeLens("map")}>map</IconButton>
+        <IconButton class="material-icons" aria-label="Chart"
+                    on:click={() => changeLens("barchart")}>
+                    insert_chart</IconButton>
         <IconButton class="material-icons" aria-label="Grid"
                     on:click={() => changeLens("grid")}>grid_on</IconButton>
         <IconButton class="material-icons" aria-label="List"
                     on:click={() => changeLens("list")}>
                     list</IconButton>
-        <IconButton class="material-icons" aria-label="Map"
-                    on:click={() => changeLens("map")}>map</IconButton>
-        <IconButton class="material-icons" aria-label="Chart"
-                    on:click={() => changeLens("chart")}>
-                    insert_chart</IconButton>
     </Section>
     <Section align="end" toolbar>
         <IconButton class="material-icons" aria-label="Search">brightness_5</IconButton>

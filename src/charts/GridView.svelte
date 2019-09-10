@@ -1,6 +1,6 @@
 <script>
   import { onMount, afterUpdate } from "svelte";
-  import { ABSMapFilter } from "./store.js";
+  import { ABSMapFilter } from "../store.js";
   import Card, {
     Content,
     PrimaryAction,
