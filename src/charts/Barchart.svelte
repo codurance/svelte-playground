@@ -39,7 +39,21 @@
       categories: [],
       labels: {
         trim: false
-      }
+      },
+      title: {
+          text: '% persones que viuen soles',
+          style: {
+            fontSize:  '18px'
+          },
+      },
+    },
+    yaxis: {
+      title: {
+          text: 'Àrees Bàsiques de Salut',
+          style: {
+            fontSize:  '18px'
+          },
+      },
     }
   };
 

@@ -97,3 +97,7 @@ svg {
   float: right;
   margin-top: 9px;
 }
+
+#barchart {
+  margin-left: 5em;
+}
