@@ -1,5 +1,6 @@
 <script>
   import { onMount } from "svelte";
+  import Table from "./Table.svelte";
 
   var options = {
     chart: {
@@ -9,6 +10,14 @@
       toolbar: {
         tools: {
           download: false
+        }
+      },
+      events: {
+        click: function(event, chartContext, config){
+          if(config.dataPointIndex >= 0) {
+              ABSSelected.NOMAGA = ABSSelected.NOMABS = config.config.xaxis.categories[config.dataPointIndex];
+              dialog.open();
+          }
         }
       }
     },
@@ -49,6 +58,13 @@
 
     chart.render();
   });
+
+  let dialog;
+  let ABSSelected = {
+    NOMABS: "",
+    NOMAGA: ""
+   };
 </script>
 
+<Table bind:ABSSelected={ABSSelected} bind:dialog={dialog} />
 <div id="barchart" />

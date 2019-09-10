@@ -28348,13 +28348,39 @@ var app = (function () {
     const file$r = "src/charts/Barchart.svelte";
 
     function create_fragment$v(ctx) {
-    	var div;
+    	var updating_ABSSelected, updating_dialog, t, div, current;
+
+    	function table_ABSSelected_binding(value) {
+    		ctx.table_ABSSelected_binding.call(null, value);
+    		updating_ABSSelected = true;
+    		add_flush_callback(() => updating_ABSSelected = false);
+    	}
+
+    	function table_dialog_binding(value_1) {
+    		ctx.table_dialog_binding.call(null, value_1);
+    		updating_dialog = true;
+    		add_flush_callback(() => updating_dialog = false);
+    	}
+
+    	let table_props = {};
+    	if (ctx.ABSSelected !== void 0) {
+    		table_props.ABSSelected = ctx.ABSSelected;
+    	}
+    	if (ctx.dialog !== void 0) {
+    		table_props.dialog = ctx.dialog;
+    	}
+    	var table = new Table({ props: table_props, $$inline: true });
+
+    	binding_callbacks.push(() => bind(table, 'ABSSelected', table_ABSSelected_binding));
+    	binding_callbacks.push(() => bind(table, 'dialog', table_dialog_binding));
 
     	return {
     		c: function create() {
+    			table.$$.fragment.c();
+    			t = space();
     			div = element("div");
     			attr(div, "id", "barchart");
-    			add_location(div, file$r, 53, 0, 1042);
+    			add_location(div, file$r, 69, 0, 1500);
     		},
 
     		l: function claim(nodes) {
@@ -28362,15 +28388,40 @@ var app = (function () {
     		},
 
     		m: function mount(target, anchor) {
+    			mount_component(table, target, anchor);
+    			insert(target, t, anchor);
     			insert(target, div, anchor);
+    			current = true;
     		},
 
-    		p: noop,
-    		i: noop,
-    		o: noop,
+    		p: function update(changed, ctx) {
+    			var table_changes = {};
+    			if (!updating_ABSSelected && changed.ABSSelected) {
+    				table_changes.ABSSelected = ctx.ABSSelected;
+    			}
+    			if (!updating_dialog && changed.dialog) {
+    				table_changes.dialog = ctx.dialog;
+    			}
+    			table.$set(table_changes);
+    		},
+
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(table.$$.fragment, local);
+
+    			current = true;
+    		},
+
+    		o: function outro(local) {
+    			transition_out(table.$$.fragment, local);
+    			current = false;
+    		},
 
     		d: function destroy(detaching) {
+    			destroy_component(table, detaching);
+
     			if (detaching) {
+    				detach(t);
     				detach(div);
     			}
     		}
@@ -28378,7 +28429,9 @@ var app = (function () {
     }
 
     function instance$v($$self, $$props, $$invalidate) {
-    	var options = {
+    	
+
+      var options = {
         chart: {
           height: 1200,
           width: "90%",
@@ -28386,6 +28439,14 @@ var app = (function () {
           toolbar: {
             tools: {
               download: false
+            }
+          },
+          events: {
+            click: function(event, chartContext, config){
+              if(config.dataPointIndex >= 0) {
+                  ABSSelected.NOMAGA = ABSSelected.NOMABS = config.config.xaxis.categories[config.dataPointIndex]; $$invalidate('ABSSelected', ABSSelected);
+                  dialog.open();
+              }
             }
           }
         },
@@ -28425,7 +28486,28 @@ var app = (function () {
         chart.render();
       });
 
-    	return {};
+      let dialog;
+      let ABSSelected = {
+        NOMABS: "",
+        NOMAGA: ""
+       };
+
+    	function table_ABSSelected_binding(value) {
+    		ABSSelected = value;
+    		$$invalidate('ABSSelected', ABSSelected);
+    	}
+
+    	function table_dialog_binding(value_1) {
+    		dialog = value_1;
+    		$$invalidate('dialog', dialog);
+    	}
+
+    	return {
+    		dialog,
+    		ABSSelected,
+    		table_ABSSelected_binding,
+    		table_dialog_binding
+    	};
     }
 
     class Barchart extends SvelteComponentDev {
