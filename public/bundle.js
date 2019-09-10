@@ -28851,7 +28851,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (116:6) {:else}
+    // (118:6) {:else}
     function create_else_block$7(ctx) {
     	var t;
 
@@ -28874,7 +28874,7 @@ var app = (function () {
     	};
     }
 
-    // (99:6) {#if features}
+    // (101:6) {#if features}
     function create_if_block_2$1(ctx) {
     	var each_1_anchor;
 
@@ -28936,7 +28936,7 @@ var app = (function () {
     	};
     }
 
-    // (100:8) {#each features as feature}
+    // (102:8) {#each features as feature}
     function create_each_block_1(ctx) {
     	var path_1, path_1_d_value, path_1_fill_value, text_1, t_value = ctx.feature.properties.NOMABS.replace('Barcelona - ', '') + "", t, text_1_transform_value, dispose;
 
@@ -28956,10 +28956,10 @@ var app = (function () {
     			attr(path_1, "d", path_1_d_value = ctx.path(ctx.feature));
     			attr(path_1, "fill", path_1_fill_value = ctx.quantize(ctx.Number(ctx.feature.properties.VALORES ? ctx.feature.properties.VALORES[ctx.$ABSMapFilter] : 0)));
     			attr(path_1, "stroke", "black");
-    			add_location(path_1, file$p, 100, 10, 2552);
+    			add_location(path_1, file$p, 102, 10, 2706);
     			set_style(text_1, "font-size", "10px");
     			attr(text_1, "transform", text_1_transform_value = `translate(${ctx.path.centroid(ctx.feature)})`);
-    			add_location(text_1, file$p, 109, 10, 2953);
+    			add_location(text_1, file$p, 111, 10, 3107);
 
     			dispose = [
     				listen(path_1, "mouseover", ctx.handleMouseOver),
@@ -29005,7 +29005,7 @@ var app = (function () {
     	};
     }
 
-    // (119:6) {#each labels as { color, text }
+    // (121:6) {#each labels as { color, text }
     function create_each_block$1(ctx) {
     	var rect, rect_fill_value, text_1, t_value = ctx.text + "", t;
 
@@ -29021,11 +29021,11 @@ var app = (function () {
     			attr(rect, "stroke", "black");
     			attr(rect, "stroke-width", "1");
     			attr(rect, "fill", rect_fill_value = ctx.color);
-    			add_location(rect, file$p, 119, 8, 3255);
+    			add_location(rect, file$p, 121, 8, 3409);
     			attr(text_1, "x", "25");
     			attr(text_1, "y", 19 + 15 * ctx.i);
     			attr(text_1, "font-size", "12");
-    			add_location(text_1, file$p, 127, 8, 3433);
+    			add_location(text_1, file$p, 129, 8, 3587);
     		},
 
     		m: function mount(target, anchor) {
@@ -29045,7 +29045,7 @@ var app = (function () {
     	};
     }
 
-    // (133:0) {#if showTooltip}
+    // (135:0) {#if showTooltip}
     function create_if_block$8(ctx) {
     	var div, p0, t0_value = ctx.tooltipValues.NOMABS + "", t0, t1, p1, t2_value = ctx.tooltipValues.NOMAGA + "", t2, t3, p2, t4_value = ctx.tooltipValues.NOMSS + "", t4, t5, p3, img, t6, t7_value = ctx.tooltipValues.VALORES ? ctx.tooltipValues.VALORES[ctx.$ABSMapFilter] : 'No Data' + "", t7, t8, div_style_value;
 
@@ -29069,18 +29069,18 @@ var app = (function () {
     			t7 = text(t7_value);
     			t8 = space();
     			if (if_block) if_block.c();
-    			add_location(p0, file$p, 136, 4, 3695);
-    			add_location(p1, file$p, 137, 4, 3729);
-    			add_location(p2, file$p, 138, 4, 3763);
+    			add_location(p0, file$p, 138, 4, 3849);
+    			add_location(p1, file$p, 139, 4, 3883);
+    			add_location(p2, file$p, 140, 4, 3917);
     			attr(img, "src", "./icons/oldman.svg");
     			attr(img, "alt", "Old Man");
     			attr(img, "width", "15%");
     			attr(img, "height", "15%");
-    			add_location(img, file$p, 140, 4, 3804);
-    			add_location(p3, file$p, 139, 4, 3796);
+    			add_location(img, file$p, 142, 4, 3958);
+    			add_location(p3, file$p, 141, 4, 3950);
     			attr(div, "class", "tooltip");
     			attr(div, "style", div_style_value = ctx.showTooltip ? `opacity: .9; top: ${ctx.tooltipValues.top}px; left: ${ctx.tooltipValues.left}px` : 'opacity: 0');
-    			add_location(div, file$p, 133, 2, 3550);
+    			add_location(div, file$p, 135, 2, 3704);
     		},
 
     		m: function mount(target, anchor) {
@@ -29147,7 +29147,7 @@ var app = (function () {
     	};
     }
 
-    // (143:4) {#if mixSelected}
+    // (145:4) {#if mixSelected}
     function create_if_block_1$2(ctx) {
     	var img, t0, t1_value = ctx.tooltipValues.VALORES ? ctx.tooltipValues.VALORES[ctx.$ABSMapFilter] * 2 : 'No Data' + "", t1;
 
@@ -29160,7 +29160,7 @@ var app = (function () {
     			attr(img, "alt", "Old Man");
     			attr(img, "width", "15%");
     			attr(img, "height", "15%");
-    			add_location(img, file$p, 143, 6, 3982);
+    			add_location(img, file$p, 145, 6, 4136);
     		},
 
     		m: function mount(target, anchor) {
@@ -29247,12 +29247,12 @@ var app = (function () {
     			t1 = space();
     			if (if_block1) if_block1.c();
     			if_block1_anchor = empty();
-    			add_location(g0, file$p, 97, 4, 2481);
-    			add_location(g1, file$p, 117, 4, 3200);
+    			add_location(g0, file$p, 99, 4, 2635);
+    			add_location(g1, file$p, 119, 4, 3354);
     			attr(svg, "viewBox", svg_viewBox_value = `0 0 ${ctx.width || 0} ${ctx.height || 0}`);
-    			add_location(svg, file$p, 95, 2, 2425);
+    			add_location(svg, file$p, 97, 2, 2579);
     			attr(div, "id", "map");
-    			add_location(div, file$p, 94, 0, 2408);
+    			add_location(div, file$p, 96, 0, 2562);
     		},
 
     		l: function claim(nodes) {
@@ -29386,6 +29386,9 @@ var app = (function () {
 
     	
 
+      const HOMESCOLOR = ["#ffffff", "#6fd1f2", "#12c4ff", "#089dcf", "#00769e"];
+      const MIXCOLOR = ["#ffffff", "#ffd333", "#ffde66", "#fff4cc", "#ffe999"];
+
       const path = d3.geoPath();
 
       let { mixSelected } = $$props;
@@ -29412,7 +29415,6 @@ var app = (function () {
           .node()
           .getBoundingClientRect().width);
       });
-      const COLORS = ["#ffffff", "#ffd333", "#ffde66", "#fff4cc", "#ffe999"];
 
       function handleOnClick(absSelected) {
         $$invalidate('ABSSelected', ABSSelected = absSelected.properties);
@@ -29423,7 +29425,7 @@ var app = (function () {
       function handleMouseOver() {
         $$invalidate('showTooltip', showTooltip = true);
         selectElement = d3.select(this);
-        selectElement.attr("fill", "orange");
+        selectElement.attr("fill", mixSelected ? "orange" : "blue");
       }
 
       function handleMouseMove(d, event) {
@@ -29485,15 +29487,16 @@ var app = (function () {
     		if ('mixSelected' in $$props) $$invalidate('mixSelected', mixSelected = $$props.mixSelected);
     	};
 
-    	let width, height, quantize, selectElement, showTooltip, tooltipValues;
+    	let width, height, colors, quantize, selectElement, showTooltip, tooltipValues;
 
-    	$$self.$$.update = ($$dirty = { widthParent: 1, colorScaleExtent: 1 }) => {
+    	$$self.$$.update = ($$dirty = { widthParent: 1, mixSelected: 1, colorScaleExtent: 1, colors: 1 }) => {
     		if ($$dirty.widthParent) { $$invalidate('width', width = widthParent / 1.5); }
     		if ($$dirty.widthParent) { $$invalidate('height', height = widthParent / 1.5); }
-    		if ($$dirty.colorScaleExtent) { $$invalidate('quantize', quantize = d3
+    		if ($$dirty.mixSelected) { $$invalidate('colors', colors = mixSelected ? MIXCOLOR : HOMESCOLOR); }
+    		if ($$dirty.colorScaleExtent || $$dirty.colors) { $$invalidate('quantize', quantize = d3
             .scaleQuantize()
             .domain(colorScaleExtent)
-            .range(COLORS)); }
+            .range(colors)); }
     	};
     	selectElement = null;
     	$$invalidate('showTooltip', showTooltip = false);

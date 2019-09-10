@@ -3,6 +3,8 @@
   import { onMount } from "svelte";
   import Table from "./Table.svelte";
 
+  const HOMESCOLOR = ["#ffffff", "#6fd1f2", "#12c4ff", "#089dcf", "#00769e"];
+  const MIXCOLOR = ["#ffffff", "#ffd333", "#ffde66", "#fff4cc", "#ffe999"];
   const FINAL =
     "https://gist.githubusercontent.com/damianpumar/862fe8d75f92a0b114ad4ae2bf128e13/raw/21dc4b07207455034b1e48022ae53f3a84fe5ece/finaltopojson";
 
@@ -20,10 +22,11 @@
   $: width = widthParent / 1.5;
   $: height = widthParent / 1.5;
   $: filter = 0;
+  $: colors = mixSelected ? MIXCOLOR : HOMESCOLOR;
   $: quantize = d3
     .scaleQuantize()
     .domain(colorScaleExtent)
-    .range(COLORS);
+    .range(colors);
   $: selectElement = null;
   $: showTooltip = false;
   $: tooltipValues = {};
@@ -43,7 +46,6 @@
       .node()
       .getBoundingClientRect().width;
   });
-  const COLORS = ["#ffffff", "#ffd333", "#ffde66", "#fff4cc", "#ffe999"];
 
   function handleOnClick(absSelected) {
     ABSSelected = absSelected.properties;
@@ -54,7 +56,7 @@
   function handleMouseOver() {
     showTooltip = true;
     selectElement = d3.select(this);
-    selectElement.attr("fill", "orange");
+    selectElement.attr("fill", mixSelected ? "orange" : "blue");
   }
 
   function handleMouseMove(d, event) {
