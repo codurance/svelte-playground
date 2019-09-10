@@ -11,6 +11,7 @@
   import TopAppBar, { Row, Section, Title } from "@smui/top-app-bar";
   import IconButton from "@smui/icon-button";
   import FormField from "@smui/form-field";
+  import { fade } from 'svelte/transition';
 
   import Charts from "./Charts.svelte";
 
@@ -56,8 +57,8 @@
                    on:click={()=> showSearch()}>
                    search</IconButton>
                    {#if isVisibleSearchInput}
-                    <input type="text" class="searchBox" placeholder="Cercar" bind:value={search}/>
-                  {/if}
+                    <input transition:fade type="text" class="searchBox" placeholder="Cercar" bind:value={search}/>
+                   {/if}
         <IconButton class="material-icons" aria-label="Grid"
                     on:click={() => changeLens("grid")}>grid_on</IconButton>
         <IconButton class="material-icons" aria-label="List"
