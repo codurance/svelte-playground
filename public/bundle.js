@@ -30045,7 +30045,7 @@ var app = (function () {
     			t = space();
     			div = element("div");
     			attr(div, "id", "barchart");
-    			add_location(div, file$r, 83, 0, 1783);
+    			add_location(div, file$r, 82, 0, 1763);
     		},
 
     		l: function claim(nodes) {
@@ -30098,7 +30098,6 @@ var app = (function () {
 
       let options = {
         chart: {
-          height: 1200,
           width: "100%",
           type: "bar",
           toolbar: {

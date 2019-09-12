@@ -91,7 +91,7 @@ button:focus {
 
 svg {
   user-select: none;
-  max-height: 100em;
+  max-height: 60em;
 }
 
 #close-dialog {
