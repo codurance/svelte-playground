@@ -94,7 +94,7 @@
 <svelte:window on:resize={handleLoadSvg}/>
 <Table bind:ABSSelected={ABSSelected} bind:dialog={dialog} />
 
-<div>
+<div data-intro='Este es un ejemplo de visualización modo Mapa, si seleccionas un sector y haces click podrás ver el detalle' data-step="4" data-disable-interaction="true">
   <svg id="absMap" viewBox={`${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`} on:load={handleLoadSvg}>
 
     <g out:fade="{{duration: 200}}">

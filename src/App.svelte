@@ -53,7 +53,7 @@
 </TopAppBar>
 <TopAppBar variant="static" color="secondary">
   <Row>
-    <Section>
+    <Section data-intro='Aquí podràs seleccionar el modo de visualización' data-step="2" data-disable-interaction="true">
        <IconButton id="searchButton"
                    class="material-icons" aria-label="Search"
                    on:click={()=> showSearch()}>
@@ -76,7 +76,7 @@
    </Row>
 </TopAppBar>
 <TopAppBar variant="static" color="secondary">
-  <Title class="chart-title">
+  <Title class="chart-title" data-intro='Aquí veras el título del gráfico visualizado' data-step="3">
     Percentatge de persones grans que viuen soles per ABS i sexe. Barcelona, any
     2017
   </Title>
@@ -84,7 +84,10 @@
 
 <Scrim />
 
-<AppContent>
+<AppContent  
+    data-intro="Bienvenido a SiSalut, este es un pequeño tutorial de como utilizar el sistema."
+    data-step="1"
+    data-disable-interaction="true">
 
   <Charts />
 

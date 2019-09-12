@@ -22493,7 +22493,7 @@ var app = (function () {
     	};
     }
 
-    // (46:2) <Actions>
+    // (46:2) <Actions data-intro='En esta sección podrás aplicar los diferentes tipos de filtros y acciones sobre el gráfico' data-step="5" data-disable-interaction="true">
     function create_default_slot_1$1(ctx) {
     	var updating_value, t0, t1, current;
 
@@ -22627,6 +22627,9 @@ var app = (function () {
 
     	var actions = new Actions({
     		props: {
+    		"data-intro": "En esta sección podrás aplicar los diferentes tipos de filtros y acciones sobre el gráfico",
+    		"data-step": "5",
+    		"data-disable-interaction": "true",
     		$$slots: { default: [create_default_slot_1$1] },
     		$$scope: { ctx }
     	},
@@ -29345,11 +29348,11 @@ var app = (function () {
     			attr(path_1, "d", path_1_d_value = ctx.path(ctx.feature));
     			attr(path_1, "fill", path_1_fill_value = ctx.quantize(ctx.Number(ctx.feature.properties.VALORES ? ctx.feature.properties.VALORES[ctx.$ABSMapFilter] : 0)));
     			attr(path_1, "stroke", "black");
-    			add_location(path_1, file$q, 102, 10, 2870);
+    			add_location(path_1, file$q, 102, 10, 3037);
     			set_style(text_1, "font-size", "10px");
     			attr(text_1, "transform", text_1_transform_value = `translate(${ctx.path.centroid(ctx.feature)})`);
-    			add_location(text_1, file$q, 112, 10, 3348);
-    			add_location(g, file$q, 111, 8, 3298);
+    			add_location(text_1, file$q, 112, 10, 3515);
+    			add_location(g, file$q, 111, 8, 3465);
 
     			dispose = [
     				listen(path_1, "mouseover", ctx.handleMouseOver),
@@ -29441,11 +29444,11 @@ var app = (function () {
     			attr(rect, "stroke", "black");
     			attr(rect, "stroke-width", "1");
     			attr(rect, "fill", rect_fill_value = ctx.color);
-    			add_location(rect, file$q, 123, 8, 3713);
+    			add_location(rect, file$q, 123, 8, 3880);
     			attr(text_1, "x", "25");
     			attr(text_1, "y", 19 + 15 * ctx.i);
     			attr(text_1, "font-size", "12");
-    			add_location(text_1, file$q, 131, 8, 3891);
+    			add_location(text_1, file$q, 131, 8, 4058);
     		},
 
     		m: function mount(target, anchor) {
@@ -29497,18 +29500,18 @@ var app = (function () {
     			t7 = text(t7_value);
     			t8 = space();
     			if (if_block) if_block.c();
-    			add_location(p0, file$q, 140, 4, 4153);
-    			add_location(p1, file$q, 141, 4, 4187);
-    			add_location(p2, file$q, 142, 4, 4221);
+    			add_location(p0, file$q, 140, 4, 4320);
+    			add_location(p1, file$q, 141, 4, 4354);
+    			add_location(p2, file$q, 142, 4, 4388);
     			attr(img, "src", "./icons/oldman.svg");
     			attr(img, "alt", "Old Man");
     			attr(img, "width", "25px");
     			attr(img, "height", "25px");
-    			add_location(img, file$q, 144, 4, 4262);
-    			add_location(p3, file$q, 143, 4, 4254);
+    			add_location(img, file$q, 144, 4, 4429);
+    			add_location(p3, file$q, 143, 4, 4421);
     			attr(div, "class", "tooltip");
     			attr(div, "style", div_style_value = ctx.showTooltip ? `opacity: .9; top: ${ctx.tooltipValues.top}px; left: ${ctx.tooltipValues.left}px` : 'opacity: 0');
-    			add_location(div, file$q, 137, 2, 4008);
+    			add_location(div, file$q, 137, 2, 4175);
     		},
 
     		m: function mount(target, anchor) {
@@ -29588,7 +29591,7 @@ var app = (function () {
     			attr(img, "alt", "Old Man");
     			attr(img, "width", "25px");
     			attr(img, "height", "25px");
-    			add_location(img, file$q, 147, 6, 4442);
+    			add_location(img, file$q, 147, 6, 4609);
     		},
 
     		m: function mount(target, anchor) {
@@ -29682,11 +29685,14 @@ var app = (function () {
     			t1 = space();
     			if (if_block1) if_block1.c();
     			if_block1_anchor = empty();
-    			add_location(g0, file$q, 99, 4, 2767);
-    			add_location(g1, file$q, 121, 4, 3658);
+    			add_location(g0, file$q, 99, 4, 2934);
+    			add_location(g1, file$q, 121, 4, 3825);
     			attr(svg, "id", "absMap");
     			attr(svg, "viewBox", svg_viewBox_value = `${ctx.bbox.x} ${ctx.bbox.y} ${ctx.bbox.width} ${ctx.bbox.height}`);
-    			add_location(svg, file$q, 97, 2, 2659);
+    			add_location(svg, file$q, 97, 2, 2826);
+    			attr(div, "data-intro", "Este es un ejemplo de visualización modo Mapa, si seleccionas un sector y haces click podrás ver el detalle");
+    			attr(div, "data-step", "4");
+    			attr(div, "data-disable-interaction", "true");
     			add_location(div, file$q, 96, 0, 2651);
 
     			dispose = [
@@ -32098,7 +32104,7 @@ var app = (function () {
     			attr(input, "type", "text");
     			attr(input, "class", "searchBox");
     			attr(input, "placeholder", "Cercar");
-    			add_location(input, file$v, 61, 20, 1682);
+    			add_location(input, file$v, 61, 20, 1790);
     			dispose = listen(input, "input", ctx.input_input_handler);
     		},
 
@@ -32226,7 +32232,7 @@ var app = (function () {
     	};
     }
 
-    // (56:4) <Section>
+    // (56:4) <Section data-intro='Aquí podràs seleccionar el modo de visualización' data-step="2" data-disable-interaction="true">
     function create_default_slot_5$2(ctx) {
     	var t0, t1, t2, t3, t4, current_1;
 
@@ -32428,6 +32434,9 @@ var app = (function () {
 
     	var section = new Section({
     		props: {
+    		"data-intro": "Aquí podràs seleccionar el modo de visualización",
+    		"data-step": "2",
+    		"data-disable-interaction": "true",
     		$$slots: { default: [create_default_slot_5$2] },
     		$$scope: { ctx }
     	},
@@ -32514,7 +32523,7 @@ var app = (function () {
     	};
     }
 
-    // (79:2) <Title class="chart-title">
+    // (79:2) <Title class="chart-title" data-intro='Aquí veras el título del gráfico visualizado' data-step="3">
     function create_default_slot_2$5(ctx) {
     	var t;
 
@@ -32542,6 +32551,8 @@ var app = (function () {
     	var title = new Title({
     		props: {
     		class: "chart-title",
+    		"data-intro": "Aquí veras el título del gráfico visualizado",
+    		"data-step": "3",
     		$$slots: { default: [create_default_slot_2$5] },
     		$$scope: { ctx }
     	},
@@ -32582,7 +32593,7 @@ var app = (function () {
     	};
     }
 
-    // (87:0) <AppContent>
+    // (87:0) <AppContent       data-intro="Bienvenido a SiSalut, este es un pequeño tutorial de como utilizar el sistema."     data-step="1"     data-disable-interaction="true">
     function create_default_slot$8(ctx) {
     	var current_1;
 
@@ -32653,6 +32664,9 @@ var app = (function () {
 
     	var appcontent = new AppContent({
     		props: {
+    		"data-intro": "Bienvenido a SiSalut, este es un pequeño tutorial de como utilizar el sistema.",
+    		"data-step": "1",
+    		"data-disable-interaction": "true",
     		$$slots: { default: [create_default_slot$8] },
     		$$scope: { ctx }
     	},

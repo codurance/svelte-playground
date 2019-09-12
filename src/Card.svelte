@@ -43,7 +43,7 @@
     <slot />
   </Content>
 
-  <Actions>
+  <Actions data-intro='En esta sección podrás aplicar los diferentes tipos de filtros y acciones sobre el gráfico' data-step="5" data-disable-interaction="true">
     <Select
       class="shaped"
       variant="filled"
