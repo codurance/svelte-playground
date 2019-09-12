@@ -7530,7 +7530,7 @@ var app = (function () {
     }
 
     const ABSMapFilter = writable(0);
-    const LensSelected = writable("map");
+    const LensSelected = writable('map');
     const MapBBox = writable({ width: 0, height: 0, x: 0, y: 0 });
 
     var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
