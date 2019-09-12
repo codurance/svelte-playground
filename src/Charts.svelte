@@ -17,7 +17,7 @@
   <span slot="aditionalFilter">
     <FormField>
       <Checkbox bind:checked={mixSelected} />
-      <span slot="label">Homes - Dones</span>
+      <span slot="label">Homes y Dones</span>
     </FormField>
   </span>
 </Card>

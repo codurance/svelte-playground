@@ -29686,12 +29686,12 @@ var app = (function () {
     			add_location(g1, file$q, 121, 4, 3658);
     			attr(svg, "id", "absMap");
     			attr(svg, "viewBox", svg_viewBox_value = `${ctx.bbox.x} ${ctx.bbox.y} ${ctx.bbox.width} ${ctx.bbox.height}`);
-    			add_location(svg, file$q, 97, 2, 2659);
-    			add_location(div, file$q, 96, 0, 2651);
+    			add_location(svg, file$q, 97, 2, 2683);
+    			add_location(div, file$q, 96, 0, 2675);
 
     			dispose = [
     				listen(window, "resize", handleLoadSvg),
-    				listen(svg, "load", handleLoadSvg)
+    				listen(window, "load", handleLoadSvg)
     			];
     		},
 
@@ -31522,7 +31522,7 @@ var app = (function () {
     	return {
     		c: function create() {
     			span = element("span");
-    			span.textContent = "Homes - Dones";
+    			span.textContent = "Homes y Dones";
     			attr(span, "slot", "label");
     			add_location(span, file$u, 19, 6, 636);
     		},
