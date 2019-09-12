@@ -91,11 +91,11 @@
   };
 
 </script>
-<svelte:window on:resize={handleLoadSvg} on:load={handleLoadSvg}/>
+<svelte:window on:resize={handleLoadSvg}/>
 <Table bind:ABSSelected={ABSSelected} bind:dialog={dialog} />
 
 <div>
-  <svg id="absMap" viewBox={`${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`}>
+  <svg id="absMap" viewBox={`${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`} on:load={handleLoadSvg}>
 
     <g out:fade="{{duration: 200}}">
       {#if features}
