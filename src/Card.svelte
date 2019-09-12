@@ -38,7 +38,7 @@
   }
 </script>
 
-<Card style="width: 80%; margin: 20px auto;" class="card-wrapping-chart">
+<Card class="card-wrapping-chart">
   <Content class="mdc-typography--body2">
     <slot />
   </Content>

@@ -51,32 +51,9 @@
     return feature.properties.NOMABS.replace("Barcelona - ", "");
   }
 
-  function modifyCardWrapperStyle(){
-    return listVisualization ? "" : "display:grid;";
-  }
+  $: cardStyle = listVisualization ? "margin-bottom: 25px;" : "box-shadow:2px 2px rgba(0,0,0,0.2)";
 
-  function modifyCardStyle(){
-    return listVisualization ? "margin-bottom: 25px;" : "box-shadow:2px 2px rgba(0,0,0,0.2)";
-  }
-
-  $: cardStyle = "cursor: pointer; "+ modifyCardStyle();
-
-  $: cardWrapper = 
-  modifyCardWrapperStyle()
-  + 
-  `
-  width: 80%;
-  margin: 20px auto;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  grid-auto-rows: minmax(150px, auto);
-  grid-gap: 20px;
-  rows-gap: 20px;
-`;
-  const card = `
-  border-radius: 4px;
-  box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
-  background-color: #fff;
-`;
+  $: cardWrapper = listVisualization ? "" : "display:grid;";
 
   function handleMouseOver() {
     absElement = d3.select(this);
@@ -98,11 +75,11 @@
 
 <Table bind:ABSSelected={ABSSelected} bind:dialog={dialog} />
 
-<div style={cardWrapper}>
+<div style={cardWrapper} class="cardWrapper">
 
   {#if features}
     {#each features as feature, i}
-      <Card style={cardStyle}>
+      <Card style={cardStyle} class="card-grid card-wrapping-chart">
         <PrimaryAction on:click={() => handleOnClick(feature)}>
 
           <svg
@@ -117,7 +94,7 @@
             on:mouseout={handleMouseOut}
             opacity="0.6">
             <g out:fly="{{y: -20, duration: 100}}">
-              <path in:draw="{{duration: 2000}}"
+              <path in:draw="{{duration: 1500}}"
                 id={`path-${getAbsCode(feature)}`}
                 class={`paths`}
                 d={PATH(feature)}
@@ -135,6 +112,5 @@
         </PrimaryAction>
       </Card>
     {/each}
-  {:else}loading{/if}
-
+  {/if}
 </div>

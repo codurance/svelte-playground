@@ -47,14 +47,15 @@
       <Title>SiSalut - Demo</Title>
     </Section>
     <Section align="end" toolbar>
-      <img src="/images/header.jpg" alt="SiSalut" />
+      <img class="headerImage" src="/images/header.jpg" alt="SiSalut" />
     </Section>
   </Row>
 </TopAppBar>
 <TopAppBar variant="static" color="secondary">
   <Row>
     <Section>
-       <IconButton class="material-icons" aria-label="Search"
+       <IconButton id="searchButton"
+                   class="material-icons" aria-label="Search"
                    on:click={()=> showSearch()}>
                    search</IconButton>
                    {#if isVisibleSearchInput}
@@ -65,20 +66,17 @@
         <IconButton class="material-icons" aria-label="Chart"
                     on:click={() => changeLens("barchart")}>
                     insert_chart</IconButton>
-        <IconButton class="material-icons" aria-label="Grid"
+        <IconButton id="gridButton"
+                    class="material-icons" aria-label="Grid"
                     on:click={() => changeLens("grid")}>grid_on</IconButton>
         <IconButton class="material-icons" aria-label="List"
                     on:click={() => changeLens("list")}>
                     list</IconButton>
     </Section>
-    <Section align="end" toolbar>
-        <IconButton class="material-icons" aria-label="Search">brightness_5</IconButton>
-        <IconButton class="material-icons" aria-label="Search">brightness_2</IconButton>
-    </Section>
    </Row>
 </TopAppBar>
 <TopAppBar variant="static" color="secondary">
-  <Title>
+  <Title class="chart-title">
     Percentatge de persones grans que viuen soles per ABS i sexe. Barcelona, any
     2017
   </Title>

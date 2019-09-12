@@ -5,7 +5,7 @@
   let options = {
     chart: {
       height: 1200,
-      width: "90%",
+      width: "100%",
       type: "bar",
       toolbar: {
         tools: {

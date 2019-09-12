@@ -1,5 +1,5 @@
 <script>
-  import { ABSMapFilter } from "../store.js";
+  import { ABSMapFilter, MapBBox } from "../store.js";
   import { onMount } from "svelte";
   import Table from "./Table.svelte";
   import { quintOut } from 'svelte/easing';
@@ -16,13 +16,11 @@
   let dialog;
   let ABSSelected = { };
 
-  let widthParent;
   let features;
   let barcelona;
   let colorScaleExtent = [0, 0];
 
-  $: width = widthParent / 1.5;
-  $: height = widthParent / 1.5;
+  $: bbox = $MapBBox;
   $: filter = 0;
   $: colors = mixSelected ? MIXCOLOR : HOMESCOLOR;
   $: labels = [
@@ -50,11 +48,11 @@
         properties.VALORES ? properties.VALORES[$ABSMapFilter] : 0
       )
     );
-    widthParent = d3
-      .select("#map")
-      .node()
-      .getBoundingClientRect().width;
   });
+
+  function handleLoadSvg() {
+    MapBBox.set(document.querySelector('svg').getBBox());
+  }
 
   function handleOnClick(absSelected) {
     ABSSelected = absSelected.properties;
@@ -93,10 +91,11 @@
   };
 
 </script>
-
+<svelte:window on:resize={handleLoadSvg}/>
 <Table bind:ABSSelected={ABSSelected} bind:dialog={dialog} />
-<div id="map">
-  <svg viewBox={`0 0 ${width || 0} ${height || 0}`}>
+
+<div>
+  <svg viewBox={`${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`} on:load={handleLoadSvg}>
 
     <g out:fade="{{duration: 200}}">
       {#if features}
