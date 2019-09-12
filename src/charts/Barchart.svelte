@@ -4,6 +4,7 @@
 
   let options = {
     chart: {
+      height: "1200",
       width: "100%",
       type: "bar",
       toolbar: {

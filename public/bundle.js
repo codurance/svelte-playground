@@ -29345,11 +29345,11 @@ var app = (function () {
     			attr(path_1, "d", path_1_d_value = ctx.path(ctx.feature));
     			attr(path_1, "fill", path_1_fill_value = ctx.quantize(ctx.Number(ctx.feature.properties.VALORES ? ctx.feature.properties.VALORES[ctx.$ABSMapFilter] : 0)));
     			attr(path_1, "stroke", "black");
-    			add_location(path_1, file$q, 102, 10, 2858);
+    			add_location(path_1, file$q, 102, 10, 2870);
     			set_style(text_1, "font-size", "10px");
     			attr(text_1, "transform", text_1_transform_value = `translate(${ctx.path.centroid(ctx.feature)})`);
-    			add_location(text_1, file$q, 112, 10, 3336);
-    			add_location(g, file$q, 111, 8, 3286);
+    			add_location(text_1, file$q, 112, 10, 3348);
+    			add_location(g, file$q, 111, 8, 3298);
 
     			dispose = [
     				listen(path_1, "mouseover", ctx.handleMouseOver),
@@ -29441,11 +29441,11 @@ var app = (function () {
     			attr(rect, "stroke", "black");
     			attr(rect, "stroke-width", "1");
     			attr(rect, "fill", rect_fill_value = ctx.color);
-    			add_location(rect, file$q, 123, 8, 3701);
+    			add_location(rect, file$q, 123, 8, 3713);
     			attr(text_1, "x", "25");
     			attr(text_1, "y", 19 + 15 * ctx.i);
     			attr(text_1, "font-size", "12");
-    			add_location(text_1, file$q, 131, 8, 3879);
+    			add_location(text_1, file$q, 131, 8, 3891);
     		},
 
     		m: function mount(target, anchor) {
@@ -29497,18 +29497,18 @@ var app = (function () {
     			t7 = text(t7_value);
     			t8 = space();
     			if (if_block) if_block.c();
-    			add_location(p0, file$q, 140, 4, 4141);
-    			add_location(p1, file$q, 141, 4, 4175);
-    			add_location(p2, file$q, 142, 4, 4209);
+    			add_location(p0, file$q, 140, 4, 4153);
+    			add_location(p1, file$q, 141, 4, 4187);
+    			add_location(p2, file$q, 142, 4, 4221);
     			attr(img, "src", "./icons/oldman.svg");
     			attr(img, "alt", "Old Man");
-    			attr(img, "width", "15%");
-    			attr(img, "height", "15%");
-    			add_location(img, file$q, 144, 4, 4250);
-    			add_location(p3, file$q, 143, 4, 4242);
+    			attr(img, "width", "25px");
+    			attr(img, "height", "25px");
+    			add_location(img, file$q, 144, 4, 4262);
+    			add_location(p3, file$q, 143, 4, 4254);
     			attr(div, "class", "tooltip");
     			attr(div, "style", div_style_value = ctx.showTooltip ? `opacity: .9; top: ${ctx.tooltipValues.top}px; left: ${ctx.tooltipValues.left}px` : 'opacity: 0');
-    			add_location(div, file$q, 137, 2, 3996);
+    			add_location(div, file$q, 137, 2, 4008);
     		},
 
     		m: function mount(target, anchor) {
@@ -29586,9 +29586,9 @@ var app = (function () {
     			t1 = text(t1_value);
     			attr(img, "src", "./icons/oldwoman.svg");
     			attr(img, "alt", "Old Man");
-    			attr(img, "width", "15%");
-    			attr(img, "height", "15%");
-    			add_location(img, file$q, 147, 6, 4428);
+    			attr(img, "width", "25px");
+    			attr(img, "height", "25px");
+    			add_location(img, file$q, 147, 6, 4442);
     		},
 
     		m: function mount(target, anchor) {
@@ -29682,8 +29682,9 @@ var app = (function () {
     			t1 = space();
     			if (if_block1) if_block1.c();
     			if_block1_anchor = empty();
-    			add_location(g0, file$q, 99, 4, 2755);
-    			add_location(g1, file$q, 121, 4, 3646);
+    			add_location(g0, file$q, 99, 4, 2767);
+    			add_location(g1, file$q, 121, 4, 3658);
+    			attr(svg, "id", "absMap");
     			attr(svg, "viewBox", svg_viewBox_value = `${ctx.bbox.x} ${ctx.bbox.y} ${ctx.bbox.width} ${ctx.bbox.height}`);
     			add_location(svg, file$q, 97, 2, 2659);
     			add_location(div, file$q, 96, 0, 2651);
@@ -30045,7 +30046,7 @@ var app = (function () {
     			t = space();
     			div = element("div");
     			attr(div, "id", "barchart");
-    			add_location(div, file$r, 82, 0, 1763);
+    			add_location(div, file$r, 83, 0, 1785);
     		},
 
     		l: function claim(nodes) {
@@ -30098,6 +30099,7 @@ var app = (function () {
 
       let options = {
         chart: {
+          height: "1200",
           width: "100%",
           type: "bar",
           toolbar: {

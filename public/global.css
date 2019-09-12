@@ -91,6 +91,9 @@ button:focus {
 
 svg {
   user-select: none;
+}
+
+#absMap {
   max-height: 60em;
 }
 

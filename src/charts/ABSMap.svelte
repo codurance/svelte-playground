@@ -95,7 +95,7 @@
 <Table bind:ABSSelected={ABSSelected} bind:dialog={dialog} />
 
 <div>
-  <svg viewBox={`${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`} on:load={handleLoadSvg}>
+  <svg id="absMap" viewBox={`${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`} on:load={handleLoadSvg}>
 
     <g out:fade="{{duration: 200}}">
       {#if features}
@@ -142,10 +142,10 @@
     <p>{tooltipValues.NOMAGA}</p>
     <p>{tooltipValues.NOMSS}</p>
     <p>
-    <img src="./icons/oldman.svg" alt="Old Man" width="15%" height="15%"/>
+    <img src="./icons/oldman.svg" alt="Old Man" width="25px" height="25px"/>
     {tooltipValues.VALORES ? tooltipValues.VALORES[$ABSMapFilter] : 'No Data'}
     {#if mixSelected}
-      <img src="./icons/oldwoman.svg" alt="Old Man" width="15%" height="15%"/>
+      <img src="./icons/oldwoman.svg" alt="Old Man" width="25px" height="25px"/>
       {tooltipValues.VALORES ? tooltipValues.VALORES[$ABSMapFilter] * 2 : 'No Data'}
     {/if}
     </p>
