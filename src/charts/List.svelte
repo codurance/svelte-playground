@@ -1,5 +1,5 @@
 <script>
-import GridView from "./GridView.svelte";
+  import GridView from "./GridView.svelte";
 </script>
 
-<GridView listVisualization=true />
+<GridView listVisualization="true" />

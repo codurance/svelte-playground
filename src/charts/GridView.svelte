@@ -11,7 +11,7 @@
     ActionIcons
   } from "@smui/card";
   import Button, { Label } from "@smui/button";
-  import { fade, draw, fly } from 'svelte/transition';
+  import { fade, draw, fly } from "svelte/transition";
   import Table from "./Table.svelte";
 
   const FINAL =
@@ -51,7 +51,9 @@
     return feature.properties.NOMABS.replace("Barcelona - ", "");
   }
 
-  $: cardStyle = listVisualization ? "margin-bottom: 25px;" : "box-shadow:2px 2px rgba(0,0,0,0.2)";
+  $: cardStyle = listVisualization
+    ? "margin-bottom: 25px;"
+    : "box-shadow:2px 2px rgba(0,0,0,0.2)";
 
   $: cardWrapper = listVisualization ? "" : "display:grid;";
 
@@ -66,14 +68,14 @@
   let ABSSelected;
   let dialog;
 
-   function handleOnClick(absSelected) {
+  function handleOnClick(absSelected) {
     ABSSelected = absSelected.properties;
 
     dialog.open();
   }
 </script>
 
-<Table bind:ABSSelected={ABSSelected} bind:dialog={dialog} />
+<Table bind:ABSSelected bind:dialog />
 
 <div style={cardWrapper} class="cardWrapper">
 
@@ -93,8 +95,9 @@
             on:mouseover={handleMouseOver}
             on:mouseout={handleMouseOut}
             opacity="0.6">
-            <g out:fly="{{y: -20, duration: 100}}">
-              <path in:draw="{{duration: 1500}}"
+            <g out:fly={{ y: -20, duration: 100 }}>
+              <path
+                in:draw={{ duration: 1500 }}
                 id={`path-${getAbsCode(feature)}`}
                 class={`paths`}
                 d={PATH(feature)}

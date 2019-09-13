@@ -2,8 +2,8 @@
   import { ABSMapFilter, MapBBox } from "../store.js";
   import { onMount } from "svelte";
   import Table from "./Table.svelte";
-  import { quintOut } from 'svelte/easing';
-  import { fade, draw, fly } from 'svelte/transition';
+  import { quintOut } from "svelte/easing";
+  import { fade, draw, fly } from "svelte/transition";
 
   const HOMESCOLOR = ["#ffffff", "#6fd1f2", "#12c4ff", "#089dcf", "#00769e"];
   const MIXCOLOR = ["#ffffff", "#ffd333", "#ffde66", "#fff4cc", "#ffe999"];
@@ -14,7 +14,7 @@
 
   export let mixSelected;
   let dialog;
-  let ABSSelected = { };
+  let ABSSelected = {};
 
   let features;
   let barcelona;
@@ -51,7 +51,7 @@
   });
 
   function handleLoadSvg() {
-    MapBBox.set(document.querySelector('svg').getBBox());
+    MapBBox.set(document.querySelector("svg").getBBox());
   }
 
   function handleOnClick(absSelected) {
@@ -63,7 +63,7 @@
   function handleMouseOver() {
     showTooltip = true;
     selectElement = d3.select(this);
-    selectElement.attr("fill", mixSelected ? "lightblue": "orange");
+    selectElement.attr("fill", mixSelected ? "lightblue" : "orange");
   }
 
   function handleMouseMove(d, event) {
@@ -89,33 +89,38 @@
     );
     selectElement.attr("fill", quantizedColor);
   };
-
 </script>
-<svelte:window on:resize={handleLoadSvg}/>
-<Table bind:ABSSelected={ABSSelected} bind:dialog={dialog} />
 
-<div data-intro='Este es un ejemplo de visualización modo Mapa, si seleccionas un sector y haces click podrás ver el detalle' data-step="4" data-disable-interaction="true">
-  <svg id="absMap" viewBox={`${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`} on:load={handleLoadSvg}>
+<svelte:window on:resize={handleLoadSvg} />
+<Table bind:ABSSelected bind:dialog />
 
-    <g out:fade="{{duration: 200}}">
+<div>
+  <svg
+    id="absMap"
+    viewBox={`${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`}
+    on:load={handleLoadSvg}>
+
+    <g out:fade={{ duration: 200 }}>
       {#if features}
         {#each features as feature, i}
-          <path in:draw="{{duration: 3000}}"
+          <path
+            in:draw={{ duration: 3000 }}
             d={path(feature)}
             fill={quantize(Number(feature.properties.VALORES ? feature.properties.VALORES[$ABSMapFilter] : 0))}
             stroke="black"
             on:mouseover={handleMouseOver}
             on:mousemove={event => handleMouseMove(feature, event)}
             on:mouseout={handleMouseOut(feature)}
-            on:click={()=> handleOnClick(feature)} />
+            on:click={() => handleOnClick(feature)} />
 
-        <g out:fly="{{y: -20, duration: 200}}">
-          <text in:fade="{{delay: 1000 + i * 15, duration: 200}}"
-            style="font-size: 10px"
-            transform={`translate(${path.centroid(feature)})`}>
-            {feature.properties.NOMABS.replace('Barcelona - ', '')}
-          </text>
-        </g>
+          <g out:fly={{ y: -20, duration: 200 }}>
+            <text
+              in:fade={{ delay: 1000 + i * 15, duration: 200 }}
+              style="font-size: 10px"
+              transform={`translate(${path.centroid(feature)})`}>
+              {feature.properties.NOMABS.replace('Barcelona - ', '')}
+            </text>
+          </g>
         {/each}
       {:else}loading{/if}
     </g>
@@ -142,12 +147,16 @@
     <p>{tooltipValues.NOMAGA}</p>
     <p>{tooltipValues.NOMSS}</p>
     <p>
-    <img src="./icons/oldman.svg" alt="Old Man" width="25px" height="25px"/>
-    {tooltipValues.VALORES ? tooltipValues.VALORES[$ABSMapFilter] : 'No Data'}
-    {#if mixSelected}
-      <img src="./icons/oldwoman.svg" alt="Old Man" width="25px" height="25px"/>
-      {tooltipValues.VALORES ? tooltipValues.VALORES[$ABSMapFilter] * 2 : 'No Data'}
-    {/if}
+      <img src="./icons/oldman.svg" alt="Old Man" width="25px" height="25px" />
+      {tooltipValues.VALORES ? tooltipValues.VALORES[$ABSMapFilter] : 'No Data'}
+      {#if mixSelected}
+        <img
+          src="./icons/oldwoman.svg"
+          alt="Old Man"
+          width="25px"
+          height="25px" />
+        {tooltipValues.VALORES ? tooltipValues.VALORES[$ABSMapFilter] * 2 : 'No Data'}
+      {/if}
     </p>
   </div>
 {/if}

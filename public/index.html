@@ -13,7 +13,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/intro.js@2.9.3/minified/introjs.min.css"
     />
-    <link rel="stylesheet" href="./intro.css" />
+    <link rel="stylesheet" href="./intro/theme.css" />
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts@latest"></script>
     <script src="https://d3js.org/d3.v5.min.js"></script>
@@ -22,30 +22,10 @@
       type="text/javascript"
       src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5d77a70f5a5d65af"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/intro.js@2.9.3/intro.min.js"></script>
 
     <script defer src="./bundle.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/intro.js@2.9.3/intro.min.js"></script>
-    <script src="./cookie.js"></script>
   </head>
 
   <body></body>
-  <script>
-    window.addEventListener("load", function() {
-      var introWasShown = getCookie("introWasShowen");
-
-      if (!introWasShown) {
-        introJs()
-          .setOptions({
-            skipLabel: "Salir",
-            doneLabel: "Finalizar",
-            nextLabel: "Siguiente",
-            prevLabel: "Anterior",
-            showStepNumbers: 0
-          })
-          .start();
-
-        setCookie("introWasShowen", true, 30);
-      }
-    });
-  </script>
 </html>

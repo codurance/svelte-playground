@@ -13,10 +13,11 @@
         }
       },
       events: {
-        click: function(event, chartContext, config){
-          if(config.dataPointIndex >= 0) {
-              ABSSelected.NOMAGA = ABSSelected.NOMABS = config.config.xaxis.categories[config.dataPointIndex];
-              dialog.open();
+        click: function(event, chartContext, config) {
+          if (config.dataPointIndex >= 0) {
+            ABSSelected.NOMAGA = ABSSelected.NOMABS =
+              config.config.xaxis.categories[config.dataPointIndex];
+            dialog.open();
           }
         }
       }
@@ -41,19 +42,19 @@
         trim: false
       },
       title: {
-          text: '% persones que viuen soles',
-          style: {
-            fontSize:  '18px'
-          },
-      },
+        text: "% persones que viuen soles",
+        style: {
+          fontSize: "18px"
+        }
+      }
     },
     yaxis: {
       title: {
-          text: 'Àrees Bàsiques de Salut',
-          style: {
-            fontSize:  '18px'
-          },
-      },
+        text: "Àrees Bàsiques de Salut",
+        style: {
+          fontSize: "18px"
+        }
+      }
     }
   };
 
@@ -61,7 +62,7 @@
   let ABSSelected = {
     NOMABS: "",
     NOMAGA: ""
-   };
+  };
 
   onMount(async () => {
     const fetched = await fetch(
@@ -80,5 +81,5 @@
   });
 </script>
 
-<Table bind:ABSSelected={ABSSelected} bind:dialog={dialog} />
+<Table bind:ABSSelected bind:dialog />
 <div id="barchart" />

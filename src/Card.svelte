@@ -38,12 +38,12 @@
   }
 </script>
 
-<Card class="card-wrapping-chart">
+<Card class="card-wrapping-chart" id="step3">
   <Content class="mdc-typography--body2">
     <slot />
   </Content>
 
-  <Actions data-intro='En esta sección podrás aplicar los diferentes tipos de filtros y acciones sobre el gráfico' data-step="5" data-disable-interaction="true">
+  <Actions id="step4">
     <Select
       class="shaped"
       variant="filled"
@@ -55,7 +55,7 @@
       {/each}
     </Select>
 
-    <slot name="aditionalFilter"/>
+    <slot name="aditionalFilter" />
 
     <ActionIcons>
       <IconButton toggle aria-label="Add to favorites" title="Add to favorites">

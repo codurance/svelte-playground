@@ -1,5 +1,5 @@
 .introjs-tooltip {
-  background-color: #13c4ff8a;
+  background-color: #13c4ffc9;
   color: #fff;
 }
 
@@ -68,4 +68,8 @@
 .introjs-arrow.right-bottom {
   right: -20px;
   border-color: transparent transparent transparent #fff;
+}
+
+.introjs-tooltipReferenceLayer {
+  top: 10% !important;
 }
