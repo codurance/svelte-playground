@@ -16,6 +16,7 @@
 
   import Charts from "./Charts.svelte";
   import Intro from "./intro/Intro.svelte";
+  import Scroll from "./Scroll.svelte";
 
   let current = "main";
   let search = "";
@@ -104,6 +105,7 @@
     2017
   </Title>
 </TopAppBar>
+<Scroll />
 
 <Scrim />
 
