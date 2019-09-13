@@ -121,6 +121,15 @@ svg {
   rows-gap: 20px;
 }
 
+#scrollButton {
+  position: fixed;
+  bottom: 5%;
+  right: 11px;
+  z-index: 1;
+  width: 50px;
+  height: 50px;
+}
+
 @media screen and (max-width: 789px) {
   .card-wrapping-chart {
     width: 100% !important;
@@ -144,6 +153,12 @@ svg {
 
   .chart-title {
     font-size: 60% !important;
+  }
+
+  #scrollButton {
+    bottom: 10%;
+    width: 40px;
+    height: 40px;
   }
 }
 

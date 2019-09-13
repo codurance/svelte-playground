@@ -31,10 +31,7 @@
 
 {#if showScrollButton}
   <div in:fade={{ duration: 200 }}>
-    <Fab
-      on:click={scrollToTop}
-      style="position: fixed; bottom: 5%; right: 12px; z-index: 1; width: 50px;
-      height: 50px;">
+    <Fab id="scrollButton" on:click={scrollToTop}>
       <Icon class="material-icons">arrow_upward</Icon>
     </Fab>
   </div>

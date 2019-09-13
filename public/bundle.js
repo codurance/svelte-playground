@@ -32175,7 +32175,7 @@ var app = (function () {
 
     	var fab = new Fab({
     		props: {
-    		style: "position: fixed; bottom: 5%; right: 12px; z-index: 1; width: 50px;\n      height: 50px;",
+    		id: "scrollButton",
     		$$slots: { default: [create_default_slot$8] },
     		$$scope: { ctx }
     	},
@@ -32225,7 +32225,7 @@ var app = (function () {
     	};
     }
 
-    // (38:6) <Icon class="material-icons">
+    // (35:6) <Icon class="material-icons">
     function create_default_slot_1$5(ctx) {
     	var t;
 
@@ -32246,7 +32246,7 @@ var app = (function () {
     	};
     }
 
-    // (34:4) <Fab       on:click={scrollToTop}       style="position: fixed; bottom: 5%; right: 12px; z-index: 1; width: 50px;       height: 50px;">
+    // (34:4) <Fab id="scrollButton" on:click={scrollToTop}>
     function create_default_slot$8(ctx) {
     	var current;
 
