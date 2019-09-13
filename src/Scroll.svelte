@@ -1,6 +1,7 @@
 <script>
   import Fab from "@smui/fab";
   import { Icon } from "@smui/common";
+  import { fade } from "svelte/transition";
 
   let minScroll = 300;
   $: showScrollButton = false;
@@ -29,10 +30,12 @@
 <svelte:window on:scroll={shouldShowButton} />
 
 {#if showScrollButton}
-  <Fab
-    on:click={scrollToTop}
-    style="position: fixed; bottom: 5%; right: 12px; z-index: 1; width: 50px;
-    height: 50px;">
-    <Icon class="material-icons">arrow_upward</Icon>
-  </Fab>
+  <div in:fade={{ duration: 200 }}>
+    <Fab
+      on:click={scrollToTop}
+      style="position: fixed; bottom: 5%; right: 12px; z-index: 1; width: 50px;
+      height: 50px;">
+      <Icon class="material-icons">arrow_upward</Icon>
+    </Fab>
+  </div>
 {/if}
