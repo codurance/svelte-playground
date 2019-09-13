@@ -205,4 +205,9 @@ svg {
   .card-wrapping-chart {
     width: 100% !important;
   }
+
+  #scrollButton {
+    width: 40px;
+    height: 40px;
+  }
 }
