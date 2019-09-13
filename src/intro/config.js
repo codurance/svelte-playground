@@ -13,11 +13,11 @@ const Config = {
     },
     {
       element: '#step1',
-      intro: 'Aquí podrás seleccionar el modo de visualización.'
+      intro: 'Aquí veras el título del gráfico visualizado.'
     },
     {
       element: '#step2',
-      intro: 'Aquí veras el título del gráfico visualizado.'
+      intro: 'Aquí podrás seleccionar el modo de visualización.'
     },
     {
       element: '#step3',

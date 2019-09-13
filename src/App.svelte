@@ -46,7 +46,6 @@
   <Row>
     <Section>
       <img src="/images/logo.jpg" alt="SiSalut" />
-      <Title>SiSalut - Demo</Title>
     </Section>
     <Section align="end" toolbar>
       <img class="headerImage" src="/images/header.jpg" alt="SiSalut" />
@@ -55,7 +54,13 @@
 </TopAppBar>
 <TopAppBar variant="static" color="secondary">
   <Row>
-    <Section id="step1">
+    <Section id="step1" toolbar>
+      <Title class="chart-title">
+        Percentatge de persones grans que viuen soles per ABS i sexe. Barcelona,
+        any 2017
+      </Title>
+    </Section>
+    <Section id="step2" align="end" toolbar>
       <IconButton
         id="searchButton"
         class="material-icons"
@@ -98,12 +103,6 @@
       </IconButton>
     </Section>
   </Row>
-</TopAppBar>
-<TopAppBar variant="static" color="secondary">
-  <Title id="step2" class="chart-title">
-    Percentatge de persones grans que viuen soles per ABS i sexe. Barcelona, any
-    2017
-  </Title>
 </TopAppBar>
 <Scroll />
 

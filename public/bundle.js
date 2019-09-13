@@ -31870,35 +31870,35 @@ var app = (function () {
     };
 
     const Config = {
-      skipLabel: 'Salir',
-      doneLabel: 'Finalizar',
-      nextLabel: 'Siguiente',
-      prevLabel: 'Anterior',
+      skipLabel: "Salir",
+      doneLabel: "Finalizar",
+      nextLabel: "Siguiente",
+      prevLabel: "Anterior",
       showStepNumbers: 0,
       disableInteraction: 1,
       exitOnOverlayClick: 0,
       steps: [
         {
           intro:
-            'Bienvenido a SiSalut, este es un pequeño tutorial de como utilizar el sistema.'
+            "Bienvenido a SiSalut, este es un pequeño tutorial de como utilizar el sistema."
         },
         {
-          element: '#step1',
-          intro: 'Aquí podrás seleccionar el modo de visualización.'
+          element: "#step1",
+          intro: "Aquí veras el título del gráfico visualizado."
         },
         {
-          element: '#step2',
-          intro: 'Aquí veras el título del gráfico visualizado.'
+          element: "#step2",
+          intro: "Aquí podrás seleccionar el modo de visualización."
         },
         {
-          element: '#step3',
+          element: "#step3",
           intro:
-            'Este es un ejemplo de visualización, si seleccionas un sector y haces click podrás ver el detalle.'
+            "Este es un ejemplo de visualización, si seleccionas un sector y haces click podrás ver el detalle."
         },
         {
-          element: '#step4',
+          element: "#step4",
           intro:
-            'En esta sección podrás aplicar los diferentes tipos de filtros y acciones sobre el gráfico.'
+            "En esta sección podrás aplicar los diferentes tipos de filtros y acciones sobre el gráfico."
         }
       ]
     };
@@ -32398,44 +32398,13 @@ var app = (function () {
 
     const file$x = "src/App.svelte";
 
-    // (49:6) <Title>
-    function create_default_slot_15$1(ctx) {
-    	var t;
-
-    	return {
-    		c: function create() {
-    			t = text("SiSalut - Demo");
-    		},
-
-    		m: function mount(target, anchor) {
-    			insert(target, t, anchor);
-    		},
-
-    		d: function destroy(detaching) {
-    			if (detaching) {
-    				detach(t);
-    			}
-    		}
-    	};
-    }
-
     // (47:4) <Section>
     function create_default_slot_14$1(ctx) {
-    	var img, t, current_1;
-
-    	var title = new Title({
-    		props: {
-    		$$slots: { default: [create_default_slot_15$1] },
-    		$$scope: { ctx }
-    	},
-    		$$inline: true
-    	});
+    	var img;
 
     	return {
     		c: function create() {
     			img = element("img");
-    			t = space();
-    			title.$$.fragment.c();
     			attr(img, "src", "/images/logo.jpg");
     			attr(img, "alt", "SiSalut");
     			add_location(img, file$x, 47, 6, 1199);
@@ -32443,41 +32412,17 @@ var app = (function () {
 
     		m: function mount(target, anchor) {
     			insert(target, img, anchor);
-    			insert(target, t, anchor);
-    			mount_component(title, target, anchor);
-    			current_1 = true;
-    		},
-
-    		p: function update(changed, ctx) {
-    			var title_changes = {};
-    			if (changed.$$scope) title_changes.$$scope = { changed, ctx };
-    			title.$set(title_changes);
-    		},
-
-    		i: function intro(local) {
-    			if (current_1) return;
-    			transition_in(title.$$.fragment, local);
-
-    			current_1 = true;
-    		},
-
-    		o: function outro(local) {
-    			transition_out(title.$$.fragment, local);
-    			current_1 = false;
     		},
 
     		d: function destroy(detaching) {
     			if (detaching) {
     				detach(img);
-    				detach(t);
     			}
-
-    			destroy_component(title, detaching);
     		}
     	};
     }
 
-    // (51:4) <Section align="end" toolbar>
+    // (50:4) <Section align="end" toolbar>
     function create_default_slot_13$1(ctx) {
     	var img;
 
@@ -32487,7 +32432,7 @@ var app = (function () {
     			attr(img, "class", "headerImage");
     			attr(img, "src", "/images/header.jpg");
     			attr(img, "alt", "SiSalut");
-    			add_location(img, file$x, 51, 6, 1335);
+    			add_location(img, file$x, 50, 6, 1299);
     		},
 
     		m: function mount(target, anchor) {
@@ -32621,8 +32566,76 @@ var app = (function () {
     	};
     }
 
-    // (59:6) <IconButton         id="searchButton"         class="material-icons"         aria-label="Search"         on:click={() => showSearch()}>
+    // (58:6) <Title class="chart-title">
     function create_default_slot_10$2(ctx) {
+    	var t;
+
+    	return {
+    		c: function create() {
+    			t = text("Percentatge de persones grans que viuen soles per ABS i sexe. Barcelona,\n        any 2017");
+    		},
+
+    		m: function mount(target, anchor) {
+    			insert(target, t, anchor);
+    		},
+
+    		d: function destroy(detaching) {
+    			if (detaching) {
+    				detach(t);
+    			}
+    		}
+    	};
+    }
+
+    // (57:4) <Section id="step1" toolbar>
+    function create_default_slot_9$2(ctx) {
+    	var current_1;
+
+    	var title = new Title({
+    		props: {
+    		class: "chart-title",
+    		$$slots: { default: [create_default_slot_10$2] },
+    		$$scope: { ctx }
+    	},
+    		$$inline: true
+    	});
+
+    	return {
+    		c: function create() {
+    			title.$$.fragment.c();
+    		},
+
+    		m: function mount(target, anchor) {
+    			mount_component(title, target, anchor);
+    			current_1 = true;
+    		},
+
+    		p: function update(changed, ctx) {
+    			var title_changes = {};
+    			if (changed.$$scope) title_changes.$$scope = { changed, ctx };
+    			title.$set(title_changes);
+    		},
+
+    		i: function intro(local) {
+    			if (current_1) return;
+    			transition_in(title.$$.fragment, local);
+
+    			current_1 = true;
+    		},
+
+    		o: function outro(local) {
+    			transition_out(title.$$.fragment, local);
+    			current_1 = false;
+    		},
+
+    		d: function destroy(detaching) {
+    			destroy_component(title, detaching);
+    		}
+    	};
+    }
+
+    // (64:6) <IconButton         id="searchButton"         class="material-icons"         aria-label="Search"         on:click={() => showSearch()}>
+    function create_default_slot_8$2(ctx) {
     	var t;
 
     	return {
@@ -32642,7 +32655,7 @@ var app = (function () {
     	};
     }
 
-    // (66:6) {#if isVisibleSearchInput}
+    // (71:6) {#if isVisibleSearchInput}
     function create_if_block$c(ctx) {
     	var input, input_transition, current_1, dispose;
 
@@ -32652,7 +32665,7 @@ var app = (function () {
     			attr(input, "type", "text");
     			attr(input, "class", "searchBox");
     			attr(input, "placeholder", "Cercar");
-    			add_location(input, file$x, 66, 8, 1737);
+    			add_location(input, file$x, 71, 8, 1916);
     			dispose = listen(input, "input", ctx.input_input_handler);
     		},
 
@@ -32696,8 +32709,8 @@ var app = (function () {
     	};
     }
 
-    // (74:6) <IconButton         class="material-icons"         aria-label="Map"         on:click={() => changeLens('map')}>
-    function create_default_slot_9$2(ctx) {
+    // (79:6) <IconButton         class="material-icons"         aria-label="Map"         on:click={() => changeLens('map')}>
+    function create_default_slot_7$2(ctx) {
     	var t;
 
     	return {
@@ -32717,8 +32730,8 @@ var app = (function () {
     	};
     }
 
-    // (80:6) <IconButton         class="material-icons"         aria-label="Chart"         on:click={() => changeLens('barchart')}>
-    function create_default_slot_8$2(ctx) {
+    // (85:6) <IconButton         class="material-icons"         aria-label="Chart"         on:click={() => changeLens('barchart')}>
+    function create_default_slot_6$2(ctx) {
     	var t;
 
     	return {
@@ -32738,8 +32751,8 @@ var app = (function () {
     	};
     }
 
-    // (86:6) <IconButton         id="gridButton"         class="material-icons"         aria-label="Grid"         on:click={() => changeLens('grid')}>
-    function create_default_slot_7$2(ctx) {
+    // (91:6) <IconButton         id="gridButton"         class="material-icons"         aria-label="Grid"         on:click={() => changeLens('grid')}>
+    function create_default_slot_5$2(ctx) {
     	var t;
 
     	return {
@@ -32759,8 +32772,8 @@ var app = (function () {
     	};
     }
 
-    // (93:6) <IconButton         class="material-icons"         aria-label="List"         on:click={() => changeLens('list')}>
-    function create_default_slot_6$2(ctx) {
+    // (98:6) <IconButton         class="material-icons"         aria-label="List"         on:click={() => changeLens('list')}>
+    function create_default_slot_4$3(ctx) {
     	var t;
 
     	return {
@@ -32780,8 +32793,8 @@ var app = (function () {
     	};
     }
 
-    // (58:4) <Section id="step1">
-    function create_default_slot_5$2(ctx) {
+    // (63:4) <Section id="step2" align="end" toolbar>
+    function create_default_slot_3$4(ctx) {
     	var t0, t1, t2, t3, t4, current_1;
 
     	var iconbutton0 = new IconButton({
@@ -32789,7 +32802,7 @@ var app = (function () {
     		id: "searchButton",
     		class: "material-icons",
     		"aria-label": "Search",
-    		$$slots: { default: [create_default_slot_10$2] },
+    		$$slots: { default: [create_default_slot_8$2] },
     		$$scope: { ctx }
     	},
     		$$inline: true
@@ -32802,7 +32815,7 @@ var app = (function () {
     		props: {
     		class: "material-icons",
     		"aria-label": "Map",
-    		$$slots: { default: [create_default_slot_9$2] },
+    		$$slots: { default: [create_default_slot_7$2] },
     		$$scope: { ctx }
     	},
     		$$inline: true
@@ -32813,7 +32826,7 @@ var app = (function () {
     		props: {
     		class: "material-icons",
     		"aria-label": "Chart",
-    		$$slots: { default: [create_default_slot_8$2] },
+    		$$slots: { default: [create_default_slot_6$2] },
     		$$scope: { ctx }
     	},
     		$$inline: true
@@ -32825,7 +32838,7 @@ var app = (function () {
     		id: "gridButton",
     		class: "material-icons",
     		"aria-label": "Grid",
-    		$$slots: { default: [create_default_slot_7$2] },
+    		$$slots: { default: [create_default_slot_5$2] },
     		$$scope: { ctx }
     	},
     		$$inline: true
@@ -32836,7 +32849,7 @@ var app = (function () {
     		props: {
     		class: "material-icons",
     		"aria-label": "List",
-    		$$slots: { default: [create_default_slot_6$2] },
+    		$$slots: { default: [create_default_slot_4$3] },
     		$$scope: { ctx }
     	},
     		$$inline: true
@@ -32976,14 +32989,26 @@ var app = (function () {
     	};
     }
 
-    // (57:2) <Row>
-    function create_default_slot_4$3(ctx) {
-    	var current_1;
+    // (56:2) <Row>
+    function create_default_slot_2$5(ctx) {
+    	var t, current_1;
 
-    	var section = new Section({
+    	var section0 = new Section({
     		props: {
     		id: "step1",
-    		$$slots: { default: [create_default_slot_5$2] },
+    		toolbar: true,
+    		$$slots: { default: [create_default_slot_9$2] },
+    		$$scope: { ctx }
+    	},
+    		$$inline: true
+    	});
+
+    	var section1 = new Section({
+    		props: {
+    		id: "step2",
+    		align: "end",
+    		toolbar: true,
+    		$$slots: { default: [create_default_slot_3$4] },
     		$$scope: { ctx }
     	},
     		$$inline: true
@@ -32991,45 +33016,62 @@ var app = (function () {
 
     	return {
     		c: function create() {
-    			section.$$.fragment.c();
+    			section0.$$.fragment.c();
+    			t = space();
+    			section1.$$.fragment.c();
     		},
 
     		m: function mount(target, anchor) {
-    			mount_component(section, target, anchor);
+    			mount_component(section0, target, anchor);
+    			insert(target, t, anchor);
+    			mount_component(section1, target, anchor);
     			current_1 = true;
     		},
 
     		p: function update(changed, ctx) {
-    			var section_changes = {};
-    			if (changed.$$scope || changed.isVisibleSearchInput || changed.search) section_changes.$$scope = { changed, ctx };
-    			section.$set(section_changes);
+    			var section0_changes = {};
+    			if (changed.$$scope) section0_changes.$$scope = { changed, ctx };
+    			section0.$set(section0_changes);
+
+    			var section1_changes = {};
+    			if (changed.$$scope || changed.isVisibleSearchInput || changed.search) section1_changes.$$scope = { changed, ctx };
+    			section1.$set(section1_changes);
     		},
 
     		i: function intro(local) {
     			if (current_1) return;
-    			transition_in(section.$$.fragment, local);
+    			transition_in(section0.$$.fragment, local);
+
+    			transition_in(section1.$$.fragment, local);
 
     			current_1 = true;
     		},
 
     		o: function outro(local) {
-    			transition_out(section.$$.fragment, local);
+    			transition_out(section0.$$.fragment, local);
+    			transition_out(section1.$$.fragment, local);
     			current_1 = false;
     		},
 
     		d: function destroy(detaching) {
-    			destroy_component(section, detaching);
+    			destroy_component(section0, detaching);
+
+    			if (detaching) {
+    				detach(t);
+    			}
+
+    			destroy_component(section1, detaching);
     		}
     	};
     }
 
-    // (56:0) <TopAppBar variant="static" color="secondary">
-    function create_default_slot_3$4(ctx) {
+    // (55:0) <TopAppBar variant="static" color="secondary">
+    function create_default_slot_1$6(ctx) {
     	var current_1;
 
     	var row = new Row({
     		props: {
-    		$$slots: { default: [create_default_slot_4$3] },
+    		$$slots: { default: [create_default_slot_2$5] },
     		$$scope: { ctx }
     	},
     		$$inline: true
@@ -33069,76 +33111,7 @@ var app = (function () {
     	};
     }
 
-    // (103:2) <Title id="step2" class="chart-title">
-    function create_default_slot_2$5(ctx) {
-    	var t;
-
-    	return {
-    		c: function create() {
-    			t = text("Percentatge de persones grans que viuen soles per ABS i sexe. Barcelona, any\n    2017");
-    		},
-
-    		m: function mount(target, anchor) {
-    			insert(target, t, anchor);
-    		},
-
-    		d: function destroy(detaching) {
-    			if (detaching) {
-    				detach(t);
-    			}
-    		}
-    	};
-    }
-
-    // (102:0) <TopAppBar variant="static" color="secondary">
-    function create_default_slot_1$6(ctx) {
-    	var current_1;
-
-    	var title = new Title({
-    		props: {
-    		id: "step2",
-    		class: "chart-title",
-    		$$slots: { default: [create_default_slot_2$5] },
-    		$$scope: { ctx }
-    	},
-    		$$inline: true
-    	});
-
-    	return {
-    		c: function create() {
-    			title.$$.fragment.c();
-    		},
-
-    		m: function mount(target, anchor) {
-    			mount_component(title, target, anchor);
-    			current_1 = true;
-    		},
-
-    		p: function update(changed, ctx) {
-    			var title_changes = {};
-    			if (changed.$$scope) title_changes.$$scope = { changed, ctx };
-    			title.$set(title_changes);
-    		},
-
-    		i: function intro(local) {
-    			if (current_1) return;
-    			transition_in(title.$$.fragment, local);
-
-    			current_1 = true;
-    		},
-
-    		o: function outro(local) {
-    			transition_out(title.$$.fragment, local);
-    			current_1 = false;
-    		},
-
-    		d: function destroy(detaching) {
-    			destroy_component(title, detaching);
-    		}
-    	};
-    }
-
-    // (112:0) <AppContent>
+    // (111:0) <AppContent>
     function create_default_slot$9(ctx) {
     	var t, current_1;
 
@@ -33188,7 +33161,7 @@ var app = (function () {
     }
 
     function create_fragment$D(ctx) {
-    	var link0, t0, link1, t1, link2, t2, t3, t4, t5, t6, t7, current_1;
+    	var link0, t0, link1, t1, link2, t2, t3, t4, t5, t6, current_1;
 
     	var topappbar0 = new TopAppBar({
     		props: {
@@ -33201,16 +33174,6 @@ var app = (function () {
     	});
 
     	var topappbar1 = new TopAppBar({
-    		props: {
-    		variant: "static",
-    		color: "secondary",
-    		$$slots: { default: [create_default_slot_3$4] },
-    		$$scope: { ctx }
-    	},
-    		$$inline: true
-    	});
-
-    	var topappbar2 = new TopAppBar({
     		props: {
     		variant: "static",
     		color: "secondary",
@@ -33244,12 +33207,10 @@ var app = (function () {
     			t3 = space();
     			topappbar1.$$.fragment.c();
     			t4 = space();
-    			topappbar2.$$.fragment.c();
-    			t5 = space();
     			scroll.$$.fragment.c();
-    			t6 = space();
+    			t5 = space();
     			scrim.$$.fragment.c();
-    			t7 = space();
+    			t6 = space();
     			appcontent.$$.fragment.c();
     			attr(link0, "rel", "stylesheet");
     			attr(link0, "href", "https://fonts.googleapis.com/icon?family=Material+Icons");
@@ -33277,12 +33238,10 @@ var app = (function () {
     			insert(target, t3, anchor);
     			mount_component(topappbar1, target, anchor);
     			insert(target, t4, anchor);
-    			mount_component(topappbar2, target, anchor);
-    			insert(target, t5, anchor);
     			mount_component(scroll, target, anchor);
-    			insert(target, t6, anchor);
+    			insert(target, t5, anchor);
     			mount_component(scrim, target, anchor);
-    			insert(target, t7, anchor);
+    			insert(target, t6, anchor);
     			mount_component(appcontent, target, anchor);
     			current_1 = true;
     		},
@@ -33296,10 +33255,6 @@ var app = (function () {
     			if (changed.$$scope || changed.isVisibleSearchInput || changed.search) topappbar1_changes.$$scope = { changed, ctx };
     			topappbar1.$set(topappbar1_changes);
 
-    			var topappbar2_changes = {};
-    			if (changed.$$scope) topappbar2_changes.$$scope = { changed, ctx };
-    			topappbar2.$set(topappbar2_changes);
-
     			var appcontent_changes = {};
     			if (changed.$$scope) appcontent_changes.$$scope = { changed, ctx };
     			appcontent.$set(appcontent_changes);
@@ -33310,8 +33265,6 @@ var app = (function () {
     			transition_in(topappbar0.$$.fragment, local);
 
     			transition_in(topappbar1.$$.fragment, local);
-
-    			transition_in(topappbar2.$$.fragment, local);
 
     			transition_in(scroll.$$.fragment, local);
 
@@ -33325,7 +33278,6 @@ var app = (function () {
     		o: function outro(local) {
     			transition_out(topappbar0.$$.fragment, local);
     			transition_out(topappbar1.$$.fragment, local);
-    			transition_out(topappbar2.$$.fragment, local);
     			transition_out(scroll.$$.fragment, local);
     			transition_out(scrim.$$.fragment, local);
     			transition_out(appcontent.$$.fragment, local);
@@ -33354,22 +33306,16 @@ var app = (function () {
     				detach(t4);
     			}
 
-    			destroy_component(topappbar2, detaching);
+    			destroy_component(scroll, detaching);
 
     			if (detaching) {
     				detach(t5);
     			}
 
-    			destroy_component(scroll, detaching);
-
-    			if (detaching) {
-    				detach(t6);
-    			}
-
     			destroy_component(scrim, detaching);
 
     			if (detaching) {
-    				detach(t7);
+    				detach(t6);
     			}
 
     			destroy_component(appcontent, detaching);

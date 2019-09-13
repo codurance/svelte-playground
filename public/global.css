@@ -37,7 +37,6 @@ textarea {
   font-family: inherit;
   font-size: inherit;
   padding: 0.4em;
-  margin: 0 0 0.5em 0;
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 2px;
@@ -69,6 +68,11 @@ button:focus {
   height: auto !important;
 }
 
+.mdc-top-app-bar__section {
+  padding-bottom: 0px !important;
+  padding-top: 0px !important;
+}
+
 .tooltip {
   position: absolute;
   font-family: Roboto, Arial, sans-serif;
@@ -86,7 +90,7 @@ button:focus {
 .searchBox {
   margin-left: 10px !important;
   border-radius: 5px;
-  width: 25em;
+  width: 35vh;
 }
 
 svg {
@@ -123,11 +127,19 @@ svg {
 
 #scrollButton {
   position: fixed;
-  bottom: 5%;
+  bottom: 8em;
   right: 11px;
   z-index: 1;
   width: 50px;
   height: 50px;
+}
+
+.chart-title {
+  width: 50em;
+  padding: 0 !important;
+  overflow-wrap: break-word !important;
+  white-space: unset !important;
+  line-height: 3em !important;
 }
 
 @media screen and (max-width: 789px) {
@@ -152,7 +164,8 @@ svg {
   }
 
   .chart-title {
-    font-size: 60% !important;
+    width: 27em;
+    font-size: 70% !important;
   }
 
   #scrollButton {
@@ -164,14 +177,14 @@ svg {
 
 @media (min-width: 300px) and (max-width: 321px) {
   .chart-title {
-    font-size: 7px !important;
+    font-size: 9px !important;
   }
 }
 
 /* GALAXY */
 @media (min-width: 322px) and (max-width: 363px) {
   .chart-title {
-    font-size: 8px !important;
+    font-size: 10px !important;
   }
 }
 
@@ -192,7 +205,14 @@ svg {
 /* IPHONE X */
 @media (min-width: 375px) and (max-width: 376px) {
   .chart-title {
-    font-size: 9px !important;
+    font-size: 10px !important;
+  }
+}
+
+/* IPAD PRO */
+@media only screen and (min-width: 767px) and (max-width: 768px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
+  .chart-title {
+    width: 100%;
   }
 }
 
@@ -209,5 +229,9 @@ svg {
   #scrollButton {
     width: 40px;
     height: 40px;
+  }
+  .chart-title {
+    width: 100%;
+    font-size: 1em !important;
   }
 }
