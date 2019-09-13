@@ -1,1 +1,0 @@
-"use strict";function printMap(){var t=document.querySelector("#abs-bcn-map");html2canvas(t,{width:1800,height:1800,scale:1}).then(a=>{let e=jsPDF("p","pt","a4",!0);e.addImage(a.toDataURL(),"PNG",5,22,920,1200),e.save(t.dataset.filename)})}$(document).ready(function(){$("#exportMap").on("click",function(){printMap()})});

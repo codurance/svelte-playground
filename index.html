@@ -1,69 +1,31 @@
+<!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf8" />
+    <meta name="viewport" content="width=device-width" />
+
     <title>SiSalut - Demo</title>
+
+    <link rel="icon" type="image/png" href="./favicon.png" />
+    <link rel="stylesheet" href="./global.css" />
+    <link rel="stylesheet" href="./bundle.css" />
     <link
-      href="https://fonts.googleapis.com/css?family=Alegreya Sans"
       rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/intro.js@2.9.3/minified/introjs.min.css"
     />
-    <link rel="shortcut icon" type="image/png" href="./favicon.png" />
+    <link rel="stylesheet" href="./intro/theme.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts@latest"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://d3js.org/topojson.v3.min.js"></script>
+    <script
+      type="text/javascript"
+      src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5d77a70f5a5d65af"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/intro.js@2.9.3/intro.min.js"></script>
+
+    <script defer src="./bundle.js"></script>
   </head>
-  <style>
-    a img {
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      display: inline-flex;
-      margin-left: 7%;
-      margin-right: auto;
-      margin-top: 5%;
-      box-shadow: 5px 5px #028cd6;
-    }
 
-    img:hover {
-      box-shadow: 5px 5px #6eb8e0;
-    }
-
-    h1 {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      width: 100%;
-      text-align: center;
-      font-size: 5em;
-    }
-    body {
-      font-family: "Alegreya Sans";
-      background-color: #007aba;
-    }
-
-    a {
-      text-decoration: none;
-    }
-
-    .navbar {
-      background-color: #028cd6;
-      overflow: hidden;
-    }
-  </style>
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      var imgs = document.getElementsByTagName("img");
-      for (let index = 0; index < imgs.length; index++) {
-        const element = imgs[index];
-
-        element.width = window.innerWidth * 0.4;
-      }
-    });
-  </script>
-  <body>
-    <div class="navbar">
-      <h1>SiSalut - Demo</h1>
-    </div>
-
-    <a href="./bootstrap.html">
-      <img src="./bootstrap/thumbnail.png" />
-    </a>
-    <a href="./material/">
-      <img src="./material/thumbnail.png" />
-    </a>
-  </body>
+  <body></body>
 </html>

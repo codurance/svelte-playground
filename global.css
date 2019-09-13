@@ -1,0 +1,237 @@
+html,
+body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  color: #333;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+a {
+  color: rgb(0, 100, 200);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:visited {
+  color: rgb(0, 80, 160);
+}
+
+label {
+  display: block;
+}
+
+input,
+button,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0.4em;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+}
+
+input:disabled {
+  color: #ccc;
+}
+
+input[type="range"] {
+  height: 0;
+}
+
+button {
+  color: #333;
+  background-color: #f4f4f4;
+  outline: none;
+}
+
+button:active {
+  background-color: #ddd;
+}
+
+button:focus {
+  border-color: #666;
+}
+
+.mdc-top-app-bar__row {
+  height: auto !important;
+}
+
+.mdc-top-app-bar__section {
+  padding-bottom: 0px !important;
+  padding-top: 0px !important;
+}
+
+.tooltip {
+  position: absolute;
+  font-family: Roboto, Arial, sans-serif;
+  text-align: left;
+  font-size: 12px;
+  padding: 4px;
+  color: #212121;
+  pointer-events: none;
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 2px 2px 6px -4px #999;
+}
+
+.searchBox {
+  margin-left: 10px !important;
+  border-radius: 5px;
+  width: 35vh;
+}
+
+svg {
+  user-select: none;
+}
+
+#absMap {
+  max-height: 60em;
+}
+
+#close-dialog {
+  float: right;
+  margin-top: 9px;
+}
+
+.card-wrapping-chart {
+  width: 50%;
+  margin: 20px auto;
+}
+
+.card-grid {
+  cursor: pointer;
+  width: 100% !important;
+}
+
+.cardWrapper {
+  width: 50% !important;
+  margin: 20px auto;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-auto-rows: minmax(150px, auto);
+  grid-gap: 20px;
+  rows-gap: 20px;
+}
+
+#scrollButton {
+  position: fixed;
+  bottom: 8em;
+  right: 11px;
+  z-index: 1;
+  width: 50px;
+  height: 50px;
+}
+
+.chart-title {
+  width: 50em;
+  padding: 0 !important;
+  overflow-wrap: break-word !important;
+  white-space: unset !important;
+  line-height: 3em !important;
+}
+
+@media screen and (max-width: 789px) {
+  .card-wrapping-chart {
+    width: 100% !important;
+  }
+
+  .cardWrapper {
+    width: 100% !important;
+  }
+
+  #searchButton {
+    display: none;
+  }
+
+  #gridButton {
+    display: none;
+  }
+
+  .headerImage {
+    display: none;
+  }
+
+  .chart-title {
+    width: 27em;
+    font-size: 70% !important;
+  }
+
+  #scrollButton {
+    bottom: 10%;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 321px) {
+  .chart-title {
+    font-size: 9px !important;
+  }
+}
+
+/* GALAXY */
+@media (min-width: 322px) and (max-width: 363px) {
+  .chart-title {
+    font-size: 10px !important;
+  }
+}
+
+/* PIXEL 2 */
+@media (min-width: 411px) and (max-width: 412px) {
+  .chart-title {
+    font-size: 10px !important;
+  }
+}
+
+/* IPHONE 6,7 */
+@media (min-width: 414px) and (max-width: 415px) {
+  .chart-title {
+    font-size: 10px !important;
+  }
+}
+
+/* IPHONE X */
+@media (min-width: 375px) and (max-width: 376px) {
+  .chart-title {
+    font-size: 10px !important;
+  }
+}
+
+/* IPAD PRO */
+@media only screen and (min-width: 767px) and (max-width: 768px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
+  .chart-title {
+    width: 100%;
+  }
+}
+
+/* IPAD PRO */
+@media only screen and (min-width: 769px) and (max-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
+  #absMap {
+    max-height: 1000em !important;
+    height: 65em !important;
+  }
+  .card-wrapping-chart {
+    width: 100% !important;
+  }
+
+  #scrollButton {
+    width: 40px;
+    height: 40px;
+  }
+  .chart-title {
+    width: 100%;
+    font-size: 1em !important;
+  }
+}
