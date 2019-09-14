@@ -22,7 +22,8 @@ const Config = {
     {
       element: '#step3',
       intro:
-        'Este es un ejemplo de visualización, si seleccionas un sector y haces click podrás ver el detalle.'
+        'Este es un ejemplo de visualización, si seleccionas un sector y haces click podrás ver el detalle.',
+      scrollTo: 'tooltip'
     },
     {
       element: '#step4',

@@ -31893,7 +31893,8 @@ var app = (function () {
         {
           element: "#step3",
           intro:
-            "Este es un ejemplo de visualización, si seleccionas un sector y haces click podrás ver el detalle."
+            "Este es un ejemplo de visualización, si seleccionas un sector y haces click podrás ver el detalle.",
+          scrollTo: "tooltip"
         },
         {
           element: "#step4",
@@ -32355,7 +32356,7 @@ var app = (function () {
     	};
     }
 
-    let minScroll = 300;
+    let minScroll = 600;
 
     function scrollToTop() {
       const currentScroll = Math.max(
@@ -32405,7 +32406,7 @@ var app = (function () {
     	return {
     		c: function create() {
     			img = element("img");
-    			attr(img, "src", "/images/logo.jpg");
+    			attr(img, "src", "./images/logo.jpg");
     			attr(img, "alt", "SiSalut");
     			add_location(img, file$x, 47, 6, 1199);
     		},
@@ -32430,9 +32431,9 @@ var app = (function () {
     		c: function create() {
     			img = element("img");
     			attr(img, "class", "headerImage");
-    			attr(img, "src", "/images/header.jpg");
+    			attr(img, "src", "./images/header.jpg");
     			attr(img, "alt", "SiSalut");
-    			add_location(img, file$x, 50, 6, 1299);
+    			add_location(img, file$x, 50, 6, 1300);
     		},
 
     		m: function mount(target, anchor) {
@@ -32665,7 +32666,7 @@ var app = (function () {
     			attr(input, "type", "text");
     			attr(input, "class", "searchBox");
     			attr(input, "placeholder", "Cercar");
-    			add_location(input, file$x, 71, 8, 1916);
+    			add_location(input, file$x, 71, 8, 1918);
     			dispose = listen(input, "input", ctx.input_input_handler);
     		},
 
