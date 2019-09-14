@@ -6,6 +6,7 @@ const Config = {
   showStepNumbers: 0,
   disableInteraction: 1,
   exitOnOverlayClick: 0,
+  helperElementPadding: -5,
   steps: [
     {
       intro:
@@ -13,11 +14,13 @@ const Config = {
     },
     {
       element: '#step1',
-      intro: 'Aquí veras el título del gráfico visualizado.'
+      intro: 'Aquí veras el título del gráfico visualizado.',
+      position: 'left'
     },
     {
       element: '#step2',
-      intro: 'Aquí podrás seleccionar el modo de visualización.'
+      intro: 'Aquí podrás seleccionar el modo de visualización.',
+      position: 'bottom-right-aligned'
     },
     {
       element: '#step3',

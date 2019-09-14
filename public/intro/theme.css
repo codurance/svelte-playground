@@ -1,6 +1,8 @@
 .introjs-tooltip {
   background-color: #13c4ffc9;
   color: #fff;
+  min-width: auto !important;
+  max-width: auto !important;
 }
 
 .introjs-button,
@@ -41,7 +43,6 @@
 .introjs-arrow.top-right {
   border-color: transparent transparent #fff;
   top: -20px;
-  left: 20px;
 }
 .introjs-arrow.bottom,
 .introjs-arrow.bottom-middle,
