@@ -22026,7 +22026,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (42:2) <Content class="mdc-typography--body2">
+    // (41:2) <Content class="mdc-typography--body2">
     function create_default_slot_10(ctx) {
     	var current;
 
@@ -22076,7 +22076,7 @@ var app = (function () {
     	};
     }
 
-    // (54:8) <Option {value} selected={selected === value}>
+    // (52:8) <Option {value} selected={$ABSMapFilter === value}>
     function create_default_slot_9(ctx) {
     	var t_value = ctx.label + "", t;
 
@@ -22099,14 +22099,14 @@ var app = (function () {
     	};
     }
 
-    // (53:6) {#each filters as { value, label }}
+    // (51:6) {#each filters as { value, label }}
     function create_each_block(ctx) {
     	var current;
 
     	var option = new Option({
     		props: {
     		value: ctx.value,
-    		selected: ctx.selected === ctx.value,
+    		selected: ctx.$ABSMapFilter === ctx.value,
     		$$slots: { default: [create_default_slot_9] },
     		$$scope: { ctx }
     	},
@@ -22126,7 +22126,7 @@ var app = (function () {
     		p: function update(changed, ctx) {
     			var option_changes = {};
     			if (changed.filters) option_changes.value = ctx.value;
-    			if (changed.selected || changed.filters) option_changes.selected = ctx.selected === ctx.value;
+    			if (changed.$ABSMapFilter || changed.filters) option_changes.selected = ctx.$ABSMapFilter === ctx.value;
     			if (changed.$$scope) option_changes.$$scope = { changed, ctx };
     			option.$set(option_changes);
     		},
@@ -22149,7 +22149,7 @@ var app = (function () {
     	};
     }
 
-    // (47:4) <Select       class="shaped"       variant="filled"       label="Filtres"       bind:value={selected}       on:change={() => ABSMapFilter.set(selected)}>
+    // (46:4) <Select       class="shaped"       variant="filled"       label="Filtres"       bind:value={$ABSMapFilter}>
     function create_default_slot_8(ctx) {
     	var each_1_anchor, current;
 
@@ -22184,7 +22184,7 @@ var app = (function () {
     		},
 
     		p: function update(changed, ctx) {
-    			if (changed.filters || changed.selected) {
+    			if (changed.filters || changed.$ABSMapFilter) {
     				each_value = ctx.filters;
 
     				for (var i = 0; i < each_value.length; i += 1) {
@@ -22231,7 +22231,7 @@ var app = (function () {
     	};
     }
 
-    // (62:8) <Icon class="material-icons" on>
+    // (60:8) <Icon class="material-icons" on>
     function create_default_slot_7(ctx) {
     	var t;
 
@@ -22252,7 +22252,7 @@ var app = (function () {
     	};
     }
 
-    // (63:8) <Icon class="material-icons">
+    // (61:8) <Icon class="material-icons">
     function create_default_slot_6(ctx) {
     	var t;
 
@@ -22273,7 +22273,7 @@ var app = (function () {
     	};
     }
 
-    // (61:6) <IconButton toggle aria-label="Add to favorites" title="Add to favorites">
+    // (59:6) <IconButton toggle aria-label="Add to favorites" title="Add to favorites">
     function create_default_slot_5(ctx) {
     	var t, current;
 
@@ -22347,7 +22347,7 @@ var app = (function () {
     	};
     }
 
-    // (65:6) <IconButton class="material-icons" title="Share">
+    // (63:6) <IconButton class="material-icons" title="Share">
     function create_default_slot_4$1(ctx) {
     	var t;
 
@@ -22368,7 +22368,7 @@ var app = (function () {
     	};
     }
 
-    // (66:6) <IconButton         class="material-icons"         title="File download"         on:click={() => exportSvg(svgElementId, fileName)}>
+    // (64:6) <IconButton         class="material-icons"         title="File download"         on:click={() => exportSvg(svgElementId, fileName)}>
     function create_default_slot_3$1(ctx) {
     	var t;
 
@@ -22389,7 +22389,7 @@ var app = (function () {
     	};
     }
 
-    // (60:4) <ActionIcons>
+    // (58:4) <ActionIcons>
     function create_default_slot_2$1(ctx) {
     	var t0, t1, current;
 
@@ -22493,7 +22493,7 @@ var app = (function () {
     	};
     }
 
-    // (46:2) <Actions id="step4">
+    // (45:2) <Actions id="step4">
     function create_default_slot_1$1(ctx) {
     	var updating_value, t0, t1, current;
 
@@ -22510,13 +22510,12 @@ var app = (function () {
     		$$slots: { default: [create_default_slot_8] },
     		$$scope: { ctx }
     	};
-    	if (ctx.selected !== void 0) {
-    		select_props.value = ctx.selected;
+    	if (ctx.$ABSMapFilter !== void 0) {
+    		select_props.value = ctx.$ABSMapFilter;
     	}
     	var select = new Select({ props: select_props, $$inline: true });
 
     	binding_callbacks.push(() => bind(select, 'value', select_value_binding));
-    	select.$on("change", ctx.change_handler);
 
     	const aditionalFilter_slot_template = ctx.$$slots.aditionalFilter;
     	const aditionalFilter_slot = create_slot(aditionalFilter_slot_template, ctx, get_aditionalFilter_slot_context);
@@ -22558,9 +22557,9 @@ var app = (function () {
 
     		p: function update(changed, ctx) {
     			var select_changes = {};
-    			if (changed.$$scope || changed.selected) select_changes.$$scope = { changed, ctx };
-    			if (!updating_value && changed.selected) {
-    				select_changes.value = ctx.selected;
+    			if (changed.$$scope || changed.$ABSMapFilter) select_changes.$$scope = { changed, ctx };
+    			if (!updating_value && changed.$ABSMapFilter) {
+    				select_changes.value = ctx.$ABSMapFilter;
     			}
     			select.$set(select_changes);
 
@@ -22612,7 +22611,7 @@ var app = (function () {
     	};
     }
 
-    // (41:0) <Card class="card-wrapping-chart" id="step3">
+    // (40:0) <Card class="card-wrapping-chart" id="step3">
     function create_default_slot$4(ctx) {
     	var t, current;
 
@@ -22654,7 +22653,7 @@ var app = (function () {
     			content.$set(content_changes);
 
     			var actions_changes = {};
-    			if (changed.$$scope || changed.selected) actions_changes.$$scope = { changed, ctx };
+    			if (changed.$$scope || changed.$ABSMapFilter) actions_changes.$$scope = { changed, ctx };
     			actions.$set(actions_changes);
     		},
 
@@ -22714,7 +22713,7 @@ var app = (function () {
 
     		p: function update(changed, ctx) {
     			var card_changes = {};
-    			if (changed.$$scope || changed.selected) card_changes.$$scope = { changed, ctx };
+    			if (changed.$$scope || changed.$ABSMapFilter) card_changes.$$scope = { changed, ctx };
     			card.$set(card_changes);
     		},
 
@@ -22758,7 +22757,6 @@ var app = (function () {
 
       let { svgElementId, fileName } = $$props;
 
-      let selected = $ABSMapFilter;
       const filters = [
         { value: 0, label: "Homes 65-74 anys que viuen sols" },
         { value: 1, label: "Homes 75-84 anys que viuen sols" },
@@ -22773,12 +22771,8 @@ var app = (function () {
     	let { $$slots = {}, $$scope } = $$props;
 
     	function select_value_binding(value) {
-    		selected = value;
-    		$$invalidate('selected', selected);
-    	}
-
-    	function change_handler() {
-    		return ABSMapFilter.set(selected);
+    		$ABSMapFilter = value;
+    		ABSMapFilter.set($ABSMapFilter);
     	}
 
     	function click_handler() {
@@ -22794,10 +22788,9 @@ var app = (function () {
     	return {
     		svgElementId,
     		fileName,
-    		selected,
     		filters,
+    		$ABSMapFilter,
     		select_value_binding,
-    		change_handler,
     		click_handler,
     		$$slots,
     		$$scope
@@ -31864,10 +31857,10 @@ var app = (function () {
     };
 
     const Config = {
-      skipLabel: "Salir",
-      doneLabel: "Finalizar",
-      nextLabel: "Siguiente",
-      prevLabel: "Anterior",
+      skipLabel: 'Salir',
+      doneLabel: 'Finalizar',
+      nextLabel: 'Siguiente',
+      prevLabel: 'Anterior',
       showStepNumbers: 0,
       disableInteraction: 1,
       exitOnOverlayClick: 0,
@@ -31875,28 +31868,28 @@ var app = (function () {
       steps: [
         {
           intro:
-            "Bienvenido a SiSalut, este es un pequeño tutorial de como utilizar el sistema."
+            'Bienvenido a SiSalut, este es un pequeño tutorial de como utilizar el sistema.'
         },
         {
-          element: "#step1",
-          intro: "Aquí veras el título del gráfico visualizado.",
-          position: "left"
+          element: '#step1',
+          intro: 'Aquí veras el título del gráfico visualizado.',
+          position: 'left'
         },
         {
-          element: "#step2",
-          intro: "Aquí podrás seleccionar el modo de visualización.",
-          position: "bottom-right-aligned"
+          element: '#step2',
+          intro: 'Aquí podrás seleccionar el modo de visualización.',
+          position: 'bottom-right-aligned'
         },
         {
-          element: "#step3",
+          element: '#step3',
           intro:
-            "Este es un ejemplo de visualización, si seleccionas un sector y haces click podrás ver el detalle.",
-          scrollTo: "tooltip"
+            'Este es un ejemplo de visualización, si seleccionas un sector y haces click podrás ver el detalle.',
+          scrollTo: 'tooltip'
         },
         {
-          element: "#step4",
+          element: '#step4',
           intro:
-            "En esta sección podrás aplicar los diferentes tipos de filtros y acciones sobre el gráfico."
+            'En esta sección podrás aplicar los diferentes tipos de filtros y acciones sobre el gráfico.'
         }
       ]
     };

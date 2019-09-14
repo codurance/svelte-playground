@@ -18,7 +18,6 @@
   export let svgElementId;
   export let fileName;
 
-  let selected = $ABSMapFilter;
   const filters = [
     { value: 0, label: "Homes 65-74 anys que viuen sols" },
     { value: 1, label: "Homes 75-84 anys que viuen sols" },
@@ -48,10 +47,9 @@
       class="shaped"
       variant="filled"
       label="Filtres"
-      bind:value={selected}
-      on:change={() => ABSMapFilter.set(selected)}>
+      bind:value={$ABSMapFilter}>
       {#each filters as { value, label }}
-        <Option {value} selected={selected === value}>{label}</Option>
+        <Option {value} selected={$ABSMapFilter === value}>{label}</Option>
       {/each}
     </Select>
 
