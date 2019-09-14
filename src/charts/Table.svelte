@@ -4,7 +4,7 @@
   import Button, { Label } from "@smui/button";
   import IconButton, { Icon } from "@smui/icon-button";
 
-  export let dialog;
+  export let dialog = {};
   export let ABSSelected = {};
 
   function getAbsCode(feature) {

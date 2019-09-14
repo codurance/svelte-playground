@@ -29136,7 +29136,7 @@ var app = (function () {
     function instance$t($$self, $$props, $$invalidate) {
     	
 
-      let { dialog, ABSSelected = {} } = $$props;
+      let { dialog = {}, ABSSelected = {} } = $$props;
 
     	const writable_props = ['dialog', 'ABSSelected'];
     	Object.keys($$props).forEach(key => {
@@ -29175,12 +29175,6 @@ var app = (function () {
     	constructor(options) {
     		super(options);
     		init(this, options, instance$t, create_fragment$t, safe_not_equal, ["dialog", "ABSSelected"]);
-
-    		const { ctx } = this.$$;
-    		const props = options.props || {};
-    		if (ctx.dialog === undefined && !('dialog' in props)) {
-    			console.warn("<Table> was created without expected prop 'dialog'");
-    		}
     	}
 
     	get dialog() {
@@ -31870,36 +31864,36 @@ var app = (function () {
     };
 
     const Config = {
-      skipLabel: "Salir",
-      doneLabel: "Finalizar",
-      nextLabel: "Siguiente",
-      prevLabel: "Anterior",
+      skipLabel: 'Salir',
+      doneLabel: 'Finalizar',
+      nextLabel: 'Siguiente',
+      prevLabel: 'Anterior',
       showStepNumbers: 0,
       disableInteraction: 1,
       exitOnOverlayClick: 0,
       steps: [
         {
           intro:
-            "Bienvenido a SiSalut, este es un pequeño tutorial de como utilizar el sistema."
+            'Bienvenido a SiSalut, este es un pequeño tutorial de como utilizar el sistema.'
         },
         {
-          element: "#step1",
-          intro: "Aquí veras el título del gráfico visualizado."
+          element: '#step1',
+          intro: 'Aquí veras el título del gráfico visualizado.'
         },
         {
-          element: "#step2",
-          intro: "Aquí podrás seleccionar el modo de visualización."
+          element: '#step2',
+          intro: 'Aquí podrás seleccionar el modo de visualización.'
         },
         {
-          element: "#step3",
+          element: '#step3',
           intro:
-            "Este es un ejemplo de visualización, si seleccionas un sector y haces click podrás ver el detalle.",
-          scrollTo: "tooltip"
+            'Este es un ejemplo de visualización, si seleccionas un sector y haces click podrás ver el detalle.',
+          scrollTo: 'tooltip'
         },
         {
-          element: "#step4",
+          element: '#step4',
           intro:
-            "En esta sección podrás aplicar los diferentes tipos de filtros y acciones sobre el gráfico."
+            'En esta sección podrás aplicar los diferentes tipos de filtros y acciones sobre el gráfico.'
         }
       ]
     };
