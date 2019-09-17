@@ -1,6 +1,6 @@
 <script>
   import { onMount, afterUpdate } from "svelte";
-  import { ABSMapFilter } from "../store.js";
+  import { ABSMapFilter, ABSFilter } from "../store.js";
   import Card, {
     Content,
     PrimaryAction,
@@ -23,6 +23,13 @@
   let features;
   let barcelona;
   let colorScaleExtent = [0, 0];
+
+  $: featuresFiltered =
+    $ABSFilter && features
+      ? features.filter(f =>
+          f.properties.NOMSS.toLowerCase().includes($ABSFilter.toLowerCase())
+        )
+      : features;
 
   $: paths = [];
   $: quantize = d3
@@ -79,11 +86,10 @@
 
 <div style={cardWrapper} class="cardWrapper">
 
-  {#if features}
-    {#each features as feature, i}
+  {#if featuresFiltered}
+    {#each featuresFiltered as feature, i}
       <Card style={cardStyle} class="card-grid card-wrapping-chart">
         <PrimaryAction on:click={() => handleOnClick(feature)}>
-
           <svg
             width="350px"
             height="200px"

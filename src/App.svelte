@@ -7,28 +7,17 @@
     Subtitle,
     Scrim
   } from "@smui/drawer";
-  import List, { Item, Text, Separator, Subheader } from "@smui/list";
   import TopAppBar, { Row, Section, Title } from "@smui/top-app-bar";
   import IconButton from "@smui/icon-button";
-  import FormField from "@smui/form-field";
-  import { fade } from "svelte/transition";
   import { LensSelected } from "./store.js";
 
   import Charts from "./Charts.svelte";
   import Intro from "./intro/Intro.svelte";
   import Scroll from "./Scroll.svelte";
-
-  let current = "main";
-  let search = "";
-  let isVisibleSearchInput = false;
+  import Search from "./Search.svelte";
 
   function changeLens(newLens) {
     LensSelected.set(newLens);
-  }
-
-  function showSearch() {
-    search = "";
-    isVisibleSearchInput = !isVisibleSearchInput;
   }
 </script>
 
@@ -61,21 +50,7 @@
       </Title>
     </Section>
     <Section id="step2" align="end" toolbar>
-      <IconButton
-        id="searchButton"
-        class="material-icons"
-        aria-label="Search"
-        on:click={() => showSearch()}>
-        search
-      </IconButton>
-      {#if isVisibleSearchInput}
-        <input
-          transition:fade
-          type="text"
-          class="searchBox"
-          placeholder="Cercar"
-          bind:value={search} />
-      {/if}
+      <Search />
       <IconButton
         class="material-icons"
         aria-label="Map"
