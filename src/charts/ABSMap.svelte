@@ -1,6 +1,6 @@
 <script>
   import { ABSMapFilter, MapBBox } from "../store.js";
-  import { onMount } from "svelte";
+  import { onMount, afterUpdate } from "svelte";
   import Table from "./Table.svelte";
   import { quintOut } from "svelte/easing";
   import { fade, draw, fly } from "svelte/transition";
@@ -19,6 +19,7 @@
   let features;
   let barcelona;
   let colorScaleExtent = [0, 0];
+  let loaded = false;
 
   $: bbox = $MapBBox;
   $: filter = 0;
@@ -38,6 +39,10 @@
   $: showTooltip = false;
   $: tooltipValues = {};
 
+	afterUpdate(() => {
+		handleLoadSvg();
+	});
+
   onMount(async () => {
     const data = await fetch(FINAL);
     barcelona = await data.json();
@@ -48,10 +53,13 @@
         properties.VALORES ? properties.VALORES[$ABSMapFilter] : 0
       )
     );
+
+    loaded = true;
   });
 
   function handleLoadSvg() {
-    MapBBox.set(document.querySelector("svg").getBBox());
+    if(loaded)
+      MapBBox.set(document.querySelector("svg").getBBox());
   }
 
   function handleOnClick(absSelected) {
@@ -90,8 +98,6 @@
     selectElement.attr("fill", quantizedColor);
   };
 </script>
-
-<svelte:window on:resize={handleLoadSvg} />
 <Table bind:ABSSelected bind:dialog />
 
 <div>

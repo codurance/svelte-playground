@@ -99,6 +99,8 @@ svg {
 
 #absMap {
   max-height: 60em;
+  margin: 0 auto;
+  display: block;
 }
 
 #close-dialog {
