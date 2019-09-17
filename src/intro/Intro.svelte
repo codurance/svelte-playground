@@ -1,16 +1,17 @@
 <script>
-  import Cookie from "../utils/cookie.js";
   import Config from "./config.js";
+  const introKey = "introWasShowen";
 
   function startIntro() {
-    const introWasShown = Cookie.getCookie("introWasShowen");
+    const introWasShown = window.localStorage.getItem(introKey);
+
     const intro = introJs();
 
     if (!introWasShown) {
       intro.setOptions(Config).start();
 
       intro.onexit(function() {
-        Cookie.setCookie("introWasShowen", true, 30);
+        window.localStorage.setItem(introKey, true);
       });
     }
   }

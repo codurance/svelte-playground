@@ -51,7 +51,7 @@
   });
 
   function handleLoadSvg() {
-      MapBBox.set(document.querySelector("svg").getBBox());
+    MapBBox.set(document.querySelector("svg").getBBox());
   }
 
   function handleOnClick(absSelected) {
@@ -90,13 +90,12 @@
     selectElement.attr("fill", quantizedColor);
   };
 </script>
+
 <svelte:window on:load={handleLoadSvg} />
 <Table bind:ABSSelected bind:dialog />
 
 <div>
-  <svg
-    id="absMap"
-    viewBox={`${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`} >
+  <svg id="absMap" viewBox={`${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`}>
 
     <g out:fade={{ duration: 200 }}>
       {#if features}
