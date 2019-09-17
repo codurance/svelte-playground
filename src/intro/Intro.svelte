@@ -5,9 +5,9 @@
   function startIntro() {
     const introWasShown = window.localStorage.getItem(introKey);
 
-    const intro = introJs();
-
     if (!introWasShown) {
+      const intro = introJs();
+
       intro.setOptions(Config).start();
 
       intro.onexit(function() {
