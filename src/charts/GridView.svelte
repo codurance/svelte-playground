@@ -100,11 +100,20 @@
           <Content style="color: #888;">
             <span style="color: black;">{feature.properties.NOMSS} -</span>
             <b>{getAbsCode(feature)}</b>
+            <IconButton
+              style="float: right; top: -13px"
+              toggle
+              aria-label="Add to favorites"
+              title="Add to favorites">
+              <Icon class="material-icons" on>favorite</Icon>
+              <Icon class="material-icons">favorite_border</Icon>
+            </IconButton>
           </Content>
           {#if !listVisualization}
             <svg
               width="350px"
               height="200px"
+              style="left: 4%;"
               viewBox={`
           ${(paths[i] && paths[i].getBBox().x) || 0}
           ${(paths[i] && paths[i].getBBox().y) || 0}
@@ -127,13 +136,6 @@
               Per més informació
             </Content>
           {/if}
-          <IconButton
-            toggle
-            aria-label="Add to favorites"
-            title="Add to favorites">
-            <Icon class="material-icons" on>favorite</Icon>
-            <Icon class="material-icons">favorite_border</Icon>
-          </IconButton>
         </PrimaryAction>
       </Card>
     {/each}

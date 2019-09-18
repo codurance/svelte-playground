@@ -22,6 +22,7 @@
   bind:this={dialog}
   aria-labelledby="dialog-title"
   aria-describedby="dialog-content"
+  style="z-index: 99999"
   on:MDCDialog:closed={() => dialog.close()}>
   <Title id="dialog-title">
     {createTitle(ABSSelected)}
