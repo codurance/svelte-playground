@@ -27,7 +27,8 @@
   $: featuresFiltered =
     $ABSFilter && features
       ? features.filter(f =>
-          f.properties.NOMSS.toLowerCase().includes($ABSFilter.toLowerCase())
+          f.properties.NOMSS.toLowerCase().includes($ABSFilter.toLowerCase()) ||
+          getAbsCode(f).toLowerCase().includes($ABSFilter.toLowerCase())
         )
       : features;
 
