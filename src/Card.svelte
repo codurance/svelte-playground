@@ -1,5 +1,5 @@
 <script>
-  import { ABSMapFilter } from "./store.js";
+  import { ABSMapFilter, Gender, GenderSelected } from "./store.js";
   import html2canvas from "html2canvas";
   import jsPDF from "jspdf";
   import Card, {
@@ -11,17 +11,19 @@
     ActionButtons,
     ActionIcons
   } from "@smui/card";
+  import Radio from "@smui/radio";
+  import FormField from "@smui/form-field";
   import Button, { Label } from "@smui/button";
-  import IconButton, { Icon } from "@smui/icon-button";
+  import IconButton from "@smui/icon-button";
   import Select, { Option } from "@smui/select";
 
   export let svgElementId;
   export let fileName;
 
-  const filters = [
-    { value: 0, label: "Homes 65-74 anys que viuen sols" },
-    { value: 1, label: "Homes 75-84 anys que viuen sols" },
-    { value: 2, label: "Homes de 85 anys i més que viuen sols" }
+  $: filters = [
+    { value: 0, label: `${$GenderSelected} 65-74 anys que viuen sols` },
+    { value: 1, label: `${$GenderSelected} 75-84 anys que viuen sols` },
+    { value: 2, label: `${$GenderSelected} de 85 anys i més que viuen sols` }
   ];
 
   function exportSvg(elementId, filename) {
@@ -45,6 +47,7 @@
   <Actions id="step4">
     <Select
       class="shaped"
+      style="width: 20em"
       variant="filled"
       label="Filtres"
       bind:value={$ABSMapFilter}>
@@ -53,13 +56,14 @@
       {/each}
     </Select>
 
-    <slot name="aditionalFilter" />
+    {#each Gender.options as gender}
+      <FormField>
+        <Radio bind:group={$GenderSelected} value={gender.name} />
+        <span slot="label">{gender.name}</span>
+      </FormField>
+    {/each}
 
     <ActionIcons>
-      <IconButton toggle aria-label="Add to favorites" title="Add to favorites">
-        <Icon class="material-icons" on>favorite</Icon>
-        <Icon class="material-icons">favorite_border</Icon>
-      </IconButton>
       <IconButton class="material-icons" title="Share">share</IconButton>
       <IconButton
         class="material-icons"

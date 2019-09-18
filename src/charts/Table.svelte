@@ -120,6 +120,7 @@
 
   </Content>
   <Actions>
+    <IconButton class="material-icons" title="Share">share</IconButton>
     <IconButton class="material-icons" title="File download">
       file_download
     </IconButton>

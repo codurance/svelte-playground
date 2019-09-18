@@ -10,6 +10,7 @@
     ActionButtons,
     ActionIcons
   } from "@smui/card";
+  import IconButton, { Icon } from "@smui/icon-button";
   import Button, { Label } from "@smui/button";
   import { fade, draw, fly } from "svelte/transition";
   import Table from "./Table.svelte";
@@ -26,9 +27,14 @@
 
   $: featuresFiltered =
     $ABSFilter && features
-      ? features.filter(f =>
-          f.properties.NOMSS.toLowerCase().includes($ABSFilter.toLowerCase()) ||
-          getAbsCode(f).toLowerCase().includes($ABSFilter.toLowerCase())
+      ? features.filter(
+          f =>
+            f.properties.NOMSS.toLowerCase().includes(
+              $ABSFilter.toLowerCase()
+            ) ||
+            getAbsCode(f)
+              .toLowerCase()
+              .includes($ABSFilter.toLowerCase())
         )
       : features;
 
@@ -91,34 +97,43 @@
     {#each featuresFiltered as feature, i}
       <Card style={cardStyle} class="card-grid card-wrapping-chart">
         <PrimaryAction on:click={() => handleOnClick(feature)}>
-          <svg
-            width="350px"
-            height="200px"
-            viewBox={`
-        ${(paths[i] && paths[i].getBBox().x) || 0}
-        ${(paths[i] && paths[i].getBBox().y) || 0}
-        350
-        200`}
-            on:mouseover={handleMouseOver}
-            on:mouseout={handleMouseOut}
-            opacity="0.6">
-            <g out:fly={{ y: -20, duration: 100 }}>
-              <path
-                in:draw={{ duration: 1500 }}
-                id={`path-${getAbsCode(feature)}`}
-                class={`paths`}
-                d={PATH(feature)}
-                fill={quantize(Number(feature.properties.VALORES ? feature.properties.VALORES[$ABSMapFilter] : 0))}
-                stroke="black" />
-            </g>
-          </svg>
           <Content style="color: #888;">
             <span style="color: black;">{feature.properties.NOMSS} -</span>
             <b>{getAbsCode(feature)}</b>
           </Content>
-          <Content style="color: #888; font-size: 10px; padding-top: 0;">
-            Per més informació
-          </Content>
+          {#if !listVisualization}
+            <svg
+              width="350px"
+              height="200px"
+              viewBox={`
+          ${(paths[i] && paths[i].getBBox().x) || 0}
+          ${(paths[i] && paths[i].getBBox().y) || 0}
+          350
+          200`}
+              on:mouseover={handleMouseOver}
+              on:mouseout={handleMouseOut}
+              opacity="0.6">
+              <g out:fly={{ y: -20, duration: 100 }}>
+                <path
+                  in:draw={{ duration: 1500 }}
+                  id={`path-${getAbsCode(feature)}`}
+                  class={`paths`}
+                  d={PATH(feature)}
+                  fill={quantize(Number(feature.properties.VALORES ? feature.properties.VALORES[$ABSMapFilter] : 0))}
+                  stroke="black" />
+              </g>
+            </svg>
+            <Content style="color: #888; font-size: 10px; padding-top: 0;">
+              Per més informació
+            </Content>
+          {/if}
+          <IconButton
+            toggle
+            aria-label="Add to favorites"
+            title="Add to favorites">
+            <Icon class="material-icons" on>favorite</Icon>
+            <Icon class="material-icons">favorite_border</Icon>
+          </IconButton>
         </PrimaryAction>
       </Card>
     {/each}

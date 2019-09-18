@@ -1,10 +1,11 @@
 <script>
-  import { ABSMapFilter, MapBBox } from "../store.js";
+  import { ABSMapFilter, MapBBox, Gender, GenderSelected } from "../store.js";
   import { onMount } from "svelte";
   import Table from "./Table.svelte";
   import { quintOut } from "svelte/easing";
   import { fade, draw, fly } from "svelte/transition";
 
+  const DONESCOLOR = ["#ffffff", "#f7b2d5", "#db74a9", "#b5417d", "#ff69b4"];
   const HOMESCOLOR = ["#ffffff", "#6fd1f2", "#12c4ff", "#089dcf", "#00769e"];
   const MIXCOLOR = ["#ffffff", "#ffd333", "#ffde66", "#fff4cc", "#ffe999"];
   const FINAL =
@@ -12,17 +13,23 @@
 
   const path = d3.geoPath();
 
-  export let mixSelected;
   let dialog;
   let ABSSelected = {};
 
   let features;
   let barcelona;
   let colorScaleExtent = [0, 0];
+  $: isMixSelected = Gender.isMix($GenderSelected);
+  $: isManSelected = Gender.isMan($GenderSelected);
+  $: isWomanSelected = Gender.isWoman($GenderSelected);
 
   $: bbox = $MapBBox;
   $: filter = 0;
-  $: colors = mixSelected ? MIXCOLOR : HOMESCOLOR;
+  $: colors = isMixSelected
+    ? MIXCOLOR
+    : isManSelected
+    ? HOMESCOLOR
+    : DONESCOLOR;
   $: labels = [
     { color: colors[0], text: "De 8.5 a 11.10" },
     { color: colors[1], text: "De 11.11 a 12.30" },
@@ -63,7 +70,10 @@
   function handleMouseOver() {
     showTooltip = true;
     selectElement = d3.select(this);
-    selectElement.attr("fill", mixSelected ? "lightblue" : "orange");
+    selectElement.attr(
+      "fill",
+      isMixSelected ? "lightblue" : isManSelected ? "orange" : "yellow"
+    );
   }
 
   function handleMouseMove(d, event) {
@@ -91,11 +101,13 @@
   };
 </script>
 
-<svelte:window on:load={handleLoadSvg} />
 <Table bind:ABSSelected bind:dialog />
 
 <div>
-  <svg id="absMap" viewBox={`${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`}>
+  <svg
+    id="absMap"
+    viewBox={`${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`}
+    on:load={handleLoadSvg}>
 
     <g out:fade={{ duration: 200 }}>
       {#if features}
@@ -144,12 +156,19 @@
     <p>{tooltipValues.NOMAGA}</p>
     <p>{tooltipValues.NOMSS}</p>
     <p>
-      <img src="./icons/oldman.svg" alt="Old Man" width="25px" height="25px" />
-      {tooltipValues.VALORES ? tooltipValues.VALORES[$ABSMapFilter] : 'No Data'}
-      {#if mixSelected}
+      {#if isMixSelected || isManSelected}
+        <img
+          src="./icons/oldman.svg"
+          alt="Old Man"
+          width="25px"
+          height="25px" />
+        {tooltipValues.VALORES ? tooltipValues.VALORES[$ABSMapFilter] : 'No Data'}
+      {/if}
+
+      {#if isMixSelected || isWomanSelected}
         <img
           src="./icons/oldwoman.svg"
-          alt="Old Man"
+          alt="Old Woman"
           width="25px"
           height="25px" />
         {tooltipValues.VALORES ? tooltipValues.VALORES[$ABSMapFilter] * 2 : 'No Data'}
