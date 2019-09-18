@@ -1,7 +1,7 @@
 const Config = {
-  skipLabel: 'Salir',
-  doneLabel: 'Finalizar',
-  nextLabel: 'Siguiente',
+  skipLabel: 'Sortir',
+  doneLabel: 'Finalitzar',
+  nextLabel: 'Sigüent',
   prevLabel: 'Anterior',
   showStepNumbers: 0,
   disableInteraction: 1,
