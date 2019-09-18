@@ -30872,7 +30872,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (96:2) {#if featuresFiltered}
+    // (100:2) {#if featuresFiltered}
     function create_if_block$9(ctx) {
     	var each_1_anchor, current;
 
@@ -30954,7 +30954,7 @@ var app = (function () {
     	};
     }
 
-    // (108:14) <Icon class="material-icons" on>
+    // (113:14) <Icon class="material-icons" on>
     function create_default_slot_6$2(ctx) {
     	var t;
 
@@ -30975,7 +30975,7 @@ var app = (function () {
     	};
     }
 
-    // (109:14) <Icon class="material-icons">
+    // (114:14) <Icon class="material-icons">
     function create_default_slot_5$2(ctx) {
     	var t;
 
@@ -30996,7 +30996,7 @@ var app = (function () {
     	};
     }
 
-    // (103:12) <IconButton               style="float: right; top: -13px"               toggle               aria-label="Add to favorites"               title="Add to favorites">
+    // (107:12) <IconButton               style="float: right; top: -13px;"               toggle               on:click={() => (favoriteClicked = true)}               aria-label="Add to favorites"               title="Add to favorites">
     function create_default_slot_4$3(ctx) {
     	var t, current;
 
@@ -31070,13 +31070,13 @@ var app = (function () {
     	};
     }
 
-    // (100:10) <Content style="color: #888;">
+    // (104:10) <Content style="color: #888;">
     function create_default_slot_3$3(ctx) {
     	var span, t0_value = ctx.feature.properties.NOMSS + "", t0, t1, t2, b, t3_value = getAbsCode$1(ctx.feature) + "", t3, t4, current;
 
     	var iconbutton = new IconButton({
     		props: {
-    		style: "float: right; top: -13px",
+    		style: "float: right; top: -13px;",
     		toggle: true,
     		"aria-label": "Add to favorites",
     		title: "Add to favorites",
@@ -31085,6 +31085,7 @@ var app = (function () {
     	},
     		$$inline: true
     	});
+    	iconbutton.$on("click", ctx.click_handler);
 
     	return {
     		c: function create() {
@@ -31097,8 +31098,8 @@ var app = (function () {
     			t4 = space();
     			iconbutton.$$.fragment.c();
     			set_style(span, "color", "black");
-    			add_location(span, file$u, 100, 12, 2745);
-    			add_location(b, file$u, 101, 12, 2821);
+    			add_location(span, file$u, 104, 12, 2843);
+    			add_location(b, file$u, 105, 12, 2919);
     		},
 
     		m: function mount(target, anchor) {
@@ -31152,7 +31153,7 @@ var app = (function () {
     	};
     }
 
-    // (112:10) {#if !listVisualization}
+    // (117:10) {#if !listVisualization}
     function create_if_block_1$3(ctx) {
     	var svg, g, path, path_id_value, path_d_value, path_fill_value, path_intro, g_outro, svg_viewBox_value, t, current, dispose;
 
@@ -31177,8 +31178,8 @@ var app = (function () {
     			attr(path, "d", path_d_value = ctx.PATH(ctx.feature));
     			attr(path, "fill", path_fill_value = ctx.quantize(Number(ctx.feature.properties.VALORES ? ctx.feature.properties.VALORES[ctx.$ABSMapFilter] : 0)));
     			attr(path, "stroke", "black");
-    			add_location(path, file$u, 125, 16, 3690);
-    			add_location(g, file$u, 124, 14, 3634);
+    			add_location(path, file$u, 130, 16, 3845);
+    			add_location(g, file$u, 129, 14, 3789);
     			attr(svg, "width", "350px");
     			attr(svg, "height", "200px");
     			set_style(svg, "left", "4%");
@@ -31188,7 +31189,7 @@ var app = (function () {
           350
           200`);
     			attr(svg, "opacity", "0.6");
-    			add_location(svg, file$u, 112, 12, 3248);
+    			add_location(svg, file$u, 117, 12, 3403);
 
     			dispose = [
     				listen(svg, "mouseover", ctx.handleMouseOver),
@@ -31268,7 +31269,7 @@ var app = (function () {
     	};
     }
 
-    // (135:12) <Content style="color: #888; font-size: 10px; padding-top: 0;">
+    // (140:12) <Content style="color: #888; font-size: 10px; padding-top: 0;">
     function create_default_slot_2$3(ctx) {
     	var t;
 
@@ -31289,7 +31290,7 @@ var app = (function () {
     	};
     }
 
-    // (99:8) <PrimaryAction on:click={() => handleOnClick(feature)}>
+    // (103:8) <PrimaryAction on:click={() => handleOnClick(feature)}>
     function create_default_slot_1$3(ctx) {
     	var t, if_block_anchor, current;
 
@@ -31374,12 +31375,12 @@ var app = (function () {
     	};
     }
 
-    // (98:6) <Card style={cardStyle} class="card-grid card-wrapping-chart">
+    // (102:6) <Card style={cardStyle} class="card-grid card-wrapping-chart">
     function create_default_slot$6(ctx) {
     	var t, current;
 
-    	function click_handler() {
-    		return ctx.click_handler(ctx);
+    	function click_handler_1() {
+    		return ctx.click_handler_1(ctx);
     	}
 
     	var primaryaction = new PrimaryAction({
@@ -31389,7 +31390,7 @@ var app = (function () {
     	},
     		$$inline: true
     	});
-    	primaryaction.$on("click", click_handler);
+    	primaryaction.$on("click", click_handler_1);
 
     	return {
     		c: function create() {
@@ -31432,7 +31433,7 @@ var app = (function () {
     	};
     }
 
-    // (97:4) {#each featuresFiltered as feature, i}
+    // (101:4) {#each featuresFiltered as feature, i}
     function create_each_block$2(ctx) {
     	var current;
 
@@ -31518,7 +31519,7 @@ var app = (function () {
     			if (if_block) if_block.c();
     			attr(div, "style", ctx.cardWrapper);
     			attr(div, "class", "cardWrapper");
-    			add_location(div, file$u, 93, 0, 2444);
+    			add_location(div, file$u, 97, 0, 2542);
     		},
 
     		l: function claim(nodes) {
@@ -31643,11 +31644,15 @@ var app = (function () {
       }
       let ABSSelected;
       let dialog;
+      let favoriteClicked = false;
 
       function handleOnClick(absSelected) {
-        $$invalidate('ABSSelected', ABSSelected = absSelected.properties);
+        if (!favoriteClicked) {
+          $$invalidate('ABSSelected', ABSSelected = absSelected.properties);
 
-        dialog.open();
+          dialog.open();
+        }
+        $$invalidate('favoriteClicked', favoriteClicked = false);
       }
 
     	const writable_props = ['listVisualization'];
@@ -31665,7 +31670,13 @@ var app = (function () {
     		$$invalidate('dialog', dialog);
     	}
 
-    	function click_handler({ feature }) {
+    	function click_handler() {
+    		const $$result = (favoriteClicked = true);
+    		$$invalidate('favoriteClicked', favoriteClicked);
+    		return $$result;
+    	}
+
+    	function click_handler_1({ feature }) {
     		return handleOnClick(feature);
     	}
 
@@ -31708,6 +31719,7 @@ var app = (function () {
     		handleMouseOut,
     		ABSSelected,
     		dialog,
+    		favoriteClicked,
     		handleOnClick,
     		featuresFiltered,
     		paths,
@@ -31717,7 +31729,8 @@ var app = (function () {
     		cardWrapper,
     		table_ABSSelected_binding,
     		table_dialog_binding,
-    		click_handler
+    		click_handler,
+    		click_handler_1
     	};
     }
 
@@ -32112,9 +32125,9 @@ var app = (function () {
     }
 
     const Config = {
-      skipLabel: 'Salir',
-      doneLabel: 'Finalizar',
-      nextLabel: 'Siguiente',
+      skipLabel: 'Sortir',
+      doneLabel: 'Finalitzar',
+      nextLabel: 'Sigüent',
       prevLabel: 'Anterior',
       showStepNumbers: 0,
       disableInteraction: 1,

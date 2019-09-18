@@ -81,11 +81,15 @@
   }
   let ABSSelected;
   let dialog;
+  let favoriteClicked = false;
 
   function handleOnClick(absSelected) {
-    ABSSelected = absSelected.properties;
+    if (!favoriteClicked) {
+      ABSSelected = absSelected.properties;
 
-    dialog.open();
+      dialog.open();
+    }
+    favoriteClicked = false;
   }
 </script>
 
@@ -101,8 +105,9 @@
             <span style="color: black;">{feature.properties.NOMSS} -</span>
             <b>{getAbsCode(feature)}</b>
             <IconButton
-              style="float: right; top: -13px"
+              style="float: right; top: -13px;"
               toggle
+              on:click={() => (favoriteClicked = true)}
               aria-label="Add to favorites"
               title="Add to favorites">
               <Icon class="material-icons" on>favorite</Icon>
