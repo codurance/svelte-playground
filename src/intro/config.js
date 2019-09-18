@@ -10,28 +10,28 @@ const Config = {
   steps: [
     {
       intro:
-        'Bienvenido a SiSalut, este es un pequeño tutorial de como utilizar el sistema.'
+        'Benvinguts a SiSalut, aquest és un petit tutorial de com emprar el sistema.'
     },
     {
       element: '#step1',
-      intro: 'Aquí veras el título del gráfico visualizado.',
+      intro: 'Aquí veuràs el títol del gràfic visualitzat.',
       position: 'left'
     },
     {
       element: '#step2',
-      intro: 'Aquí podrás seleccionar el modo de visualización.',
+      intro: 'Aquí podràs seleccionar el mode de visualització.',
       position: 'bottom-right-aligned'
     },
     {
       element: '#step3',
       intro:
-        'Este es un ejemplo de visualización, si seleccionas un sector y haces click podrás ver el detalle.',
+        'Aquest és un exemple de visualització. Si selecciones un sector i fas click podràs veure el detall.',
       scrollTo: 'tooltip'
     },
     {
       element: '#step4',
       intro:
-        'En esta sección podrás aplicar los diferentes tipos de filtros y acciones sobre el gráfico.'
+        'En aquesta secció podràs aplicar els diferents tipus de filtres i accions sobre el gràfic.'
     }
   ]
 };
