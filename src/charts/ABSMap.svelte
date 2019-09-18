@@ -101,13 +101,11 @@
   };
 </script>
 
+<svelte:window on:load={handleLoadSvg} />
 <Table bind:ABSSelected bind:dialog />
 
 <div>
-  <svg
-    id="absMap"
-    viewBox={`${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`}
-    on:load={handleLoadSvg}>
+  <svg id="absMap" viewBox={`${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`}>
 
     <g out:fade={{ duration: 200 }}>
       {#if features}
