@@ -48,8 +48,9 @@
   onMount(async () => {
     const data = await fetch(FINAL);
     barcelona = await data.json();
-    features = await topojson.feature(barcelona, barcelona.objects["ABS_2018"])
-      .features;
+    features = await topojson
+      .feature(barcelona, barcelona.objects["ABS_2018"])
+      .features.sort((a, b) => getAbsCode(a).localeCompare(getAbsCode(b)));
     colorScaleExtent = d3.extent(
       barcelona.objects.ABS_2018.geometries.map(({ properties }) =>
         properties.VALORES ? properties.VALORES[2] : 0

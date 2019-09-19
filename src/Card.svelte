@@ -45,32 +45,33 @@
   </Content>
 
   <Actions id="step4">
-    <Select
-      class="shaped"
-      style="width: 20em"
-      variant="filled"
-      label="Filtres"
-      bind:value={$ABSChartFilter}>
-      {#each filters as { value, label }}
-        <Option {value} selected={$ABSChartFilter === value}>{label}</Option>
+    <div class="filters">
+      <Select
+        class="shaped"
+        style="min-width: 20em"
+        variant="filled"
+        label="Filtres"
+        bind:value={$ABSChartFilter}>
+        {#each filters as { value, label }}
+          <Option {value} selected={$ABSChartFilter === value}>{label}</Option>
+        {/each}
+      </Select>
+      {#each Gender.options as gender}
+        <FormField>
+          <Radio bind:group={$GenderSelected} value={gender.name} />
+          <span slot="label">{gender.name}</span>
+        </FormField>
       {/each}
-    </Select>
 
-    {#each Gender.options as gender}
-      <FormField>
-        <Radio bind:group={$GenderSelected} value={gender.name} />
-        <span slot="label">{gender.name}</span>
-      </FormField>
-    {/each}
-
-    <ActionIcons>
-      <IconButton class="material-icons" title="Share">share</IconButton>
-      <IconButton
-        class="material-icons"
-        title="File download"
-        on:click={() => exportSvg(svgElementId, fileName)}>
-        file_download
-      </IconButton>
-    </ActionIcons>
+      <ActionIcons>
+        <IconButton class="material-icons" title="Share">share</IconButton>
+        <IconButton
+          class="material-icons"
+          title="File download"
+          on:click={() => exportSvg(svgElementId, fileName)}>
+          file_download
+        </IconButton>
+      </ActionIcons>
+    </div>
   </Actions>
 </Card>

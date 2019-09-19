@@ -3,7 +3,7 @@
   import { Icon } from "@smui/common";
   import { fade } from "svelte/transition";
 
-  let minScroll = 600;
+  let minScroll = document.body.scrollHeight * 0.6;
   $: showScrollButton = false;
 
   function shouldShowButton() {

@@ -144,6 +144,11 @@ svg {
   line-height: 3em !important;
 }
 
+.filters {
+  width: 100%; 
+  display: flex;
+}
+
 @media screen and (max-width: 789px) {
   .card-wrapping-chart {
     width: 100% !important;
@@ -161,6 +166,10 @@ svg {
     display: none;
   }
 
+  #favoriteButton {
+    display: none;
+  }
+
   .headerImage {
     display: none;
   }
@@ -175,6 +184,14 @@ svg {
     width: 40px;
     height: 40px;
   }
+
+  .filters {
+    display: block;
+  }
+
+  .mdc-card__action-icons {
+    justify-content: flex-start !important;
+}
 }
 
 @media (min-width: 300px) and (max-width: 321px) {
