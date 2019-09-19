@@ -129,7 +129,7 @@
           <g out:fly={{ y: -20, duration: 200 }}>
             <text
               in:fade={{ delay: 1000 + i * 15, duration: 200 }}
-              style="font-size: 10px"
+              style="font-size: 10px; pointer-events: none;"
               transform={`translate(${path.centroid(feature)})`}>
               {feature.properties.NOMABS.replace('Barcelona - ', '')}
             </text>

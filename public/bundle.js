@@ -5787,16 +5787,16 @@ var app = (function () {
     const MapBBox = writable({ width: 0, height: 0, x: 0, y: 0 });
     const ABSFilter = writable(undefined);
 
-    const MixDefaultValue = 'Ambdos';
+    const MixDefaultValue = 'Ambdós';
     const GenderSelected = writable(MixDefaultValue);
     const Gender = {
-      isMix: function(selected) {
+      isMix: function (selected) {
         return selected === MixDefaultValue;
       },
-      isMan: function(selected) {
+      isMan: function (selected) {
         return selected === 'Homes';
       },
-      isWoman: function(selected) {
+      isWoman: function (selected) {
         return selected == 'Dones';
       },
       options: [
@@ -31061,6 +31061,7 @@ var app = (function () {
     			attr(path_1, "stroke", "black");
     			add_location(path_1, file$u, 118, 10, 2985);
     			set_style(text_1, "font-size", "10px");
+    			set_style(text_1, "pointer-events", "none");
     			attr(text_1, "transform", text_1_transform_value = `translate(${ctx.path.centroid(ctx.feature)})`);
     			add_location(text_1, file$u, 129, 12, 3482);
     			add_location(g, file$u, 128, 10, 3430);
@@ -31155,11 +31156,11 @@ var app = (function () {
     			attr(rect, "stroke", "black");
     			attr(rect, "stroke-width", "1");
     			attr(rect, "fill", rect_fill_value = ctx.color);
-    			add_location(rect, file$u, 141, 8, 3871);
+    			add_location(rect, file$u, 141, 8, 3894);
     			attr(text_1, "x", "25");
     			attr(text_1, "y", 19 + 15 * ctx.i);
     			attr(text_1, "font-size", "12");
-    			add_location(text_1, file$u, 149, 8, 4049);
+    			add_location(text_1, file$u, 149, 8, 4072);
     		},
 
     		m: function mount(target, anchor) {
@@ -31211,13 +31212,13 @@ var app = (function () {
     			if (if_block0) if_block0.c();
     			t6 = space();
     			if (if_block1) if_block1.c();
-    			add_location(p0, file$u, 158, 4, 4311);
-    			add_location(p1, file$u, 159, 4, 4345);
-    			add_location(p2, file$u, 160, 4, 4379);
-    			add_location(p3, file$u, 161, 4, 4412);
+    			add_location(p0, file$u, 158, 4, 4334);
+    			add_location(p1, file$u, 159, 4, 4368);
+    			add_location(p2, file$u, 160, 4, 4402);
+    			add_location(p3, file$u, 161, 4, 4435);
     			attr(div, "class", "tooltip");
     			attr(div, "style", div_style_value = ctx.showTooltip ? `opacity: .9; top: ${ctx.tooltipValues.top}px; left: ${ctx.tooltipValues.left}px` : 'opacity: 0');
-    			add_location(div, file$u, 155, 2, 4166);
+    			add_location(div, file$u, 155, 2, 4189);
     		},
 
     		m: function mount(target, anchor) {
@@ -31305,7 +31306,7 @@ var app = (function () {
     			attr(img, "alt", "Old Man");
     			attr(img, "width", "25px");
     			attr(img, "height", "25px");
-    			add_location(img, file$u, 163, 8, 4467);
+    			add_location(img, file$u, 163, 8, 4490);
     		},
 
     		m: function mount(target, anchor) {
@@ -31343,7 +31344,7 @@ var app = (function () {
     			attr(img, "alt", "Old Woman");
     			attr(img, "width", "25px");
     			attr(img, "height", "25px");
-    			add_location(img, file$u, 172, 8, 4732);
+    			add_location(img, file$u, 172, 8, 4755);
     		},
 
     		m: function mount(target, anchor) {
@@ -31438,7 +31439,7 @@ var app = (function () {
     			if (if_block1) if_block1.c();
     			if_block1_anchor = empty();
     			add_location(g0, file$u, 115, 4, 2882);
-    			add_location(g1, file$u, 139, 4, 3816);
+    			add_location(g1, file$u, 139, 4, 3839);
     			attr(svg, "id", "absMap");
     			attr(svg, "viewBox", svg_viewBox_value = `${ctx.bbox.x} ${ctx.bbox.y} ${ctx.bbox.width} ${ctx.bbox.height}`);
     			add_location(svg, file$u, 113, 2, 2798);

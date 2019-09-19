@@ -5,7 +5,7 @@ export const LensSelected = writable('map');
 export const MapBBox = writable({ width: 0, height: 0, x: 0, y: 0 });
 export const ABSFilter = writable(undefined);
 
-const MixDefaultValue = 'Ambdos';
+const MixDefaultValue = 'Ambdós';
 export const GenderSelected = writable(MixDefaultValue);
 export const Gender = {
   isMix: function(selected) {
