@@ -202,6 +202,10 @@ svg {
   .navBar {
     flex-direction: column;
   }
+
+  #gridButton {
+    display: none;
+  }
 }
 
 /* IPHONE 5 o SE */
