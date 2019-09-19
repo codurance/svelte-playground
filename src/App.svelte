@@ -34,10 +34,10 @@
 <TopAppBar variant="static" color="primary">
   <Row>
     <Section>
-      <img src="./images/logo.jpg" alt="SiSalut" />
+      <img src="./images/logo.png" alt="SiSalut" />
     </Section>
     <Section align="end" toolbar>
-      <img class="headerImage" src="./images/header.jpg" alt="SiSalut" />
+      <img class="headerImage" src="./images/header.png" alt="SiSalut" />
     </Section>
   </Row>
 </TopAppBar>

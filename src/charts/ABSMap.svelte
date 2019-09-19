@@ -1,6 +1,6 @@
 <script>
   import { ABSMapFilter, MapBBox, Gender, GenderSelected } from "../store.js";
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import Table from "./Table.svelte";
   import { quintOut } from "svelte/easing";
   import { fade, draw, fly } from "svelte/transition";
@@ -55,6 +55,10 @@
         properties.VALORES ? properties.VALORES[$ABSMapFilter] : 0
       )
     );
+
+    await tick();
+
+    handleLoadSvg();
   });
 
   function handleLoadSvg() {
@@ -101,7 +105,6 @@
   };
 </script>
 
-<svelte:window on:load={handleLoadSvg} />
 <Table bind:ABSSelected bind:dialog />
 
 <div>
