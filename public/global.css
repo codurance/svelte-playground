@@ -147,12 +147,19 @@ svg {
   padding: 0 !important;
   overflow-wrap: break-word !important;
   white-space: unset !important;
-  line-height: 3em !important;
+  line-height: 1.4em !important;
 }
 
 .filters {
   width: 100%; 
   display: flex;
+}
+
+.navBar {
+  width: 100%; 
+  display: flex; 
+  justify-content: space-between;
+  align-items:center
 }
 
 @media screen and (max-width: 789px) {
@@ -168,21 +175,14 @@ svg {
     display: none;
   }
 
-  #gridButton {
-    display: none;
-  }
-
-  #favoriteButton {
-    display: none;
-  }
-
   .headerImage {
     display: none;
   }
 
   .chart-title {
-    width: 24em;
+    width: 95%;
     font-size: 70% !important;
+    text-align: center;
   }
 
   #scrollButton {
@@ -197,40 +197,45 @@ svg {
 
   .mdc-card__action-icons {
     justify-content: flex-start !important;
-}
+  }
+
+  .navBar {
+    flex-direction: column;
+  }
 }
 
+/* IPHONE 5 o SE */
 @media (min-width: 300px) and (max-width: 321px) {
   .chart-title {
-    font-size: 9px !important;
+    font-size: 13px !important;
   }
 }
 
 /* GALAXY */
 @media (min-width: 322px) and (max-width: 363px) {
   .chart-title {
-    font-size: 10px !important;
+    font-size: 13px !important;
   }
 }
 
 /* PIXEL 2 */
 @media (min-width: 411px) and (max-width: 412px) {
   .chart-title {
-    font-size: 10px !important;
+    font-size: 17px !important;
   }
 }
 
-/* IPHONE 6,7 */
+/* IPHONE 6,7 PLUS */
 @media (min-width: 414px) and (max-width: 415px) {
   .chart-title {
-    font-size: 10px !important;
+    font-size: 17px !important;
   }
 }
 
 /* IPHONE X */
 @media (min-width: 375px) and (max-width: 376px) {
   .chart-title {
-    font-size: 10px !important;
+    font-size: 15px !important;
   }
 }
 

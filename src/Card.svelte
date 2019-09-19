@@ -48,7 +48,7 @@
     <div class="filters">
       <Select
         class="shaped"
-        style="min-width: 20em"
+        style="min-width: 18em"
         variant="filled"
         label="Filtres"
         bind:value={$ABSChartFilter}>
