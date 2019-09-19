@@ -5782,7 +5782,7 @@ var app = (function () {
         return { set, update, subscribe };
     }
 
-    const ABSMapFilter = writable(0);
+    const ABSChartFilter = writable(0);
     const LensSelected = writable('map');
     const MapBBox = writable({ width: 0, height: 0, x: 0, y: 0 });
     const ABSFilter = writable(undefined);
@@ -5790,13 +5790,13 @@ var app = (function () {
     const MixDefaultValue = 'Ambdos';
     const GenderSelected = writable(MixDefaultValue);
     const Gender = {
-      isMix: function(selected) {
+      isMix: function (selected) {
         return selected === MixDefaultValue;
       },
-      isMan: function(selected) {
+      isMan: function (selected) {
         return selected === 'Homes';
       },
-      isWoman: function(selected) {
+      isWoman: function (selected) {
         return selected == 'Dones';
       },
       options: [
@@ -5810,6 +5810,11 @@ var app = (function () {
           name: 'Dones'
         }
       ]
+    };
+    const ColorGender = {
+      Mix: ["#ffffff", "#ffd333", "#ffde66", "#fff4cc", "#ffe999"],
+      Woman: ["#ffffff", "#f7b2d5", "#db74a9", "#b5417d", "#ff69b4"],
+      Man: ["#ffffff", "#6fd1f2", "#12c4ff", "#089dcf", "#00769e"]
     };
 
     var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
@@ -22585,7 +22590,7 @@ var app = (function () {
     	};
     }
 
-    // (55:8) <Option {value} selected={$ABSMapFilter === value}>
+    // (55:8) <Option {value} selected={$ABSChartFilter === value}>
     function create_default_slot_7(ctx) {
     	var t_value = ctx.label + "", t;
 
@@ -22619,7 +22624,7 @@ var app = (function () {
     	var option = new Option({
     		props: {
     		value: ctx.value,
-    		selected: ctx.$ABSMapFilter === ctx.value,
+    		selected: ctx.$ABSChartFilter === ctx.value,
     		$$slots: { default: [create_default_slot_7] },
     		$$scope: { ctx }
     	},
@@ -22639,7 +22644,7 @@ var app = (function () {
     		p: function update(changed, ctx) {
     			var option_changes = {};
     			if (changed.filters) option_changes.value = ctx.value;
-    			if (changed.$ABSMapFilter || changed.filters) option_changes.selected = ctx.$ABSMapFilter === ctx.value;
+    			if (changed.$ABSChartFilter || changed.filters) option_changes.selected = ctx.$ABSChartFilter === ctx.value;
     			if (changed.$$scope || changed.filters) option_changes.$$scope = { changed, ctx };
     			option.$set(option_changes);
     		},
@@ -22662,7 +22667,7 @@ var app = (function () {
     	};
     }
 
-    // (48:4) <Select       class="shaped"       style="width: 20em"       variant="filled"       label="Filtres"       bind:value={$ABSMapFilter}>
+    // (48:4) <Select       class="shaped"       style="width: 20em"       variant="filled"       label="Filtres"       bind:value={$ABSChartFilter}>
     function create_default_slot_6(ctx) {
     	var each_1_anchor, current;
 
@@ -22697,7 +22702,7 @@ var app = (function () {
     		},
 
     		p: function update(changed, ctx) {
-    			if (changed.filters || changed.$ABSMapFilter) {
+    			if (changed.filters || changed.$ABSChartFilter) {
     				each_value_1 = ctx.filters;
 
     				for (var i = 0; i < each_value_1.length; i += 1) {
@@ -22753,7 +22758,7 @@ var app = (function () {
     			span = element("span");
     			t = text(t_value);
     			attr(span, "slot", "label");
-    			add_location(span, file$k, 61, 8, 1716);
+    			add_location(span, file$k, 61, 8, 1722);
     		},
 
     		m: function mount(target, anchor) {
@@ -23017,8 +23022,8 @@ var app = (function () {
     		$$slots: { default: [create_default_slot_6] },
     		$$scope: { ctx }
     	};
-    	if (ctx.$ABSMapFilter !== void 0) {
-    		select_props.value = ctx.$ABSMapFilter;
+    	if (ctx.$ABSChartFilter !== void 0) {
+    		select_props.value = ctx.$ABSChartFilter;
     	}
     	var select = new Select({ props: select_props, $$inline: true });
 
@@ -23072,9 +23077,9 @@ var app = (function () {
 
     		p: function update(changed, ctx) {
     			var select_changes = {};
-    			if (changed.$$scope || changed.filters || changed.$ABSMapFilter) select_changes.$$scope = { changed, ctx };
-    			if (!updating_value && changed.$ABSMapFilter) {
-    				select_changes.value = ctx.$ABSMapFilter;
+    			if (changed.$$scope || changed.filters || changed.$ABSChartFilter) select_changes.$$scope = { changed, ctx };
+    			if (!updating_value && changed.$ABSChartFilter) {
+    				select_changes.value = ctx.$ABSChartFilter;
     			}
     			select.$set(select_changes);
 
@@ -23186,7 +23191,7 @@ var app = (function () {
     			content.$set(content_changes);
 
     			var actions_changes = {};
-    			if (changed.$$scope || changed.$GenderSelected || changed.$ABSMapFilter || changed.filters) actions_changes.$$scope = { changed, ctx };
+    			if (changed.$$scope || changed.$GenderSelected || changed.$ABSChartFilter || changed.filters) actions_changes.$$scope = { changed, ctx };
     			actions.$set(actions_changes);
     		},
 
@@ -23246,7 +23251,7 @@ var app = (function () {
 
     		p: function update(changed, ctx) {
     			var card_changes = {};
-    			if (changed.$$scope || changed.$GenderSelected || changed.$ABSMapFilter || changed.filters) card_changes.$$scope = { changed, ctx };
+    			if (changed.$$scope || changed.$GenderSelected || changed.$ABSChartFilter || changed.filters) card_changes.$$scope = { changed, ctx };
     			card.$set(card_changes);
     		},
 
@@ -23281,12 +23286,12 @@ var app = (function () {
     }
 
     function instance$m($$self, $$props, $$invalidate) {
-    	let $GenderSelected, $ABSMapFilter;
+    	let $GenderSelected, $ABSChartFilter;
 
     	validate_store(GenderSelected, 'GenderSelected');
     	component_subscribe($$self, GenderSelected, $$value => { $GenderSelected = $$value; $$invalidate('$GenderSelected', $GenderSelected); });
-    	validate_store(ABSMapFilter, 'ABSMapFilter');
-    	component_subscribe($$self, ABSMapFilter, $$value => { $ABSMapFilter = $$value; $$invalidate('$ABSMapFilter', $ABSMapFilter); });
+    	validate_store(ABSChartFilter, 'ABSChartFilter');
+    	component_subscribe($$self, ABSChartFilter, $$value => { $ABSChartFilter = $$value; $$invalidate('$ABSChartFilter', $ABSChartFilter); });
 
     	
 
@@ -23300,8 +23305,8 @@ var app = (function () {
     	let { $$slots = {}, $$scope } = $$props;
 
     	function select_value_binding(value) {
-    		$ABSMapFilter = value;
-    		ABSMapFilter.set($ABSMapFilter);
+    		$ABSChartFilter = value;
+    		ABSChartFilter.set($ABSChartFilter);
     	}
 
     	function radio_group_binding(value) {
@@ -23334,7 +23339,7 @@ var app = (function () {
     		fileName,
     		filters,
     		$GenderSelected,
-    		$ABSMapFilter,
+    		$ABSChartFilter,
     		select_value_binding,
     		radio_group_binding,
     		click_handler,
@@ -29852,7 +29857,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (135:6) {:else}
+    // (138:6) {:else}
     function create_else_block$7(ctx) {
     	var t;
 
@@ -29877,7 +29882,7 @@ var app = (function () {
     	};
     }
 
-    // (114:6) {#if features}
+    // (117:6) {#if features}
     function create_if_block_3$1(ctx) {
     	var each_1_anchor, current;
 
@@ -29912,7 +29917,7 @@ var app = (function () {
     		},
 
     		p: function update(changed, ctx) {
-    			if (changed.path || changed.features || changed.quantize || changed.Number || changed.$ABSMapFilter) {
+    			if (changed.path || changed.features || changed.quantize || changed.Number || changed.$ABSChartFilter) {
     				each_value_1 = ctx.features;
 
     				for (var i = 0; i < each_value_1.length; i += 1) {
@@ -29959,7 +29964,7 @@ var app = (function () {
     	};
     }
 
-    // (115:8) {#each features as feature, i}
+    // (118:8) {#each features as feature, i}
     function create_each_block_1$1(ctx) {
     	var path_1, path_1_d_value, path_1_fill_value, path_1_intro, g, text_1, t_value = ctx.feature.properties.NOMABS.replace('Barcelona - ', '') + "", t, text_1_transform_value, text_1_intro, g_outro, current, dispose;
 
@@ -29978,13 +29983,13 @@ var app = (function () {
     			text_1 = svg_element("text");
     			t = text(t_value);
     			attr(path_1, "d", path_1_d_value = ctx.path(ctx.feature));
-    			attr(path_1, "fill", path_1_fill_value = ctx.quantize(ctx.Number(ctx.feature.properties.VALORES ? ctx.feature.properties.VALORES[ctx.$ABSMapFilter] : 0)));
+    			attr(path_1, "fill", path_1_fill_value = ctx.quantize(ctx.Number(ctx.feature.properties.VALORES ? ctx.feature.properties.VALORES[ctx.$ABSChartFilter] : 0)));
     			attr(path_1, "stroke", "black");
-    			add_location(path_1, file$s, 115, 10, 3157);
+    			add_location(path_1, file$s, 118, 10, 2985);
     			set_style(text_1, "font-size", "10px");
     			attr(text_1, "transform", text_1_transform_value = `translate(${ctx.path.centroid(ctx.feature)})`);
-    			add_location(text_1, file$s, 126, 12, 3652);
-    			add_location(g, file$s, 125, 10, 3600);
+    			add_location(text_1, file$s, 129, 12, 3482);
+    			add_location(g, file$s, 128, 10, 3430);
 
     			dispose = [
     				listen(path_1, "mouseover", ctx.handleMouseOver),
@@ -30008,7 +30013,7 @@ var app = (function () {
     				attr(path_1, "d", path_1_d_value);
     			}
 
-    			if ((!current || changed.quantize || changed.features || changed.$ABSMapFilter) && path_1_fill_value !== (path_1_fill_value = ctx.quantize(ctx.Number(ctx.feature.properties.VALORES ? ctx.feature.properties.VALORES[ctx.$ABSMapFilter] : 0)))) {
+    			if ((!current || changed.quantize || changed.features || changed.$ABSChartFilter) && path_1_fill_value !== (path_1_fill_value = ctx.quantize(ctx.Number(ctx.feature.properties.VALORES ? ctx.feature.properties.VALORES[ctx.$ABSChartFilter] : 0)))) {
     				attr(path_1, "fill", path_1_fill_value);
     			}
 
@@ -30060,7 +30065,7 @@ var app = (function () {
     	};
     }
 
-    // (138:6) {#each labels as { color, text }
+    // (141:6) {#each labels as { color, text }
     function create_each_block$1(ctx) {
     	var rect, rect_fill_value, text_1, t_value = ctx.text + "", t;
 
@@ -30076,11 +30081,11 @@ var app = (function () {
     			attr(rect, "stroke", "black");
     			attr(rect, "stroke-width", "1");
     			attr(rect, "fill", rect_fill_value = ctx.color);
-    			add_location(rect, file$s, 138, 8, 4041);
+    			add_location(rect, file$s, 141, 8, 3871);
     			attr(text_1, "x", "25");
     			attr(text_1, "y", 19 + 15 * ctx.i);
     			attr(text_1, "font-size", "12");
-    			add_location(text_1, file$s, 146, 8, 4219);
+    			add_location(text_1, file$s, 149, 8, 4049);
     		},
 
     		m: function mount(target, anchor) {
@@ -30108,7 +30113,7 @@ var app = (function () {
     	};
     }
 
-    // (152:0) {#if showTooltip}
+    // (155:0) {#if showTooltip}
     function create_if_block$8(ctx) {
     	var div, p0, t0_value = ctx.tooltipValues.NOMABS + "", t0, t1, p1, t2_value = ctx.tooltipValues.NOMAGA + "", t2, t3, p2, t4_value = ctx.tooltipValues.NOMSS + "", t4, t5, p3, t6, div_style_value;
 
@@ -30132,13 +30137,13 @@ var app = (function () {
     			if (if_block0) if_block0.c();
     			t6 = space();
     			if (if_block1) if_block1.c();
-    			add_location(p0, file$s, 155, 4, 4481);
-    			add_location(p1, file$s, 156, 4, 4515);
-    			add_location(p2, file$s, 157, 4, 4549);
-    			add_location(p3, file$s, 158, 4, 4582);
+    			add_location(p0, file$s, 158, 4, 4311);
+    			add_location(p1, file$s, 159, 4, 4345);
+    			add_location(p2, file$s, 160, 4, 4379);
+    			add_location(p3, file$s, 161, 4, 4412);
     			attr(div, "class", "tooltip");
     			attr(div, "style", div_style_value = ctx.showTooltip ? `opacity: .9; top: ${ctx.tooltipValues.top}px; left: ${ctx.tooltipValues.left}px` : 'opacity: 0');
-    			add_location(div, file$s, 152, 2, 4336);
+    			add_location(div, file$s, 155, 2, 4166);
     		},
 
     		m: function mount(target, anchor) {
@@ -30213,9 +30218,9 @@ var app = (function () {
     	};
     }
 
-    // (160:6) {#if isMixSelected || isManSelected}
+    // (163:6) {#if isMixSelected || isManSelected}
     function create_if_block_2$1(ctx) {
-    	var img, t0, t1_value = ctx.tooltipValues.VALORES ? ctx.tooltipValues.VALORES[ctx.$ABSMapFilter] : 'No Data' + "", t1;
+    	var img, t0, t1_value = ctx.tooltipValues.VALORES ? ctx.tooltipValues.VALORES[ctx.$ABSChartFilter] : 'No Data' + "", t1;
 
     	return {
     		c: function create() {
@@ -30226,7 +30231,7 @@ var app = (function () {
     			attr(img, "alt", "Old Man");
     			attr(img, "width", "25px");
     			attr(img, "height", "25px");
-    			add_location(img, file$s, 160, 8, 4637);
+    			add_location(img, file$s, 163, 8, 4467);
     		},
 
     		m: function mount(target, anchor) {
@@ -30236,7 +30241,7 @@ var app = (function () {
     		},
 
     		p: function update(changed, ctx) {
-    			if ((changed.tooltipValues || changed.$ABSMapFilter) && t1_value !== (t1_value = ctx.tooltipValues.VALORES ? ctx.tooltipValues.VALORES[ctx.$ABSMapFilter] : 'No Data' + "")) {
+    			if ((changed.tooltipValues || changed.$ABSChartFilter) && t1_value !== (t1_value = ctx.tooltipValues.VALORES ? ctx.tooltipValues.VALORES[ctx.$ABSChartFilter] : 'No Data' + "")) {
     				set_data(t1, t1_value);
     			}
     		},
@@ -30251,9 +30256,9 @@ var app = (function () {
     	};
     }
 
-    // (169:6) {#if isMixSelected || isWomanSelected}
+    // (172:6) {#if isMixSelected || isWomanSelected}
     function create_if_block_1$2(ctx) {
-    	var img, t0, t1_value = ctx.tooltipValues.VALORES ? ctx.tooltipValues.VALORES[ctx.$ABSMapFilter] * 2 : 'No Data' + "", t1;
+    	var img, t0, t1_value = ctx.tooltipValues.VALORES ? ctx.tooltipValues.VALORES[ctx.$ABSChartFilter] * 2 : 'No Data' + "", t1;
 
     	return {
     		c: function create() {
@@ -30264,7 +30269,7 @@ var app = (function () {
     			attr(img, "alt", "Old Woman");
     			attr(img, "width", "25px");
     			attr(img, "height", "25px");
-    			add_location(img, file$s, 169, 8, 4900);
+    			add_location(img, file$s, 172, 8, 4732);
     		},
 
     		m: function mount(target, anchor) {
@@ -30274,7 +30279,7 @@ var app = (function () {
     		},
 
     		p: function update(changed, ctx) {
-    			if ((changed.tooltipValues || changed.$ABSMapFilter) && t1_value !== (t1_value = ctx.tooltipValues.VALORES ? ctx.tooltipValues.VALORES[ctx.$ABSMapFilter] * 2 : 'No Data' + "")) {
+    			if ((changed.tooltipValues || changed.$ABSChartFilter) && t1_value !== (t1_value = ctx.tooltipValues.VALORES ? ctx.tooltipValues.VALORES[ctx.$ABSChartFilter] * 2 : 'No Data' + "")) {
     				set_data(t1, t1_value);
     			}
     		},
@@ -30358,12 +30363,12 @@ var app = (function () {
     			t1 = space();
     			if (if_block1) if_block1.c();
     			if_block1_anchor = empty();
-    			add_location(g0, file$s, 112, 4, 3054);
-    			add_location(g1, file$s, 136, 4, 3986);
+    			add_location(g0, file$s, 115, 4, 2882);
+    			add_location(g1, file$s, 139, 4, 3816);
     			attr(svg, "id", "absMap");
     			attr(svg, "viewBox", svg_viewBox_value = `${ctx.bbox.x} ${ctx.bbox.y} ${ctx.bbox.width} ${ctx.bbox.height}`);
-    			add_location(svg, file$s, 110, 2, 2970);
-    			add_location(div, file$s, 109, 0, 2962);
+    			add_location(svg, file$s, 113, 2, 2798);
+    			add_location(div, file$s, 112, 0, 2790);
     		},
 
     		l: function claim(nodes) {
@@ -30515,20 +30520,16 @@ var app = (function () {
     }
 
     function instance$v($$self, $$props, $$invalidate) {
-    	let $GenderSelected, $MapBBox, $ABSMapFilter;
+    	let $GenderSelected, $MapBBox, $ABSChartFilter;
 
     	validate_store(GenderSelected, 'GenderSelected');
     	component_subscribe($$self, GenderSelected, $$value => { $GenderSelected = $$value; $$invalidate('$GenderSelected', $GenderSelected); });
     	validate_store(MapBBox, 'MapBBox');
     	component_subscribe($$self, MapBBox, $$value => { $MapBBox = $$value; $$invalidate('$MapBBox', $MapBBox); });
-    	validate_store(ABSMapFilter, 'ABSMapFilter');
-    	component_subscribe($$self, ABSMapFilter, $$value => { $ABSMapFilter = $$value; $$invalidate('$ABSMapFilter', $ABSMapFilter); });
+    	validate_store(ABSChartFilter, 'ABSChartFilter');
+    	component_subscribe($$self, ABSChartFilter, $$value => { $ABSChartFilter = $$value; $$invalidate('$ABSChartFilter', $ABSChartFilter); });
 
     	
-
-      const DONESCOLOR = ["#ffffff", "#f7b2d5", "#db74a9", "#b5417d", "#ff69b4"];
-      const HOMESCOLOR = ["#ffffff", "#6fd1f2", "#12c4ff", "#089dcf", "#00769e"];
-      const MIXCOLOR = ["#ffffff", "#ffd333", "#ffde66", "#fff4cc", "#ffe999"];
 
       const path = d3.geoPath();
 
@@ -30546,7 +30547,7 @@ var app = (function () {
           .features);
         $$invalidate('colorScaleExtent', colorScaleExtent = d3.extent(
           barcelona.objects.ABS_2018.geometries.map(({ properties }) =>
-            properties.VALORES ? properties.VALORES[$ABSMapFilter] : 0
+            properties.VALORES ? properties.VALORES[$ABSChartFilter] : 0
           )
         ));
 
@@ -30587,7 +30588,7 @@ var app = (function () {
         const quantizedColor = quantize(
           Number(
             feature.properties.VALORES
-              ? feature.properties.VALORES[$ABSMapFilter]
+              ? feature.properties.VALORES[$ABSChartFilter]
               : 0
           )
         );
@@ -30620,10 +30621,10 @@ var app = (function () {
     		if ($$dirty.$GenderSelected) { $$invalidate('isWomanSelected', isWomanSelected = Gender.isWoman($GenderSelected)); }
     		if ($$dirty.$MapBBox) { $$invalidate('bbox', bbox = $MapBBox); }
     		if ($$dirty.isMixSelected || $$dirty.isManSelected) { $$invalidate('colors', colors = isMixSelected
-            ? MIXCOLOR
+            ? ColorGender.Mix
             : isManSelected
-            ? HOMESCOLOR
-            : DONESCOLOR); }
+            ? ColorGender.Man
+            : ColorGender.Woman); }
     		if ($$dirty.colors) { $$invalidate('labels', labels = [
             { color: colors[0], text: "De 8.5 a 11.10" },
             { color: colors[1], text: "De 11.11 a 12.30" },
@@ -30657,7 +30658,7 @@ var app = (function () {
     		quantize,
     		showTooltip,
     		tooltipValues,
-    		$ABSMapFilter,
+    		$ABSChartFilter,
     		Number,
     		table_ABSSelected_binding,
     		table_dialog_binding,
@@ -30710,7 +30711,7 @@ var app = (function () {
     			t = space();
     			div = element("div");
     			attr(div, "id", "barchart");
-    			add_location(div, file$t, 84, 0, 1751);
+    			add_location(div, file$t, 138, 0, 3087);
     		},
 
     		l: function claim(nodes) {
@@ -30759,6 +30760,13 @@ var app = (function () {
     }
 
     function instance$w($$self, $$props, $$invalidate) {
+    	let $GenderSelected, $ABSChartFilter;
+
+    	validate_store(GenderSelected, 'GenderSelected');
+    	component_subscribe($$self, GenderSelected, $$value => { $GenderSelected = $$value; $$invalidate('$GenderSelected', $GenderSelected); });
+    	validate_store(ABSChartFilter, 'ABSChartFilter');
+    	component_subscribe($$self, ABSChartFilter, $$value => { $ABSChartFilter = $$value; $$invalidate('$ABSChartFilter', $ABSChartFilter); });
+
     	
 
       let options = {
@@ -30789,12 +30797,6 @@ var app = (function () {
         dataLabels: {
           enabled: false
         },
-        series: [
-          {
-            name: "",
-            data: []
-          }
-        ],
         xaxis: {
           categories: [],
           labels: {
@@ -30822,19 +30824,72 @@ var app = (function () {
         NOMABS: "",
         NOMAGA: ""
       };
+      let data = null;
+      let chart = null;
+      let originalSeriesValue = null;
 
       onMount(async () => {
         const fetched = await fetch(
           "https://gist.githubusercontent.com/damianpumar/f5110a8cf1c2a99408a4cc40235e6790/raw/c7cfcac7a10a2cf25359454756fcd6c82763d7c8/barchart"
         );
-        const data = await fetched.json();
 
-        options.xaxis.categories = data.categories.map(category => category.name);    options.series[0].data = data.dataset.set.map(series =>
-          parseFloat(series.value)
-        );
-        var chart = new ApexCharts(document.querySelector("#barchart"), options);
+        data = await fetched.json();
+
+        updateOption(data);
+
+        chart = new ApexCharts(document.querySelector("#barchart"), options);
 
         chart.render();
+      });
+
+      function updateOption(data) {
+        options.colors = Gender.isMix($GenderSelected)
+          ? [ColorGender.Man[2], ColorGender.Woman[2]]
+          : Gender.isMan($GenderSelected)
+          ? [ColorGender.Man[2]]
+          : [ColorGender.Woman[2]];
+        options.xaxis.categories = data.categories.map(category => category.name);
+        originalSeriesValue = data.dataset.set.map(series =>
+          parseFloat(series.value)
+        );
+
+        updateValue(originalSeriesValue);
+      }
+
+      function updateValue(originalSeriesValue) {
+        const serieValue =
+          $ABSChartFilter > 0
+            ? originalSeriesValue.map(s => Math.trunc(s * ($ABSChartFilter + 0.1))) //TODO: Replace for real data
+            : originalSeriesValue;
+
+        options.series = [];
+        if (Gender.isMix($GenderSelected) || Gender.isMan($GenderSelected)) {
+          options.series.push({
+            name: "Homes",
+            data: serieValue
+          });
+        }
+
+        if (Gender.isMix($GenderSelected) || Gender.isWoman($GenderSelected)) {
+          options.series.push({
+            name: "Dones",
+            data: serieValue.map(s => Math.trunc(s * 1.2)) //TODO: Replace for real data
+          });
+        }
+      }
+
+      GenderSelected.subscribe(value => {
+        if (data) {
+          updateOption(data);
+          chart.updateOptions(options);
+        }
+      });
+
+      ABSChartFilter.subscribe(filterValue => {
+        if (data) {
+          updateValue(originalSeriesValue);
+          chart.updateOptions(options);
+        }
       });
 
     	function table_ABSSelected_binding(value) {
@@ -30908,7 +30963,7 @@ var app = (function () {
     		},
 
     		p: function update(changed, ctx) {
-    			if (changed.cardStyle || changed.listVisualization || changed.paths || changed.getAbsCode || changed.featuresFiltered || changed.PATH || changed.quantize || changed.$ABSMapFilter) {
+    			if (changed.cardStyle || changed.listVisualization || changed.paths || changed.getAbsCode || changed.featuresFiltered || changed.PATH || changed.quantize) {
     				each_value = ctx.featuresFiltered;
 
     				for (var i = 0; i < each_value.length; i += 1) {
@@ -31099,8 +31154,8 @@ var app = (function () {
     			t4 = space();
     			iconbutton.$$.fragment.c();
     			set_style(span, "color", "black");
-    			add_location(span, file$u, 104, 12, 2843);
-    			add_location(b, file$u, 105, 12, 2919);
+    			add_location(span, file$u, 104, 12, 2817);
+    			add_location(b, file$u, 105, 12, 2893);
     		},
 
     		m: function mount(target, anchor) {
@@ -31177,10 +31232,10 @@ var app = (function () {
     			attr(path, "id", path_id_value = `path-${getAbsCode$1(ctx.feature)}`);
     			attr(path, "class", `paths`);
     			attr(path, "d", path_d_value = ctx.PATH(ctx.feature));
-    			attr(path, "fill", path_fill_value = ctx.quantize(Number(ctx.feature.properties.VALORES ? ctx.feature.properties.VALORES[ctx.$ABSMapFilter] : 0)));
+    			attr(path, "fill", path_fill_value = ctx.quantize(Number(ctx.feature.properties.VALORES ? ctx.feature.properties.VALORES[2] : 0)));
     			attr(path, "stroke", "black");
-    			add_location(path, file$u, 130, 16, 3845);
-    			add_location(g, file$u, 129, 14, 3789);
+    			add_location(path, file$u, 130, 16, 3819);
+    			add_location(g, file$u, 129, 14, 3763);
     			attr(svg, "width", "350px");
     			attr(svg, "height", "200px");
     			set_style(svg, "left", "4%");
@@ -31190,7 +31245,7 @@ var app = (function () {
           350
           200`);
     			attr(svg, "opacity", "0.6");
-    			add_location(svg, file$u, 117, 12, 3403);
+    			add_location(svg, file$u, 117, 12, 3377);
 
     			dispose = [
     				listen(svg, "mouseover", ctx.handleMouseOver),
@@ -31216,7 +31271,7 @@ var app = (function () {
     				attr(path, "d", path_d_value);
     			}
 
-    			if ((!current || changed.quantize || changed.featuresFiltered || changed.$ABSMapFilter) && path_fill_value !== (path_fill_value = ctx.quantize(Number(ctx.feature.properties.VALORES ? ctx.feature.properties.VALORES[ctx.$ABSMapFilter] : 0)))) {
+    			if ((!current || changed.quantize || changed.featuresFiltered) && path_fill_value !== (path_fill_value = ctx.quantize(Number(ctx.feature.properties.VALORES ? ctx.feature.properties.VALORES[2] : 0)))) {
     				attr(path, "fill", path_fill_value);
     			}
 
@@ -31408,7 +31463,7 @@ var app = (function () {
     		p: function update(changed, new_ctx) {
     			ctx = new_ctx;
     			var primaryaction_changes = {};
-    			if (changed.$$scope || changed.listVisualization || changed.paths || changed.featuresFiltered || changed.quantize || changed.$ABSMapFilter) primaryaction_changes.$$scope = { changed, ctx };
+    			if (changed.$$scope || changed.listVisualization || changed.paths || changed.featuresFiltered || changed.quantize) primaryaction_changes.$$scope = { changed, ctx };
     			primaryaction.$set(primaryaction_changes);
     		},
 
@@ -31461,7 +31516,7 @@ var app = (function () {
     		p: function update(changed, ctx) {
     			var card_changes = {};
     			if (changed.cardStyle) card_changes.style = ctx.cardStyle;
-    			if (changed.$$scope || changed.listVisualization || changed.paths || changed.featuresFiltered || changed.quantize || changed.$ABSMapFilter) card_changes.$$scope = { changed, ctx };
+    			if (changed.$$scope || changed.listVisualization || changed.paths || changed.featuresFiltered || changed.quantize) card_changes.$$scope = { changed, ctx };
     			card.$set(card_changes);
     		},
 
@@ -31520,7 +31575,7 @@ var app = (function () {
     			if (if_block) if_block.c();
     			attr(div, "style", ctx.cardWrapper);
     			attr(div, "class", "cardWrapper");
-    			add_location(div, file$u, 97, 0, 2542);
+    			add_location(div, file$u, 97, 0, 2516);
     		},
 
     		l: function claim(nodes) {
@@ -31603,12 +31658,10 @@ var app = (function () {
     }
 
     function instance$x($$self, $$props, $$invalidate) {
-    	let $ABSFilter, $ABSMapFilter;
+    	let $ABSFilter;
 
     	validate_store(ABSFilter, 'ABSFilter');
     	component_subscribe($$self, ABSFilter, $$value => { $ABSFilter = $$value; $$invalidate('$ABSFilter', $ABSFilter); });
-    	validate_store(ABSMapFilter, 'ABSMapFilter');
-    	component_subscribe($$self, ABSMapFilter, $$value => { $ABSMapFilter = $$value; $$invalidate('$ABSMapFilter', $ABSMapFilter); });
 
     	
       const PATH = d3.geoPath();
@@ -31626,7 +31679,7 @@ var app = (function () {
           .features);
         $$invalidate('colorScaleExtent', colorScaleExtent = d3.extent(
           barcelona.objects.ABS_2018.geometries.map(({ properties }) =>
-            properties.VALORES ? properties.VALORES[$ABSMapFilter] : 0
+            properties.VALORES ? properties.VALORES[2] : 0
           )
         ));
       });
@@ -31725,7 +31778,6 @@ var app = (function () {
     		featuresFiltered,
     		paths,
     		quantize,
-    		$ABSMapFilter,
     		cardStyle,
     		cardWrapper,
     		table_ABSSelected_binding,

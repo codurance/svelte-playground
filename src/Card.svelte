@@ -1,5 +1,5 @@
 <script>
-  import { ABSMapFilter, Gender, GenderSelected } from "./store.js";
+  import { ABSChartFilter, Gender, GenderSelected } from "./store.js";
   import html2canvas from "html2canvas";
   import jsPDF from "jspdf";
   import Card, {
@@ -50,9 +50,9 @@
       style="width: 20em"
       variant="filled"
       label="Filtres"
-      bind:value={$ABSMapFilter}>
+      bind:value={$ABSChartFilter}>
       {#each filters as { value, label }}
-        <Option {value} selected={$ABSMapFilter === value}>{label}</Option>
+        <Option {value} selected={$ABSChartFilter === value}>{label}</Option>
       {/each}
     </Select>
 

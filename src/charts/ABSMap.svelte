@@ -1,13 +1,16 @@
 <script>
-  import { ABSMapFilter, MapBBox, Gender, GenderSelected } from "../store.js";
+  import {
+    ABSChartFilter,
+    MapBBox,
+    Gender,
+    GenderSelected,
+    ColorGender
+  } from "../store.js";
   import { onMount, tick } from "svelte";
   import Table from "./Table.svelte";
   import { quintOut } from "svelte/easing";
   import { fade, draw, fly } from "svelte/transition";
 
-  const DONESCOLOR = ["#ffffff", "#f7b2d5", "#db74a9", "#b5417d", "#ff69b4"];
-  const HOMESCOLOR = ["#ffffff", "#6fd1f2", "#12c4ff", "#089dcf", "#00769e"];
-  const MIXCOLOR = ["#ffffff", "#ffd333", "#ffde66", "#fff4cc", "#ffe999"];
   const FINAL =
     "https://gist.githubusercontent.com/damianpumar/862fe8d75f92a0b114ad4ae2bf128e13/raw/21dc4b07207455034b1e48022ae53f3a84fe5ece/finaltopojson";
 
@@ -26,10 +29,10 @@
   $: bbox = $MapBBox;
   $: filter = 0;
   $: colors = isMixSelected
-    ? MIXCOLOR
+    ? ColorGender.Mix
     : isManSelected
-    ? HOMESCOLOR
-    : DONESCOLOR;
+    ? ColorGender.Man
+    : ColorGender.Woman;
   $: labels = [
     { color: colors[0], text: "De 8.5 a 11.10" },
     { color: colors[1], text: "De 11.11 a 12.30" },
@@ -52,7 +55,7 @@
       .features;
     colorScaleExtent = d3.extent(
       barcelona.objects.ABS_2018.geometries.map(({ properties }) =>
-        properties.VALORES ? properties.VALORES[$ABSMapFilter] : 0
+        properties.VALORES ? properties.VALORES[$ABSChartFilter] : 0
       )
     );
 
@@ -97,7 +100,7 @@
     const quantizedColor = quantize(
       Number(
         feature.properties.VALORES
-          ? feature.properties.VALORES[$ABSMapFilter]
+          ? feature.properties.VALORES[$ABSChartFilter]
           : 0
       )
     );
@@ -116,7 +119,7 @@
           <path
             in:draw={{ duration: 3000 }}
             d={path(feature)}
-            fill={quantize(Number(feature.properties.VALORES ? feature.properties.VALORES[$ABSMapFilter] : 0))}
+            fill={quantize(Number(feature.properties.VALORES ? feature.properties.VALORES[$ABSChartFilter] : 0))}
             stroke="black"
             on:mouseover={handleMouseOver}
             on:mousemove={event => handleMouseMove(feature, event)}
@@ -163,7 +166,7 @@
           alt="Old Man"
           width="25px"
           height="25px" />
-        {tooltipValues.VALORES ? tooltipValues.VALORES[$ABSMapFilter] : 'No Data'}
+        {tooltipValues.VALORES ? tooltipValues.VALORES[$ABSChartFilter] : 'No Data'}
       {/if}
 
       {#if isMixSelected || isWomanSelected}
@@ -172,7 +175,7 @@
           alt="Old Woman"
           width="25px"
           height="25px" />
-        {tooltipValues.VALORES ? tooltipValues.VALORES[$ABSMapFilter] * 2 : 'No Data'}
+        {tooltipValues.VALORES ? tooltipValues.VALORES[$ABSChartFilter] * 2 : 'No Data'}
       {/if}
     </p>
   </div>

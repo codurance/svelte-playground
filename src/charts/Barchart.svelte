@@ -1,6 +1,12 @@
 <script>
   import { onMount } from "svelte";
   import Table from "./Table.svelte";
+  import {
+    ABSChartFilter,
+    Gender,
+    GenderSelected,
+    ColorGender
+  } from "../store.js";
 
   let options = {
     chart: {
@@ -30,12 +36,6 @@
     dataLabels: {
       enabled: false
     },
-    series: [
-      {
-        name: "",
-        data: []
-      }
-    ],
     xaxis: {
       categories: [],
       labels: {
@@ -63,21 +63,75 @@
     NOMABS: "",
     NOMAGA: ""
   };
+  let data = null;
+  let chart = null;
+  let originalSeriesValue = null;
 
   onMount(async () => {
     const fetched = await fetch(
       "https://gist.githubusercontent.com/damianpumar/f5110a8cf1c2a99408a4cc40235e6790/raw/c7cfcac7a10a2cf25359454756fcd6c82763d7c8/barchart"
     );
-    const data = await fetched.json();
+
+    data = await fetched.json();
+
+    updateOption(data);
+
+    chart = new ApexCharts(document.querySelector("#barchart"), options);
+
+    chart.render();
+  });
+
+  function updateOption(data) {
+    options.colors = Gender.isMix($GenderSelected)
+      ? [ColorGender.Man[2], ColorGender.Woman[2]]
+      : Gender.isMan($GenderSelected)
+      ? [ColorGender.Man[2]]
+      : [ColorGender.Woman[2]];
 
     options.xaxis.categories = data.categories.map(category => category.name);
-    options.series[0].data = data.dataset.set.map(series =>
+
+    originalSeriesValue = data.dataset.set.map(series =>
       parseFloat(series.value)
     );
 
-    var chart = new ApexCharts(document.querySelector("#barchart"), options);
+    updateValue(originalSeriesValue);
+  }
 
-    chart.render();
+  function updateValue(originalSeriesValue) {
+    const serieValue =
+      $ABSChartFilter > 0
+        ? originalSeriesValue.map(s => Math.trunc(s * ($ABSChartFilter + 0.1))) //TODO: Replace for real data
+        : originalSeriesValue;
+
+    options.series = [];
+
+    if (Gender.isMix($GenderSelected) || Gender.isMan($GenderSelected)) {
+      options.series.push({
+        name: "Homes",
+        data: serieValue
+      });
+    }
+
+    if (Gender.isMix($GenderSelected) || Gender.isWoman($GenderSelected)) {
+      options.series.push({
+        name: "Dones",
+        data: serieValue.map(s => Math.trunc(s * 1.2)) //TODO: Replace for real data
+      });
+    }
+  }
+
+  GenderSelected.subscribe(value => {
+    if (data) {
+      updateOption(data);
+      chart.updateOptions(options);
+    }
+  });
+
+  ABSChartFilter.subscribe(filterValue => {
+    if (data) {
+      updateValue(originalSeriesValue);
+      chart.updateOptions(options);
+    }
   });
 </script>
 

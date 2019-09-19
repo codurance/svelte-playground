@@ -1,6 +1,6 @@
 <script>
   import { onMount, afterUpdate } from "svelte";
-  import { ABSMapFilter, ABSFilter } from "../store.js";
+  import { ABSFilter } from "../store.js";
   import Card, {
     Content,
     PrimaryAction,
@@ -52,7 +52,7 @@
       .features;
     colorScaleExtent = d3.extent(
       barcelona.objects.ABS_2018.geometries.map(({ properties }) =>
-        properties.VALORES ? properties.VALORES[$ABSMapFilter] : 0
+        properties.VALORES ? properties.VALORES[2] : 0
       )
     );
   });
@@ -133,7 +133,7 @@
                   id={`path-${getAbsCode(feature)}`}
                   class={`paths`}
                   d={PATH(feature)}
-                  fill={quantize(Number(feature.properties.VALORES ? feature.properties.VALORES[$ABSMapFilter] : 0))}
+                  fill={quantize(Number(feature.properties.VALORES ? feature.properties.VALORES[2] : 0))}
                   stroke="black" />
               </g>
             </svg>
