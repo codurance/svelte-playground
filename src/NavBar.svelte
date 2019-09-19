@@ -49,6 +49,7 @@
           insert_chart
         </IconButton>
         <IconButton
+          id="gridButton"
           class="material-icons"
           aria-label="Grid"
           on:click={() => changeLens('grid')}>
