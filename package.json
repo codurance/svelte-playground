@@ -14,14 +14,14 @@
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^4.0.4",
     "svelte": "^3.0.0",
-    "svelte-material-ui": "^1.0.0-beta.10"
+    "husky": "^3.0.5",
+    "lint-staged": "^9.2.5",
+    "sirv-cli": "^0.4.4"
   },
   "dependencies": {
     "html2canvas": "^1.0.0-rc.3",
-    "husky": "^3.0.5",
     "jspdf": "^1.5.3",
-    "lint-staged": "^9.2.5",
-    "sirv-cli": "^0.4.4"
+    "svelte-material-ui": "^1.0.0-beta.10"
   },
   "scripts": {
     "build": "rollup -c",
