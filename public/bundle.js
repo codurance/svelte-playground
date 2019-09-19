@@ -6084,7 +6084,7 @@ var app = (function () {
     const file$8 = "src/NavBar.svelte";
 
     // (14:4) <Section>
-    function create_default_slot_13(ctx) {
+    function create_default_slot_14(ctx) {
     	var img;
 
     	return {
@@ -6108,7 +6108,7 @@ var app = (function () {
     }
 
     // (17:4) <Section align="end" toolbar>
-    function create_default_slot_12(ctx) {
+    function create_default_slot_13(ctx) {
     	var img;
 
     	return {
@@ -6133,12 +6133,12 @@ var app = (function () {
     }
 
     // (13:2) <Row>
-    function create_default_slot_11(ctx) {
+    function create_default_slot_12(ctx) {
     	var t, current;
 
     	var section0 = new Section({
     		props: {
-    		$$slots: { default: [create_default_slot_13] },
+    		$$slots: { default: [create_default_slot_14] },
     		$$scope: { ctx }
     	},
     		$$inline: true
@@ -6148,7 +6148,7 @@ var app = (function () {
     		props: {
     		align: "end",
     		toolbar: true,
-    		$$slots: { default: [create_default_slot_12] },
+    		$$slots: { default: [create_default_slot_13] },
     		$$scope: { ctx }
     	},
     		$$inline: true
@@ -6206,12 +6206,12 @@ var app = (function () {
     }
 
     // (12:0) <TopAppBar variant="static" color="primary">
-    function create_default_slot_10(ctx) {
+    function create_default_slot_11(ctx) {
     	var current;
 
     	var row = new Row({
     		props: {
-    		$$slots: { default: [create_default_slot_11] },
+    		$$slots: { default: [create_default_slot_12] },
     		$$scope: { ctx }
     	},
     		$$inline: true
@@ -6252,7 +6252,7 @@ var app = (function () {
     }
 
     // (25:6) <Title class="chart-title">
-    function create_default_slot_9(ctx) {
+    function create_default_slot_10(ctx) {
     	var t;
 
     	return {
@@ -6273,13 +6273,13 @@ var app = (function () {
     }
 
     // (24:4) <Section id="step1" toolbar>
-    function create_default_slot_8(ctx) {
+    function create_default_slot_9(ctx) {
     	var current;
 
     	var title = new Title({
     		props: {
     		class: "chart-title",
-    		$$slots: { default: [create_default_slot_9] },
+    		$$slots: { default: [create_default_slot_10] },
     		$$scope: { ctx }
     	},
     		$$inline: true
@@ -6320,7 +6320,7 @@ var app = (function () {
     }
 
     // (32:6) <IconButton         class="material-icons"         aria-label="Map"         on:click={() => changeLens('map')}>
-    function create_default_slot_7(ctx) {
+    function create_default_slot_8(ctx) {
     	var t;
 
     	return {
@@ -6340,7 +6340,28 @@ var app = (function () {
     	};
     }
 
-    // (38:6) <IconButton         class="material-icons"         aria-label="Chart"         on:click={() => changeLens('barchart')}>
+    // (38:6) <IconButton         class="material-icons"         aria-label="Chart"         on:click={() => changeLens('absDeck')}>
+    function create_default_slot_7(ctx) {
+    	var t;
+
+    	return {
+    		c: function create() {
+    			t = text("3d_rotation");
+    		},
+
+    		m: function mount(target, anchor) {
+    			insert(target, t, anchor);
+    		},
+
+    		d: function destroy(detaching) {
+    			if (detaching) {
+    				detach(t);
+    			}
+    		}
+    	};
+    }
+
+    // (44:6) <IconButton         class="material-icons"         aria-label="Chart"         on:click={() => changeLens('barchart')}>
     function create_default_slot_6(ctx) {
     	var t;
 
@@ -6361,7 +6382,7 @@ var app = (function () {
     	};
     }
 
-    // (44:6) <IconButton         id="gridButton"         class="material-icons"         aria-label="Grid"         on:click={() => changeLens('grid')}>
+    // (50:6) <IconButton         id="gridButton"         class="material-icons"         aria-label="Grid"         on:click={() => changeLens('grid')}>
     function create_default_slot_5(ctx) {
     	var t;
 
@@ -6382,7 +6403,7 @@ var app = (function () {
     	};
     }
 
-    // (51:6) <IconButton         class="material-icons noVisibleInMobile"         aria-label="List"         on:click={() => changeLens('list')}>
+    // (57:6) <IconButton         class="material-icons noVisibleInMobile"         aria-label="List"         on:click={() => changeLens('list')}>
     function create_default_slot_4(ctx) {
     	var t;
 
@@ -6403,7 +6424,7 @@ var app = (function () {
     	};
     }
 
-    // (57:6) <IconButton         id="favoriteButton"         class="material-icons"         aria-label="Favorite">
+    // (63:6) <IconButton         id="favoriteButton"         class="material-icons"         aria-label="Favorite">
     function create_default_slot_3(ctx) {
     	var t;
 
@@ -6426,7 +6447,7 @@ var app = (function () {
 
     // (30:4) <Section id="step2" align="end" toolbar>
     function create_default_slot_2(ctx) {
-    	var t0, t1, t2, t3, t4, current;
+    	var t0, t1, t2, t3, t4, t5, current;
 
     	var search = new Search({ $$inline: true });
 
@@ -6434,7 +6455,7 @@ var app = (function () {
     		props: {
     		class: "material-icons",
     		"aria-label": "Map",
-    		$$slots: { default: [create_default_slot_7] },
+    		$$slots: { default: [create_default_slot_8] },
     		$$scope: { ctx }
     	},
     		$$inline: true
@@ -6445,7 +6466,7 @@ var app = (function () {
     		props: {
     		class: "material-icons",
     		"aria-label": "Chart",
-    		$$slots: { default: [create_default_slot_6] },
+    		$$slots: { default: [create_default_slot_7] },
     		$$scope: { ctx }
     	},
     		$$inline: true
@@ -6453,6 +6474,17 @@ var app = (function () {
     	iconbutton1.$on("click", ctx.click_handler_1);
 
     	var iconbutton2 = new IconButton({
+    		props: {
+    		class: "material-icons",
+    		"aria-label": "Chart",
+    		$$slots: { default: [create_default_slot_6] },
+    		$$scope: { ctx }
+    	},
+    		$$inline: true
+    	});
+    	iconbutton2.$on("click", ctx.click_handler_2);
+
+    	var iconbutton3 = new IconButton({
     		props: {
     		id: "gridButton",
     		class: "material-icons",
@@ -6462,9 +6494,9 @@ var app = (function () {
     	},
     		$$inline: true
     	});
-    	iconbutton2.$on("click", ctx.click_handler_2);
+    	iconbutton3.$on("click", ctx.click_handler_3);
 
-    	var iconbutton3 = new IconButton({
+    	var iconbutton4 = new IconButton({
     		props: {
     		class: "material-icons noVisibleInMobile",
     		"aria-label": "List",
@@ -6473,9 +6505,9 @@ var app = (function () {
     	},
     		$$inline: true
     	});
-    	iconbutton3.$on("click", ctx.click_handler_3);
+    	iconbutton4.$on("click", ctx.click_handler_4);
 
-    	var iconbutton4 = new IconButton({
+    	var iconbutton5 = new IconButton({
     		props: {
     		id: "favoriteButton",
     		class: "material-icons",
@@ -6499,6 +6531,8 @@ var app = (function () {
     			iconbutton3.$$.fragment.c();
     			t4 = space();
     			iconbutton4.$$.fragment.c();
+    			t5 = space();
+    			iconbutton5.$$.fragment.c();
     		},
 
     		m: function mount(target, anchor) {
@@ -6513,6 +6547,8 @@ var app = (function () {
     			mount_component(iconbutton3, target, anchor);
     			insert(target, t4, anchor);
     			mount_component(iconbutton4, target, anchor);
+    			insert(target, t5, anchor);
+    			mount_component(iconbutton5, target, anchor);
     			current = true;
     		},
 
@@ -6536,6 +6572,10 @@ var app = (function () {
     			var iconbutton4_changes = {};
     			if (changed.$$scope) iconbutton4_changes.$$scope = { changed, ctx };
     			iconbutton4.$set(iconbutton4_changes);
+
+    			var iconbutton5_changes = {};
+    			if (changed.$$scope) iconbutton5_changes.$$scope = { changed, ctx };
+    			iconbutton5.$set(iconbutton5_changes);
     		},
 
     		i: function intro(local) {
@@ -6552,6 +6592,8 @@ var app = (function () {
 
     			transition_in(iconbutton4.$$.fragment, local);
 
+    			transition_in(iconbutton5.$$.fragment, local);
+
     			current = true;
     		},
 
@@ -6562,6 +6604,7 @@ var app = (function () {
     			transition_out(iconbutton2.$$.fragment, local);
     			transition_out(iconbutton3.$$.fragment, local);
     			transition_out(iconbutton4.$$.fragment, local);
+    			transition_out(iconbutton5.$$.fragment, local);
     			current = false;
     		},
 
@@ -6597,6 +6640,12 @@ var app = (function () {
     			}
 
     			destroy_component(iconbutton4, detaching);
+
+    			if (detaching) {
+    				detach(t5);
+    			}
+
+    			destroy_component(iconbutton5, detaching);
     		}
     	};
     }
@@ -6609,7 +6658,7 @@ var app = (function () {
     		props: {
     		id: "step1",
     		toolbar: true,
-    		$$slots: { default: [create_default_slot_8] },
+    		$$slots: { default: [create_default_slot_9] },
     		$$scope: { ctx }
     	},
     		$$inline: true
@@ -6730,7 +6779,7 @@ var app = (function () {
     		props: {
     		variant: "static",
     		color: "primary",
-    		$$slots: { default: [create_default_slot_10] },
+    		$$slots: { default: [create_default_slot_11] },
     		$$scope: { ctx }
     	},
     		$$inline: true
@@ -6811,14 +6860,18 @@ var app = (function () {
     	}
 
     	function click_handler_1() {
-    		return changeLens('barchart');
+    		return changeLens('absDeck');
     	}
 
     	function click_handler_2() {
-    		return changeLens('grid');
+    		return changeLens('barchart');
     	}
 
     	function click_handler_3() {
+    		return changeLens('grid');
+    	}
+
+    	function click_handler_4() {
     		return changeLens('list');
     	}
 
@@ -6826,7 +6879,8 @@ var app = (function () {
     		click_handler,
     		click_handler_1,
     		click_handler_2,
-    		click_handler_3
+    		click_handler_3,
+    		click_handler_4
     	};
     }
 
@@ -29685,7 +29739,7 @@ var app = (function () {
     }
 
     // (110:10) <Cell>
-    function create_default_slot_14(ctx) {
+    function create_default_slot_14$1(ctx) {
     	var t;
 
     	return {
@@ -29743,7 +29797,7 @@ var app = (function () {
 
     	var cell4 = new Cell({
     		props: {
-    		$$slots: { default: [create_default_slot_14] },
+    		$$slots: { default: [create_default_slot_14$1] },
     		$$scope: { ctx }
     	},
     		$$inline: true
@@ -31643,11 +31697,118 @@ var app = (function () {
     	}
     }
 
-    /* src/charts/Barchart.svelte generated by Svelte v3.9.2 */
+    /* src/charts/DeckGLMap.svelte generated by Svelte v3.9.2 */
 
-    const file$v = "src/charts/Barchart.svelte";
+    const file$v = "src/charts/DeckGLMap.svelte";
 
     function create_fragment$y(ctx) {
+    	var div;
+
+    	return {
+    		c: function create() {
+    			div = element("div");
+    			attr(div, "id", "absDeck");
+    			add_location(div, file$v, 62, 0, 1354);
+    		},
+
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+
+    		m: function mount(target, anchor) {
+    			insert(target, div, anchor);
+    		},
+
+    		p: noop,
+    		i: noop,
+    		o: noop,
+
+    		d: function destroy(detaching) {
+    			if (detaching) {
+    				detach(div);
+    			}
+    		}
+    	};
+    }
+
+    const COUNTRIES = 'https://raw.githubusercontent.com/martgnz/bcn-geodata/master/barris/barris.geojson';
+
+    function getElevation(x) {
+    if (x > 20000) {
+      return (Math.floor(Math.random() * 8) + 1) * 500
+    }
+    return parseInt(x)/4
+    }
+
+    function instance$y($$self) {
+    	
+    const COLOR_SCALE = [
+      // negative
+      [65, 182, 196],
+      [127, 205, 187],
+      [199, 233, 180],
+      [237, 248, 177],
+      // positive
+      [255, 255, 204],
+      [255, 237, 160],
+      [254, 217, 118],
+      [254, 178, 76],
+      [253, 141, 60],
+      [252, 78, 42],
+      [227, 26, 28],
+      [189, 0, 38],
+      [128, 0, 38]
+    ];
+    function colorScale(x) {
+      const i = Math.floor(Math.random() * 10) + 1;
+      return COLOR_SCALE[i]
+    }
+
+    onMount(async ()=> {
+      await tick();
+
+      const deckgl = new deck.DeckGL({
+        container: 'absDeck',
+        latitude: 41.39,
+        longitude: 2.15,
+        zoom: 11,
+        pitch: 20,
+        layers: [
+          new deck.GeoJsonLayer({
+            stroked: false,
+            filled: true,
+            extruded: true,
+            wireframe: true,
+            fp64: true,
+            id: 'base-map',
+            data: COUNTRIES,
+            stroked: true,
+            filled: true,
+            lineWidthMinPixels: 2,
+            getLineDashArray: [3, 3],
+            getLineColor: [60, 60, 60],
+            getFillColor: f => colorScale(f.properties.PERIMETRE),
+            getElevation: f => getElevation(f.properties.PERIMETRE)
+            })
+        ]
+      });
+    });
+
+    	return {};
+    }
+
+    class DeckGLMap extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$y, create_fragment$y, safe_not_equal, []);
+    	}
+    }
+
+    /* src/charts/Barchart.svelte generated by Svelte v3.9.2 */
+
+    const file$w = "src/charts/Barchart.svelte";
+
+    function create_fragment$z(ctx) {
     	var updating_ABSSelected, updating_dialog, t, div, current;
 
     	function table_ABSSelected_binding(value) {
@@ -31680,7 +31841,7 @@ var app = (function () {
     			t = space();
     			div = element("div");
     			attr(div, "id", "barchart");
-    			add_location(div, file$v, 138, 0, 3087);
+    			add_location(div, file$w, 138, 0, 3087);
     		},
 
     		l: function claim(nodes) {
@@ -31728,7 +31889,7 @@ var app = (function () {
     	};
     }
 
-    function instance$y($$self, $$props, $$invalidate) {
+    function instance$z($$self, $$props, $$invalidate) {
     	let $GenderSelected, $ABSChartFilter;
 
     	validate_store(GenderSelected, 'GenderSelected');
@@ -31882,13 +32043,13 @@ var app = (function () {
     class Barchart extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$y, create_fragment$y, safe_not_equal, []);
+    		init(this, options, instance$z, create_fragment$z, safe_not_equal, []);
     	}
     }
 
     /* src/charts/GridView.svelte generated by Svelte v3.9.2 */
 
-    const file$w = "src/charts/GridView.svelte";
+    const file$x = "src/charts/GridView.svelte";
 
     function get_each_context$2(ctx, list, i) {
     	const child_ctx = Object.create(ctx);
@@ -32123,8 +32284,8 @@ var app = (function () {
     			t4 = space();
     			iconbutton.$$.fragment.c();
     			set_style(span, "color", "black");
-    			add_location(span, file$w, 105, 12, 2883);
-    			add_location(b, file$w, 106, 12, 2959);
+    			add_location(span, file$x, 105, 12, 2883);
+    			add_location(b, file$x, 106, 12, 2959);
     		},
 
     		m: function mount(target, anchor) {
@@ -32203,8 +32364,8 @@ var app = (function () {
     			attr(path, "d", path_d_value = ctx.PATH(ctx.feature));
     			attr(path, "fill", path_fill_value = ctx.quantize(Number(ctx.feature.properties.VALORES ? ctx.feature.properties.VALORES[2] : 0)));
     			attr(path, "stroke", "black");
-    			add_location(path, file$w, 131, 16, 3885);
-    			add_location(g, file$w, 130, 14, 3829);
+    			add_location(path, file$x, 131, 16, 3885);
+    			add_location(g, file$x, 130, 14, 3829);
     			attr(svg, "width", "350px");
     			attr(svg, "height", "200px");
     			set_style(svg, "left", "4%");
@@ -32214,7 +32375,7 @@ var app = (function () {
           350
           200`);
     			attr(svg, "opacity", "0.6");
-    			add_location(svg, file$w, 118, 12, 3443);
+    			add_location(svg, file$x, 118, 12, 3443);
 
     			dispose = [
     				listen(svg, "mouseover", ctx.handleMouseOver),
@@ -32507,7 +32668,7 @@ var app = (function () {
     	};
     }
 
-    function create_fragment$z(ctx) {
+    function create_fragment$A(ctx) {
     	var updating_ABSSelected, updating_dialog, t, div, current;
 
     	function table_ABSSelected_binding(value) {
@@ -32544,7 +32705,7 @@ var app = (function () {
     			if (if_block) if_block.c();
     			attr(div, "style", ctx.cardWrapper);
     			attr(div, "class", "cardWrapper");
-    			add_location(div, file$w, 98, 0, 2582);
+    			add_location(div, file$x, 98, 0, 2582);
     		},
 
     		l: function claim(nodes) {
@@ -32626,7 +32787,7 @@ var app = (function () {
       return feature.properties.NOMABS.replace("Barcelona - ", "");
     }
 
-    function instance$z($$self, $$props, $$invalidate) {
+    function instance$A($$self, $$props, $$invalidate) {
     	let $ABSFilter;
 
     	validate_store(ABSFilter, 'ABSFilter');
@@ -32760,7 +32921,7 @@ var app = (function () {
     class GridView extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$z, create_fragment$z, safe_not_equal, ["listVisualization"]);
+    		init(this, options, instance$A, create_fragment$A, safe_not_equal, ["listVisualization"]);
     	}
 
     	get listVisualization() {
@@ -32774,7 +32935,7 @@ var app = (function () {
 
     /* src/charts/List.svelte generated by Svelte v3.9.2 */
 
-    function create_fragment$A(ctx) {
+    function create_fragment$B(ctx) {
     	var current;
 
     	var gridview = new GridView({
@@ -32819,14 +32980,14 @@ var app = (function () {
     class List$1 extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, null, create_fragment$A, safe_not_equal, []);
+    		init(this, options, null, create_fragment$B, safe_not_equal, []);
     	}
     }
 
     /* src/Charts.svelte generated by Svelte v3.9.2 */
 
-    // (20:34) 
-    function create_if_block_3$2(ctx) {
+    // (23:34) 
+    function create_if_block_4$1(ctx) {
     	var current;
 
     	var list = new List$1({ $$inline: true });
@@ -32859,8 +33020,8 @@ var app = (function () {
     	};
     }
 
-    // (18:34) 
-    function create_if_block_2$2(ctx) {
+    // (21:34) 
+    function create_if_block_3$2(ctx) {
     	var current;
 
     	var gridview = new GridView({ $$inline: true });
@@ -32893,8 +33054,8 @@ var app = (function () {
     	};
     }
 
-    // (14:38) 
-    function create_if_block_1$4(ctx) {
+    // (17:38) 
+    function create_if_block_2$2(ctx) {
     	var current;
 
     	var card = new Card_1({
@@ -32934,7 +33095,41 @@ var app = (function () {
     	};
     }
 
-    // (10:0) {#if $LensSelected == 'map'}
+    // (15:37) 
+    function create_if_block_1$4(ctx) {
+    	var current;
+
+    	var deckglmap = new DeckGLMap({ $$inline: true });
+
+    	return {
+    		c: function create() {
+    			deckglmap.$$.fragment.c();
+    		},
+
+    		m: function mount(target, anchor) {
+    			mount_component(deckglmap, target, anchor);
+    			current = true;
+    		},
+
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(deckglmap.$$.fragment, local);
+
+    			current = true;
+    		},
+
+    		o: function outro(local) {
+    			transition_out(deckglmap.$$.fragment, local);
+    			current = false;
+    		},
+
+    		d: function destroy(detaching) {
+    			destroy_component(deckglmap, detaching);
+    		}
+    	};
+    }
+
+    // (11:0) {#if $LensSelected == 'map'}
     function create_if_block$b(ctx) {
     	var current;
 
@@ -32976,7 +33171,7 @@ var app = (function () {
     	};
     }
 
-    // (15:2) <Card svgElementId="barchart">
+    // (18:2) <Card svgElementId="barchart">
     function create_default_slot_1$5(ctx) {
     	var current;
 
@@ -33010,7 +33205,7 @@ var app = (function () {
     	};
     }
 
-    // (11:2) <Card svgElementId="map" fileName="ABS Barcelona Map">
+    // (12:2) <Card svgElementId="map" fileName="ABS Barcelona Map">
     function create_default_slot$9(ctx) {
     	var current;
 
@@ -33044,23 +33239,25 @@ var app = (function () {
     	};
     }
 
-    function create_fragment$B(ctx) {
+    function create_fragment$C(ctx) {
     	var current_block_type_index, if_block, if_block_anchor, current;
 
     	var if_block_creators = [
     		create_if_block$b,
     		create_if_block_1$4,
     		create_if_block_2$2,
-    		create_if_block_3$2
+    		create_if_block_3$2,
+    		create_if_block_4$1
     	];
 
     	var if_blocks = [];
 
     	function select_block_type(changed, ctx) {
     		if (ctx.$LensSelected == 'map') return 0;
-    		if (ctx.$LensSelected == 'barchart') return 1;
-    		if (ctx.$LensSelected == 'grid') return 2;
-    		if (ctx.$LensSelected == 'list') return 3;
+    		if (ctx.$LensSelected == 'absDeck') return 1;
+    		if (ctx.$LensSelected == 'barchart') return 2;
+    		if (ctx.$LensSelected == 'grid') return 3;
+    		if (ctx.$LensSelected == 'list') return 4;
     		return -1;
     	}
 
@@ -33131,7 +33328,7 @@ var app = (function () {
     	};
     }
 
-    function instance$A($$self, $$props, $$invalidate) {
+    function instance$B($$self, $$props, $$invalidate) {
     	let $LensSelected;
 
     	validate_store(LensSelected, 'LensSelected');
@@ -33143,7 +33340,7 @@ var app = (function () {
     class Charts extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$A, create_fragment$B, safe_not_equal, []);
+    		init(this, options, instance$B, create_fragment$C, safe_not_equal, []);
     	}
     }
 
@@ -33188,7 +33385,7 @@ var app = (function () {
     /* src/intro/Intro.svelte generated by Svelte v3.9.2 */
     const { window: window_1 } = globals;
 
-    function create_fragment$C(ctx) {
+    function create_fragment$D(ctx) {
     	var dispose;
 
     	return {
@@ -33230,15 +33427,15 @@ var app = (function () {
     class Intro extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, null, create_fragment$C, safe_not_equal, []);
+    		init(this, options, null, create_fragment$D, safe_not_equal, []);
     	}
     }
 
     /* node_modules/@smui/fab/Fab.svelte generated by Svelte v3.9.2 */
 
-    const file$x = "node_modules/@smui/fab/Fab.svelte";
+    const file$y = "node_modules/@smui/fab/Fab.svelte";
 
-    function create_fragment$D(ctx) {
+    function create_fragment$E(ctx) {
     	var button, useActions_action, forwardEvents_action, Ripple_action, current;
 
     	const default_slot_template = ctx.$$slots.default;
@@ -33265,7 +33462,7 @@ var app = (function () {
     			toggle_class(button, "mdc-fab--exited", ctx.exited);
     			toggle_class(button, "mdc-fab--extended", ctx.extended);
     			toggle_class(button, "smui-fab--color-primary", ctx.color === 'primary');
-    			add_location(button, file$x, 0, 0, 0);
+    			add_location(button, file$y, 0, 0, 0);
     		},
 
     		l: function claim(nodes) {
@@ -33348,7 +33545,7 @@ var app = (function () {
     	};
     }
 
-    function instance$B($$self, $$props, $$invalidate) {
+    function instance$C($$self, $$props, $$invalidate) {
     	
 
       const forwardEvents = forwardEventsBuilder(current_component);
@@ -33391,7 +33588,7 @@ var app = (function () {
     class Fab extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$B, create_fragment$D, safe_not_equal, ["use", "class", "ripple", "color", "mini", "exited", "extended"]);
+    		init(this, options, instance$C, create_fragment$E, safe_not_equal, ["use", "class", "ripple", "color", "mini", "exited", "extended"]);
     	}
 
     	get use() {
@@ -33453,7 +33650,7 @@ var app = (function () {
 
     /* src/Scroll.svelte generated by Svelte v3.9.2 */
 
-    const file$y = "src/Scroll.svelte";
+    const file$z = "src/Scroll.svelte";
 
     // (32:0) {#if showScrollButton}
     function create_if_block$c(ctx) {
@@ -33473,7 +33670,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			fab.$$.fragment.c();
-    			add_location(div, file$y, 32, 2, 803);
+    			add_location(div, file$z, 32, 2, 803);
     		},
 
     		m: function mount(target, anchor) {
@@ -33579,7 +33776,7 @@ var app = (function () {
     	};
     }
 
-    function create_fragment$E(ctx) {
+    function create_fragment$F(ctx) {
     	var if_block_anchor, current, dispose;
 
     	var if_block = (ctx.showScrollButton) && create_if_block$c(ctx);
@@ -33655,7 +33852,7 @@ var app = (function () {
       }
     }
 
-    function instance$C($$self, $$props, $$invalidate) {
+    function instance$D($$self, $$props, $$invalidate) {
     	
 
       let minScroll = document.body.scrollHeight * 0.6;
@@ -33676,13 +33873,13 @@ var app = (function () {
     class Scroll extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$C, create_fragment$E, safe_not_equal, []);
+    		init(this, options, instance$D, create_fragment$F, safe_not_equal, []);
     	}
     }
 
     /* src/App.svelte generated by Svelte v3.9.2 */
 
-    const file$z = "src/App.svelte";
+    const file$A = "src/App.svelte";
 
     // (33:0) <AppContent>
     function create_default_slot$b(ctx) {
@@ -33733,7 +33930,7 @@ var app = (function () {
     	};
     }
 
-    function create_fragment$F(ctx) {
+    function create_fragment$G(ctx) {
     	var link0, t0, link1, t1, link2, t2, t3, t4, t5, current;
 
     	var navbar = new NavBar({ $$inline: true });
@@ -33767,13 +33964,13 @@ var app = (function () {
     			appcontent.$$.fragment.c();
     			attr(link0, "rel", "stylesheet");
     			attr(link0, "href", "https://fonts.googleapis.com/icon?family=Material+Icons");
-    			add_location(link0, file$z, 16, 0, 312);
+    			add_location(link0, file$A, 16, 0, 312);
     			attr(link1, "rel", "stylesheet");
     			attr(link1, "href", "https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700");
-    			add_location(link1, file$z, 19, 0, 405);
+    			add_location(link1, file$A, 19, 0, 405);
     			attr(link2, "rel", "stylesheet");
     			attr(link2, "href", "https://fonts.googleapis.com/css?family=Roboto+Mono");
-    			add_location(link2, file$z, 22, 0, 509);
+    			add_location(link2, file$A, 22, 0, 509);
     		},
 
     		l: function claim(nodes) {
@@ -33860,7 +34057,7 @@ var app = (function () {
     class App extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, null, create_fragment$F, safe_not_equal, []);
+    		init(this, options, null, create_fragment$G, safe_not_equal, []);
     	}
     }
 

@@ -103,6 +103,12 @@ svg {
   display: block;
 }
 
+#absDeck {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+}
+
 #close-dialog {
   float: right;
   margin-top: 9px;

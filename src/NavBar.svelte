@@ -38,6 +38,12 @@
       <IconButton
         class="material-icons"
         aria-label="Chart"
+        on:click={() => changeLens('absDeck')}>
+        3d_rotation
+      </IconButton>
+      <IconButton
+        class="material-icons"
+        aria-label="Chart"
         on:click={() => changeLens('barchart')}>
         insert_chart
       </IconButton>
