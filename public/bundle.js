@@ -6084,7 +6084,7 @@ var app = (function () {
     const file$8 = "src/NavBar.svelte";
 
     // (14:4) <Section>
-    function create_default_slot_14(ctx) {
+    function create_default_slot_15(ctx) {
     	var img;
 
     	return {
@@ -6108,7 +6108,7 @@ var app = (function () {
     }
 
     // (17:4) <Section align="end" toolbar>
-    function create_default_slot_13(ctx) {
+    function create_default_slot_14(ctx) {
     	var img;
 
     	return {
@@ -6133,12 +6133,12 @@ var app = (function () {
     }
 
     // (13:2) <Row>
-    function create_default_slot_12(ctx) {
+    function create_default_slot_13(ctx) {
     	var t, current;
 
     	var section0 = new Section({
     		props: {
-    		$$slots: { default: [create_default_slot_14] },
+    		$$slots: { default: [create_default_slot_15] },
     		$$scope: { ctx }
     	},
     		$$inline: true
@@ -6148,7 +6148,7 @@ var app = (function () {
     		props: {
     		align: "end",
     		toolbar: true,
-    		$$slots: { default: [create_default_slot_13] },
+    		$$slots: { default: [create_default_slot_14] },
     		$$scope: { ctx }
     	},
     		$$inline: true
@@ -6206,12 +6206,12 @@ var app = (function () {
     }
 
     // (12:0) <TopAppBar variant="static" color="primary">
-    function create_default_slot_11(ctx) {
+    function create_default_slot_12(ctx) {
     	var current;
 
     	var row = new Row({
     		props: {
-    		$$slots: { default: [create_default_slot_12] },
+    		$$slots: { default: [create_default_slot_13] },
     		$$scope: { ctx }
     	},
     		$$inline: true
@@ -6252,7 +6252,7 @@ var app = (function () {
     }
 
     // (26:8) <Title class="chart-title">
-    function create_default_slot_10(ctx) {
+    function create_default_slot_11(ctx) {
     	var t;
 
     	return {
@@ -6273,13 +6273,13 @@ var app = (function () {
     }
 
     // (25:6) <Section id="step1" toolbar>
-    function create_default_slot_9(ctx) {
+    function create_default_slot_10(ctx) {
     	var current;
 
     	var title = new Title({
     		props: {
     		class: "chart-title",
-    		$$slots: { default: [create_default_slot_10] },
+    		$$slots: { default: [create_default_slot_11] },
     		$$scope: { ctx }
     	},
     		$$inline: true
@@ -6320,7 +6320,7 @@ var app = (function () {
     }
 
     // (33:8) <IconButton           class="material-icons"           aria-label="Map"           on:click={() => changeLens('map')}>
-    function create_default_slot_8(ctx) {
+    function create_default_slot_9(ctx) {
     	var t;
 
     	return {
@@ -6341,7 +6341,7 @@ var app = (function () {
     }
 
     // (39:8) <IconButton           class="material-icons"           aria-label="Chart"           on:click={() => changeLens('absDeck')}>
-    function create_default_slot_7(ctx) {
+    function create_default_slot_8(ctx) {
     	var t;
 
     	return {
@@ -6362,7 +6362,7 @@ var app = (function () {
     }
 
     // (45:8) <IconButton           class="material-icons"           aria-label="Chart"           on:click={() => changeLens('barchart')}>
-    function create_default_slot_6(ctx) {
+    function create_default_slot_7(ctx) {
     	var t;
 
     	return {
@@ -6382,8 +6382,8 @@ var app = (function () {
     	};
     }
 
-    // (51:8) <IconButton           class="material-icons"           aria-label="Grid"           on:click={() => changeLens('grid')}>
-    function create_default_slot_5(ctx) {
+    // (51:8) <IconButton           id="gridButton"           class="material-icons"           aria-label="Grid"           on:click={() => changeLens('grid')}>
+    function create_default_slot_6(ctx) {
     	var t;
 
     	return {
@@ -6403,8 +6403,8 @@ var app = (function () {
     	};
     }
 
-    // (57:8) <IconButton           class="material-icons noVisibleInMobile"           aria-label="List"           on:click={() => changeLens('list')}>
-    function create_default_slot_4(ctx) {
+    // (58:8) <IconButton           class="material-icons noVisibleInMobile"           aria-label="List"           on:click={() => changeLens('list')}>
+    function create_default_slot_5(ctx) {
     	var t;
 
     	return {
@@ -6424,8 +6424,8 @@ var app = (function () {
     	};
     }
 
-    // (63:8) <IconButton class="material-icons" aria-label="Favorite">
-    function create_default_slot_3(ctx) {
+    // (64:8) <IconButton class="material-icons" aria-label="Favorite">
+    function create_default_slot_4(ctx) {
     	var t;
 
     	return {
@@ -6445,9 +6445,30 @@ var app = (function () {
     	};
     }
 
+    // (67:8) <IconButton class="material-icons" aria-label="Information">
+    function create_default_slot_3(ctx) {
+    	var t;
+
+    	return {
+    		c: function create() {
+    			t = text("info");
+    		},
+
+    		m: function mount(target, anchor) {
+    			insert(target, t, anchor);
+    		},
+
+    		d: function destroy(detaching) {
+    			if (detaching) {
+    				detach(t);
+    			}
+    		}
+    	};
+    }
+
     // (31:6) <Section id="step2" align="end" toolbar>
     function create_default_slot_2(ctx) {
-    	var t0, t1, t2, t3, t4, t5, current;
+    	var t0, t1, t2, t3, t4, t5, t6, current;
 
     	var search = new Search({ $$inline: true });
 
@@ -6455,7 +6476,7 @@ var app = (function () {
     		props: {
     		class: "material-icons",
     		"aria-label": "Map",
-    		$$slots: { default: [create_default_slot_8] },
+    		$$slots: { default: [create_default_slot_9] },
     		$$scope: { ctx }
     	},
     		$$inline: true
@@ -6466,7 +6487,7 @@ var app = (function () {
     		props: {
     		class: "material-icons",
     		"aria-label": "Chart",
-    		$$slots: { default: [create_default_slot_7] },
+    		$$slots: { default: [create_default_slot_8] },
     		$$scope: { ctx }
     	},
     		$$inline: true
@@ -6477,7 +6498,7 @@ var app = (function () {
     		props: {
     		class: "material-icons",
     		"aria-label": "Chart",
-    		$$slots: { default: [create_default_slot_6] },
+    		$$slots: { default: [create_default_slot_7] },
     		$$scope: { ctx }
     	},
     		$$inline: true
@@ -6486,9 +6507,10 @@ var app = (function () {
 
     	var iconbutton3 = new IconButton({
     		props: {
+    		id: "gridButton",
     		class: "material-icons",
     		"aria-label": "Grid",
-    		$$slots: { default: [create_default_slot_5] },
+    		$$slots: { default: [create_default_slot_6] },
     		$$scope: { ctx }
     	},
     		$$inline: true
@@ -6499,7 +6521,7 @@ var app = (function () {
     		props: {
     		class: "material-icons noVisibleInMobile",
     		"aria-label": "List",
-    		$$slots: { default: [create_default_slot_4] },
+    		$$slots: { default: [create_default_slot_5] },
     		$$scope: { ctx }
     	},
     		$$inline: true
@@ -6510,6 +6532,16 @@ var app = (function () {
     		props: {
     		class: "material-icons",
     		"aria-label": "Favorite",
+    		$$slots: { default: [create_default_slot_4] },
+    		$$scope: { ctx }
+    	},
+    		$$inline: true
+    	});
+
+    	var iconbutton6 = new IconButton({
+    		props: {
+    		class: "material-icons",
+    		"aria-label": "Information",
     		$$slots: { default: [create_default_slot_3] },
     		$$scope: { ctx }
     	},
@@ -6531,6 +6563,8 @@ var app = (function () {
     			iconbutton4.$$.fragment.c();
     			t5 = space();
     			iconbutton5.$$.fragment.c();
+    			t6 = space();
+    			iconbutton6.$$.fragment.c();
     		},
 
     		m: function mount(target, anchor) {
@@ -6547,6 +6581,8 @@ var app = (function () {
     			mount_component(iconbutton4, target, anchor);
     			insert(target, t5, anchor);
     			mount_component(iconbutton5, target, anchor);
+    			insert(target, t6, anchor);
+    			mount_component(iconbutton6, target, anchor);
     			current = true;
     		},
 
@@ -6574,6 +6610,10 @@ var app = (function () {
     			var iconbutton5_changes = {};
     			if (changed.$$scope) iconbutton5_changes.$$scope = { changed, ctx };
     			iconbutton5.$set(iconbutton5_changes);
+
+    			var iconbutton6_changes = {};
+    			if (changed.$$scope) iconbutton6_changes.$$scope = { changed, ctx };
+    			iconbutton6.$set(iconbutton6_changes);
     		},
 
     		i: function intro(local) {
@@ -6592,6 +6632,8 @@ var app = (function () {
 
     			transition_in(iconbutton5.$$.fragment, local);
 
+    			transition_in(iconbutton6.$$.fragment, local);
+
     			current = true;
     		},
 
@@ -6603,6 +6645,7 @@ var app = (function () {
     			transition_out(iconbutton3.$$.fragment, local);
     			transition_out(iconbutton4.$$.fragment, local);
     			transition_out(iconbutton5.$$.fragment, local);
+    			transition_out(iconbutton6.$$.fragment, local);
     			current = false;
     		},
 
@@ -6644,6 +6687,12 @@ var app = (function () {
     			}
 
     			destroy_component(iconbutton5, detaching);
+
+    			if (detaching) {
+    				detach(t6);
+    			}
+
+    			destroy_component(iconbutton6, detaching);
     		}
     	};
     }
@@ -6656,7 +6705,7 @@ var app = (function () {
     		props: {
     		id: "step1",
     		toolbar: true,
-    		$$slots: { default: [create_default_slot_9] },
+    		$$slots: { default: [create_default_slot_10] },
     		$$scope: { ctx }
     	},
     		$$inline: true
@@ -6781,7 +6830,7 @@ var app = (function () {
     		props: {
     		variant: "static",
     		color: "primary",
-    		$$slots: { default: [create_default_slot_11] },
+    		$$slots: { default: [create_default_slot_12] },
     		$$scope: { ctx }
     	},
     		$$inline: true
@@ -29720,7 +29769,7 @@ var app = (function () {
     }
 
     // (109:10) <Cell>
-    function create_default_slot_15(ctx) {
+    function create_default_slot_15$1(ctx) {
     	var t;
 
     	return {
@@ -29791,7 +29840,7 @@ var app = (function () {
 
     	var cell3 = new Cell({
     		props: {
-    		$$slots: { default: [create_default_slot_15] },
+    		$$slots: { default: [create_default_slot_15$1] },
     		$$scope: { ctx }
     	},
     		$$inline: true

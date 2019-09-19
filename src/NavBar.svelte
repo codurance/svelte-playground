@@ -64,6 +64,9 @@
         <IconButton class="material-icons" aria-label="Favorite">
           favorite
         </IconButton>
+        <IconButton class="material-icons" aria-label="Information">
+          info
+        </IconButton>
       </Section>
     </div>
   </Row>
