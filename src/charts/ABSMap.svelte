@@ -1,7 +1,6 @@
 <script>
   import {
     ABSChartFilter,
-    MapBBox,
     Gender,
     GenderSelected,
     ColorGender
@@ -26,7 +25,7 @@
   $: isManSelected = Gender.isMan($GenderSelected);
   $: isWomanSelected = Gender.isWoman($GenderSelected);
 
-  $: bbox = $MapBBox;
+  $: bbox = { width: 0, height: 0, x: 0, y: 0 };
   $: filter = 0;
   $: colors = isMixSelected
     ? ColorGender.Mix
@@ -65,7 +64,7 @@
   });
 
   function handleLoadSvg() {
-    MapBBox.set(document.querySelector("svg").getBBox());
+    bbox = document.getElementById("absMap").getBBox();
   }
 
   function handleOnClick(absSelected) {
