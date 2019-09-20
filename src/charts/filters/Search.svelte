@@ -2,7 +2,7 @@
   import { tick } from "svelte";
   import IconButton from "@smui/icon-button";
   import { fade } from "svelte/transition";
-  import { ABSFilter } from "./store.js";
+  import { ABSFilter } from "../../store.js";
 
   let isVisibleSearchInput = false;
 

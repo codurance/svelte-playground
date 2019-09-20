@@ -1,12 +1,15 @@
 <script>
   import { onMount } from "svelte";
-  import Table from "./Table.svelte";
   import {
     ABSChartFilter,
     Gender,
     GenderSelected,
     ColorGender
   } from "../store.js";
+  import Table from "./Table.svelte";
+  import Card from "../Card.svelte";
+  import ABSFilter from "./filters/ABSFilter.svelte";
+  import Search from "./filters/Search.svelte";
 
   let options = {
     chart: {
@@ -135,5 +138,16 @@
   });
 </script>
 
-<Table bind:ABSSelected bind:dialog />
-<div id="barchart" />
+<Card svgElementId="barchart">
+
+  <div slot="filter" class="filters">
+
+    <ABSFilter />
+
+    <Search />
+
+  </div>
+
+  <Table bind:ABSSelected bind:dialog />
+  <div id="barchart" />
+</Card>

@@ -1,5 +1,4 @@
 <script>
-  import Card from "./Card.svelte";
   import ABSMap from "./charts/ABSMap.svelte";
   import DeckGLMap from "./charts/DeckGLMap.svelte";
   import Barchart from "./charts/Barchart.svelte";
@@ -9,15 +8,11 @@
 </script>
 
 {#if $LensSelected == 'map'}
-  <Card svgElementId="map" fileName="ABS Barcelona Map">
-    <ABSMap />
-  </Card>
+  <ABSMap />
 {:else if $LensSelected == 'absDeck'}
   <DeckGLMap />
 {:else if $LensSelected == 'barchart'}
-  <Card svgElementId="barchart">
-    <Barchart />
-  </Card>
+  <Barchart />
 {:else if $LensSelected == 'grid'}
   <GridView />
 {:else if $LensSelected == 'list'}
