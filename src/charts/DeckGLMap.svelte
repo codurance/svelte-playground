@@ -31,8 +31,8 @@
       container: "absDeck",
       latitude: 41.39,
       longitude: 2.15,
-      zoom: 11,
-      pitch: 20,
+      zoom: 10.3,
+      pitch: 8,
       layers: []
     });
     redraw();
@@ -94,6 +94,6 @@
     <Search />
   </div>
 
-  <div style="width: 100%;" id="absDeck" />
+  <div id="absDeck" />
 
 </Card>

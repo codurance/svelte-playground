@@ -14960,7 +14960,8 @@ var app = (function () {
       'https://gist.githubusercontent.com/damianpumar/862fe8d75f92a0b114ad4ae2bf128e13/raw/21dc4b07207455034b1e48022ae53f3a84fe5ece/finaltopojson';
     const ABSBarcelonaChartEndpoint =
       'https://gist.githubusercontent.com/damianpumar/f5110a8cf1c2a99408a4cc40235e6790/raw/c7cfcac7a10a2cf25359454756fcd6c82763d7c8/barchart';
-    const Barcelona3dMap = "https://raw.githubusercontent.com/martgnz/bcn-geodata/master/barris/barris.geojson";
+    const Barcelona3dMap =
+      'https://raw.githubusercontent.com/martgnz/bcn-geodata/master/barris/barris.geojson';
 
     const MixDefaultValue = 'Ambdós';
     const GenderSelected = writable(MixDefaultValue);
@@ -31963,7 +31964,7 @@ var app = (function () {
     			search.$$.fragment.c();
     			attr(div, "slot", "filter");
     			attr(div, "class", "filters");
-    			add_location(div, file$v, 91, 2, 2113);
+    			add_location(div, file$v, 91, 2, 2114);
     		},
 
     		m: function mount(target, anchor) {
@@ -32009,9 +32010,8 @@ var app = (function () {
     		c: function create() {
     			t = space();
     			div = element("div");
-    			set_style(div, "width", "100%");
     			attr(div, "id", "absDeck");
-    			add_location(div, file$v, 96, 2, 2195);
+    			add_location(div, file$v, 96, 2, 2196);
     		},
 
     		m: function mount(target, anchor) {
@@ -32118,8 +32118,8 @@ var app = (function () {
           container: "absDeck",
           latitude: 41.39,
           longitude: 2.15,
-          zoom: 11,
-          pitch: 20,
+          zoom: 10.3,
+          pitch: 8,
           layers: []
         });
         redraw();
