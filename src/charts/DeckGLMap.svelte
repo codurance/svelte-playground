@@ -1,5 +1,10 @@
 <script>
 import { onMount, tick } from 'svelte';
+import Card from "../Card.svelte";
+import ABSFilter from "./filters/ABSFilter.svelte";
+import Search from "./filters/Search.svelte";
+import { ABSChartFilter } from "../store.js";
+
 const COUNTRIES = 'https://raw.githubusercontent.com/martgnz/bcn-geodata/master/barris/barris.geojson';
 const COLOR_SCALE = [
   // negative
@@ -18,27 +23,42 @@ const COLOR_SCALE = [
   [189, 0, 38],
   [128, 0, 38]
 ];
+
 function colorScale(x) {
-  const i = Math.floor(Math.random() * 10) + 1;
+  const i = Math.floor(Math.random() * 12) + 1;
   return COLOR_SCALE[i]
 }
+
 function getElevation(x) {
+  console.log($ABSChartFilter)
   if (x > 20000) {
     return (Math.floor(Math.random() * 8) + 1) * 500
   }
   return parseInt(x)/4
 }
 
-onMount(async ()=> {
-  await tick()
 
-  const deckgl = new deck.DeckGL({
+let deckInstance = null;
+
+onMount(async ()=> {
+  deckInstance = new deck.DeckGL({
     container: 'absDeck',
     latitude: 41.39,
     longitude: 2.15,
     zoom: 11,
     pitch: 20,
-    layers: [
+    layers: []});
+redraw();
+})
+
+ABSChartFilter.subscribe(newValue => {
+  if(deckInstance) {
+    redraw()
+  }
+});
+  function redraw() {
+
+    const layers = [
       new deck.GeoJsonLayer({
         stroked: false,
         filled: true,
@@ -52,12 +72,25 @@ onMount(async ()=> {
         lineWidthMinPixels: 2,
         getLineDashArray: [3, 3],
         getLineColor: [60, 60, 60],
+        getElevation: f => getElevation(($ABSChartFilter + 1) * f.properties.PERIMETRE),
         getFillColor: f => colorScale(f.properties.PERIMETRE),
-        getElevation: f => getElevation(f.properties.PERIMETRE)
+        updateTriggers: {
+          getElevation: f => getElevation(($ABSChartFilter + 1) * f.properties.PERIMETRE),
+          getFillColor: f => colorScale(f.properties.PERIMETRE),
+        }
         })
-    ]
-  });
-})
+    ];
+
+    deckInstance.setProps({layers});
+  }
+
 </script>
 
-<div id="absDeck"></div>
+<Card fileName="ABS Barcelona 3D Map">
+  <div slot="filter" class="filters">
+    <ABSFilter />
+    <Search />
+  </div>
+
+  <div style="width: 100%;" id="absDeck"></div>
+</Card>
