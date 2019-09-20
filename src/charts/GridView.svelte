@@ -9,47 +9,45 @@
   import IconButton, { Icon } from "@smui/icon-button";
   import Button, { Label } from "@smui/button";
   import { fade, draw, fly } from "svelte/transition";
-  import { ABSFilter } from "../store.js";
+  import { ABSBarcelonaMapEndpoint } from "../store.endpoint.js";
+  import { ABSFilter, getAbsCode, filterABS } from "../store.abs.js";
+  import { ColorGender } from "../store.gender.js";
   import Search from "./filters/Search.svelte";
   import CardWrapper from "../Card.svelte";
   import Table from "./Table.svelte";
 
-  const FINAL =
-    "https://gist.githubusercontent.com/damianpumar/862fe8d75f92a0b114ad4ae2bf128e13/raw/21dc4b07207455034b1e48022ae53f3a84fe5ece/finaltopojson";
   const PATH = d3.geoPath();
-  const COLORS = ["#ffffff", "#ffd333", "#ffde66", "#fff4cc", "#ffe999"];
 
   export let listVisualization = false;
   let features;
   let barcelona;
   let colorScaleExtent = [0, 0];
+  let ABSSelected;
+  let dialog;
+  let favoriteClicked = false;
 
-  $: featuresFiltered =
-    $ABSFilter && features
-      ? features.filter(
-          f =>
-            f.properties.NOMSS.toLowerCase().includes(
-              $ABSFilter.toLowerCase()
-            ) ||
-            getAbsCode(f)
-              .toLowerCase()
-              .includes($ABSFilter.toLowerCase())
-        )
-      : features;
+  $: featuresFiltered = filterABS(features, $ABSFilter);
 
   $: paths = [];
   $: quantize = d3
     .scaleQuantize()
     .domain(colorScaleExtent)
-    .range(COLORS);
+    .range(ColorGender.Mix);
   $: absElement = null;
+  $: cardStyle = listVisualization
+    ? "margin-bottom: 25px;"
+    : "box-shadow:2px 2px rgba(0,0,0,0.2)";
+  $: cardWrapper = listVisualization ? "" : "display:grid;";
 
   onMount(async () => {
-    const data = await fetch(FINAL);
+    const data = await fetch(ABSBarcelonaMapEndpoint);
+
     barcelona = await data.json();
+
     features = await topojson
       .feature(barcelona, barcelona.objects["ABS_2018"])
       .features.sort((a, b) => getAbsCode(a).localeCompare(getAbsCode(b)));
+
     colorScaleExtent = d3.extent(
       barcelona.objects.ABS_2018.geometries.map(({ properties }) =>
         properties.VALORES ? properties.VALORES[2] : 0
@@ -61,31 +59,19 @@
     paths = document.querySelectorAll(".paths");
   });
 
-  function getAbsCode(feature) {
-    return feature.properties.NOMABS.replace("Barcelona - ", "");
-  }
-
-  $: cardStyle = listVisualization
-    ? "margin-bottom: 25px;"
-    : "box-shadow:2px 2px rgba(0,0,0,0.2)";
-
-  $: cardWrapper = listVisualization ? "" : "display:grid;";
-
   function handleMouseOver() {
     absElement = d3.select(this);
     absElement.attr("opacity", "1");
   }
+
   function handleMouseOut() {
     absElement = d3.select(this);
     absElement.attr("opacity", "0.3");
   }
-  let ABSSelected;
-  let dialog;
-  let favoriteClicked = false;
 
   function handleOnClick(absSelected) {
     if (!favoriteClicked) {
-      ABSSelected = absSelected.properties;
+      ABSSelected = absSelected;
 
       dialog.open();
     }
@@ -96,12 +82,11 @@
 <CardWrapper>
 
   <div slot="filter">
-
     <Search />
-
   </div>
 
   <Table bind:ABSSelected bind:dialog />
+
   <div style={cardWrapper} class="cardWrapper">
     {#if featuresFiltered}
       {#each featuresFiltered as feature, i}
@@ -152,4 +137,5 @@
       {/each}
     {/if}
   </div>
+
 </CardWrapper>

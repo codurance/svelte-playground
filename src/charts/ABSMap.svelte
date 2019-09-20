@@ -5,31 +5,32 @@
   import Card from "../Card.svelte";
   import {
     ABSChartFilter,
-    Gender,
-    GenderSelected,
-    ColorGender
-  } from "../store.js";
+    getAbsCode,
+    isMatchABS,
+    ABSFilter
+  } from "../store.abs.js";
+  import { ABSBarcelonaMapEndpoint } from "../store.endpoint.js";
+  import { Gender, GenderSelected, ColorGender } from "../store.gender.js";
   import Table from "./Table.svelte";
-  import ABSFilter from "./filters/ABSFilter.svelte";
+  import ABSFilters from "./filters/ABSFilters.svelte";
   import Search from "./filters/Search.svelte";
-
-  const FINAL =
-    "https://gist.githubusercontent.com/damianpumar/862fe8d75f92a0b114ad4ae2bf128e13/raw/21dc4b07207455034b1e48022ae53f3a84fe5ece/finaltopojson";
 
   const path = d3.geoPath();
 
   let dialog;
-  let ABSSelected = {};
-
+  let ABSSelected = {
+    properties: {
+      NOMSS: "",
+      NOMABS: ""
+    }
+  };
   let features;
   let barcelona;
   let colorScaleExtent = [0, 0];
+
   $: isMixSelected = Gender.isMix($GenderSelected);
   $: isManSelected = Gender.isMan($GenderSelected);
   $: isWomanSelected = Gender.isWoman($GenderSelected);
-
-  $: bbox = { width: 0, height: 0, x: 0, y: 0 };
-  $: filter = 0;
   $: colors = isMixSelected
     ? ColorGender.Mix
     : isManSelected
@@ -42,6 +43,8 @@
     { color: colors[3], text: "De 13.61 a 16.10" },
     { color: colors[4], text: "De 16.11 a 29.40" }
   ];
+
+  $: bbox = { width: 0, height: 0, x: 0, y: 0 };
   $: quantize = d3
     .scaleQuantize()
     .domain(colorScaleExtent)
@@ -50,8 +53,12 @@
   $: showTooltip = false;
   $: tooltipValues = {};
 
+  $: isMatchinABSFilter = function(feature) {
+    return isMatchABS(feature, $ABSFilter);
+  };
+
   onMount(async () => {
-    const data = await fetch(FINAL);
+    const data = await fetch(ABSBarcelonaMapEndpoint);
     barcelona = await data.json();
     features = await topojson.feature(barcelona, barcelona.objects.ABS_2018)
       .features;
@@ -70,21 +77,23 @@
     bbox = document.getElementById("absMap").getBBox();
   }
 
-  function handleOnClick(absSelected) {
-    ABSSelected = absSelected.properties;
-
+  function handleOnClick(feature) {
+    if (!isMatchinABSFilter(feature)) return;
+    ABSSelected = feature;
     dialog.open();
   }
 
-  function handleMouseOver() {
+  function handleMouseOver(feature) {
+    if (!isMatchinABSFilter(feature)) return;
     showTooltip = true;
     selectElement = d3.select(this);
     selectElement.attr("stroke-width", 5);
     selectElement.attr("filter", "url(#glow)");
   }
 
-  function handleMouseMove(d, event) {
-    const { NOMABS, NOMAGA, NOMSS, VALORES } = d.properties;
+  function handleMouseMove(feature, event) {
+    if (!isMatchinABSFilter(feature)) return;
+    const { NOMABS, NOMAGA, NOMSS, VALORES } = feature.properties;
     tooltipValues = {
       NOMABS,
       NOMAGA,
@@ -96,6 +105,7 @@
   }
 
   const handleMouseOut = feature => () => {
+    if (!isMatchinABSFilter(feature)) return;
     showTooltip = false;
     const quantizedColor = quantize(
       Number(
@@ -108,16 +118,25 @@
     selectElement.attr("stroke-width", 1);
     selectElement.attr("filter", "none");
   };
+
+  $: getFill = feature => {
+    return isMatchinABSFilter(feature)
+      ? quantize(
+          Number(
+            feature.properties.VALORES
+              ? feature.properties.VALORES[$ABSChartFilter]
+              : 0
+          )
+        )
+      : "gray";
+  };
 </script>
 
 <Card svgElementId="map" fileName="ABS Barcelona Map">
 
   <div slot="filter" class="filters">
-
-    <ABSFilter />
-
+    <ABSFilters />
     <Search />
-
   </div>
 
   <Table bind:ABSSelected bind:dialog />
@@ -139,11 +158,12 @@
         {#if features}
           {#each features as feature, i}
             <path
+              style="cursor: pointer;"
               in:draw={{ duration: 3000 }}
               d={path(feature)}
-              fill={quantize(Number(feature.properties.VALORES ? feature.properties.VALORES[$ABSChartFilter] : 0))}
+              fill={getFill(feature)}
               stroke="black"
-              on:mouseover={handleMouseOver}
+              on:mouseover={() => handleMouseOver(feature)}
               on:mousemove={event => handleMouseMove(feature, event)}
               on:mouseout={handleMouseOut(feature)}
               on:click={() => handleOnClick(feature)} />
@@ -151,9 +171,9 @@
             <g out:fly={{ y: -20, duration: 200 }}>
               <text
                 in:fade={{ delay: 1000 + i * 15, duration: 200 }}
-                style="font-size: 10px; pointer-events: none;"
+                style="font-size: 10px; pointer-events: none; cursor: pointer;"
                 transform={`translate(${path.centroid(feature)})`}>
-                {feature.properties.NOMABS.replace('Barcelona - ', '')}
+                {getAbsCode(feature)}
               </text>
             </g>
           {/each}

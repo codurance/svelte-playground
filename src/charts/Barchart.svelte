@@ -1,14 +1,11 @@
 <script>
   import { onMount } from "svelte";
-  import {
-    ABSChartFilter,
-    Gender,
-    GenderSelected,
-    ColorGender
-  } from "../store.js";
+  import { ABSBarcelonaChartEndpoint } from "../store.endpoint.js";
+  import { ABSChartFilter } from "../store.abs.js";
+  import { Gender, GenderSelected, ColorGender } from "../store.gender.js";
   import Table from "./Table.svelte";
   import Card from "../Card.svelte";
-  import ABSFilter from "./filters/ABSFilter.svelte";
+  import ABSFilters from "./filters/ABSFilters.svelte";
   import Search from "./filters/Search.svelte";
 
   let options = {
@@ -24,7 +21,13 @@
       events: {
         click: function(event, chartContext, config) {
           if (config.dataPointIndex >= 0) {
-            ABSSelected.NOMAGA = ABSSelected.NOMABS =
+            ABSSelected = {
+              properties: {
+                NOMAGA: "",
+                NOMABS: ""
+              }
+            };
+            ABSSelected.properties.NOMAGA = ABSSelected.properties.NOMABS =
               config.config.xaxis.categories[config.dataPointIndex];
             dialog.open();
           }
@@ -62,18 +65,14 @@
   };
 
   let dialog;
-  let ABSSelected = {
-    NOMABS: "",
-    NOMAGA: ""
-  };
+  let ABSSelected;
+  let chart;
+  let originalSeriesValue;
+
   let data = null;
-  let chart = null;
-  let originalSeriesValue = null;
 
   onMount(async () => {
-    const fetched = await fetch(
-      "https://gist.githubusercontent.com/damianpumar/f5110a8cf1c2a99408a4cc40235e6790/raw/c7cfcac7a10a2cf25359454756fcd6c82763d7c8/barchart"
-    );
+    const fetched = await fetch(ABSBarcelonaChartEndpoint);
 
     data = await fetched.json();
 
@@ -141,13 +140,12 @@
 <Card svgElementId="barchart">
 
   <div slot="filter" class="filters">
-
-    <ABSFilter />
-
+    <ABSFilters />
     <Search />
-
   </div>
 
   <Table bind:ABSSelected bind:dialog />
+
   <div id="barchart" />
+
 </Card>

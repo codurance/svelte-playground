@@ -3,18 +3,23 @@
   import Dialog, { Title, Content, Actions } from "@smui/dialog";
   import Button, { Label } from "@smui/button";
   import IconButton, { Icon } from "@smui/icon-button";
+  import { getAbsCode } from "../store.abs.js";
 
   export let dialog = {};
-  export let ABSSelected = {};
+  export let ABSSelected = null;
 
-  function getAbsCode(feature) {
-    return feature.NOMABS ? feature.NOMABS.replace("Barcelona - ", "") : "";
+  function getTitle(feature) {
+    if (feature) {
+      return feature.properties.NOMSS
+        ? feature.properties.NOMSS + " - " + getAbsCode(feature)
+        : feature.properties.NOMABS;
+    }
   }
 
-  function createTitle(feature) {
-    return feature.NOMSS
-      ? feature.NOMSS + " - " + getAbsCode(feature)
-      : feature.NOMABS;
+  function getName(feature) {
+    if (feature) {
+      return feature.properties.NOMAGA;
+    }
   }
 </script>
 
@@ -25,7 +30,7 @@
   style="z-index: 99999"
   on:MDCDialog:closed={() => dialog.close()}>
   <Title id="dialog-title">
-    {createTitle(ABSSelected)}
+    {getTitle(ABSSelected)}
     <IconButton
       id="close-dialog"
       class="material-icons"
@@ -40,7 +45,7 @@
         <Row>
           <Cell />
           <Cell>ABS {getAbsCode(ABSSelected)}</Cell>
-          <Cell>{ABSSelected.NOMAGA}</Cell>
+          <Cell>{getName(ABSSelected)}</Cell>
           <Cell>AIS BCN Esquerra</Cell>
           <Cell>Barcelona</Cell>
         </Row>

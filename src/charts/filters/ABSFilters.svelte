@@ -1,5 +1,6 @@
 <script>
-  import { ABSChartFilter, Gender, GenderSelected } from "../../store.js";
+  import { ABSChartFilter } from "../../store.abs.js";
+  import { Gender, GenderSelected } from "../../store.gender.js";
   import FormField from "@smui/form-field";
   import Select, { Option } from "@smui/select";
   import Radio from "@smui/radio";
