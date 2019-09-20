@@ -77,10 +77,8 @@
   function handleMouseOver() {
     showTooltip = true;
     selectElement = d3.select(this);
-    selectElement.attr(
-      "fill",
-      isMixSelected ? "lightblue" : isManSelected ? "orange" : "yellow"
-    );
+    selectElement.attr("stroke-width", 5);
+    selectElement.attr("filter", "url(#glow)");
   }
 
   function handleMouseMove(d, event) {
@@ -105,6 +103,8 @@
       )
     );
     selectElement.attr("fill", quantizedColor);
+    selectElement.attr("stroke-width", 1);
+    selectElement.attr("filter", "none");
   };
 </script>
 
@@ -112,6 +112,14 @@
 
 <div>
   <svg id="absMap" viewBox={`${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`}>
+
+  <filter id="glow">
+      <feGaussianBlur stdDeviation="15" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
 
     <g out:fade={{ duration: 200 }}>
       {#if features}

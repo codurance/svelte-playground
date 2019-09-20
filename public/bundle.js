@@ -5790,13 +5790,13 @@ var app = (function () {
     const MixDefaultValue = 'Ambdós';
     const GenderSelected = writable(MixDefaultValue);
     const Gender = {
-      isMix: function (selected) {
+      isMix: function(selected) {
         return selected === MixDefaultValue;
       },
-      isMan: function (selected) {
+      isMan: function(selected) {
         return selected === 'Homes';
       },
-      isWoman: function (selected) {
+      isWoman: function(selected) {
         return selected == 'Dones';
       },
       options: [
@@ -30931,7 +30931,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (138:6) {:else}
+    // (146:6) {:else}
     function create_else_block$7(ctx) {
     	var t;
 
@@ -30956,7 +30956,7 @@ var app = (function () {
     	};
     }
 
-    // (117:6) {#if features}
+    // (125:6) {#if features}
     function create_if_block_3$1(ctx) {
     	var each_1_anchor, current;
 
@@ -31038,7 +31038,7 @@ var app = (function () {
     	};
     }
 
-    // (118:8) {#each features as feature, i}
+    // (126:8) {#each features as feature, i}
     function create_each_block_1$1(ctx) {
     	var path_1, path_1_d_value, path_1_fill_value, path_1_intro, g, text_1, t_value = ctx.feature.properties.NOMABS.replace('Barcelona - ', '') + "", t, text_1_transform_value, text_1_intro, g_outro, current, dispose;
 
@@ -31059,12 +31059,12 @@ var app = (function () {
     			attr(path_1, "d", path_1_d_value = ctx.path(ctx.feature));
     			attr(path_1, "fill", path_1_fill_value = ctx.quantize(ctx.Number(ctx.feature.properties.VALORES ? ctx.feature.properties.VALORES[ctx.$ABSChartFilter] : 0)));
     			attr(path_1, "stroke", "black");
-    			add_location(path_1, file$u, 118, 10, 2985);
+    			add_location(path_1, file$u, 126, 10, 3258);
     			set_style(text_1, "font-size", "10px");
     			set_style(text_1, "pointer-events", "none");
     			attr(text_1, "transform", text_1_transform_value = `translate(${ctx.path.centroid(ctx.feature)})`);
-    			add_location(text_1, file$u, 129, 12, 3482);
-    			add_location(g, file$u, 128, 10, 3430);
+    			add_location(text_1, file$u, 137, 12, 3755);
+    			add_location(g, file$u, 136, 10, 3703);
 
     			dispose = [
     				listen(path_1, "mouseover", ctx.handleMouseOver),
@@ -31140,7 +31140,7 @@ var app = (function () {
     	};
     }
 
-    // (141:6) {#each labels as { color, text }
+    // (149:6) {#each labels as { color, text }
     function create_each_block$1(ctx) {
     	var rect, rect_fill_value, text_1, t_value = ctx.text + "", t;
 
@@ -31156,11 +31156,11 @@ var app = (function () {
     			attr(rect, "stroke", "black");
     			attr(rect, "stroke-width", "1");
     			attr(rect, "fill", rect_fill_value = ctx.color);
-    			add_location(rect, file$u, 141, 8, 3894);
+    			add_location(rect, file$u, 149, 8, 4167);
     			attr(text_1, "x", "25");
     			attr(text_1, "y", 19 + 15 * ctx.i);
     			attr(text_1, "font-size", "12");
-    			add_location(text_1, file$u, 149, 8, 4072);
+    			add_location(text_1, file$u, 157, 8, 4345);
     		},
 
     		m: function mount(target, anchor) {
@@ -31188,7 +31188,7 @@ var app = (function () {
     	};
     }
 
-    // (155:0) {#if showTooltip}
+    // (163:0) {#if showTooltip}
     function create_if_block$9(ctx) {
     	var div, p0, t0_value = ctx.tooltipValues.NOMABS + "", t0, t1, p1, t2_value = ctx.tooltipValues.NOMAGA + "", t2, t3, p2, t4_value = ctx.tooltipValues.NOMSS + "", t4, t5, p3, t6, div_style_value;
 
@@ -31212,13 +31212,13 @@ var app = (function () {
     			if (if_block0) if_block0.c();
     			t6 = space();
     			if (if_block1) if_block1.c();
-    			add_location(p0, file$u, 158, 4, 4334);
-    			add_location(p1, file$u, 159, 4, 4368);
-    			add_location(p2, file$u, 160, 4, 4402);
-    			add_location(p3, file$u, 161, 4, 4435);
+    			add_location(p0, file$u, 166, 4, 4607);
+    			add_location(p1, file$u, 167, 4, 4641);
+    			add_location(p2, file$u, 168, 4, 4675);
+    			add_location(p3, file$u, 169, 4, 4708);
     			attr(div, "class", "tooltip");
     			attr(div, "style", div_style_value = ctx.showTooltip ? `opacity: .9; top: ${ctx.tooltipValues.top}px; left: ${ctx.tooltipValues.left}px` : 'opacity: 0');
-    			add_location(div, file$u, 155, 2, 4189);
+    			add_location(div, file$u, 163, 2, 4462);
     		},
 
     		m: function mount(target, anchor) {
@@ -31293,7 +31293,7 @@ var app = (function () {
     	};
     }
 
-    // (163:6) {#if isMixSelected || isManSelected}
+    // (171:6) {#if isMixSelected || isManSelected}
     function create_if_block_2$1(ctx) {
     	var img, t0, t1_value = ctx.tooltipValues.VALORES ? ctx.tooltipValues.VALORES[ctx.$ABSChartFilter] : 'No Data' + "", t1;
 
@@ -31306,7 +31306,7 @@ var app = (function () {
     			attr(img, "alt", "Old Man");
     			attr(img, "width", "25px");
     			attr(img, "height", "25px");
-    			add_location(img, file$u, 163, 8, 4490);
+    			add_location(img, file$u, 171, 8, 4763);
     		},
 
     		m: function mount(target, anchor) {
@@ -31331,7 +31331,7 @@ var app = (function () {
     	};
     }
 
-    // (172:6) {#if isMixSelected || isWomanSelected}
+    // (180:6) {#if isMixSelected || isWomanSelected}
     function create_if_block_1$2(ctx) {
     	var img, t0, t1_value = ctx.tooltipValues.VALORES ? ctx.tooltipValues.VALORES[ctx.$ABSChartFilter] * 2 : 'No Data' + "", t1;
 
@@ -31344,7 +31344,7 @@ var app = (function () {
     			attr(img, "alt", "Old Woman");
     			attr(img, "width", "25px");
     			attr(img, "height", "25px");
-    			add_location(img, file$u, 172, 8, 4755);
+    			add_location(img, file$u, 180, 8, 5028);
     		},
 
     		m: function mount(target, anchor) {
@@ -31370,7 +31370,7 @@ var app = (function () {
     }
 
     function create_fragment$x(ctx) {
-    	var updating_ABSSelected, updating_dialog, t0, div, svg, g0, current_block_type_index, if_block0, g0_outro, g1, svg_viewBox_value, t1, if_block1_anchor, current;
+    	var updating_ABSSelected, updating_dialog, t0, div, svg, filter_1, feGaussianBlur, feMerge, feMergeNode0, feMergeNode1, g0, current_block_type_index, if_block0, g0_outro, g1, svg_viewBox_value, t1, if_block1_anchor, current;
 
     	function table_ABSSelected_binding(value) {
     		ctx.table_ABSSelected_binding.call(null, value);
@@ -31427,6 +31427,11 @@ var app = (function () {
     			t0 = space();
     			div = element("div");
     			svg = svg_element("svg");
+    			filter_1 = svg_element("filter");
+    			feGaussianBlur = svg_element("feGaussianBlur");
+    			feMerge = svg_element("feMerge");
+    			feMergeNode0 = svg_element("feMergeNode");
+    			feMergeNode1 = svg_element("feMergeNode");
     			g0 = svg_element("g");
     			if_block0.c();
     			g1 = svg_element("g");
@@ -31438,12 +31443,22 @@ var app = (function () {
     			t1 = space();
     			if (if_block1) if_block1.c();
     			if_block1_anchor = empty();
-    			add_location(g0, file$u, 115, 4, 2882);
-    			add_location(g1, file$u, 139, 4, 3839);
+    			attr(feGaussianBlur, "stdDeviation", "15");
+    			attr(feGaussianBlur, "result", "coloredBlur");
+    			add_location(feGaussianBlur, file$u, 116, 6, 2964);
+    			attr(feMergeNode0, "in", "coloredBlur");
+    			add_location(feMergeNode0, file$u, 118, 8, 3045);
+    			attr(feMergeNode1, "in", "SourceGraphic");
+    			add_location(feMergeNode1, file$u, 119, 8, 3085);
+    			add_location(feMerge, file$u, 117, 6, 3027);
+    			attr(filter_1, "id", "glow");
+    			add_location(filter_1, file$u, 115, 2, 2939);
+    			add_location(g0, file$u, 123, 4, 3155);
+    			add_location(g1, file$u, 147, 4, 4112);
     			attr(svg, "id", "absMap");
     			attr(svg, "viewBox", svg_viewBox_value = `${ctx.bbox.x} ${ctx.bbox.y} ${ctx.bbox.width} ${ctx.bbox.height}`);
-    			add_location(svg, file$u, 113, 2, 2798);
-    			add_location(div, file$u, 112, 0, 2790);
+    			add_location(svg, file$u, 113, 2, 2857);
+    			add_location(div, file$u, 112, 0, 2849);
     		},
 
     		l: function claim(nodes) {
@@ -31455,6 +31470,11 @@ var app = (function () {
     			insert(target, t0, anchor);
     			insert(target, div, anchor);
     			append(div, svg);
+    			append(svg, filter_1);
+    			append(filter_1, feGaussianBlur);
+    			append(filter_1, feMerge);
+    			append(feMerge, feMergeNode0);
+    			append(feMerge, feMergeNode1);
     			append(svg, g0);
     			if_blocks[current_block_type_index].m(g0, null);
     			append(svg, g1);
@@ -31640,10 +31660,8 @@ var app = (function () {
       function handleMouseOver() {
         $$invalidate('showTooltip', showTooltip = true);
         selectElement = d3.select(this);
-        selectElement.attr(
-          "fill",
-          isMixSelected ? "lightblue" : isManSelected ? "orange" : "yellow"
-        );
+        selectElement.attr("stroke-width", 5);
+        selectElement.attr("filter", "url(#glow)");
       }
 
       function handleMouseMove(d, event) {
@@ -31668,6 +31686,8 @@ var app = (function () {
           )
         );
         selectElement.attr("fill", quantizedColor);
+        selectElement.attr("stroke-width", 1);
+        selectElement.attr("filter", "none");
       };
 
     	function table_ABSSelected_binding(value) {
