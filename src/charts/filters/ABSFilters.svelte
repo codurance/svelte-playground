@@ -1,9 +1,9 @@
 <script>
-  import { ABSChartFilter } from "../../store.abs.js";
-  import { Gender, GenderSelected } from "../../store.gender.js";
   import FormField from "@smui/form-field";
   import Select, { Option } from "@smui/select";
   import Radio from "@smui/radio";
+  import { ABSChartFilter } from "../../store.abs.js";
+  import { Gender, GenderSelected } from "../../store.gender.js";
 
   $: filters = [
     { value: 0, label: `${$GenderSelected} 65-74 anys que viuen sols` },

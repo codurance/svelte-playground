@@ -10,8 +10,8 @@
 
   import NavBar from "./NavBar.svelte";
   import Charts from "./Charts.svelte";
-  import Intro from "./intro/Intro.svelte";
   import Scroll from "./Scroll.svelte";
+  import Intro from "./intro/Intro.svelte";
 </script>
 
 <NavBar />

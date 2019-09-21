@@ -4,32 +4,40 @@
   import { fade } from "svelte/transition";
   import { ABSFilter } from "../../store.abs.js";
 
+  const escapeKeyCode = 27;
   let isVisibleSearchInput = false;
 
   async function showSearch() {
-    isVisibleSearchInput = !isVisibleSearchInput;
+    toggleVisibility();
     await tick();
     document.getElementById("searchInput").focus();
   }
+
+  function toggleVisibility() {
+    isVisibleSearchInput = !isVisibleSearchInput;
+  }
+
+  function handleKeydown(event) {
+    if (event.keyCode === escapeKeyCode) {
+      toggleVisibility();
+    }
+  }
 </script>
 
-<div class="filters">
-
-  <IconButton
-    id="searchButton"
-    class="material-icons"
-    aria-label="Search"
-    on:click={() => showSearch()}>
-    search
-  </IconButton>
-  {#if isVisibleSearchInput}
-    <input
-      id="searchInput"
-      transition:fade
-      type="text"
-      class="searchBox"
-      placeholder="Cercar"
-      bind:value={$ABSFilter} />
-  {/if}
-
-</div>
+<IconButton
+  id="searchButton"
+  class="material-icons"
+  aria-label="Search"
+  on:click={() => showSearch()}>
+  search
+</IconButton>
+{#if isVisibleSearchInput}
+  <input
+    id="searchInput"
+    type="text"
+    class="searchBox"
+    placeholder="Cercar"
+    transition:fade
+    bind:value={$ABSFilter}
+    on:keydown={handleKeydown} />
+{/if}

@@ -3,10 +3,9 @@
   import { ABSBarcelonaChartEndpoint } from "../store.endpoint.js";
   import { ABSChartFilter } from "../store.abs.js";
   import { Gender, GenderSelected, ColorGender } from "../store.gender.js";
-  import Table from "./Table.svelte";
   import Card from "../Card.svelte";
+  import Table from "./Table.svelte";
   import ABSFilters from "./filters/ABSFilters.svelte";
-  import Search from "./filters/Search.svelte";
 
   let options = {
     chart: {
@@ -139,9 +138,8 @@
 
 <Card svgElementId="barchart">
 
-  <div slot="filter" class="filters">
+  <div slot="filter">
     <ABSFilters />
-    <Search />
   </div>
 
   <Table bind:ABSSelected bind:dialog />

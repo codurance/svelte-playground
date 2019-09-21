@@ -7,6 +7,7 @@
 
   export let svgElementId;
   export let fileName;
+  export let showFilterSection = true;
 
   function exportSvg(elementId, filename) {
     const SVG = document.querySelector(`#${elementId}`);
@@ -22,9 +23,11 @@
 </script>
 
 <Card class="card-wrapping-chart" id="step3">
-  <Actions id="step4">
-    <slot name="filter" />
-  </Actions>
+  {#if showFilterSection === true}
+    <Actions id="step4">
+      <slot name="filter" />
+    </Actions>
+  {/if}
   <Content class="mdc-typography--body2">
     <slot />
   </Content>

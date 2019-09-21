@@ -1,10 +1,9 @@
 <script>
   import { onMount, tick } from "svelte";
-  import Card from "../Card.svelte";
-  import ABSFilters from "./filters/ABSFilters.svelte";
-  import Search from "./filters/Search.svelte";
   import { ABSChartFilter } from "../store.abs.js";
   import { Barcelona3dMap } from "../store.endpoint.js";
+  import Card from "../Card.svelte";
+  import ABSFilters from "./filters/ABSFilters.svelte";
 
   const COLOR_SCALE = [
     // negative
@@ -89,9 +88,8 @@
 
 <Card fileName="ABS Barcelona 3D Map">
 
-  <div slot="filter" class="filters">
+  <div slot="filter">
     <ABSFilters />
-    <Search />
   </div>
 
   <div id="absDeck" />

@@ -1,6 +1,7 @@
 <script>
   import TopAppBar, { Row, Section, Title } from "@smui/top-app-bar";
   import IconButton from "@smui/icon-button";
+  import Search from "./charts/filters/Search.svelte";
   import { LensSelected } from "./store.js";
 
   function changeLens(newLens) {
@@ -28,6 +29,7 @@
         </Title>
       </Section>
       <Section id="step2" align="end" toolbar>
+        <Search />
         <IconButton
           class="material-icons"
           aria-label="Map"

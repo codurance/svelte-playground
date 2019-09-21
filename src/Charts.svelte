@@ -1,10 +1,10 @@
 <script>
+  import { LensSelected } from "./store.js";
   import ABSMap from "./charts/ABSMap.svelte";
   import DeckGLMap from "./charts/DeckGLMap.svelte";
   import Barchart from "./charts/Barchart.svelte";
   import GridView from "./charts/GridView.svelte";
   import List from "./charts/List.svelte";
-  import { LensSelected } from "./store.js";
 </script>
 
 {#if $LensSelected == 'map'}

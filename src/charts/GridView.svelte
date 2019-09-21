@@ -12,7 +12,6 @@
   import { ABSBarcelonaMapEndpoint } from "../store.endpoint.js";
   import { ABSFilter, getAbsCode, filterABS } from "../store.abs.js";
   import { ColorGender } from "../store.gender.js";
-  import Search from "./filters/Search.svelte";
   import CardWrapper from "../Card.svelte";
   import Table from "./Table.svelte";
 
@@ -79,11 +78,7 @@
   }
 </script>
 
-<CardWrapper>
-
-  <div slot="filter">
-    <Search />
-  </div>
+<CardWrapper showFilterSection="false">
 
   <Table bind:ABSSelected bind:dialog />
 

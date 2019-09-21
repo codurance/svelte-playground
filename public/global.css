@@ -150,12 +150,6 @@ svg {
   line-height: 1.4em !important;
 }
 
-.filters {
-  width: 100%; 
-  display: flex;
-  align-items: center;
-}
-
 .navBar {
   width: 100%; 
   display: flex; 
@@ -190,10 +184,6 @@ svg {
     bottom: 10%;
     width: 40px;
     height: 40px;
-  }
-
-  .filters {
-    display: block;
   }
 
   .mdc-card__action-icons {

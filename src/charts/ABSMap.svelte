@@ -2,7 +2,6 @@
   import { onMount, tick } from "svelte";
   import { quintOut } from "svelte/easing";
   import { fade, draw, fly } from "svelte/transition";
-  import Card from "../Card.svelte";
   import {
     ABSChartFilter,
     getAbsCode,
@@ -11,19 +10,14 @@
   } from "../store.abs.js";
   import { ABSBarcelonaMapEndpoint } from "../store.endpoint.js";
   import { Gender, GenderSelected, ColorGender } from "../store.gender.js";
+  import Card from "../Card.svelte";
   import Table from "./Table.svelte";
   import ABSFilters from "./filters/ABSFilters.svelte";
-  import Search from "./filters/Search.svelte";
 
   const path = d3.geoPath();
 
   let dialog;
-  let ABSSelected = {
-    properties: {
-      NOMSS: "",
-      NOMABS: ""
-    }
-  };
+  let ABSSelected;
   let features;
   let barcelona;
   let colorScaleExtent = [0, 0];
@@ -53,8 +47,20 @@
   $: showTooltip = false;
   $: tooltipValues = {};
 
-  $: isMatchinABSFilter = function(feature) {
+  $: isMatchinABSFilter = feature => {
     return isMatchABS(feature, $ABSFilter);
+  };
+
+  $: getFill = feature => {
+    return isMatchinABSFilter(feature)
+      ? quantize(
+          Number(
+            feature.properties.VALORES
+              ? feature.properties.VALORES[$ABSChartFilter]
+              : 0
+          )
+        )
+      : "gray";
   };
 
   onMount(async () => {
@@ -118,25 +124,12 @@
     selectElement.attr("stroke-width", 1);
     selectElement.attr("filter", "none");
   };
-
-  $: getFill = feature => {
-    return isMatchinABSFilter(feature)
-      ? quantize(
-          Number(
-            feature.properties.VALORES
-              ? feature.properties.VALORES[$ABSChartFilter]
-              : 0
-          )
-        )
-      : "gray";
-  };
 </script>
 
 <Card svgElementId="map" fileName="ABS Barcelona Map">
 
-  <div slot="filter" class="filters">
+  <div slot="filter">
     <ABSFilters />
-    <Search />
   </div>
 
   <Table bind:ABSSelected bind:dialog />
