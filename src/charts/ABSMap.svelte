@@ -89,13 +89,13 @@
     dialog.open();
   }
 
-  function handleMouseOver(feature) {
+  const handleMouseOver = feature => event => {
     if (!isMatchinABSFilter(feature)) return;
     showTooltip = true;
-    selectElement = d3.select(this);
+    selectElement = d3.select(event.srcElement);
     selectElement.attr("stroke-width", 5);
     selectElement.attr("filter", "url(#glow)");
-  }
+  };
 
   function handleMouseMove(feature, event) {
     if (!isMatchinABSFilter(feature)) return;
@@ -156,7 +156,7 @@
               d={path(feature)}
               fill={getFill(feature)}
               stroke="black"
-              on:mouseover={() => handleMouseOver(feature)}
+              on:mouseover={handleMouseOver(feature)}
               on:mousemove={event => handleMouseMove(feature, event)}
               on:mouseout={handleMouseOut(feature)}
               on:click={() => handleOnClick(feature)} />

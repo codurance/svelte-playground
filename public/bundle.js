@@ -31136,7 +31136,7 @@ var app = (function () {
     			div = element("div");
     			absfilters.$$.fragment.c();
     			attr(div, "slot", "filter");
-    			add_location(div, file$u, 130, 2, 3485);
+    			add_location(div, file$u, 130, 2, 3508);
     		},
 
     		m: function mount(target, anchor) {
@@ -31278,10 +31278,6 @@ var app = (function () {
     function create_each_block_1$1(ctx) {
     	var path_1, path_1_d_value, path_1_fill_value, path_1_intro, g, text_1, t_value = getAbsCode(ctx.feature) + "", t, text_1_transform_value, text_1_intro, g_outro, current, dispose;
 
-    	function mouseover_handler() {
-    		return ctx.mouseover_handler(ctx);
-    	}
-
     	function mousemove_handler(...args) {
     		return ctx.mousemove_handler(ctx, ...args);
     	}
@@ -31300,16 +31296,16 @@ var app = (function () {
     			attr(path_1, "d", path_1_d_value = ctx.path(ctx.feature));
     			attr(path_1, "fill", path_1_fill_value = ctx.getFill(ctx.feature));
     			attr(path_1, "stroke", "black");
-    			add_location(path_1, file$u, 152, 12, 4028);
+    			add_location(path_1, file$u, 152, 12, 4051);
     			set_style(text_1, "font-size", "10px");
     			set_style(text_1, "pointer-events", "none");
     			set_style(text_1, "cursor", "pointer");
     			attr(text_1, "transform", text_1_transform_value = `translate(${ctx.path.centroid(ctx.feature)})`);
-    			add_location(text_1, file$u, 164, 14, 4521);
-    			add_location(g, file$u, 163, 12, 4467);
+    			add_location(text_1, file$u, 164, 14, 4538);
+    			add_location(g, file$u, 163, 12, 4484);
 
     			dispose = [
-    				listen(path_1, "mouseover", mouseover_handler),
+    				listen(path_1, "mouseover", ctx.handleMouseOver(ctx.feature)),
     				listen(path_1, "mousemove", mousemove_handler),
     				listen(path_1, "mouseout", ctx.handleMouseOut(ctx.feature)),
     				listen(path_1, "click", click_handler)
@@ -31398,11 +31394,11 @@ var app = (function () {
     			attr(rect, "stroke", "black");
     			attr(rect, "stroke-width", "1");
     			attr(rect, "fill", rect_fill_value = ctx.color);
-    			add_location(rect, file$u, 176, 10, 4940);
+    			add_location(rect, file$u, 176, 10, 4957);
     			attr(text_1, "x", "25");
     			attr(text_1, "y", 19 + 15 * ctx.i);
     			attr(text_1, "font-size", "12");
-    			add_location(text_1, file$u, 184, 10, 5134);
+    			add_location(text_1, file$u, 184, 10, 5151);
     		},
 
     		m: function mount(target, anchor) {
@@ -31454,13 +31450,13 @@ var app = (function () {
     			if (if_block0) if_block0.c();
     			t6 = space();
     			if (if_block1) if_block1.c();
-    			add_location(p0, file$u, 193, 6, 5414);
-    			add_location(p1, file$u, 194, 6, 5450);
-    			add_location(p2, file$u, 195, 6, 5486);
-    			add_location(p3, file$u, 196, 6, 5521);
+    			add_location(p0, file$u, 193, 6, 5431);
+    			add_location(p1, file$u, 194, 6, 5467);
+    			add_location(p2, file$u, 195, 6, 5503);
+    			add_location(p3, file$u, 196, 6, 5538);
     			attr(div, "class", "tooltip");
     			attr(div, "style", div_style_value = ctx.showTooltip ? `opacity: .9; top: ${ctx.tooltipValues.top}px; left: ${ctx.tooltipValues.left}px` : 'opacity: 0');
-    			add_location(div, file$u, 190, 4, 5263);
+    			add_location(div, file$u, 190, 4, 5280);
     		},
 
     		m: function mount(target, anchor) {
@@ -31548,7 +31544,7 @@ var app = (function () {
     			attr(img, "alt", "Old Man");
     			attr(img, "width", "25px");
     			attr(img, "height", "25px");
-    			add_location(img, file$u, 198, 10, 5580);
+    			add_location(img, file$u, 198, 10, 5597);
     		},
 
     		m: function mount(target, anchor) {
@@ -31586,7 +31582,7 @@ var app = (function () {
     			attr(img, "alt", "Old Woman");
     			attr(img, "width", "25px");
     			attr(img, "height", "25px");
-    			add_location(img, file$u, 207, 10, 5861);
+    			add_location(img, file$u, 207, 10, 5878);
     		},
 
     		m: function mount(target, anchor) {
@@ -31689,20 +31685,20 @@ var app = (function () {
     			if_block1_anchor = empty();
     			attr(feGaussianBlur, "stdDeviation", "15");
     			attr(feGaussianBlur, "result", "coloredBlur");
-    			add_location(feGaussianBlur, file$u, 142, 8, 3713);
+    			add_location(feGaussianBlur, file$u, 142, 8, 3736);
     			attr(feMergeNode0, "in", "coloredBlur");
-    			add_location(feMergeNode0, file$u, 144, 10, 3799);
+    			add_location(feMergeNode0, file$u, 144, 10, 3822);
     			attr(feMergeNode1, "in", "SourceGraphic");
-    			add_location(feMergeNode1, file$u, 145, 10, 3842);
-    			add_location(feMerge, file$u, 143, 8, 3779);
+    			add_location(feMergeNode1, file$u, 145, 10, 3865);
+    			add_location(feMerge, file$u, 143, 8, 3802);
     			attr(filter, "id", "glow");
-    			add_location(filter, file$u, 141, 6, 3686);
-    			add_location(g0, file$u, 149, 6, 3919);
-    			add_location(g1, file$u, 174, 6, 4881);
+    			add_location(filter, file$u, 141, 6, 3709);
+    			add_location(g0, file$u, 149, 6, 3942);
+    			add_location(g1, file$u, 174, 6, 4898);
     			attr(svg, "id", "absMap");
     			attr(svg, "viewBox", svg_viewBox_value = `${ctx.bbox.x} ${ctx.bbox.y} ${ctx.bbox.width} ${ctx.bbox.height}`);
-    			add_location(svg, file$u, 137, 4, 3588);
-    			add_location(div, file$u, 136, 2, 3578);
+    			add_location(svg, file$u, 137, 4, 3611);
+    			add_location(div, file$u, 136, 2, 3601);
     		},
 
     		m: function mount(target, anchor) {
@@ -31952,13 +31948,13 @@ var app = (function () {
         dialog.open();
       }
 
-      function handleMouseOver(feature) {
+      const handleMouseOver = feature => event => {
         if (!isMatchinABSFilter(feature)) return;
         $$invalidate('showTooltip', showTooltip = true);
-        selectElement = d3.select(this);
+        selectElement = d3.select(event.srcElement);
         selectElement.attr("stroke-width", 5);
         selectElement.attr("filter", "url(#glow)");
-      }
+      };
 
       function handleMouseMove(feature, event) {
         if (!isMatchinABSFilter(feature)) return;
@@ -31996,10 +31992,6 @@ var app = (function () {
     	function table_dialog_binding(value_1) {
     		dialog = value_1;
     		$$invalidate('dialog', dialog);
-    	}
-
-    	function mouseover_handler({ feature }) {
-    		return handleMouseOver(feature);
     	}
 
     	function mousemove_handler({ feature }, event) {
@@ -32073,7 +32065,6 @@ var app = (function () {
     		$ABSChartFilter,
     		table_ABSSelected_binding,
     		table_dialog_binding,
-    		mouseover_handler,
     		mousemove_handler,
     		click_handler
     	};
