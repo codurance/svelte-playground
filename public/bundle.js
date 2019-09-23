@@ -32669,7 +32669,7 @@ var app = (function () {
 
     // (86:4) {#if featuresFiltered}
     function create_if_block$b(ctx) {
-    	var each_1_anchor, current;
+    	var t, if_block_anchor, current;
 
     	var each_value = ctx.featuresFiltered;
 
@@ -32683,13 +32683,17 @@ var app = (function () {
     		each_blocks[i] = null;
     	});
 
+    	var if_block = (ctx.featuresFiltered.length === 0) && create_if_block_1$3();
+
     	return {
     		c: function create() {
     			for (var i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
 
-    			each_1_anchor = empty();
+    			t = space();
+    			if (if_block) if_block.c();
+    			if_block_anchor = empty();
     		},
 
     		m: function mount(target, anchor) {
@@ -32697,7 +32701,9 @@ var app = (function () {
     				each_blocks[i].m(target, anchor);
     			}
 
-    			insert(target, each_1_anchor, anchor);
+    			insert(target, t, anchor);
+    			if (if_block) if_block.m(target, anchor);
+    			insert(target, if_block_anchor, anchor);
     			current = true;
     		},
 
@@ -32715,13 +32721,24 @@ var app = (function () {
     						each_blocks[i] = create_each_block$2(child_ctx);
     						each_blocks[i].c();
     						transition_in(each_blocks[i], 1);
-    						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
+    						each_blocks[i].m(t.parentNode, t);
     					}
     				}
 
     				group_outros();
     				for (i = each_value.length; i < each_blocks.length; i += 1) out(i);
     				check_outros();
+    			}
+
+    			if (ctx.featuresFiltered.length === 0) {
+    				if (!if_block) {
+    					if_block = create_if_block_1$3();
+    					if_block.c();
+    					if_block.m(if_block_anchor.parentNode, if_block_anchor);
+    				}
+    			} else if (if_block) {
+    				if_block.d(1);
+    				if_block = null;
     			}
     		},
 
@@ -32743,7 +32760,13 @@ var app = (function () {
     			destroy_each(each_blocks, detaching);
 
     			if (detaching) {
-    				detach(each_1_anchor);
+    				detach(t);
+    			}
+
+    			if (if_block) if_block.d(detaching);
+
+    			if (detaching) {
+    				detach(if_block_anchor);
     			}
     		}
     	};
@@ -32949,7 +32972,7 @@ var app = (function () {
     }
 
     // (103:12) {#if !listVisualization}
-    function create_if_block_1$3(ctx) {
+    function create_if_block_2$2(ctx) {
     	var svg, g, path, path_id_value, path_d_value, path_fill_value, path_intro, g_outro, svg_viewBox_value, t, current, dispose;
 
     	var content = new Content({
@@ -33098,7 +33121,7 @@ var app = (function () {
     		$$inline: true
     	});
 
-    	var if_block = (!ctx.listVisualization) && create_if_block_1$3(ctx);
+    	var if_block = (!ctx.listVisualization) && create_if_block_2$2(ctx);
 
     	return {
     		c: function create() {
@@ -33126,7 +33149,7 @@ var app = (function () {
     					if_block.p(changed, ctx);
     					transition_in(if_block, 1);
     				} else {
-    					if_block = create_if_block_1$3(ctx);
+    					if_block = create_if_block_2$2(ctx);
     					if_block.c();
     					transition_in(if_block, 1);
     					if_block.m(if_block_anchor.parentNode, if_block_anchor);
@@ -33172,7 +33195,7 @@ var app = (function () {
 
     // (88:8) <Card style={cardStyle} class="card-grid card-wrapping-chart">
     function create_default_slot_1$5(ctx) {
-    	var t, current;
+    	var current;
 
     	function click_handler_1() {
     		return ctx.click_handler_1(ctx);
@@ -33190,12 +33213,10 @@ var app = (function () {
     	return {
     		c: function create() {
     			primaryaction.$$.fragment.c();
-    			t = space();
     		},
 
     		m: function mount(target, anchor) {
     			mount_component(primaryaction, target, anchor);
-    			insert(target, t, anchor);
     			current = true;
     		},
 
@@ -33220,10 +33241,6 @@ var app = (function () {
 
     		d: function destroy(detaching) {
     			destroy_component(primaryaction, detaching);
-
-    			if (detaching) {
-    				detach(t);
-    			}
     		}
     	};
     }
@@ -33273,6 +33290,29 @@ var app = (function () {
 
     		d: function destroy(detaching) {
     			destroy_component(card, detaching);
+    		}
+    	};
+    }
+
+    // (133:6) {#if featuresFiltered.length === 0}
+    function create_if_block_1$3(ctx) {
+    	var p;
+
+    	return {
+    		c: function create() {
+    			p = element("p");
+    			p.textContent = "No s'han trobat resultats.";
+    			add_location(p, file$x, 133, 8, 4161);
+    		},
+
+    		m: function mount(target, anchor) {
+    			insert(target, p, anchor);
+    		},
+
+    		d: function destroy(detaching) {
+    			if (detaching) {
+    				detach(p);
+    			}
     		}
     	};
     }
@@ -33697,7 +33737,7 @@ var app = (function () {
     }
 
     // (14:38) 
-    function create_if_block_2$2(ctx) {
+    function create_if_block_2$3(ctx) {
     	var current;
 
     	var barchart = new Barchart({ $$inline: true });
@@ -33804,7 +33844,7 @@ var app = (function () {
     	var if_block_creators = [
     		create_if_block$c,
     		create_if_block_1$4,
-    		create_if_block_2$2,
+    		create_if_block_2$3,
     		create_if_block_3$2,
     		create_if_block_4$1
     	];

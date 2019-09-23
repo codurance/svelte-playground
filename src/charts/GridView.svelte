@@ -130,6 +130,9 @@
           </PrimaryAction>
         </Card>
       {/each}
+      {#if featuresFiltered.length === 0}
+        <p>No s'han trobat resultats.</p>
+      {/if}
     {/if}
   </div>
 
