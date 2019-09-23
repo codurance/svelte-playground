@@ -26,11 +26,13 @@
   let deckInstance = null;
 
   onMount(async () => {
+    await tick();
+    const zoom = document.body.scrollHeight > 2000 ? 11 : 10.3;
     deckInstance = new deck.DeckGL({
       container: "absDeck",
       latitude: 41.39,
       longitude: 2.15,
-      zoom: 10.3,
+      zoom: zoom,
       pitch: 8,
       layers: []
     });
