@@ -1,8 +1,12 @@
 {
   "version": 3,
   "file": "bundle.css",
-  "sources": [],
-  "sourcesContent": [],
+  "sources": [
+    "../src/Footer.svelte"
+  ],
+  "sourcesContent": [
+    "<style>\n.certifcation-wrapper {\n\n}\n</style>\n<footer style=\"display: flex; justify-content: space-around; background-color: #e1ddd5; padding: 8px 12px;\">\n  <div style=\"display: flex; align-items: center\">\n    <a href=\"https://www.aspb.cat\">\n      <img src=\"https://www.aspb.cat/wp-content/themes/aspb/images/logo_pequeno.png\">\n    </a>\n\n    <div class=\"certifcation-wrapper\">\n      <a href=\"https://www.aspb.cat/wp-content/uploads/2019/09/SegellEFQM400_ASPB_2019.pdf\" target=\"_blank\">\n\t<img src=\"https://www.aspb.cat/wp-content/themes/aspb/images/certificat-1.png\">\n      </a>\n      <a style=\"width:auto;margin-right: 20px;\" target=\"_blank\" href=\"https://www.aspb.cat/wp-content/uploads/2019/07/Certificat_ISO9001_ASPB.pdf\">\n\t<img src=\"https://www.aspb.cat/wp-content/uploads/2019/09/aspb_certificat_iso9001_2015.png\">\n      </a>\n      <a style=\"width:auto;margin-right: 20px;\" target=\"_blank\" href=\"https://www.aspb.cat/wp-content/uploads/2019/07/Certificat_OHSAS18001_ASPB.pdf\">\n\t<img src=\"https://www.aspb.cat/wp-content/uploads/2019/09/aspb_certificat_ohsas_18001_2007.png\">\n      </a>\n      <a style=\"width:auto;margin-right: 20px;\" href=\"https://www.aspb.cat/wp-content/uploads/2016/10/CERT_227_LE_1338_aigues.pdf\">\n\t<img src=\"https://www.aspb.cat/wp-content/uploads/2019/09/aspb_certificat_iso_17025.png\">\n      </a>\n    </div>\n  </div>\n</footer>\n"
+  ],
   "names": [],
-  "mappings": ""
+  "mappings": "AACA,qBAAqB,cAAC,CAAC,AAEvB,CAAC"
 }
