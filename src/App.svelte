@@ -12,6 +12,7 @@
   import Charts from "./Charts.svelte";
   import Scroll from "./Scroll.svelte";
   import Intro from "./intro/Intro.svelte";
+  import Footer from "./Footer.svelte";
 </script>
 
 <NavBar />
@@ -27,3 +28,5 @@
   <Intro />
 
 </AppContent>
+
+<Footer />
