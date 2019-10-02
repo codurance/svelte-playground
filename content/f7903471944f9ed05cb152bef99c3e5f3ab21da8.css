@@ -1,0 +1,128 @@
+
+/*====================================================*/
+/* FILE /plugins//pages-order/css/css_front.css*/
+/*====================================================*/
+.page_hiera ul li div:hover { 
+	border: 1px dotted #ccc !important ; 
+}
+.page_hiera ul li div { 
+	cursor: move; 
+	margin-left: 5px !important ; 
+	max-width: 680px !important ;
+	border: 1px solid transparent !important ; 
+	position: relative; 
+}
+
+.page_hiera .page_status {
+	position: relative;
+	display: block;
+	float: left;
+	height: 12px;
+	line-height: 12px !important;
+	margin: 3px 6px 0 1px;
+	text-transform: uppercase;
+	font-variant: small-caps;
+	font-weight: bold;
+	padding: 2px 3px;
+	font-size: 8px;
+	line-height: 8px;
+	text-align: center;
+	background: #E4E4E4;
+	color: #999;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.page_hiera .page_draft { 
+	background: #c0311e; 
+	color: #fff; 
+}
+.page_hiera .page_pending { 
+	background: #FFE6B2; 
+	color: #9A7A3F; 
+}
+.page_hiera .page_published { 
+ 	background: #33BD00 !important; 
+ 	color: #fff !important; 
+ }
+.page_hiera .page_future { 
+	background: #688CAC; 
+	color: #fff; 
+}
+
+.page_hiera ul li div .page_actions {
+	margin-left: 0 !important ;
+	line-height: 20px !important ;
+	visibility: hidden;
+	position: absolute;
+	right: 5px !important ;
+	font-size: 11px;
+	z-index: 1;
+}
+
+.page_hiera ul li div:hover > .page_actions { visibility: visible; }
+
+
+.page_action_delete { 
+	color: #BC0B0B !important; 
+}
+.page_action_delete:hover { 
+	color: #f00 !important; 
+}
+
+ul.tree, ul.tree ul { 
+	background: url("https://www.aspb.cat/wp-content/plugins/pages-order/core/img/tree_vline.png") repeat-y; 
+	margin: 0 !important ; padding: 0 !important ; 
+} 
+
+ul.tree ul { 
+	margin-left: 10px !important ; 
+} 
+
+ul.tree li { 
+	margin: 0 !important ; 
+	padding: 0 12px !important ; 
+	line-height: 20px !important ; 
+	background: url("https://www.aspb.cat/wp-content/plugins/pages-order/core/img/tree_node.png") no-repeat; 
+} 
+
+.page_hiera ul li { 
+	list-style-type: none !important  ; 
+} 
+.page_hiera ul ul li { 
+	list-style-type: none !important ; 
+} 
+
+ul.tree li:last-child { 
+	background: #fff url("https://www.aspb.cat/wp-content/plugins/pages-order/core/img/tree_lastnode.png") no-repeat; 
+}
+
+ul.tree li.minus_folder { 
+	background: url("https://www.aspb.cat/wp-content/plugins/pages-order/core/img/tree_node_minus.png") no-repeat; 
+}
+
+ul.tree li.plus_folder { 
+	background: url("https://www.aspb.cat/wp-content/plugins/pages-order/core/img/tree_node_plus.png") no-repeat; 
+}
+
+ul.tree li.minus_folder:last-child { 
+	background: #fff url("https://www.aspb.cat/wp-content/plugins/pages-order/core/img/tree_lastnode_minus.png") no-repeat; 
+}
+
+ul.tree li.plus_folder:last-child { 
+	background: #fff url("https://www.aspb.cat/wp-content/plugins/pages-order/core/img/tree_lastnode_plus.png") no-repeat; 
+}
+
+ul.tree div.loading { 
+	padding-left:18px !important ; 
+	background: url("https://www.aspb.cat/wp-content/plugins/pages-order/core/img/ajax-loader.gif") no-repeat left 3px; 
+}
+
+.highlight_placeholder {
+	border: 1px solid #A1A1A1 !important ; 
+	height:15px !important ;
+	width:200px !important ;
+}
+
+

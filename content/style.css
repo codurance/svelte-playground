@@ -1,0 +1,18 @@
+/* initially hide all groups (even before JS is loaded), so the page will never render them while loading */
+[data-class="wpcf7cf_group"], .wpcf7cf_remove, .wpcf7cf_add {
+    display:none;
+}
+
+.wpcf7cf_repeater_sub {
+    margin-bottom: 20px;
+}
+
+.wpcf7cf_repeater_controls, .wpcf7cf_step_controls {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.wpcf7cf_multistep .wpcf7cf_step {
+    display:none;
+}

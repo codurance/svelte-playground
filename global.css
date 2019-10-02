@@ -260,3 +260,14 @@ svg {
     font-size: 1em !important;
   }
 }
+
+.certifcation-wrapper {
+  display: none;
+}
+
+@media screen and (min-width: 800px) {
+  .certifcation-wrapper {
+    display: flex;
+    align-items: center;
+  }
+}
