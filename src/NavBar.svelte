@@ -27,8 +27,9 @@
   style="display: flex; align-items: center; height: 40px; background-color:
   #e1ddd5; padding: 8px 12px;">
   <a style="cursor: pointer" on:click={() => changeLens('actualWebsiteCopy')}>
-    Home / section
+    InfoABS
   </a>
+  <span style="margin-left: 5px"> / Composició de les llars</span>
 </div>
 
 <TopAppBar variant="static" color="secondary">

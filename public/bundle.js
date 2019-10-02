@@ -14856,7 +14856,7 @@ var app = (function () {
     	};
     }
 
-    // (38:8) <Title class="chart-title">
+    // (39:8) <Title class="chart-title">
     function create_default_slot_11(ctx) {
     	var t;
 
@@ -14877,7 +14877,7 @@ var app = (function () {
     	};
     }
 
-    // (37:6) <Section id="step1" toolbar>
+    // (38:6) <Section id="step1" toolbar>
     function create_default_slot_10(ctx) {
     	var current;
 
@@ -14924,7 +14924,7 @@ var app = (function () {
     	};
     }
 
-    // (45:8) <IconButton           class="material-icons"           aria-label="Map"           on:click={() => changeLens('map')}>
+    // (46:8) <IconButton           class="material-icons"           aria-label="Map"           on:click={() => changeLens('map')}>
     function create_default_slot_9(ctx) {
     	var t;
 
@@ -14945,7 +14945,7 @@ var app = (function () {
     	};
     }
 
-    // (51:8) <IconButton           class="material-icons"           aria-label="Chart"           on:click={() => changeLens('absDeck')}>
+    // (52:8) <IconButton           class="material-icons"           aria-label="Chart"           on:click={() => changeLens('absDeck')}>
     function create_default_slot_8(ctx) {
     	var t;
 
@@ -14966,7 +14966,7 @@ var app = (function () {
     	};
     }
 
-    // (57:8) <IconButton           class="material-icons"           aria-label="Chart"           on:click={() => changeLens('barchart')}>
+    // (58:8) <IconButton           class="material-icons"           aria-label="Chart"           on:click={() => changeLens('barchart')}>
     function create_default_slot_7(ctx) {
     	var t;
 
@@ -14987,7 +14987,7 @@ var app = (function () {
     	};
     }
 
-    // (63:8) <IconButton           id="gridButton"           class="material-icons"           aria-label="Grid"           on:click={() => changeLens('grid')}>
+    // (64:8) <IconButton           id="gridButton"           class="material-icons"           aria-label="Grid"           on:click={() => changeLens('grid')}>
     function create_default_slot_6(ctx) {
     	var t;
 
@@ -15008,7 +15008,7 @@ var app = (function () {
     	};
     }
 
-    // (70:8) <IconButton           class="material-icons noVisibleInMobile"           aria-label="List"           on:click={() => changeLens('list')}>
+    // (71:8) <IconButton           class="material-icons noVisibleInMobile"           aria-label="List"           on:click={() => changeLens('list')}>
     function create_default_slot_5(ctx) {
     	var t;
 
@@ -15029,7 +15029,7 @@ var app = (function () {
     	};
     }
 
-    // (76:8) <IconButton class="material-icons" aria-label="Favorite">
+    // (77:8) <IconButton class="material-icons" aria-label="Favorite">
     function create_default_slot_4(ctx) {
     	var t;
 
@@ -15050,7 +15050,7 @@ var app = (function () {
     	};
     }
 
-    // (79:8) <IconButton class="material-icons" aria-label="Information">
+    // (80:8) <IconButton class="material-icons" aria-label="Information">
     function create_default_slot_3(ctx) {
     	var t;
 
@@ -15071,7 +15071,7 @@ var app = (function () {
     	};
     }
 
-    // (43:6) <Section id="step2" align="end" toolbar>
+    // (44:6) <Section id="step2" align="end" toolbar>
     function create_default_slot_2(ctx) {
     	var t0, t1, t2, t3, t4, t5, t6, current;
 
@@ -15302,7 +15302,7 @@ var app = (function () {
     	};
     }
 
-    // (35:2) <Row>
+    // (36:2) <Row>
     function create_default_slot_1(ctx) {
     	var div, t, current;
 
@@ -15334,7 +15334,7 @@ var app = (function () {
     			t = space();
     			section1.$$.fragment.c();
     			attr(div, "class", "navBar");
-    			add_location(div, file$9, 35, 4, 955);
+    			add_location(div, file$9, 36, 4, 1015);
     		},
 
     		m: function mount(target, anchor) {
@@ -15382,7 +15382,7 @@ var app = (function () {
     	};
     }
 
-    // (34:0) <TopAppBar variant="static" color="secondary">
+    // (35:0) <TopAppBar variant="static" color="secondary">
     function create_default_slot$2(ctx) {
     	var current;
 
@@ -15429,7 +15429,7 @@ var app = (function () {
     }
 
     function create_fragment$a(ctx) {
-    	var t0, div, a, t2, current, dispose;
+    	var t0, div, a, t2, span, t4, current, dispose;
 
     	var topappbar0 = new TopAppBar({
     		props: {
@@ -15458,11 +15458,16 @@ var app = (function () {
     			t0 = space();
     			div = element("div");
     			a = element("a");
-    			a.textContent = "Home / section";
+    			a.textContent = "InfoABS";
     			t2 = space();
+    			span = element("span");
+    			span.textContent = "/ Composició de les llars";
+    			t4 = space();
     			topappbar1.$$.fragment.c();
     			set_style(a, "cursor", "pointer");
     			add_location(a, file$9, 28, 2, 785);
+    			set_style(span, "margin-left", "5px");
+    			add_location(span, file$9, 31, 2, 883);
     			set_style(div, "display", "flex");
     			set_style(div, "align-items", "center");
     			set_style(div, "height", "40px");
@@ -15481,7 +15486,9 @@ var app = (function () {
     			insert(target, t0, anchor);
     			insert(target, div, anchor);
     			append(div, a);
-    			insert(target, t2, anchor);
+    			append(div, t2);
+    			append(div, span);
+    			insert(target, t4, anchor);
     			mount_component(topappbar1, target, anchor);
     			current = true;
     		},
@@ -15517,7 +15524,7 @@ var app = (function () {
     			if (detaching) {
     				detach(t0);
     				detach(div);
-    				detach(t2);
+    				detach(t4);
     			}
 
     			destroy_component(topappbar1, detaching);
