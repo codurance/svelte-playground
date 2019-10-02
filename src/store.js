@@ -1,3 +1,3 @@
 import { writable } from 'svelte/store';
 
-export const LensSelected = writable('map');
+export const LensSelected = writable('actualWebsiteCopy');

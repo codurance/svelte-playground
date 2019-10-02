@@ -9,7 +9,10 @@
   }
 </script>
 
-<TopAppBar variant="static" color="primary" style="display: flex; flex-direction: row; align-items: center; height: 65px">
+<TopAppBar
+  variant="static"
+  color="primary"
+  style="display: flex; flex-direction: row; align-items: center; height: 65px">
   <Row>
     <Section>
       <img src="./images/logo.png" alt="SiSalut" />
@@ -20,8 +23,12 @@
   </Row>
 </TopAppBar>
 
-<div style="display: flex; align-items: center; height: 40px; background-color: #e1ddd5; padding: 8px 12px;">
-  <a href="" on:click={() => window.alert('add link to fake homepage')}>Home / section </a>
+<div
+  style="display: flex; align-items: center; height: 40px; background-color:
+  #e1ddd5; padding: 8px 12px;">
+  <a style="cursor: pointer" on:click={() => changeLens('actualWebsiteCopy')}>
+    Home / section
+  </a>
 </div>
 
 <TopAppBar variant="static" color="secondary">
